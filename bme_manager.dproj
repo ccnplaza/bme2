@@ -1,0 +1,265 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{839566C6-4666-48F2-BA36-6CDDF67ABDE3}</ProjectGuid>
+			<ProjectVersion>12.0</ProjectVersion>
+			<MainSource>bme_manager.dpr</MainSource>
+			<Config Condition="'$(Config)'==''">Debug</Config>
+			<DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_1)'!=''">
+			<Cfg_1>true</Cfg_1>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_2)'!=''">
+			<Cfg_2>true</Cfg_2>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Base)'!=''">
+			<DCC_UsePackage>rtl;vcl;vclx;vclactnband;xmlrtl;vclimg;dbrtl;vcldb;vcldbx;bdertl;vcltouch;dsnap;dsnapcon;TeeUI;TeeDB;Tee;vclib;ibxpress;adortl;IndyCore;IndySystem;IndyProtocols;VclSmp;vclie;inet;websnap;webdsnap;inetdb;inetdbbde;inetdbxpress;soaprtl;vclribbon;dbexpress;DbxCommonDriver;DataSnapIndy10ServerTransport;DataSnapProviderClient;DbxClientDriver;DataSnapServer;DBXInterBaseDriver;DBXMySQLDriver;dbxcds;DBXFirebirdDriver;DBXSybaseASEDriver;DBXSybaseASADriver;DBXOracleDriver;DBXMSSQLDriver;DBXInformixDriver;DBXDb2Driver;tmsd2010;tmsexd2010;ZMstr191D2010;ZylTimerPack;TVidGrab;wmp;BMThreadPkgD2010;dxServerModeRS14;cxDataRS14;dxCoreRS14;cxLibraryRS14;dxGDIPlusRS14;dxThemeRS14;dxPScxPCProdRS14;dxPSCoreRS14;cxPageControlRS14;cxEditorsRS14;dxmdsRS14;dxBarRS14;dxComnRS14;cxBarEditItemRS14;dxBarDBNavRS14;dxBarExtItemsRS14;dxBarExtDBItemsRS14;dxRibbonRS14;dxTabbedMDIRS14;dxdbtrRS14;dxtrmdRS14;dxDockingRS14;dxFlowChartRS14;dxLayoutControlRS14;dxNavBarRS14;dxorgcRS14;dxdborRS14;cxGridRS14;cxExportRS14;cxTreeListRS14;cxTreeListdxBarPopupMenuRS14;cxPivotGridRS14;cxPivotGridChartRS14;cxPivotGridOLAPRS14;cxSchedulerRS14;cxSchedulerGridRS14;cxSchedulerTreeBrowserRS14;dxSpreadSheetRS14;cxVerticalGridRS14;dxTileControlRS14;dxPScxCommonRS14;dxPSLnksRS14;dxPScxExtCommonRS14;dxPSdxLCLnkRS14;dxPScxGridLnkRS14;dxPScxPivotGridLnkRS14;dxPScxSchedulerLnkRS14;dxPScxSSLnkRS14;cxSpreadSheetRS14;dxPScxTLLnkRS14;dxPScxVGridLnkRS14;dxPSTeeChartRS14;dxPSDBTeeChartRS14;dxPSdxDBOCLnkRS14;dxPSdxOCLnkRS14;dxPSdxDBTVLnkRS14;dxPSdxFCLnkRS14;dxPsPrVwAdvRS14;dxPSPrVwRibbonRS14;cxSchedulerRibbonStyleEventEditorRS14;dxGaugeControlRS14;dxSpellCheckerRS14;dxWizardControlRS14;dxMapControlRS14;dxPSdxSpreadSheetLnkRS14;dxSkinsdxBarPainterRS14;dxSkinsCoreRS14;dxSkinscxPCPainterRS14;dxSkinsdxDLPainterRS14;dxSkinsdxNavBarPainterRS14;dxSkinsdxRibbonPainterRS14;dxSkinscxSchedulerPainterRS14;dxSkinBlueprintRS14;dxSkinBlueRS14;dxSkinCaramelRS14;dxSkinCoffeeRS14;dxSkinDarkRoomRS14;dxSkinDarkSideRS14;dxSkinDevExpressDarkStyleRS14;dxSkinDevExpressStyleRS14;dxSkinFoggyRS14;dxSkinGlassOceansRS14;dxSkinHighContrastRS14;dxSkiniMaginaryRS14;dxSkinLilianRS14;dxSkinLiquidSkyRS14;dxSkinLondonLiquidSkyRS14;dxSkinMcSkinRS14;dxSkinMetropolisDarkRS14;dxSkinMetropolisRS14;dxSkinMoneyTwinsRS14;dxSkinOffice2007BlackRS14;dxSkinOffice2007BlueRS14;dxSkinOffice2007GreenRS14;dxSkinOffice2007PinkRS14;dxSkinOffice2007SilverRS14;dxSkinOffice2010BlackRS14;dxSkinOffice2010BlueRS14;dxSkinOffice2010SilverRS14;dxSkinOffice2013DarkGrayRS14;dxSkinOffice2013LightGrayRS14;dxSkinOffice2013WhiteRS14;dxSkinPumpkinRS14;dxSkinSevenClassicRS14;dxSkinSevenRS14;dxSkinSharpPlusRS14;dxSkinSharpRS14;dxSkinSilverRS14;dxSkinSpringTimeRS14;dxSkinStardustRS14;dxSkinSummer2008RS14;dxSkinTheAsphaltWorldRS14;dxSkinValentineRS14;dxSkinVS2010RS14;dxSkinWhiteprintRS14;dxSkinXmas2008BlueRS14;dcldxSkinsCoreRS14;dxSkinBlackRS14;Hydra_Core_D14;DCEF_2010;dxADOServerModeRS14;dxDBXServerModeRS14;vc2;speech;xf40_d2010;rxctl;rxdb;rxbde;ASiCBBoxD14;PKIBBoxD14;XMLBBoxSecD14;PGPBBoxD14;XMLBBoxD14;ZIPBBoxD14;BaseBBoxD14;CloudBBoxD14;HTTPBBoxCliD14;SSLBBoxCliD14;DAVBBoxCliD14;DAVBBoxSrvD14;HTTPBBoxSrvD14;SSLBBoxSrvD14;DCBBoxD14;DsgnBBoxD14;EDIBBoxD14;FTPSBBoxCliD14;MIMEBBoxD14;FTPSBBoxSrvD14;LDAPBBoxD14;MailBBoxD14;OfficeBBoxD14;PDFBBoxD14;PGPLDAPBBoxD14;PGPMIMEBBoxD14;PGPSSHBBoxD14;SSHBBoxCliD14;PGPTLSBBoxD14;PKIPDFBBoxD14;PKISSHBBoxD14;SFTPBBoxCliD14;SFTPBBoxSrvD14;SSHBBoxSrvD14;SMIMEBBoxD14;SOAPBBoxCliD14;tmsxlsd2010;tmswizd2010;wclr_d2010;gtRtlD14;gtDocEngD14;RaudusD140;NativeExcelD2010;SynEdit_R2010;Intraweb_15_D2010;ibprovider140;unidac140;dac140;myprovider140;fs14;fsDB14;fsBDE14;fsADO14;fsIBX14;fsTee14;frx14;frxDB14;frxBDE14;frxIBX14;frxDBX14;frxTee14;frxe14;dacvcl140;unidacvcl140;PKIECtrl14;PKIEDB14</DCC_UsePackage>
+			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;$(DCC_UnitAlias)</DCC_UnitAlias>
+			<DCC_DependencyCheckOutputName>bme_manager.exe</DCC_DependencyCheckOutputName>
+			<DCC_ImageBase>00400000</DCC_ImageBase>
+			<DCC_Platform>x86</DCC_Platform>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
+			<DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
+			<DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+			<DCC_DebugInformation>false</DCC_DebugInformation>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_2)'!=''">
+			<DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
+		</PropertyGroup>
+		<ItemGroup>
+			<DelphiCompile Include="bme_manager.dpr">
+				<MainSource>MainSource</MainSource>
+			</DelphiCompile>
+			<DCCReference Include="uMain.pas">
+				<Form>fmMain</Form>
+			</DCCReference>
+			<DCCReference Include="GlobalVars.pas"/>
+			<DCCReference Include="uLogin.pas">
+				<Form>fmLogin</Form>
+			</DCCReference>
+			<DCCReference Include="CommonLogic.pas"/>
+			<DCCReference Include="UdataModule.pas">
+				<Form>DataModule1</Form>
+				<DesignClass>TDataModule</DesignClass>
+			</DCCReference>
+			<DCCReference Include="school\UfmSchool.pas">
+				<Form>fmSchool</Form>
+			</DCCReference>
+			<DCCReference Include="school\UfmSchoolEdit.pas">
+				<Form>fmSchoolEdit</Form>
+			</DCCReference>
+			<DCCReference Include="school\UfmAnalyseEdit.pas">
+				<Form>fmAnalyseEdit</Form>
+			</DCCReference>
+			<DCCReference Include="school\UfmSchoolSelect.pas">
+				<Form>fmSchoolSelect</Form>
+			</DCCReference>
+			<DCCReference Include="analyse\UfmAnalyzer.pas">
+				<Form>fmAnalyzer</Form>
+			</DCCReference>
+			<DCCReference Include="analyse\UfmResultView.pas">
+				<Form>fmResultView</Form>
+			</DCCReference>
+			<DCCReference Include="school\UfmStudentEdit.pas">
+				<Form>fmStudentEdit</Form>
+			</DCCReference>
+			<DCCReference Include="loginuser\UfmUserAdd.pas">
+				<Form>fmUserAdd</Form>
+			</DCCReference>
+			<DCCReference Include="school\UfmExcelFormat.pas">
+				<Form>fmExcelFormat</Form>
+			</DCCReference>
+			<DCCReference Include="school\UfmExcelMapping.pas">
+				<Form>fmExcelMapping</Form>
+			</DCCReference>
+			<DCCReference Include="analyse\UfmRequestEdit.pas">
+				<Form>fmRequestEdit</Form>
+			</DCCReference>
+			<DCCReference Include="UfmDataCopy.pas">
+				<Form>fmDataCopy</Form>
+			</DCCReference>
+			<DCCReference Include="backup\UfmFBUtil.pas">
+				<Form>fmFBUtil</Form>
+			</DCCReference>
+			<DCCReference Include="analyse\UfmTotalAnalyse.pas">
+				<Form>fmTotalAnalyse</Form>
+			</DCCReference>
+			<DCCReference Include="analyse\UfmViewPicture.pas">
+				<Form>fmViewPicture</Form>
+			</DCCReference>
+			<DCCReference Include="analyse\UfmSchoolReport.pas">
+				<Form>fmSchoolReport</Form>
+			</DCCReference>
+			<DCCReference Include="UfmFileManager.pas">
+				<Form>fmFileManager</Form>
+			</DCCReference>
+			<DCCReference Include="UfmMessageBox.pas">
+				<Form>fmMessageBox</Form>
+			</DCCReference>
+			<DCCReference Include="capture\UfmCapture.pas">
+				<Form>fmCapture</Form>
+			</DCCReference>
+			<DCCReference Include="capture\UfmCameraPreview.pas">
+				<Form>fmCameraPreview</Form>
+			</DCCReference>
+			<DCCReference Include="UfmDateSelector.pas">
+				<Form>fmDateSelector</Form>
+			</DCCReference>
+			<DCCReference Include="UfmSelectStudent.pas">
+				<Form>fmSelectStudent</Form>
+			</DCCReference>
+			<DCCReference Include="analyse\UfmPopupHowto.pas">
+				<Form>fmPopupHowto</Form>
+			</DCCReference>
+			<DCCReference Include="capture\UfmPictureViewer.pas">
+				<Form>fmPictureViewer</Form>
+			</DCCReference>
+			<DCCReference Include="capture\miscCameraControl.pas">
+				<Form>frmCameraControl</Form>
+			</DCCReference>
+			<DCCReference Include="analyse\UfmComments.pas">
+				<Form>fmComments</Form>
+			</DCCReference>
+			<DCCReference Include="analyse\UfmCommentEdit.pas">
+				<Form>fmCommentEdit</Form>
+			</DCCReference>
+			<DCCReference Include="growth\UfmGrowthStatus.pas">
+				<Form>fmGrowthStatus</Form>
+			</DCCReference>
+			<DCCReference Include="growth\UfmGrowthEdit.pas">
+				<Form>fmGrowthEdit</Form>
+			</DCCReference>
+			<DCCReference Include="growth\UfmGrowthDataEdit.pas">
+				<Form>fmGrowthDataEdit</Form>
+			</DCCReference>
+			<DCCReference Include="growth\UfmGrowthView.pas">
+				<Form>fmGrowthView</Form>
+			</DCCReference>
+			<DCCReference Include="growth\UfmGrowCommentEdit.pas">
+				<Form>fmGrowCommentEdit</Form>
+			</DCCReference>
+			<DCCReference Include="growth\UfmGrowComments.pas">
+				<Form>fmGrowComments</Form>
+			</DCCReference>
+			<DCCReference Include="capture\UfmPostureView.pas">
+				<Form>fmPostureView</Form>
+			</DCCReference>
+			<DCCReference Include="analyse\UfmImportImage.pas">
+				<Form>fmImportImage</Form>
+			</DCCReference>
+			<DCCReference Include="analyse\UfmImageEditor.pas">
+				<Form>fmImageEditor</Form>
+			</DCCReference>
+			<DCCReference Include="analyse\UfmCompare.pas">
+				<Form>fmCompare</Form>
+			</DCCReference>
+			<DCCReference Include="analyse\UfmCompareComments.pas">
+				<Form>fmCompareComments</Form>
+			</DCCReference>
+			<DCCReference Include="analyse\UfmCompareMemo.pas">
+				<Form>fmCompareMemo</Form>
+			</DCCReference>
+			<DCCReference Include="common\ccnDB.pas"/>
+			<DCCReference Include="practice\UfmPractice.pas">
+				<Form>fmPractice</Form>
+			</DCCReference>
+			<DCCReference Include="common\UfmPracticeEditor.pas">
+				<Form>fmPracticeEditor</Form>
+			</DCCReference>
+			<DCCReference Include="common\UfmContentsEdit.pas">
+				<Form>fmContentsEdit</Form>
+			</DCCReference>
+			<DCCReference Include="common\UfmPracticeTitle.pas">
+				<Form>fmPracticeTitle</Form>
+			</DCCReference>
+			<DCCReference Include="capture\UfmCaptureNew.pas">
+				<Form>fmCaptureNew</Form>
+			</DCCReference>
+			<DCCReference Include="analyse\UfmEditAnalyseDate.pas">
+				<Form>fmEditAnalyseDate</Form>
+			</DCCReference>
+			<DCCReference Include="common\UfmVideoPlayer.pas">
+				<Form>fmVideoPlayer</Form>
+			</DCCReference>
+			<DCCReference Include="common\UfmFolderSelect.pas">
+				<Form>fmFolderSelect</Form>
+			</DCCReference>
+			<DCCReference Include="analyse\UfmSelectStudentPicture.pas">
+				<Form>fmSelectStudentPicture</Form>
+			</DCCReference>
+			<BuildConfiguration Include="Base">
+				<Key>Base</Key>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Release">
+				<Key>Cfg_1</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Debug">
+				<Key>Cfg_2</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+		</ItemGroup>
+		<Import Project="$(BDS)\Bin\CodeGear.Delphi.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')"/>
+		<ProjectExtensions>
+			<Borland.Personality>Delphi.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Delphi.Personality>
+					<Source>
+						<Source Name="MainSource">bme_manager.dpr</Source>
+					</Source>
+					<Parameters>
+						<Parameters Name="UseLauncher">False</Parameters>
+						<Parameters Name="LoadAllSymbols">True</Parameters>
+						<Parameters Name="LoadUnspecifiedSymbols">False</Parameters>
+						<Parameters Name="DebugSourceDirs">C:\Program Files (x86)\FastReports\FastReport 4\FastScript\</Parameters>
+					</Parameters>
+					<VersionInfo>
+						<VersionInfo Name="IncludeVerInfo">True</VersionInfo>
+						<VersionInfo Name="AutoIncBuild">False</VersionInfo>
+						<VersionInfo Name="MajorVer">3</VersionInfo>
+						<VersionInfo Name="MinorVer">0</VersionInfo>
+						<VersionInfo Name="Release">2</VersionInfo>
+						<VersionInfo Name="Build">9</VersionInfo>
+						<VersionInfo Name="Debug">False</VersionInfo>
+						<VersionInfo Name="PreRelease">False</VersionInfo>
+						<VersionInfo Name="Special">False</VersionInfo>
+						<VersionInfo Name="Private">False</VersionInfo>
+						<VersionInfo Name="DLL">False</VersionInfo>
+						<VersionInfo Name="Locale">1042</VersionInfo>
+						<VersionInfo Name="CodePage">949</VersionInfo>
+					</VersionInfo>
+					<VersionInfoKeys>
+						<VersionInfoKeys Name="CompanyName">ccn software</VersionInfoKeys>
+						<VersionInfoKeys Name="FileDescription">IkeySchool</VersionInfoKeys>
+						<VersionInfoKeys Name="FileVersion">3.0.2.9</VersionInfoKeys>
+						<VersionInfoKeys Name="InternalName"/>
+						<VersionInfoKeys Name="LegalCopyright">2014 ccnsoft</VersionInfoKeys>
+						<VersionInfoKeys Name="LegalTrademarks"/>
+						<VersionInfoKeys Name="OriginalFilename"/>
+						<VersionInfoKeys Name="ProductName">IkeySchool</VersionInfoKeys>
+						<VersionInfoKeys Name="ProductVersion">2.0.1.13</VersionInfoKeys>
+						<VersionInfoKeys Name="Comments">IkeySchool</VersionInfoKeys>
+					</VersionInfoKeys>
+					<Excluded_Packages>
+						<Excluded_Packages Name="$(BDS)\bin\samplevisualizers140.bpl">Embarcadero Sample Debugger Visualizers</Excluded_Packages>
+						<Excluded_Packages Name="$(BDS)\bin\bcboffice2k140.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
+						<Excluded_Packages Name="$(BDS)\bin\bcbofficexp140.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>
+						<Excluded_Packages Name="$(BDS)\bin\dcloffice2k140.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+						<Excluded_Packages Name="$(BDS)\bin\dclofficexp140.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+						<Excluded_Packages Name="$(BDS)\Bin\dclIntraweb_100_140.bpl">VCL for the Web 10.0  Design Package for CodeGear RAD Studio</Excluded_Packages>
+					</Excluded_Packages>
+				</Delphi.Personality>
+			</BorlandProject>
+			<ProjectFileVersion>12</ProjectFileVersion>
+		</ProjectExtensions>
+	</Project>

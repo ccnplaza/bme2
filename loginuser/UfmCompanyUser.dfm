@@ -1,0 +1,617 @@
+object fmCompanyUser: TfmCompanyUser
+  Left = 0
+  Top = 0
+  Caption = #51648#49324' '#48143' '#49324#50857#51088
+  ClientHeight = 623
+  ClientWidth = 1051
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -13
+  Font.Name = #44404#47548
+  Font.Style = []
+  FormStyle = fsMDIChild
+  OldCreateOrder = False
+  Visible = True
+  OnClose = FormClose
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 441
+    Height = 623
+    Align = alLeft
+    BevelOuter = bvNone
+    TabOrder = 0
+    object Panel3: TPanel
+      Left = 0
+      Top = 0
+      Width = 441
+      Height = 30
+      Align = alTop
+      TabOrder = 0
+      object btnAddComp: TcxButton
+        Left = 90
+        Top = 2
+        Width = 60
+        Height = 25
+        Hint = #46321#47197
+        Caption = #46321#47197
+        LookAndFeel.NativeStyle = False
+        OptionsImage.Glyph.Data = {
+          36040000424D3604000000000000360000002800000010000000100000000100
+          2000000000000004000000000000000000000000000000000000000000000000
+          00000000000000000000101010462121218D2F2F2FC7383838F0383838F02F2F
+          2FC72121218D1010104600000000000000000000000000000000000000000000
+          0000080808202121218C393939F33C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
+          3CFF3C3C3CFF393939F32121218C080808200000000000000000000000000808
+          0820262626A33C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
+          3CFF3C3C3CFF3C3C3CFF3C3C3CFF262626A30808082000000000000000002121
+          218C3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
+          3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF2121218C00000000101010463939
+          39F33C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF00000000000000003C3C
+          3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF393939F3101010462121218D3C3C
+          3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF00000000000000003C3C
+          3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF2121218D2F2F2FC73C3C
+          3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF00000000000000003C3C
+          3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF2F2F2FC7383838F03C3C
+          3CFF3C3C3CFF3C3C3CFF00000000000000000000000000000000000000000000
+          000000000000000000003C3C3CFF3C3C3CFF3C3C3CFF383838F0383838F03C3C
+          3CFF3C3C3CFF3C3C3CFF00000000000000000000000000000000000000000000
+          000000000000000000003C3C3CFF3C3C3CFF3C3C3CFF383838F02F2F2FC73C3C
+          3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF00000000000000003C3C
+          3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF2F2F2FC72121218D3C3C
+          3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF00000000000000003C3C
+          3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF2121218D101010463939
+          39F33C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF00000000000000003C3C
+          3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF393939F310101046000000002121
+          218C3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
+          3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF2121218C00000000000000000808
+          0820262626A33C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
+          3CFF3C3C3CFF3C3C3CFF3C3C3CFF262626A30808082000000000000000000000
+          0000080808202121218C393939F33C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
+          3CFF3C3C3CFF393939F32121218C080808200000000000000000000000000000
+          00000000000000000000101010462121218D2F2F2FC7383838F0383838F02F2F
+          2FC72121218D1010104600000000000000000000000000000000}
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 0
+        OnClick = btnAddCompClick
+      end
+      object btnEditComp: TcxButton
+        Left = 151
+        Top = 2
+        Width = 60
+        Height = 25
+        Hint = #49688#51221
+        Caption = #49688#51221
+        LookAndFeel.NativeStyle = False
+        OptionsImage.Glyph.Data = {
+          36040000424D3604000000000000360000002800000010000000100000000100
+          2000000000000004000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000003C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
+          3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF0000000000000000000000000000
+          0000000000003C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
+          3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF0000000000000000000000000000
+          0000000000003C3C3CFF3C3C3CFF000000000000000000000000000000000000
+          000000000000000000003C3C3CFF3C3C3CFF0000000000000000000000000000
+          0000000000003C3C3CFF2D2D2DBE00000000000000001E1E1E7E3C3C3CFF0000
+          000000000000000000003C3C3CFF3C3C3CFF0000000000000000000000000000
+          0000000000002D2D2DBE040404101E1E1E811E1E1E81000000001E1E1E7E0000
+          000000000000000000003C3C3CFF3C3C3CFF0000000000000000000000000000
+          000000000000040404101E1E1E813C3C3CFF3C3C3CFF1E1E1E81000000000000
+          000000000000000000003C3C3CFF3C3C3CFF0000000000000000000000000000
+          0000000000001E1E1E813C3C3CFF3C3C3CFF3C3C3CFF1E1E1E7E000000000000
+          000000000000000000003C3C3CFF3C3C3CFF0000000000000000000000000000
+          00001E1E1E813C3C3CFF3C3C3CFF3C3C3CFF1E1E1E7E00000000000000000000
+          000000000000000000003C3C3CFF3C3C3CFF0000000000000000000000001A1A
+          1A703C3C3CFF3C3C3CFF3C3C3CFF1E1E1E7E0000000000000000000000000000
+          000000000000000000003C3C3CFF3C3C3CFF00000000000000001A1A1A703C3C
+          3CFF3C3C3CFF3C3C3CFF1E1E1E7E040404100000000000000000000000003C3C
+          3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF0000000000000000353535E03C3C
+          3CFF3C3C3CFF1A1A1A700A0A0A2C000000000000000000000000000000003C3C
+          3CFF3C3C3CFF3C3C3CFF3C3C3CFF1E1E1E7E00000000000000001A1A1A703535
+          35E01A1A1A700A0A0A2C3C3C3CFF000000000000000000000000000000003C3C
+          3CFF3C3C3CFF3C3C3CFF1E1E1E7E000000000000000000000000000000000000
+          0000000000003C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
+          3CFF3C3C3CFF1E1E1E7E00000000000000000000000000000000000000000000
+          0000000000003C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
+          3CFF1E1E1E7E0000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000}
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 1
+        OnClick = btnEditCompClick
+      end
+      object btnDelComp: TcxButton
+        Left = 212
+        Top = 2
+        Width = 60
+        Height = 25
+        Hint = #49325#51228
+        Caption = #49325#51228
+        LookAndFeel.NativeStyle = False
+        OptionsImage.Glyph.Data = {
+          36040000424D3604000000000000360000002800000010000000100000000100
+          2000000000000004000000000000000000000000000000000000000000000000
+          00000000000000000000101010462121218D2F2F2FC7383838F0383838F02F2F
+          2FC72121218D1010104600000000000000000000000000000000000000000000
+          0000080808202121218C393939F33C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
+          3CFF3C3C3CFF393939F32121218C080808200000000000000000000000000808
+          0820262626A33C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
+          3CFF3C3C3CFF3C3C3CFF3C3C3CFF262626A30808082000000000000000002121
+          218C3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
+          3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF2121218C00000000101010463939
+          39F33C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
+          3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF393939F3101010462121218D3C3C
+          3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
+          3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF2121218D2F2F2FC73C3C
+          3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
+          3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF2F2F2FC7383838F03C3C
+          3CFF3C3C3CFF3C3C3CFF00000000000000000000000000000000000000000000
+          000000000000000000003C3C3CFF3C3C3CFF3C3C3CFF383838F0383838F03C3C
+          3CFF3C3C3CFF3C3C3CFF00000000000000000000000000000000000000000000
+          000000000000000000003C3C3CFF3C3C3CFF3C3C3CFF383838F02F2F2FC73C3C
+          3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
+          3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF2F2F2FC72121218D3C3C
+          3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
+          3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF2121218D101010463939
+          39F33C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
+          3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF393939F310101046000000002121
+          218C3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
+          3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF2121218C00000000000000000808
+          0820262626A33C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
+          3CFF3C3C3CFF3C3C3CFF3C3C3CFF262626A30808082000000000000000000000
+          0000080808202121218C393939F33C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
+          3CFF3C3C3CFF393939F32121218C080808200000000000000000000000000000
+          00000000000000000000101010462121218D2F2F2FC7383838F0383838F02F2F
+          2FC72121218D1010104600000000000000000000000000000000}
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 2
+      end
+    end
+    object cxGrid1: TcxGrid
+      Left = 0
+      Top = 30
+      Width = 441
+      Height = 593
+      Align = alClient
+      BorderWidth = 1
+      TabOrder = 1
+      LookAndFeel.NativeStyle = False
+      LookAndFeel.SkinName = 'Black'
+      object gridCompany: TcxGridDBTableView
+        Navigator.Buttons.CustomButtons = <>
+        Navigator.Buttons.First.Visible = True
+        Navigator.Buttons.PriorPage.Visible = True
+        Navigator.Buttons.Prior.Visible = True
+        Navigator.Buttons.Next.Visible = True
+        Navigator.Buttons.NextPage.Visible = True
+        Navigator.Buttons.Last.Visible = True
+        Navigator.Buttons.Insert.Visible = False
+        Navigator.Buttons.Append.Visible = False
+        Navigator.Buttons.Delete.Visible = False
+        Navigator.Buttons.Edit.Visible = False
+        Navigator.Buttons.Post.Visible = False
+        Navigator.Buttons.Cancel.Visible = False
+        Navigator.Buttons.Refresh.Visible = True
+        Navigator.Buttons.SaveBookmark.Visible = True
+        Navigator.Buttons.GotoBookmark.Visible = True
+        Navigator.Buttons.Filter.Visible = True
+        Navigator.InfoPanel.DisplayMask = '[RecordIndex] / [RecordCount]'
+        Navigator.InfoPanel.Visible = True
+        Navigator.Visible = True
+        OnCellDblClick = gridCompanyCellDblClick
+        OnFocusedRecordChanged = gridCompanyFocusedRecordChanged
+        DataController.DataSource = DataModule1.d_COMPANY_SEL
+        DataController.Summary.DefaultGroupSummaryItems = <>
+        DataController.Summary.FooterSummaryItems = <>
+        DataController.Summary.SummaryGroups = <>
+        OptionsCustomize.ColumnsQuickCustomization = True
+        OptionsData.CancelOnExit = False
+        OptionsData.Deleting = False
+        OptionsData.DeletingConfirmation = False
+        OptionsData.Editing = False
+        OptionsData.Inserting = False
+        OptionsSelection.CellSelect = False
+        OptionsView.FooterAutoHeight = True
+        OptionsView.GroupByBox = False
+        OptionsView.GroupByHeaderLayout = ghlHorizontal
+        OptionsView.GroupSummaryLayout = gslAlignWithColumns
+        OptionsView.Indicator = True
+        object gridCompanyID: TcxGridDBColumn
+          DataBinding.FieldName = 'ID'
+          Visible = False
+        end
+        object gridCompanyCOMP_NAME: TcxGridDBColumn
+          Caption = #49345#54840
+          DataBinding.FieldName = 'COMP_NAME'
+          Width = 132
+        end
+        object gridCompanyCHIEF_NAME: TcxGridDBColumn
+          Caption = #45824#54364#51088
+          DataBinding.FieldName = 'CHIEF_NAME'
+        end
+        object gridCompanyC_AREA: TcxGridDBColumn
+          Caption = #51648#50669
+          DataBinding.FieldName = 'C_AREA'
+        end
+        object gridCompanyC_TEL: TcxGridDBColumn
+          Caption = #51204#54868#48264#54840
+          DataBinding.FieldName = 'C_TEL'
+        end
+        object gridCompanyC_ADDR: TcxGridDBColumn
+          DataBinding.FieldName = 'C_ADDR'
+          Visible = False
+        end
+        object gridCompanyC_STATUS: TcxGridDBColumn
+          Caption = #49345#53468
+          DataBinding.FieldName = 'C_STATUS'
+        end
+      end
+      object cxGrid1Level1: TcxGridLevel
+        GridView = gridCompany
+      end
+    end
+  end
+  object Panel2: TPanel
+    Left = 441
+    Top = 0
+    Width = 610
+    Height = 623
+    Align = alClient
+    BevelOuter = bvNone
+    TabOrder = 1
+    object Panel5: TPanel
+      Left = 0
+      Top = 0
+      Width = 610
+      Height = 30
+      Align = alTop
+      TabOrder = 0
+      object btnDelUser: TcxButton
+        Left = 185
+        Top = 2
+        Width = 60
+        Height = 25
+        Hint = #49325#51228
+        Caption = #49325#51228
+        LookAndFeel.NativeStyle = False
+        OptionsImage.Glyph.Data = {
+          36040000424D3604000000000000360000002800000010000000100000000100
+          2000000000000004000000000000000000000000000000000000000000000000
+          00000000000000000000101010462121218D2F2F2FC7383838F0383838F02F2F
+          2FC72121218D1010104600000000000000000000000000000000000000000000
+          0000080808202121218C393939F33C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
+          3CFF3C3C3CFF393939F32121218C080808200000000000000000000000000808
+          0820262626A33C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
+          3CFF3C3C3CFF3C3C3CFF3C3C3CFF262626A30808082000000000000000002121
+          218C3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
+          3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF2121218C00000000101010463939
+          39F33C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
+          3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF393939F3101010462121218D3C3C
+          3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
+          3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF2121218D2F2F2FC73C3C
+          3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
+          3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF2F2F2FC7383838F03C3C
+          3CFF3C3C3CFF3C3C3CFF00000000000000000000000000000000000000000000
+          000000000000000000003C3C3CFF3C3C3CFF3C3C3CFF383838F0383838F03C3C
+          3CFF3C3C3CFF3C3C3CFF00000000000000000000000000000000000000000000
+          000000000000000000003C3C3CFF3C3C3CFF3C3C3CFF383838F02F2F2FC73C3C
+          3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
+          3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF2F2F2FC72121218D3C3C
+          3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
+          3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF2121218D101010463939
+          39F33C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
+          3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF393939F310101046000000002121
+          218C3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
+          3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF2121218C00000000000000000808
+          0820262626A33C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
+          3CFF3C3C3CFF3C3C3CFF3C3C3CFF262626A30808082000000000000000000000
+          0000080808202121218C393939F33C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
+          3CFF3C3C3CFF393939F32121218C080808200000000000000000000000000000
+          00000000000000000000101010462121218D2F2F2FC7383838F0383838F02F2F
+          2FC72121218D1010104600000000000000000000000000000000}
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 0
+      end
+      object btnEditUser: TcxButton
+        Left = 124
+        Top = 2
+        Width = 60
+        Height = 25
+        Hint = #49688#51221
+        Caption = #49688#51221
+        LookAndFeel.NativeStyle = False
+        OptionsImage.Glyph.Data = {
+          36040000424D3604000000000000360000002800000010000000100000000100
+          2000000000000004000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000003C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
+          3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF0000000000000000000000000000
+          0000000000003C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
+          3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF0000000000000000000000000000
+          0000000000003C3C3CFF3C3C3CFF000000000000000000000000000000000000
+          000000000000000000003C3C3CFF3C3C3CFF0000000000000000000000000000
+          0000000000003C3C3CFF2D2D2DBE00000000000000001E1E1E7E3C3C3CFF0000
+          000000000000000000003C3C3CFF3C3C3CFF0000000000000000000000000000
+          0000000000002D2D2DBE040404101E1E1E811E1E1E81000000001E1E1E7E0000
+          000000000000000000003C3C3CFF3C3C3CFF0000000000000000000000000000
+          000000000000040404101E1E1E813C3C3CFF3C3C3CFF1E1E1E81000000000000
+          000000000000000000003C3C3CFF3C3C3CFF0000000000000000000000000000
+          0000000000001E1E1E813C3C3CFF3C3C3CFF3C3C3CFF1E1E1E7E000000000000
+          000000000000000000003C3C3CFF3C3C3CFF0000000000000000000000000000
+          00001E1E1E813C3C3CFF3C3C3CFF3C3C3CFF1E1E1E7E00000000000000000000
+          000000000000000000003C3C3CFF3C3C3CFF0000000000000000000000001A1A
+          1A703C3C3CFF3C3C3CFF3C3C3CFF1E1E1E7E0000000000000000000000000000
+          000000000000000000003C3C3CFF3C3C3CFF00000000000000001A1A1A703C3C
+          3CFF3C3C3CFF3C3C3CFF1E1E1E7E040404100000000000000000000000003C3C
+          3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF0000000000000000353535E03C3C
+          3CFF3C3C3CFF1A1A1A700A0A0A2C000000000000000000000000000000003C3C
+          3CFF3C3C3CFF3C3C3CFF3C3C3CFF1E1E1E7E00000000000000001A1A1A703535
+          35E01A1A1A700A0A0A2C3C3C3CFF000000000000000000000000000000003C3C
+          3CFF3C3C3CFF3C3C3CFF1E1E1E7E000000000000000000000000000000000000
+          0000000000003C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
+          3CFF3C3C3CFF1E1E1E7E00000000000000000000000000000000000000000000
+          0000000000003C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
+          3CFF1E1E1E7E0000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000}
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 1
+        OnClick = btnEditUserClick
+      end
+    end
+    object cxGrid2: TcxGrid
+      Left = 0
+      Top = 30
+      Width = 610
+      Height = 593
+      Align = alClient
+      BorderWidth = 1
+      TabOrder = 1
+      LookAndFeel.NativeStyle = False
+      LookAndFeel.SkinName = 'Black'
+      object gridUser: TcxGridDBTableView
+        Navigator.Buttons.CustomButtons = <>
+        Navigator.Buttons.First.Visible = True
+        Navigator.Buttons.PriorPage.Visible = True
+        Navigator.Buttons.Prior.Visible = True
+        Navigator.Buttons.Next.Visible = True
+        Navigator.Buttons.NextPage.Visible = True
+        Navigator.Buttons.Last.Visible = True
+        Navigator.Buttons.Insert.Visible = False
+        Navigator.Buttons.Append.Visible = False
+        Navigator.Buttons.Delete.Visible = False
+        Navigator.Buttons.Edit.Visible = False
+        Navigator.Buttons.Post.Visible = False
+        Navigator.Buttons.Cancel.Visible = False
+        Navigator.Buttons.Refresh.Visible = True
+        Navigator.Buttons.SaveBookmark.Visible = True
+        Navigator.Buttons.GotoBookmark.Visible = True
+        Navigator.Buttons.Filter.Visible = True
+        Navigator.InfoPanel.DisplayMask = '[RecordIndex] / [RecordCount]'
+        Navigator.InfoPanel.Visible = True
+        Navigator.Visible = True
+        OnCellDblClick = gridUserCellDblClick
+        DataController.DataSource = DataModule1.d_REG_USER_SEL
+        DataController.Summary.DefaultGroupSummaryItems = <>
+        DataController.Summary.FooterSummaryItems = <>
+        DataController.Summary.SummaryGroups = <>
+        OptionsCustomize.ColumnsQuickCustomization = True
+        OptionsData.CancelOnExit = False
+        OptionsData.Deleting = False
+        OptionsData.DeletingConfirmation = False
+        OptionsData.Editing = False
+        OptionsData.Inserting = False
+        OptionsSelection.CellSelect = False
+        OptionsView.FooterAutoHeight = True
+        OptionsView.GroupByBox = False
+        OptionsView.GroupByHeaderLayout = ghlHorizontal
+        OptionsView.GroupSummaryLayout = gslAlignWithColumns
+        OptionsView.Indicator = True
+        object gridUserID: TcxGridDBColumn
+          DataBinding.FieldName = 'ID'
+          Visible = False
+        end
+        object gridUserU_REGDATE: TcxGridDBColumn
+          Caption = #46321#47197#51068#51088
+          DataBinding.FieldName = 'U_REGDATE'
+          Width = 92
+        end
+        object gridUserU_NAME: TcxGridDBColumn
+          Caption = #49324#50857#51088#47749
+          DataBinding.FieldName = 'U_NAME'
+        end
+        object gridUserU_LOGINID: TcxGridDBColumn
+          Caption = #47196#44536#51064'ID'
+          DataBinding.FieldName = 'U_LOGINID'
+        end
+        object gridUserU_LOGINPASS: TcxGridDBColumn
+          Caption = #48708#48128#48264#54840
+          DataBinding.FieldName = 'U_LOGINPASS'
+          Visible = False
+        end
+        object gridUserU_EMAIL: TcxGridDBColumn
+          Caption = #51060#47700#51068
+          DataBinding.FieldName = 'U_EMAIL'
+          Width = 159
+        end
+        object gridUserU_TEL: TcxGridDBColumn
+          Caption = #51204#54868#48264#54840
+          DataBinding.FieldName = 'U_TEL'
+        end
+        object gridUserU_COMPID: TcxGridDBColumn
+          DataBinding.FieldName = 'U_COMPID'
+          Visible = False
+        end
+        object gridUserU_KIND: TcxGridDBColumn
+          Caption = #44396#48516
+          DataBinding.FieldName = 'U_KIND'
+          PropertiesClassName = 'TcxImageComboBoxProperties'
+          Properties.Items = <
+            item
+              Description = #49324#50857#51088
+              ImageIndex = 0
+              Value = 0
+            end
+            item
+              Description = #44288#47532#51088
+              Value = 1
+            end>
+          HeaderAlignmentHorz = taCenter
+        end
+        object gridUserU_APPROVED: TcxGridDBColumn
+          Caption = #49849#51064
+          DataBinding.FieldName = 'U_APPROVED'
+          PropertiesClassName = 'TcxImageComboBoxProperties'
+          Properties.Items = <
+            item
+              Description = #48708#49849#51064
+              ImageIndex = 0
+              Value = 0
+            end
+            item
+              Description = #49849#51064
+              Value = 1
+            end>
+          HeaderAlignmentHorz = taCenter
+        end
+        object gridUserU_SYSTEMID: TcxGridDBColumn
+          Caption = #49884#49828#53596'ID'
+          DataBinding.FieldName = 'U_SYSTEMID'
+        end
+      end
+      object cxGridLevel1: TcxGridLevel
+        GridView = gridUser
+      end
+    end
+  end
+  object COMPANY_IU: TUniStoredProc
+    StoredProcName = 'COMPANY_IU'
+    Connection = DataModule1.UniConnectLocal
+    Left = 160
+    Top = 456
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftString
+        Name = 'COMP_NAME'
+        ParamType = ptInput
+        Size = 30
+      end
+      item
+        DataType = ftString
+        Name = 'CHIEF_NAME'
+        ParamType = ptInput
+        Size = 10
+      end
+      item
+        DataType = ftString
+        Name = 'C_TEL'
+        ParamType = ptInput
+        Size = 20
+      end
+      item
+        DataType = ftString
+        Name = 'C_AREA'
+        ParamType = ptInput
+        Size = 10
+      end
+      item
+        DataType = ftString
+        Name = 'C_ADDR'
+        ParamType = ptInput
+        Size = 50
+      end
+      item
+        DataType = ftInteger
+        Name = 'C_STATUS'
+        ParamType = ptInput
+      end>
+    CommandStoredProcName = 'COMPANY_IU'
+  end
+  object REG_USER_IU: TUniStoredProc
+    StoredProcName = 'REG_USER_IU'
+    Connection = DataModule1.UniConnectLocal
+    Left = 640
+    Top = 464
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftString
+        Name = 'U_NAME'
+        ParamType = ptInput
+        Size = 10
+      end
+      item
+        DataType = ftString
+        Name = 'U_LOGINID'
+        ParamType = ptInput
+        Size = 10
+      end
+      item
+        DataType = ftString
+        Name = 'U_LOGINPASS'
+        ParamType = ptInput
+        Size = 10
+      end
+      item
+        DataType = ftString
+        Name = 'U_EMAIL'
+        ParamType = ptInput
+        Size = 30
+      end
+      item
+        DataType = ftString
+        Name = 'U_TEL'
+        ParamType = ptInput
+        Size = 20
+      end
+      item
+        DataType = ftInteger
+        Name = 'U_COMPID'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'U_KIND'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'U_APPROVED'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftString
+        Name = 'U_SYSTEMID'
+        ParamType = ptInput
+        Size = 20
+      end
+      item
+        DataType = ftString
+        Name = 'U_REGDATE'
+        ParamType = ptInput
+        Size = 10
+      end>
+    CommandStoredProcName = 'REG_USER_IU'
+  end
+end

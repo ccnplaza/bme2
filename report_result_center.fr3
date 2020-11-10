@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<TfrxReport Version="5.1.9" DotMatrixReport="False" IniFile="\Software\Fast Reports" PreviewOptions.Buttons="4095" PreviewOptions.Zoom="1" PrintOptions.Printer="Default" PrintOptions.PrintOnSheet="0" ReportOptions.CreateDate="42125.6270629167" ReportOptions.Description.Text="" ReportOptions.LastChange="42359.2572742361" ScriptLanguage="PascalScript" ScriptText.Text="&#13;&#10;begin&#13;&#10;&#13;&#10;end.">
+  <Datasets>
+    <item DataSet="frxDBDataset1" DataSetName="frxDBDataset1"/>
+  </Datasets>
+  <Styles>
+    <item Name="Title" Font.Charset="1" Font.Color="-16777208" Font.Height="-16" Font.Name="Arial" Font.Style="1"/>
+    <item Name="Header" Font.Charset="1" Font.Color="-16777208" Font.Height="-13" Font.Name="Arial" Font.Style="1"/>
+    <item Name="Group header" Font.Charset="1" Font.Color="-16777208" Font.Height="-13" Font.Name="Arial" Font.Style="0" Frame.Typ="8"/>
+    <item Name="Data" Font.Charset="1" Font.Color="-16777208" Font.Height="-13" Font.Name="Arial" Font.Style="0"/>
+    <item Name="Group footer" Font.Charset="1" Font.Color="-16777208" Font.Height="-13" Font.Name="Arial" Font.Style="0" Frame.Typ="4"/>
+    <item Name="Header line" Font.Charset="1" Font.Color="-16777208" Font.Height="-13" Font.Name="Arial" Font.Style="0" Frame.Typ="8" Frame.Width="2"/>
+  </Styles>
+  <TfrxDataPage Name="Data" Height="1000" Left="0" Top="0" Width="1000"/>
+  <TfrxReportPage Name="Page1" Orientation="poLandscape" PaperWidth="297" PaperHeight="210" PaperSize="9" LeftMargin="10" RightMargin="10" TopMargin="10" BottomMargin="10" ColumnWidth="0" ColumnPositions.Text="" DataSet="frxDBDataset1" DataSetName="frxDBDataset1" HGuides.Text="" VGuides.Text="">
+    <TfrxMemoView Name="Memo16" Left="39.45671" Top="569.25232" Width="207.87415" Height="37.7953" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="0" Fill.BackColor="15790320" ParentFont="False" Text=""/>
+    <TfrxShapeView Name="Shape2" Left="39.45671" Top="567.69326" Width="207.87415" Height="113.3859" Frame.Width="1.5"/>
+    <TfrxShapeView Name="Shape6" Left="38.45671" Top="105.94496" Width="642.5201" Height="37.7953" Fill.BackColor="15000804"/>
+    <TfrxShapeView Name="Shape1" Left="38.45671" Top="106.74026" Width="642.5201" Height="75.5906" Frame.Width="1.5"/>
+    <TfrxMemoView Name="frxDBDataset1s_name" Left="159.84261" Top="154.28355" Width="98.26778" Height="17.00787402" DataField="s_name" DataSet="frxDBDataset1" DataSetName="frxDBDataset1" Font.Charset="1" Font.Color="0" Font.Height="-16" Font.Name="굴림" Font.Style="1" HAlign="haCenter" ParentFont="False" Text="[frxDBDataset1.&#34;s_name&#34;]"/>
+    <TfrxPictureView Name="Picture1" Left="39.01577" Top="189.35436" Width="207.87415" Height="374.17326252" Center="True" DataField="pic_front" DataSet="frxDBDataset1" DataSetName="frxDBDataset1" Frame.Typ="15" HightQuality="False" Transparent="False" TransparentColor="16777215"/>
+    <TfrxPictureView Name="Picture2" Left="264.78757" Top="189.13389" Width="207.87401575" Height="374.17326252" Center="True" DataField="pic_side" DataSet="frxDBDataset1" DataSetName="frxDBDataset1" Frame.Typ="15" HightQuality="False" Transparent="False" TransparentColor="16777215"/>
+    <TfrxPictureView Name="Picture3" Left="491.44125" Top="189.13389" Width="207.87401575" Height="374.17326252" Center="True" DataField="pic_back" DataSet="frxDBDataset1" DataSetName="frxDBDataset1" Frame.Typ="15" HightQuality="False" Transparent="False" TransparentColor="16777215"/>
+    <TfrxMemoView Name="frxDBDataset1check_date" Left="45.11812" Top="154.28355" Width="98.26778" Height="17.00787402" DataSet="frxDBDataset1" DataSetName="frxDBDataset1" Font.Charset="1" Font.Color="0" Font.Height="-16" Font.Name="굴림" Font.Style="1" HAlign="haCenter" ParentFont="False" Text="[frxDBDataset1.&#34;check_date&#34;]"/>
+    <TfrxMemoView Name="frxDBDataset1s_sex" Left="277.12616" Top="154.28355" Width="49.13389" Height="17.00787402" DataSet="frxDBDataset1" DataSetName="frxDBDataset1" Font.Charset="1" Font.Color="0" Font.Height="-16" Font.Name="굴림" Font.Style="1" HAlign="haCenter" ParentFont="False" Text="[frxDBDataset1.&#34;s_sex&#34;]"/>
+    <TfrxMemoView Name="Memo1" Left="38.45671" Top="67.47248" Width="139.84261" Height="15.11812" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="바탕체" Font.Style="0" ParentFont="False" Text="사회적기업육성사업단"/>
+    <TfrxMemoView Name="Memo2" Left="353.63791" Top="44.5906" Width="340.1577" Height="30.23624" Font.Charset="1" Font.Color="0" Font.Height="-27" Font.Name="바탕체" Font.Style="1" HAlign="haCenter" ParentFont="False" Text="자세 분석 결과지(센터용)"/>
+    <TfrxMemoView Name="Memo3" Left="202.45671" Top="75.60637" Width="642.5201" Height="26.45671" Font.Charset="1" Font.Color="0" Font.Height="-24" Font.Name="바탕체" Font.Style="1" HAlign="haCenter" ParentFont="False" Text="Posture Analysis Report"/>
+    <TfrxLineView Name="Line1" Left="38.45671" Top="144.53556" Width="642.5201" Height="0" Color="0" Frame.Typ="4"/>
+    <TfrxLineView Name="Line2" Left="151.84261" Top="106.74026" Width="0" Height="75.5906" Color="0" Frame.Typ="1"/>
+    <TfrxLineView Name="Line3" Left="265.22851" Top="106.74026" Width="0" Height="75.5906" Color="0" Frame.Typ="1"/>
+    <TfrxLineView Name="Line4" Left="340.81911" Top="106.74026" Width="0" Height="75.5906" Color="0" Frame.Typ="1"/>
+    <TfrxLineView Name="Line5" Left="492.00031" Top="106.74026" Width="0" Height="75.5906" Color="0" Frame.Typ="1"/>
+    <TfrxMemoView Name="Memo4" Left="47.23624" Top="116.07885" Width="94.48825" Height="18.89765" Font.Charset="1" Font.Color="0" Font.Height="-16" Font.Name="바탕체" Font.Style="1" HAlign="haCenter" ParentFont="False" Text="측정일자"/>
+    <TfrxMemoView Name="Memo5" Left="163.1812" Top="118.07885" Width="94.48825" Height="18.89765" Font.Charset="1" Font.Color="0" Font.Height="-16" Font.Name="바탕체" Font.Style="1" HAlign="haCenter" ParentFont="False" Text="이  름"/>
+    <TfrxMemoView Name="Memo6" Left="276.5671" Top="118.07885" Width="52.91342" Height="18.89765" Font.Charset="1" Font.Color="0" Font.Height="-16" Font.Name="바탕체" Font.Style="1" HAlign="haCenter" ParentFont="False" Text="성 별"/>
+    <TfrxMemoView Name="Memo7" Left="363.49629" Top="118.07885" Width="94.48825" Height="18.89765" Font.Charset="1" Font.Color="0" Font.Height="-16" Font.Name="바탕체" Font.Style="1" HAlign="haCenter" ParentFont="False" Text="생년월일"/>
+    <TfrxMemoView Name="Memo8" Left="518.45702" Top="118.07885" Width="109.60637" Height="18.89765" Font.Charset="1" Font.Color="0" Font.Height="-16" Font.Name="바탕체" Font.Style="1" HAlign="haCenter" ParentFont="False" Text="연락처(선택)"/>
+    <TfrxMemoView Name="Memo18" Left="58.69295" Top="615.84292" Width="34.01577" Height="15.11812" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="바탕체" Font.Style="1" HAlign="haCenter" ParentFont="False" Text="얼굴"/>
+    <TfrxMemoView Name="Memo19" Left="58.69295" Top="653.97681" Width="34.01577" Height="15.11812" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="바탕체" Font.Style="1" HAlign="haCenter" ParentFont="False" Text="어깨"/>
+    <TfrxMemoView Name="Memo20" Left="286.90569" Top="610.60668" Width="26.45671" Height="15.11812" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="바탕체" Font.Style="1" HAlign="haCenter" ParentFont="False" Text="목"/>
+    <TfrxMemoView Name="Memo21" Left="285.236395" Top="634.96104" Width="30.23624" Height="15.11812" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="바탕체" Font.Style="1" HAlign="haCenter" ParentFont="False" Text="등"/>
+    <TfrxMemoView Name="Memo22" Left="285.12616" Top="660.07916" Width="34.01577" Height="15.11812" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="바탕체" Font.Style="1" HAlign="haCenter" ParentFont="False" Text="허리"/>
+    <TfrxMemoView Name="Memo23" Left="511.11843" Top="617.94527" Width="34.01577" Height="15.11812" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="바탕체" Font.Style="1" HAlign="haCenter" ParentFont="False" Text="골반"/>
+    <TfrxMemoView Name="Memo24" Left="511.11843" Top="651.18151" Width="34.01577" Height="15.11812" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="바탕체" Font.Style="1" HAlign="haCenter" ParentFont="False" Text="다리"/>
+    <TfrxMemoView Name="Memo25" Left="723.56741" Top="486.76407" Width="64.25201" Height="15.11812" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="바탕체" Font.Style="1" HAlign="haCenter" ParentFont="False" Text="족부(좌)"/>
+    <TfrxMemoView Name="Memo26" Left="723.677645" Top="526.00031" Width="64.25201" Height="15.11812" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="바탕체" Font.Style="1" HAlign="haCenter" ParentFont="False" Text="족부(우)"/>
+    <TfrxMemoView Name="Memo62" Left="805.7013" Top="593.92981" Width="128.50402" Height="30.23624" Font.Charset="1" Font.Color="0" Font.Height="-27" Font.Name="바탕체" Font.Style="1" HAlign="haCenter" ParentFont="False" Text="바른GYM"/>
+    <TfrxMemoView Name="Memo63" Left="783.02412" Top="624.16605" Width="185.19697" Height="37.7953" Font.Charset="1" Font.Color="0" Font.Height="-15" Font.Name="바탕체" Font.Style="1" HAlign="haCenter" ParentFont="False" Text="상담문의(천안점)&#13;&#10;전화:041-556-0281"/>
+    <TfrxLineView Name="Line6" Left="114.5906" Top="567.69326" Width="0" Height="113.3859" Color="0" Frame.Typ="1" Frame.Width="1.5"/>
+    <TfrxLineView Name="Line7" Left="39.45671" Top="605.48856" Width="207.87415" Height="0" Color="0" Frame.Typ="4" Frame.Width="1.5"/>
+    <TfrxLineView Name="Line8" Left="39.45671" Top="643.28386" Width="207.87415" Height="0" Color="0" Frame.Typ="4"/>
+    <TfrxMemoView Name="Memo14" Left="59.01577" Top="579.03185" Width="34.01577" Height="15.11812" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="바탕체" Font.Style="1" HAlign="haCenter" ParentFont="False" Text="항목"/>
+    <TfrxMemoView Name="Memo15" Left="125.14966" Top="579.03185" Width="109.60637" Height="15.11812" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="바탕체" Font.Style="1" HAlign="haCenter" ParentFont="False" Text="분석결과"/>
+    <TfrxPictureView Name="PictureLogo" Left="45.35436" Top="15.11812" Width="117.16543" Height="49.13389" HightQuality="False" Transparent="False" TransparentColor="16777215"/>
+    <TfrxPictureView Name="Picture4" Left="718.1107" Top="189.75603" Width="207.87401575" Height="245.66924252" Center="True" DataField="pic_foot" DataSet="frxDBDataset1" DataSetName="frxDBDataset1" Frame.Typ="15" HightQuality="False" Transparent="False" TransparentColor="16777215"/>
+    <TfrxMemoView Name="frxDBDataset1item1_comment" Left="125.72449" Top="616.70903" Width="109.60637" Height="15.11812" DataSet="frxDBDataset1" DataSetName="frxDBDataset1" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="바탕체" Font.Style="1" HAlign="haCenter" ParentFont="False" Text="[frxDBDataset1.&#34;item1_comment&#34;]"/>
+    <TfrxMemoView Name="Memo11" Left="125.72449" Top="654.06339" Width="109.60637" Height="15.11812" DataSet="frxDBDataset1" DataSetName="frxDBDataset1" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="바탕체" Font.Style="1" HAlign="haCenter" ParentFont="False" Text="[frxDBDataset1.&#34;item2_comment&#34;]"/>
+    <TfrxMemoView Name="Memo12" Left="350.1577" Top="610.26809" Width="109.60637" Height="15.11812" DataSet="frxDBDataset1" DataSetName="frxDBDataset1" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="바탕체" Font.Style="1" HAlign="haCenter" ParentFont="False" Text="[frxDBDataset1.&#34;item3_comment&#34;]"/>
+    <TfrxMemoView Name="Memo13" Left="350.37817" Top="635.16574" Width="109.60637" Height="15.11812" DataSet="frxDBDataset1" DataSetName="frxDBDataset1" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="바탕체" Font.Style="1" HAlign="haCenter" ParentFont="False" Text="[frxDBDataset1.&#34;item4_comment&#34;]"/>
+    <TfrxMemoView Name="Memo27" Left="352.1577" Top="658.84292" Width="109.60637" Height="15.11812" DataSet="frxDBDataset1" DataSetName="frxDBDataset1" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="바탕체" Font.Style="1" HAlign="haCenter" ParentFont="False" Text="[frxDBDataset1.&#34;item5_comment&#34;]"/>
+    <TfrxMemoView Name="Memo28" Left="578.14997" Top="615.48856" Width="109.60637" Height="15.11812" DataSet="frxDBDataset1" DataSetName="frxDBDataset1" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="바탕체" Font.Style="1" HAlign="haCenter" ParentFont="False" Text="[frxDBDataset1.&#34;item6_comment&#34;]"/>
+    <TfrxMemoView Name="Memo29" Left="578.14997" Top="653.28386" Width="109.60637" Height="15.11812" DataSet="frxDBDataset1" DataSetName="frxDBDataset1" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="바탕체" Font.Style="1" HAlign="haCenter" ParentFont="False" Text="[frxDBDataset1.&#34;item7_comment&#34;]"/>
+    <TfrxMemoView Name="Memo30" Left="804.81942" Top="488.42548" Width="109.60637" Height="15.11812" DataSet="frxDBDataset1" DataSetName="frxDBDataset1" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="바탕체" Font.Style="1" HAlign="haCenter" ParentFont="False" Text="[frxDBDataset1.&#34;item8_comment&#34;]"/>
+    <TfrxMemoView Name="Memo31" Left="804.81942" Top="524.44125" Width="109.60637" Height="15.11812" DataSet="frxDBDataset1" DataSetName="frxDBDataset1" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="바탕체" Font.Style="1" HAlign="haCenter" ParentFont="False" Text="[frxDBDataset1.&#34;item9_comment&#34;]"/>
+    <TfrxMemoView Name="Memo32" Left="727.43352" Top="108.73253" Width="309.92146" Height="71.81107" Font.Charset="1" Font.Color="255" Font.Height="-15" Font.Name="바탕체" Font.Style="1" ParentFont="False" Text="※주의사항※&#13;&#10;질병진단을 위한 보고서가 아니며 분석값은 측정환경과 자세, 측정인 등 외부환경에 따라 달라질 수 있습니다."/>
+    <TfrxMemoView Name="Memo9" Left="265.22851" Top="568.69326" Width="207.87415" Height="37.7953" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="0" Fill.BackColor="15790320" ParentFont="False" Text=""/>
+    <TfrxShapeView Name="Shape3" Left="265.22851" Top="567.1342" Width="207.87415" Height="113.3859" Frame.Width="1.5"/>
+    <TfrxLineView Name="Line9" Left="340.3624" Top="567.1342" Width="0" Height="113.3859" Color="0" Frame.Typ="1" Frame.Width="1.5"/>
+    <TfrxLineView Name="Line16" Left="265.22851" Top="604.9295" Width="207.87415" Height="0" Color="0" Frame.Typ="4" Frame.Width="1.5"/>
+    <TfrxLineView Name="Line17" Left="265.22851" Top="628.7248" Width="207.87415" Height="0" Color="0" Frame.Typ="4"/>
+    <TfrxMemoView Name="Memo33" Left="284.78757" Top="578.47279" Width="34.01577" Height="15.11812" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="바탕체" Font.Style="1" HAlign="haCenter" ParentFont="False" Text="항목"/>
+    <TfrxMemoView Name="Memo34" Left="350.92146" Top="578.47279" Width="109.60637" Height="15.11812" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="바탕체" Font.Style="1" HAlign="haCenter" ParentFont="False" Text="분석결과"/>
+    <TfrxMemoView Name="Memo37" Left="491.44125" Top="568.69326" Width="207.87415" Height="37.7953" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="0" Fill.BackColor="15790320" ParentFont="False" Text=""/>
+    <TfrxShapeView Name="Shape4" Left="491.44125" Top="567.1342" Width="207.87415" Height="113.3859" Frame.Width="1.5"/>
+    <TfrxLineView Name="Line18" Left="566.57514" Top="567.1342" Width="0" Height="113.3859" Color="0" Frame.Typ="1" Frame.Width="1.5"/>
+    <TfrxLineView Name="Line19" Left="491.44125" Top="604.9295" Width="207.87415" Height="0" Color="0" Frame.Typ="4" Frame.Width="1.5"/>
+    <TfrxLineView Name="Line20" Left="491.44125" Top="642.7248" Width="207.87415" Height="0" Color="0" Frame.Typ="4"/>
+    <TfrxMemoView Name="Memo40" Left="511.00031" Top="578.47279" Width="34.01577" Height="15.11812" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="바탕체" Font.Style="1" HAlign="haCenter" ParentFont="False" Text="항목"/>
+    <TfrxMemoView Name="Memo41" Left="577.1342" Top="578.47279" Width="109.60637" Height="15.11812" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="바탕체" Font.Style="1" HAlign="haCenter" ParentFont="False" Text="분석결과"/>
+    <TfrxMemoView Name="Memo44" Left="718.89023" Top="440.63018" Width="207.87415" Height="37.7953" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="0" Fill.BackColor="15790320" ParentFont="False" Text=""/>
+    <TfrxShapeView Name="Shape5" Left="718.89023" Top="439.07112" Width="207.87415" Height="113.3859" Frame.Width="1.5"/>
+    <TfrxLineView Name="Line21" Left="794.02412" Top="439.07112" Width="0" Height="113.3859" Color="0" Frame.Typ="1" Frame.Width="1.5"/>
+    <TfrxLineView Name="Line22" Left="718.89023" Top="476.86642" Width="207.87415" Height="0" Color="0" Frame.Typ="4" Frame.Width="1.5"/>
+    <TfrxLineView Name="Line23" Left="718.89023" Top="514.66172" Width="207.87415" Height="0" Color="0" Frame.Typ="4"/>
+    <TfrxMemoView Name="Memo47" Left="738.44929" Top="450.40971" Width="34.01577" Height="15.11812" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="바탕체" Font.Style="1" HAlign="haCenter" ParentFont="False" Text="항목"/>
+    <TfrxMemoView Name="Memo48" Left="804.58318" Top="450.40971" Width="109.60637" Height="15.11812" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="바탕체" Font.Style="1" HAlign="haCenter" ParentFont="False" Text="분석결과"/>
+    <TfrxLineView Name="Line24" Left="265.22851" Top="655.06339" Width="207.87415" Height="0" Color="0" Frame.Typ="4"/>
+  </TfrxReportPage>
+</TfrxReport>

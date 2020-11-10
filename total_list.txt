@@ -1,0 +1,25 @@
+id	item_group	item_name	man_filter	women_filter	total_filter	group_id	man_value	man_percent	women_value	women_percent	item_id
+3	[01] 얼굴기울기	기운형(우측)	check_item1 = 2 and s_sex = 0	check_item1 = 2 and s_sex = 1	check_item1 = 2	1	0(0%)	0(0%)	0(0%)		2
+4	[01] 얼굴기울기	기운형(좌측)	check_item1 = 3 and s_sex = 0	check_item1 = 3 and s_sex = 1	check_item1 = 3	1	0(0%)	0(0%)	0(0%)		3
+7	[02] 어깨기울기	처진형(우측)	check_item2 = 5 and s_sex = 0	check_item2 = 5 and s_sex = 1	check_item2 = 5	2	0(0%)	0(0%)	0(0%)		5
+8	[02] 어깨기울기	처진형(좌측)	check_item2 = 6 and s_sex = 0	check_item2 = 6 and s_sex = 1	check_item2 = 6	2	0(0%)	0(0%)	0(0%)		6
+11	[03] 다리형태	O형 진행형	check_item3 = 8 and s_sex = 0	check_item3 = 8 and s_sex = 1	check_item3 = 8	3	0(0%)	0(0%)	0(0%)		8
+12	[03] 다리형태	O형	check_item3 = 9 and s_sex = 0	check_item3 = 9 and s_sex = 1	check_item3 = 9	3	0(0%)	0(0%)	0(0%)		9
+13	[03] 다리형태	X형 진행형	check_item3 = 10 and s_sex = 0	check_item3 = 10 and s_sex = 1	check_item3 = 10	3	0(0%)	0(0%)	0(0%)		10
+14	[03] 다리형태	X형	check_item3 = 11 and s_sex = 0	check_item3 = 11 and s_sex = 1	check_item3 = 11	3	0(0%)	0(0%)	0(0%)		11
+17	[04] 목기울기	거북목 진행형	check_item4 = 13 and s_sex = 0	check_item4 = 13 and s_sex = 1	check_item4 = 13	4	0(0%)	0(0%)	0(0%)		13
+18	[04] 목기울기	거북목	check_item4 = 14 and s_sex = 0	check_item4 = 14 and s_sex = 1	check_item4 = 14	4	0(0%)	0(0%)	0(0%)		14
+19	[04] 목기울기	일자목 진행형	check_item4 = 15 and s_sex = 0	check_item4 = 15 and s_sex = 1	check_item4 = 15	4	0(0%)	0(0%)	0(0%)		15
+20	[04] 목기울기	일자목	check_item4 = 16 and s_sex = 0	check_item4 = 16 and s_sex = 1	check_item4 = 16	4	0(0%)	0(0%)	0(0%)		16
+23	[05] 등기울기	굽은등	check_item5 = 18 and s_sex = 0	check_item5 = 18 and s_sex = 1	check_item5 = 18	5	0(0%)	0(0%)	0(0%)		18
+26	[06] 과전만측정	과전만	check_item6 = 20 and s_sex = 0	check_item6 = 20 and s_sex = 1	check_item6 = 20	6	0(0%)	0(0%)	0(0%)		20
+27	[06] 과전만측정	과전만2	check_item6 = 21 and s_sex = 0	check_item6 = 21 and s_sex = 1	check_item6 = 21	6	0(0%)	0(0%)	0(0%)		21
+29	[07] 골반상하기울기	우측 上형	check_item7 = 23 and s_sex = 0	check_item7 = 23 and s_sex = 1	check_item7 = 23	7	0(0%)	0(0%)	0(0%)		23
+30	[07] 골반상하기울기	좌측 上형	check_item7 = 24 and s_sex = 0	check_item7 = 24 and s_sex = 1	check_item7 = 24	7	0(0%)	0(0%)	0(0%)		24
+31	[07] 골반상하기울기	혼합형	check_item7 = 25 and s_sex = 0	check_item7 = 25 and s_sex = 1	check_item7 = 25	7	0(0%)	0(0%)	0(0%)		25
+33	[08] 종골각측정	후족부외반	check_item8 = 27 and s_sex = 0	check_item8 = 27 and s_sex = 1	check_item8 = 27	8	0(0%)	0(0%)	0(0%)		27
+34	[08] 종골각측정	후족부내반	check_item8 = 28 and s_sex = 0	check_item8 = 28 and s_sex = 1	check_item8 = 28	8	0(0%)	0(0%)	0(0%)		28
+36	[09] 족부(좌)	요족형	check_item9 = 30 and s_sex = 0	check_item9 = 30 and s_sex = 1	check_item9 = 30	9	0(0%)	0(0%)	0(0%)		30
+37	[09] 족부(좌)	평발	check_item9 = 31 and s_sex = 0	check_item9 = 31 and s_sex = 1	check_item9 = 31	9	0(0%)	0(0%)	0(0%)		31
+39	[10] 족부(우)	요족형	check_item10 = 33 and s_sex = 0	check_item10 = 33 and s_sex = 1	check_item10 = 33	10	0(0%)	0(0%)	0(0%)		33
+40	[10] 족부(우)	평발	check_item10 = 34 and s_sex = 0	check_item10 = 34 and s_sex = 1	check_item10 = 34	10	0(0%)	0(0%)	0(0%)		34
