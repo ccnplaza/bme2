@@ -2679,4 +2679,30 @@ object DataModule1: TDataModule1
       end>
     CommandStoredProcName = 'ANALYSE_RESULT_INS'
   end
+  object CHECK_PIC_DATE_EXISTS: TUniStoredProc
+    StoredProcName = 'CHECK_PIC_DATE_EXISTS'
+    Connection = UniConnection1
+    Left = 480
+    Top = 560
+    ParamData = <
+      item
+        DataType = ftDate
+        Name = 'P_DATE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptOutput
+      end>
+    CommandStoredProcName = 'CHECK_PIC_DATE_EXISTS'
+    object CHECK_PIC_DATE_EXISTSID: TIntegerField
+      FieldName = 'ID'
+    end
+  end
+  object ds_CHECK_PIC_DATE_EXISTS: TDataSource
+    DataSet = CHECK_PIC_DATE_EXISTS
+    Left = 480
+    Top = 608
+  end
 end

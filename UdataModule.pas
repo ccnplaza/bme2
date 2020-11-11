@@ -239,6 +239,9 @@ type
     ANALYSE_RESULT_CHECKRESULT5: TIntegerField;
     ANALYSE_RESULT_CHECKRESULT6: TIntegerField;
     ANALYSE_RESULT_INS: TUniStoredProc;
+    CHECK_PIC_DATE_EXISTS: TUniStoredProc;
+    ds_CHECK_PIC_DATE_EXISTS: TDataSource;
+    CHECK_PIC_DATE_EXISTSID: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }

@@ -360,6 +360,7 @@ var
   i, cnt, sid : Integer;
   uid : Int64;
 begin
+  Screen.Cursor := crHourGlass;
   fmSelectStudent := TfmSelectStudent.Create(Self);
   try
     fmSelectStudent.ShowModal;
@@ -381,6 +382,7 @@ begin
     end;
   finally
     fmSelectStudent.Free;
+    Screen.Cursor := crArrow;
   end;
 end;
 
@@ -388,11 +390,23 @@ procedure TfmCapture.btnAddPictureClick(Sender: TObject);
 var
   uid : Int64;
 begin
-  DataModule1.PICTURE_DATE_INS.ParamByName('PIC_DATE').Value := Date;
-  DataModule1.PICTURE_DATE_INS.ParamByName('PIC_CNT').Value := 0;
-  DataModule1.PICTURE_DATE_INS.ParamByName('CENTER_ID').Value := UserInfo.userCenterID;
-  DataModule1.PICTURE_DATE_INS.ExecProc;
-  RetrieveStudentList;
+  Screen.Cursor := crHourGlass;
+  DataModule1.CHECK_PIC_DATE_EXISTS.ParamByName('P_DATE').Value := Date;
+  DataModule1.CHECK_PIC_DATE_EXISTS.Open;
+  DataModule1.ds_CHECK_PIC_DATE_EXISTS.DataSet.Refresh;
+  if DataModule1.CHECK_PIC_DATE_EXISTSID.Value > 0 then begin
+    ShowMessage('동일 날짜가 있습니다.');
+    Exit;
+  end else begin
+    DataModule1.PICTURE_DATE_INS.ParamByName('PIC_DATE').Value := Date;
+    DataModule1.PICTURE_DATE_INS.ParamByName('PIC_CNT').Value := 0;
+    DataModule1.PICTURE_DATE_INS.ParamByName('CENTER_ID').Value := UserInfo.userCenterID;
+    DataModule1.PICTURE_DATE_INS.ExecProc;
+    DataModule1.ds_PICTURE_DATE_SEL.DataSet.Refresh;
+    DataModule1.ds_PICTURE_DATE_SEL.DataSet.Locate('PIC_DATE', Date, []);
+    RetrieveStudentList;
+  end;
+  Screen.Cursor := crArrow;
 end;
 
 procedure TfmCapture.btnCapture1Click(Sender: TObject);
@@ -471,9 +485,12 @@ begin
   if MessageDlg('선택한 자료를 삭제합니다. ' + #13#10 + '삭제한 후에는 되돌릴 수 없습니다.'
     + #13#10 + '정말 삭제할까요?',
     mtInformation, mbOKCancel, 0) = 1 then begin
+    Screen.Cursor := crHourGlass;
     DataModule1.PICTURE_DATE_DEL.ParamByName('ID').Value := gridPictureID.EditValue;
     DataModule1.PICTURE_DATE_DEL.ExecProc;
     DataModule1.ds_PICTURE_DATE_SEL.DataSet.Refresh;
+    gridPicture.DataController.GotoLast;
+    Screen.Cursor := crArrow;
   end;
 end;
 
