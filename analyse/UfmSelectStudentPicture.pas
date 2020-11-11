@@ -94,6 +94,7 @@ end;
 procedure TfmSelectStudentPicture.RetrieveDateList;
 begin
   DataModule1.PICTURE_DATE_SEL.ParamByName('C_ID').Value := UserInfo.userCenterID;
+  DataModule1.PICTURE_DATE_SEL.ParamByName('SUB_ID').Value := UserInfo.userSubCenterID;
   DataModule1.PICTURE_DATE_SEL.Open;
   DataModule1.ds_PICTURE_DATE_SEL.DataSet.Refresh;
 end;

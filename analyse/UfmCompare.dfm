@@ -27,7 +27,6 @@ object fmCompare: TfmCompare
     Height = 29
     Align = alTop
     TabOrder = 0
-    ExplicitWidth = 1147
     object Label3: TLabel
       AlignWithMargins = True
       Left = 4
@@ -112,10 +111,6 @@ object fmCompare: TfmCompare
     Height = 668
     Align = alClient
     TabOrder = 1
-    ExplicitLeft = 520
-    ExplicitTop = 8
-    ExplicitWidth = 553
-    ExplicitHeight = 665
     object Panel3: TPanel
       Left = 1
       Top = 1
@@ -124,7 +119,6 @@ object fmCompare: TfmCompare
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 0
-      ExplicitWidth = 463
       object PanelTop: TPanel
         Left = 0
         Top = 0
@@ -133,7 +127,6 @@ object fmCompare: TfmCompare
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitWidth = 463
         object PanelTopLeft: TPanel
           Left = 0
           Top = 0
@@ -198,7 +191,6 @@ object fmCompare: TfmCompare
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 1
-          ExplicitWidth = 146
           object ImageEnVect2: TImageEnVect
             Left = 0
             Top = 21
@@ -216,7 +208,6 @@ object fmCompare: TfmCompare
             OnDblClick = ImageEnVect2DblClick
             OnDragDrop = ImageEnVect2DragDrop
             OnDragOver = ImageEnVect2DragOver
-            ExplicitWidth = 146
             object ImageEnVect6: TImageEnVect
               Left = 72
               Top = 112
@@ -234,7 +225,6 @@ object fmCompare: TfmCompare
             Height = 21
             Align = alTop
             TabOrder = 1
-            ExplicitWidth = 146
             object CheckBox2: TCheckBox
               Left = 132
               Top = 1
@@ -246,7 +236,6 @@ object fmCompare: TfmCompare
               State = cbChecked
               TabOrder = 0
               OnClick = CheckBox2Click
-              ExplicitLeft = 95
             end
           end
         end
@@ -260,7 +249,6 @@ object fmCompare: TfmCompare
         BevelOuter = bvNone
         Caption = 'Panel12'
         TabOrder = 1
-        ExplicitWidth = 463
         object PanelBottomLeft: TPanel
           Left = 0
           Top = 0
@@ -325,7 +313,6 @@ object fmCompare: TfmCompare
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 1
-          ExplicitWidth = 146
           object ImageEnVect4: TImageEnVect
             Left = 0
             Top = 21
@@ -343,7 +330,6 @@ object fmCompare: TfmCompare
             OnDblClick = ImageEnVect4DblClick
             OnDragDrop = ImageEnVect4DragDrop
             OnDragOver = ImageEnVect4DragOver
-            ExplicitWidth = 146
             object ImageEnVect8: TImageEnVect
               Left = 72
               Top = 112
@@ -361,7 +347,6 @@ object fmCompare: TfmCompare
             Height = 21
             Align = alTop
             TabOrder = 1
-            ExplicitWidth = 146
             object CheckBox4: TCheckBox
               Left = 132
               Top = 1
@@ -373,7 +358,6 @@ object fmCompare: TfmCompare
               State = cbChecked
               TabOrder = 0
               OnClick = CheckBox4Click
-              ExplicitLeft = 95
             end
           end
         end
@@ -387,9 +371,6 @@ object fmCompare: TfmCompare
       Align = alRight
       Caption = 'Panel7'
       TabOrder = 1
-      ExplicitLeft = 962
-      ExplicitTop = 29
-      ExplicitHeight = 668
       object GroupBox1: TGroupBox
         AlignWithMargins = True
         Left = 4
@@ -604,7 +585,6 @@ object fmCompare: TfmCompare
         Align = alClient
         Caption = #48708#44368#48516#49437' '#47532#49828#53944
         TabOrder = 1
-        ExplicitHeight = 376
         object cxGrid1: TcxGrid
           Left = 2
           Top = 48
@@ -614,7 +594,6 @@ object fmCompare: TfmCompare
           Align = alClient
           TabOrder = 0
           LookAndFeel.SkinName = 'Black'
-          ExplicitHeight = 326
           object gridCompare: TcxGridDBTableView
             Navigator.Buttons.CustomButtons = <>
             Navigator.Buttons.First.Visible = False
@@ -998,9 +977,6 @@ object fmCompare: TfmCompare
     Align = alLeft
     BevelOuter = bvNone
     TabOrder = 2
-    ExplicitLeft = 8
-    ExplicitTop = 37
-    ExplicitHeight = 632
     object Panel2: TPanel
       Left = 0
       Top = 0
@@ -1009,7 +985,6 @@ object fmCompare: TfmCompare
       Align = alLeft
       Caption = 'Panel1'
       TabOrder = 0
-      ExplicitHeight = 632
       object Panel21: TPanel
         Left = 1
         Top = 279
@@ -1032,7 +1007,6 @@ object fmCompare: TfmCompare
         TabOrder = 1
         LookAndFeel.NativeStyle = False
         LookAndFeel.SkinName = 'Black'
-        ExplicitHeight = 327
         object gridStudent: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           Navigator.Buttons.First.Visible = False
@@ -1259,7 +1233,6 @@ object fmCompare: TfmCompare
       Height = 668
       Align = alClient
       TabOrder = 1
-      ExplicitHeight = 632
       object cxTabControl1: TcxTabControl
         Left = 1
         Top = 1
@@ -1296,7 +1269,6 @@ object fmCompare: TfmCompare
         DragMode = dmAutomatic
         TabOrder = 1
         OnStartDrag = ImageEnView1StartDrag
-        ExplicitHeight = 603
       end
     end
   end

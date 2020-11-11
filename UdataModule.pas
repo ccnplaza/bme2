@@ -249,6 +249,10 @@ type
     REG_SCHOOL_SEL_DEFAULTID: TIntegerField;
     ds_REG_SCHOOL_SEL_DEFAULT: TDataSource;
     PICTURE_DATE_SELSUB_CENTER: TIntegerField;
+    STUDENTS_SEL_CENTERUID: TIntegerField;
+    STUDENT_IMAGE_EXISTS: TUniStoredProc;
+    ds_STUDENT_IMAGE_EXISTS: TDataSource;
+    STUDENT_IMAGE_EXISTSID: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
@@ -268,6 +272,7 @@ type
     procedure UploadImage(imgName : string);
     procedure DownloadImage(imgName : string);
     function GetSubCenterID : Integer;
+    function CheckStudentImageExists(student_id:Integer;p_date:TDate) : Boolean;
   end;
 
 var
@@ -281,6 +286,20 @@ uses GlobalVars, CommonLogic;
 
 const
   server_url = 'http://ccnplaza.com/bmae/uploads/';
+
+function TDataModule1.CheckStudentImageExists(student_id:Integer;p_date:TDate) : Boolean;
+begin
+  STUDENT_IMAGE_EXISTS.ParamByName('CENTER').Value := UserInfo.userCenterID;
+  STUDENT_IMAGE_EXISTS.ParamByName('SUBID').Value := UserInfo.userSubCenterID;
+  STUDENT_IMAGE_EXISTS.ParamByName('SID').Value := student_id;
+  STUDENT_IMAGE_EXISTS.ParamByName('PDATE').Value := p_date;
+  STUDENT_IMAGE_EXISTS.Open;
+  ds_STUDENT_IMAGE_EXISTS.DataSet.Refresh;
+  if STUDENT_IMAGE_EXISTSID.Value > 0 then
+    Result := True
+  else
+    Result := False;
+end;
 
 procedure TDataModule1.DataModuleCreate(Sender: TObject);
 begin

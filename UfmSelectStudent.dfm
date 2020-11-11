@@ -493,6 +493,10 @@ object fmSelectStudent: TfmSelectStudent
           HeaderAlignmentHorz = taCenter
           Width = 60
         end
+        object gridStudentUID: TcxGridDBColumn
+          DataBinding.FieldName = 'UID'
+          Visible = False
+        end
       end
       object cxGridLevel2: TcxGridLevel
         GridView = gridStudent

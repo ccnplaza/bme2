@@ -332,7 +332,17 @@ begin
   FORM_OPEN := False;
   WORK_YEAR.Value := YearOf(Date);
   ImageEnView1.Clear;
-  btnRefresh.Click;
+  UserInfo.userSubCenterID := DataModule1.GetSubCenterID;
+  if UserInfo.userKind = 1 then begin
+    if DataModule1.GetSubCenterID > 0 then begin
+      btnRefresh.Click;
+    end else begin
+      ShowMessage('단체(도장)을 선택하세요.');
+      Exit;
+    end;
+  end else begin
+    btnRefresh.Click;
+  end;
 end;
 
 procedure TfmCompare.LoadPictureData;
@@ -681,6 +691,7 @@ end;
 procedure TfmCompare.RetrieveDateList;
 begin
   DataModule1.PICTURE_DATE_SEL.ParamByName('C_ID').Value := UserInfo.userCenterID;
+  DataModule1.PICTURE_DATE_SEL.ParamByName('SUB_ID').Value := UserInfo.userSubCenterID;
   DataModule1.PICTURE_DATE_SEL.Open;
   DataModule1.ds_PICTURE_DATE_SEL.DataSet.Refresh;
 end;

@@ -23,8 +23,6 @@ object fmSelectStudentPicture: TfmSelectStudentPicture
     Height = 580
     Align = alLeft
     TabOrder = 0
-    ExplicitTop = 24
-    ExplicitHeight = 441
     object cxGrid1: TcxGrid
       Left = 1
       Top = 1
@@ -33,9 +31,6 @@ object fmSelectStudentPicture: TfmSelectStudentPicture
       Align = alClient
       TabOrder = 0
       LookAndFeel.SkinName = 'Black'
-      ExplicitTop = 26
-      ExplicitWidth = 248
-      ExplicitHeight = 253
       object gridPicture: TcxGridDBTableView
         Navigator.Buttons.CustomButtons = <>
         Navigator.Buttons.First.Visible = False
@@ -123,10 +118,6 @@ object fmSelectStudentPicture: TfmSelectStudentPicture
     Height = 580
     Align = alClient
     TabOrder = 1
-    ExplicitLeft = 295
-    ExplicitTop = 24
-    ExplicitWidth = 298
-    ExplicitHeight = 441
     object cxGrid3: TcxGrid
       Left = 1
       Top = 1
@@ -138,9 +129,6 @@ object fmSelectStudentPicture: TfmSelectStudentPicture
       TabOrder = 0
       LookAndFeel.NativeStyle = False
       LookAndFeel.SkinName = 'Black'
-      ExplicitTop = 304
-      ExplicitWidth = 248
-      ExplicitHeight = 327
       object gridStudent: TcxGridDBTableView
         Navigator.Buttons.CustomButtons = <>
         Navigator.Buttons.First.Visible = False
@@ -268,7 +256,6 @@ object fmSelectStudentPicture: TfmSelectStudentPicture
     Height = 33
     Align = alTop
     TabOrder = 2
-    ExplicitWidth = 639
     object Label1: TLabel
       Left = 13
       Top = 8

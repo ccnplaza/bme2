@@ -231,6 +231,11 @@ object DataModule1: TDataModule1
         DataType = ftFloat
         Name = 'BMI_VALUE'
         ParamType = ptOutput
+      end
+      item
+        DataType = ftInteger
+        Name = 'UID'
+        ParamType = ptOutput
       end>
     CommandStoredProcName = 'STUDENTS_SEL_CENTER'
     object STUDENTS_SEL_CENTERID: TIntegerField
@@ -273,6 +278,9 @@ object DataModule1: TDataModule1
     object STUDENTS_SEL_CENTERBMI_VALUE: TFloatField
       Alignment = taCenter
       FieldName = 'BMI_VALUE'
+    end
+    object STUDENTS_SEL_CENTERUID: TIntegerField
+      FieldName = 'UID'
     end
   end
   object ds_STUDENTS_SEL_CENTER: TDataSource
@@ -667,6 +675,11 @@ object DataModule1: TDataModule1
       item
         DataType = ftInteger
         Name = 'CENTER_ID'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'SUB_CENTER'
         ParamType = ptInput
       end>
     CommandStoredProcName = 'CHECK_DATA_INS'
@@ -2389,6 +2402,11 @@ object DataModule1: TDataModule1
         ParamType = ptInput
       end
       item
+        DataType = ftInteger
+        Name = 'SUB_ID'
+        ParamType = ptInput
+      end
+      item
         DataType = ftDate
         Name = 'P_DATE'
         ParamType = ptInput
@@ -2823,5 +2841,46 @@ object DataModule1: TDataModule1
     DataSet = REG_SCHOOL_SEL_DEFAULT
     Left = 56
     Top = 472
+  end
+  object STUDENT_IMAGE_EXISTS: TUniStoredProc
+    StoredProcName = 'STUDENT_IMAGE_EXISTS'
+    Connection = UniConnection1
+    Left = 656
+    Top = 576
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'CENTER'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'SUBID'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'SID'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftDate
+        Name = 'PDATE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptOutput
+      end>
+    CommandStoredProcName = 'STUDENT_IMAGE_EXISTS'
+    object STUDENT_IMAGE_EXISTSID: TIntegerField
+      FieldName = 'ID'
+    end
+  end
+  object ds_STUDENT_IMAGE_EXISTS: TDataSource
+    DataSet = STUDENT_IMAGE_EXISTS
+    Left = 656
+    Top = 624
   end
 end

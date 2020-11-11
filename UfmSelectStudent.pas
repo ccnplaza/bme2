@@ -48,6 +48,7 @@ type
     btnFilter: TcxButton;
     gridStudentBIRTH_MONTH: TcxGridDBColumn;
     gridStudentBIRTH_DAY: TcxGridDBColumn;
+    gridStudentUID: TcxGridDBColumn;
     procedure btnAddClick(Sender: TObject);
     procedure btnEdit3Click(Sender: TObject);
     procedure btnDelClick(Sender: TObject);
@@ -78,79 +79,78 @@ procedure TfmSelectStudent.btnAddClick(Sender: TObject);
 var
   std_id : string;
 begin
-{  if CurrentSchoolID <> '' then begin
-    fmStudentEdit := TfmStudentEdit.Create(Self);
-    try
-      fmStudentEdit.ShowModal;
-      if fmStudentEdit.ModalResult = mrOk then begin
-        //신규학생추가
-        std_id := FormatDateTime('yyyymmddhhnnsszzz', now);
-        DataModule1.AddNewStudent(std_id,
-                                  fmStudentEdit.S_NAME.Text,
-                                  fmStudentEdit.BIRTH_DAY.Text,
-                                  fmStudentEdit.S_AGE.Value,
-                                  fmStudentEdit.S_MONTH.Value,
-                                  0,
-                                  fmStudentEdit.S_SEX.ItemIndex,
-                                  fmStudentEdit.S_KIND.EditValue
-                                  );
-
-        DataModule1.d_STUDENTS_SEL.DataSet.Refresh;
-        DataModule1.d_STUDENTS_SEL.DataSet.Last;
-      end;
-    finally
-      fmStudentEdit.Free;
+  fmStudentEdit := TfmStudentEdit.Create(Self);
+  try
+    fmStudentEdit.ShowModal;
+    if fmStudentEdit.ModalResult = mrOk then begin
+      //신규학생추가
+      DataModule1.STUDENTS_INS.ParamByName('S_NAME').Value := fmStudentEdit.S_NAME.Text;
+      DataModule1.STUDENTS_INS.ParamByName('S_BIRTH').Value := fmStudentEdit.S_BIRTH.Date;
+      DataModule1.STUDENTS_INS.ParamByName('S_KIND').Value := fmStudentEdit.S_KIND.EditValue;
+      DataModule1.STUDENTS_INS.ParamByName('S_SEX').Value := fmStudentEdit.S_SEX.ItemIndex;
+      DataModule1.STUDENTS_INS.ParamByName('S_AGE').Value := fmStudentEdit.S_AGE.Value;
+      DataModule1.STUDENTS_INS.ParamByName('CENTER_ID').Value := UserInfo.userCenterID;
+      DataModule1.STUDENTS_INS.ParamByName('S_HEIGHT').Value := fmStudentEdit.S_HEIGHT.EditValue;
+      DataModule1.STUDENTS_INS.ParamByName('S_WEIGHT').Value := fmStudentEdit.S_WEIGHT.EditValue;
+      DataModule1.STUDENTS_INS.ParamByName('BMI_VALUE').Value := StrToFloatDef(fmStudentEdit.BMI_VALUE.Text, 0);
+      DataModule1.STUDENTS_INS.ParamByName('UID').Value := UserInfo.userSubCenterID;
+      DataModule1.STUDENTS_INS.ExecProc;
+      DataModule1.ds_STUDENTS_SEL_CENTER.DataSet.Refresh;
+      DataModule1.ds_STUDENTS_SEL_CENTER.DataSet.Last;
     end;
+  finally
+    fmStudentEdit.Free;
   end;
-}
 end;
 
 procedure TfmSelectStudent.btnDelClick(Sender: TObject);
 begin
-{  if Application.MessageBox('자료를 삭제합니다. 삭제한 후에는 되돌릴 수 없습니다.' + #13#10 +
+  if Application.MessageBox('자료를 삭제합니다. 삭제한 후에는 되돌릴 수 없습니다.' + #13#10 +
     '그래도 삭제할까요?', '자료삭제', MB_YESNO) = IDYES then
   begin
     gridStudent.DataController.SaveBookmark;
     DataModule1.STUDENTS_DEL.ParamByName('ID').Value := gridStudentID.EditValue;
     DataModule1.STUDENTS_DEL.ExecProc;
-    DataModule1.d_STUDENTS_SEL.DataSet.Refresh;
-    DataModule1.UpdateAnlyseCount(CurrentSchoolID);
+    DataModule1.ds_STUDENTS_SEL_CENTER.DataSet.Refresh;
     gridStudent.DataController.GotoBookmark;
   end;
-  }
 end;
 
 procedure TfmSelectStudent.btnEdit3Click(Sender: TObject);
 begin
-{  gridStudent.DataController.SaveBookmark;
-  GStudentID := gridStudentID.EditValue;
+  if not (gridStudent.DataController.RecordCount > 0) then begin
+    ShowMessage('수정할 자료가 없습니다.');
+    Exit;
+  end;
+  gridStudent.DataController.SaveBookmark;
   fmStudentEdit := TfmStudentEdit.Create(Self);
   try
-    fmStudentEdit.S_NAME.Text     := gridStudentS_NAME.EditValue;
-    fmStudentEdit.BIRTH_DAY.Text     := gridStudentBIRTH_DAY.EditValue;
-    fmStudentEdit.S_AGE.EditValue     := gridStudentS_AGE.EditValue;
-//    fmStudentEdit.S_CLASS.EditValue   := gridStudentS_CLASS.EditValue;
-    fmStudentEdit.S_SEX.ItemIndex := gridStudentS_SEX.EditValue;
-    fmStudentEdit.S_KIND.EditValue   := gridStudentS_KIND.EditValue;
-
+    fmStudentEdit.S_NAME.Text     := DataModule1.STUDENTS_SEL_CENTERS_NAME.Value;
+    fmStudentEdit.S_BIRTH.Date    := DataModule1.STUDENTS_SEL_CENTERS_BIRTH.Value;
+    fmStudentEdit.S_AGE.EditValue     := DataModule1.STUDENTS_SEL_CENTERS_AGE.Value;
+    fmStudentEdit.S_SEX.ItemIndex := DataModule1.STUDENTS_SEL_CENTERS_SEX.Value;
+    fmStudentEdit.s_kind.EditValue := DataModule1.STUDENTS_SEL_CENTERS_KIND.Value;
+    fmStudentEdit.S_HEIGHT.EditValue  := DataModule1.STUDENTS_SEL_CENTERS_HEIGHT.Value;
+    fmStudentEdit.S_WEIGHT.EditValue  := DataModule1.STUDENTS_SEL_CENTERS_WEIGHT.Value;
+    fmStudentEdit.BMI_VALUE.Text      := DataModule1.STUDENTS_SEL_CENTERBMI_VALUE.AsString;
     fmStudentEdit.ShowModal;
     if fmStudentEdit.ModalResult = mrOk then begin
-      //STUDENTS_UPD_BASIC(:ID, :S_NAME, :S_YEAR, :S_CLASS, :S_NO, :S_SEX, :S_HEIGHT, :S_WEIGHT, :S_BMI, :S_LEVEL, :S_AGE)
-      DataModule1.STUDENTS_UPD_BASIC.ParamByName('ID').Value         := GStudentID;
-      DataModule1.STUDENTS_UPD_BASIC.ParamByName('S_NAME').Value     := fmStudentEdit.S_NAME.Text;
-      DataModule1.STUDENTS_UPD_BASIC.ParamByName('BIRTH_DAY').Value     := fmStudentEdit.BIRTH_DAY.Text;
-      DataModule1.STUDENTS_UPD_BASIC.ParamByName('S_AGE').Value      := fmStudentEdit.S_AGE.Value;
-      DataModule1.STUDENTS_UPD_BASIC.ParamByName('S_CLASS').Value    := 0;
-      DataModule1.STUDENTS_UPD_BASIC.ParamByName('S_SEX').Value      := fmStudentEdit.S_SEX.ItemIndex;
-      DataModule1.STUDENTS_UPD_BASIC.ParamByName('S_KIND').Value    := fmStudentEdit.S_KIND.EditValue;
-      DataModule1.STUDENTS_UPD_BASIC.ExecProc;
-      DataModule1.d_STUDENTS_SEL.DataSet.Refresh;
+      DataModule1.STUDENTS_UPD.ParamByName('ID').Value := gridStudentID.EditValue;
+      DataModule1.STUDENTS_UPD.ParamByName('S_NAME').Value := fmStudentEdit.S_NAME.Text;
+      DataModule1.STUDENTS_UPD.ParamByName('S_BIRTH').Value := fmStudentEdit.S_BIRTH.Date;
+      DataModule1.STUDENTS_UPD.ParamByName('S_KIND').Value := fmStudentEdit.S_KIND.EditValue;
+      DataModule1.STUDENTS_UPD.ParamByName('S_SEX').Value := fmStudentEdit.S_SEX.ItemIndex;
+      DataModule1.STUDENTS_UPD.ParamByName('S_AGE').Value := fmStudentEdit.S_AGE.Value;
+      DataModule1.STUDENTS_UPD.ParamByName('S_HEIGHT').Value := fmStudentEdit.S_HEIGHT.EditValue;
+      DataModule1.STUDENTS_UPD.ParamByName('S_WEIGHT').Value := fmStudentEdit.S_WEIGHT.EditValue;
+      DataModule1.STUDENTS_UPD.ParamByName('BMI_VALUE').Value := StrToFloatDef(fmStudentEdit.BMI_VALUE.Text, 0);
+      DataModule1.STUDENTS_UPD.ExecProc;
+      DataModule1.ds_STUDENTS_SEL_CENTER.DataSet.Refresh;
       gridStudent.DataController.GotoBookmark;
     end;
   finally
     fmStudentEdit.Free;
   end;
-  }
 end;
 
 procedure TfmSelectStudent.btnFilterClick(Sender: TObject);
@@ -186,6 +186,7 @@ end;
 procedure TfmSelectStudent.FormShow(Sender: TObject);
 begin
   DataModule1.STUDENTS_SEL_CENTER.ParamByName('C_ID').Value := UserInfo.userCenterID;
+  DataModule1.STUDENTS_SEL_CENTER.ParamByName('SUB_ID').Value := UserInfo.userSubCenterID;
   DataModule1.STUDENTS_SEL_CENTER.Open;
   DataModule1.ds_STUDENTS_SEL_CENTER.DataSet.Refresh;
 end;

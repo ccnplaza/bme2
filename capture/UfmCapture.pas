@@ -46,7 +46,6 @@ type
     cxGrid1Level1: TcxGridLevel;
     cxGrid1: TcxGrid;
     gridPictureID: TcxGridDBColumn;
-    btnEdit: TcxButton;
     cxGroupBox3: TcxGroupBox;
     btnSet1: TcxButton;
     btnStartPreview1: TcxButton;
@@ -121,7 +120,6 @@ type
     procedure btnDelClick(Sender: TObject);
     procedure btnRefreshClick(Sender: TObject);
     procedure btnCheckDelClick(Sender: TObject);
-    procedure btnEditClick(Sender: TObject);
     procedure ImageEnVect1MouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure ImageEnVect1MouseUp(Sender: TObject; Button: TMouseButton;
@@ -172,6 +170,7 @@ type
     procedure ShowVideoFormats2;
     procedure RetrieveDateList;
     procedure RetrieveStudentList;
+    procedure UpdateStudentPictureCount;
     { Private declarations }
   public
     { Public declarations }
@@ -295,9 +294,9 @@ begin
   spY2.Value := CamSetINI.ReadInteger('Camera1', 'Bottom', 0);
   c1_act := CamSetINI.ReadInteger('Camera1', 'Active', 0);
   chkCameraMargin.Checked := c1_act = 1;
+  UserInfo.userSubCenterID := DataModule1.GetSubCenterID;
   if UserInfo.userKind = 1 then begin
     if DataModule1.GetSubCenterID > 0 then begin
-      UserInfo.userSubCenterID := DataModule1.GetSubCenterID;
       btnRefresh.Click;
     end else begin
       ShowMessage('단체(도장)을 선택하세요.');
@@ -368,27 +367,39 @@ end;
 procedure TfmCapture.btnAddClick(Sender: TObject);
 var
   i, cnt, sid : Integer;
-  uid : Int64;
+  student_id, sub_id : Integer;
+  p_date : TDate;
 begin
-  Screen.Cursor := crHourGlass;
+  if not (gridPicture.DataController.RecordCount > 0) then begin
+    ShowMessage('촬영데이터가 없습니다. 촬영데이터를 먼저 생성하세요.');
+    Exit;
+  end;
   fmSelectStudent := TfmSelectStudent.Create(Self);
   try
     fmSelectStudent.ShowModal;
     if fmSelectStudent.ModalResult = mrOk then begin
+      Screen.Cursor := crHourGlass;
       with fmSelectStudent.gridStudent do begin
         cnt := Controller.SelectedRecordCount;
+        p_date := gridPicturePIC_DATE.EditValue;
         for i := 0 to cnt - 1 do begin
           sid := Controller.SelectedRecords[i].RecordIndex;
-          uid := CreateUniqInt64;
-          DataModule1.STUDENT_IMAGE_INS.ParamByName('STUDENT_ID').Value := DataController.GetValue(sid, GetColumnByFieldName('ID').Index);
-          DataModule1.STUDENT_IMAGE_INS.ParamByName('UID').Value := uid;
-          DataModule1.STUDENT_IMAGE_INS.ParamByName('P_DATE').Value := gridPicturePIC_DATE.EditValue;
-          DataModule1.STUDENT_IMAGE_INS.ParamByName('CHASOO').Value := 0;
-          DataModule1.STUDENT_IMAGE_INS.ParamByName('CENTER_ID').Value := UserInfo.userCenterID;
-          DataModule1.STUDENT_IMAGE_INS.ExecProc;
+          student_id := DataController.GetValue(sid, GetColumnByFieldName('ID').Index);
+          sub_id := DataController.GetValue(sid, GetColumnByFieldName('UID').Index);
+          if DataModule1.CheckStudentImageExists(student_id, p_date) = False then begin
+            DataModule1.STUDENT_IMAGE_INS.ParamByName('STUDENT_ID').Value := student_id;
+            DataModule1.STUDENT_IMAGE_INS.ParamByName('UID').Value := sub_id;
+            DataModule1.STUDENT_IMAGE_INS.ParamByName('P_DATE').Value := p_date;
+            DataModule1.STUDENT_IMAGE_INS.ParamByName('CHASOO').Value := 0;
+            DataModule1.STUDENT_IMAGE_INS.ParamByName('CENTER_ID').Value := UserInfo.userCenterID;
+            DataModule1.STUDENT_IMAGE_INS.ExecProc;
+          end else begin
+            ShowMessage('중복자료입니다.');
+          end;
         end;
       end;
       DataModule1.ds_STUDENT_IMAGE_SEL_BYDATE.DataSet.Refresh;
+      UpdateStudentPictureCount;
     end;
   finally
     fmSelectStudent.Free;
@@ -423,7 +434,7 @@ end;
 procedure TfmCapture.btnCapture1Click(Sender: TObject);
 var
   tagno : Integer;
-  student_id, pic_id : Integer;
+  student_id, pic_id, top_row, row_id : Integer;
   mStream : TMemoryStream;
 begin
   tagno := (Sender as TcxButton).Tag;
@@ -436,7 +447,6 @@ begin
     Exit;
   end;
   student_id := gridStudentID.EditValue;
-  pic_id := gridPictureID.EditValue;
   ImageEnVect1.Proc.SelCopyToClip(True);
   ImageEnView1.Proc.SelPasteFromClip(True);
   ImageEnView1.Update;
@@ -448,13 +458,18 @@ begin
   DataModule1.STUDENT_IMAGE_UPD_ONE.ParamByName('IMAGE_KIND').Value := tagno;
   DataModule1.STUDENT_IMAGE_UPD_ONE.ExecProc;
   mStream.Free;
+  top_row := gridStudent.Controller.TopRowIndex;
+  gridStudent.DataController.SaveBookmark;
+  DataModule1.ds_STUDENT_IMAGE_SEL_BYDATE.DataSet.Refresh;
+  gridStudent.DataController.GotoBookmark;
+  gridStudent.Controller.TopRowIndex := top_row;
   cxTabControl1.TabIndex := tagno - 1;
 end;
 
 procedure TfmCapture.cxButton4Click(Sender: TObject);
 var
   tagno : Integer;
-  student_id, pic_id : Integer;
+  student_id, pic_id, top_row : Integer;
   mStream : TMemoryStream;
 begin
   cxTabControl1.TabIndex := 3;
@@ -467,18 +482,22 @@ begin
     Exit;
   end;
   student_id := gridStudentID.EditValue;
-  pic_id := gridPictureID.EditValue;
   ImageEnVect2.Proc.SelCopyToClip(True);
   ImageEnView1.Proc.SelPasteFromClip(True);
   ImageEnView1.Update;
   mStream := TMemoryStream.Create;
   ImageEnView1.IO.SaveToStreamJpeg(mStream);
   mStream.Position := 0;
-  DataModule1.STUDENT_IMAGE_UPD_ONE.ParamByName('PIC_ID').Value := pic_id;
+  DataModule1.STUDENT_IMAGE_UPD_ONE.ParamByName('PIC_ID').Value := student_id;
   DataModule1.STUDENT_IMAGE_UPD_ONE.ParamByName('IMAGE_SRC').LoadFromStream(mStream, ftBlob);
   DataModule1.STUDENT_IMAGE_UPD_ONE.ParamByName('IMAGE_KIND').Value := 4;
   DataModule1.STUDENT_IMAGE_UPD_ONE.ExecProc;
   mStream.Free;
+  top_row := gridStudent.Controller.TopRowIndex;
+  gridStudent.DataController.SaveBookmark;
+  DataModule1.ds_STUDENT_IMAGE_SEL_BYDATE.DataSet.Refresh;
+  gridStudent.DataController.GotoBookmark;
+  gridStudent.Controller.TopRowIndex := top_row;
 end;
 
 procedure TfmCapture.cxTabControl1Change(Sender: TObject);
@@ -513,33 +532,7 @@ begin
     DataModule1.STUDENT_IMAGE_DEL.ParamByName('ID').Value := gridStudentID.EditValue;
     DataModule1.STUDENT_IMAGE_DEL.ExecProc;
     DataModule1.ds_STUDENT_IMAGE_SEL_BYDATE.DataSet.Refresh;
-  end;
-end;
-
-procedure TfmCapture.btnEditClick(Sender: TObject);
-begin
-  gridStudent.DataController.SaveBookmark;
-  fmStudentEdit := TfmStudentEdit.Create(Self);
-  try
-    fmStudentEdit.S_NAME.Text     := DataModule1.STUDENTS_SEL_CENTERS_NAME.Value;
-    fmStudentEdit.S_BIRTH.Date    := DataModule1.STUDENTS_SEL_CENTERS_BIRTH.Value;
-    fmStudentEdit.S_AGE.EditValue     := DataModule1.STUDENTS_SEL_CENTERS_AGE.Value;
-    fmStudentEdit.S_SEX.ItemIndex := DataModule1.STUDENTS_SEL_CENTERS_SEX.Value;
-    fmStudentEdit.s_kind.EditValue := DataModule1.STUDENTS_SEL_CENTERS_KIND.Value;
-    fmStudentEdit.ShowModal;
-    if fmStudentEdit.ModalResult = mrOk then begin
-      DataModule1.STUDENTS_UPD.ParamByName('ID').Value := gridStudentID.EditValue;
-      DataModule1.STUDENTS_UPD.ParamByName('S_NAME').Value := fmStudentEdit.S_NAME.Text;
-      DataModule1.STUDENTS_UPD.ParamByName('S_BIRTH').Value := fmStudentEdit.S_BIRTH.Date;
-      DataModule1.STUDENTS_UPD.ParamByName('S_KIND').Value := fmStudentEdit.S_KIND.EditValue;
-      DataModule1.STUDENTS_UPD.ParamByName('S_SEX').Value := fmStudentEdit.S_SEX.ItemIndex;
-      DataModule1.STUDENTS_UPD.ParamByName('S_AGE').Value := fmStudentEdit.S_AGE.Value;
-      DataModule1.STUDENTS_UPD.ExecProc;
-      DataModule1.ds_STUDENTS_SEL_CENTER.DataSet.Refresh;
-      gridStudent.DataController.GotoBookmark;
-    end;
-  finally
-    fmStudentEdit.Free;
+    UpdateStudentPictureCount;
   end;
 end;
 
@@ -743,9 +736,15 @@ end;
 
 procedure TfmCapture.btnReCalcClick(Sender: TObject);
 begin
+  UpdateStudentPictureCount;
+end;
+
+procedure TfmCapture.UpdateStudentPictureCount;
+begin
   Screen.Cursor := crHourGlass;
   gridPicture.DataController.SaveBookmark;
   DataModule1.PICTURE_DATE_COUNT_UPD.ParamByName('CENTER_ID').Value := UserInfo.userCenterID;
+  DataModule1.PICTURE_DATE_COUNT_UPD.ParamByName('SUB_ID').Value := UserInfo.userSubCenterID;
   DataModule1.PICTURE_DATE_COUNT_UPD.ParamByName('P_DATE').Value := gridPicturePIC_DATE.EditValue;
   DataModule1.PICTURE_DATE_COUNT_UPD.ExecProc;
   DataModule1.ds_PICTURE_DATE_SEL.DataSet.Refresh;

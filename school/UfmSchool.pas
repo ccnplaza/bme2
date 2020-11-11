@@ -228,8 +228,6 @@ begin
 end;
 
 procedure TfmSchool.btnAdd3Click(Sender: TObject);
-var
-  sub_id : Integer;
 begin
   fmStudentEdit := TfmStudentEdit.Create(Self);
   try
@@ -268,8 +266,6 @@ begin
 end;
 
 procedure TfmSchool.btnEdit3Click(Sender: TObject);
-var
-  mStream : TMemoryStream;
 begin
   if not (gridStudent.DataController.RecordCount > 0) then begin
     ShowMessage('수정할 자료가 없습니다.');
@@ -277,7 +273,6 @@ begin
   end;
   gridStudent.DataController.SaveBookmark;
   fmStudentEdit := TfmStudentEdit.Create(Self);
-  mStream := TMemoryStream.Create;
   try
     fmStudentEdit.S_NAME.Text     := DataModule1.STUDENTS_SEL_CENTERS_NAME.Value;
     fmStudentEdit.S_BIRTH.Date    := DataModule1.STUDENTS_SEL_CENTERS_BIRTH.Value;

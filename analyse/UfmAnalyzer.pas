@@ -269,9 +269,9 @@ begin
   WORK_YEAR.Value := YearOf(Date);
   isClickedCheckData := False;
   cxTabControl1.TabIndex := 0;
+  UserInfo.userSubCenterID := DataModule1.GetSubCenterID;
   if UserInfo.userKind = 1 then begin
     if DataModule1.GetSubCenterID > 0 then begin
-      UserInfo.userSubCenterID := DataModule1.GetSubCenterID;
       btnRefresh.Click;
     end else begin
       ShowMessage('단체(도장)을 선택하세요.');
