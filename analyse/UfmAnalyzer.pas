@@ -269,13 +269,24 @@ begin
   WORK_YEAR.Value := YearOf(Date);
   isClickedCheckData := False;
   cxTabControl1.TabIndex := 0;
-  btnRefresh.Click;
+  if UserInfo.userKind = 1 then begin
+    if DataModule1.GetSubCenterID > 0 then begin
+      UserInfo.userSubCenterID := DataModule1.GetSubCenterID;
+      btnRefresh.Click;
+    end else begin
+      ShowMessage('단체(도장)을 선택하세요.');
+      Exit;
+    end;
+  end else begin
+    btnRefresh.Click;
+  end;
 end;
 
 procedure TfmAnalyzer.LoadCheckData;
 begin
   DataModule1.CHECK_DATA_SEL.ParamByName('C_ID').Value := UserInfo.userCenterID;
   DataModule1.CHECK_DATA_SEL.ParamByName('W_YEAR').Value := WORK_YEAR.Value;
+  DataModule1.CHECK_DATA_SEL.ParamByName('SUB_ID').Value := UserInfo.userSubCenterID;
   DataModule1.CHECK_DATA_SEL.Open;
   DataModule1.ds_CHECK_DATA_SEL.DataSet.Refresh;
 end;
@@ -460,6 +471,7 @@ begin
   DataModule1.CHECK_DATA_INS.ParamByName('CHECK_DATE').Value := Date;
   DataModule1.CHECK_DATA_INS.ParamByName('CHASOO').Value := chasoo;
   DataModule1.CHECK_DATA_INS.ParamByName('CENTER_ID').Value := UserInfo.userCenterID;
+  DataModule1.CHECK_DATA_INS.ParamByName('SUB_CENTER').Value := UserInfo.userSubCenterID;
   DataModule1.CHECK_DATA_INS.ExecProc;
   DataModule1.ds_CHECK_DATA_SEL.DataSet.Refresh;
   gridCheckData.DataController.GotoLast;

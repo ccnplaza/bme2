@@ -18,6 +18,8 @@ type
         userCenterID : Integer;
         userLoginCnt : Integer;
         userCanUpdate : Integer;
+        userKind : Integer;
+        userSubCenterID : Integer;
     end;
 
 

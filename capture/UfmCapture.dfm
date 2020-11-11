@@ -332,7 +332,7 @@ object fmCapture: TfmCapture
           Navigator.InfoPanel.DisplayMask = '[RecordIndex]/[RecordCount]'
           Navigator.InfoPanel.Visible = True
           Navigator.Visible = True
-          OnFocusedRecordChanged = gridStudentFocusedRecordChanged
+          OnCellClick = gridStudentCellClick
           DataController.DataSource = DataModule1.ds_STUDENT_IMAGE_SEL_BYDATE
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
@@ -588,7 +588,7 @@ object fmCapture: TfmCapture
           Navigator.InfoPanel.DisplayMask = '[RecordIndex] / [RecordCount]'
           Navigator.InfoPanel.Visible = True
           Navigator.Visible = True
-          OnFocusedRecordChanged = gridPictureFocusedRecordChanged
+          OnCellClick = gridPictureCellClick
           DataController.DataSource = DataModule1.ds_PICTURE_DATE_SEL
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>

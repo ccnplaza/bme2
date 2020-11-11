@@ -3,8 +3,8 @@ object fmSchoolEdit: TfmSchoolEdit
   Top = 0
   BorderStyle = bsDialog
   Caption = #54617#44368' '#46321#47197'/'#49688#51221
-  ClientHeight = 236
-  ClientWidth = 420
+  ClientHeight = 245
+  ClientWidth = 503
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,10 +19,12 @@ object fmSchoolEdit: TfmSchoolEdit
     AlignWithMargins = True
     Left = 3
     Top = 3
-    Width = 414
-    Height = 230
+    Width = 497
+    Height = 239
     Align = alClient
     TabOrder = 0
+    ExplicitWidth = 414
+    ExplicitHeight = 230
     object Label1: TLabel
       Left = 122
       Top = 120
@@ -176,7 +178,7 @@ object fmSchoolEdit: TfmSchoolEdit
     object S_ADDR: TEdit
       Left = 122
       Top = 92
-      Width = 263
+      Width = 343
       Height = 21
       ImeName = 'Microsoft IME 2010'
       TabOrder = 2

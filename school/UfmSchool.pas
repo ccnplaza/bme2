@@ -25,7 +25,8 @@ uses
   cxGridPopupMenu, cxCheckBox, ImgList, cxTextEdit, cxContainer, ComObj,
   cxProgressBar, DAAlerter, UniAlerter, dxmdaset, DateUtils, cxGroupBox, cxMemo,
   cxDBEdit, cxImage, ieopensavedlg, ieview, imageenview, hyieutils, iexBitmaps,
-  hyiedefs, iesettings, iexLayers, iexRulers, iexToolbars;
+  hyiedefs, iesettings, iexLayers, iexRulers, iexToolbars, dxBarBuiltInMenu,
+  cxPC;
 
 type
   TfmSchool = class(TForm)
@@ -105,6 +106,27 @@ type
     gridStudentS_HEIGHT: TcxGridDBColumn;
     gridStudentS_WEIGHT: TcxGridDBColumn;
     gridStudentBMI_VALUE: TcxGridDBColumn;
+    cxPageControl1: TcxPageControl;
+    cxTabSheet1: TcxTabSheet;
+    cxTabSheet2: TcxTabSheet;
+    cxGroupBox2: TcxGroupBox;
+    Panel5: TPanel;
+    gridCenter: TcxGridDBTableView;
+    cxGrid1Level1: TcxGridLevel;
+    cxGrid1: TcxGrid;
+    btnSchoolAdd: TcxButton;
+    btnSchoolEdit: TcxButton;
+    btnSchoolDel: TcxButton;
+    gridCenterID: TcxGridDBColumn;
+    gridCenterS_NAME: TcxGridDBColumn;
+    gridCenterS_AREA: TcxGridDBColumn;
+    gridCenterREG_DATE: TcxGridDBColumn;
+    gridCenterS_TEL: TcxGridDBColumn;
+    gridCenterS_ADDR: TcxGridDBColumn;
+    gridCenterUSER_ID: TcxGridDBColumn;
+    btnSetCenter: TcxButton;
+    gridCenterDEFAULT_CENTER: TcxGridDBColumn;
+    REG_SCHOOL_UPD_DEFAULT: TUniStoredProc;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure gridSchoolFocusedRecordChanged(Sender: TcxCustomGridTableView;
       APrevFocusedRecord, AFocusedRecord: TcxCustomGridRecord;
@@ -129,6 +151,16 @@ type
     procedure gridStudentIDGetDataText(Sender: TcxCustomGridTableItem;
       ARecordIndex: Integer; var AText: string);
     procedure btnFileClick(Sender: TObject);
+    procedure btnSchoolAddClick(Sender: TObject);
+    procedure btnSchoolEditClick(Sender: TObject);
+    procedure btnSchoolDelClick(Sender: TObject);
+    procedure gridCenterFocusedRecordChanged(Sender: TcxCustomGridTableView;
+      APrevFocusedRecord, AFocusedRecord: TcxCustomGridRecord;
+      ANewItemRecordFocusingChanged: Boolean);
+    procedure btnSetCenterClick(Sender: TObject);
+    procedure gridCenterCellDblClick(Sender: TcxCustomGridTableView;
+      ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
+      AShift: TShiftState; var AHandled: Boolean);
   private
     procedure ImportFromExcel(filepath: string);
     procedure ImportExcel(file_name :string);
@@ -136,6 +168,7 @@ type
     { Private declarations }
   public
     { Public declarations }
+    DATA_LOADED : Boolean;
   end;
 
 var
@@ -162,12 +195,25 @@ end;
 
 procedure TfmSchool.FormShow(Sender: TObject);
 begin
+  DATA_LOADED := False;
+  cxPageControl1.Properties.HideTabs := True;
   edtCenterName.Text := UserInfo.centerName;
   edtChiefName.Text := UserInfo.centerChief;
   edtCenterTel.Text := UserInfo.centerTel;
   edtCenterAddr.Text := UserInfo.centerAddr;
+  cxPageControl1.ActivePageIndex := UserInfo.userKind;
   GetCenterLogo;
-  DataModule1.SelectStudents;
+  if UserInfo.userKind = 1 then begin
+    DataModule1.REG_SCHOOL_SEL.ParamByName('U_ID').Value := UserInfo.userID;
+    DataModule1.REG_SCHOOL_SEL.Open;
+    DataModule1.ds_REG_SCHOOL_SEL.DataSet.Refresh;
+    UserInfo.userSubCenterID := DataModule1.REG_SCHOOL_SELID.Value;
+    DataModule1.SelectStudents;
+  end else begin
+    UserInfo.userSubCenterID := 0;
+    DataModule1.SelectStudents;
+  end;
+  DATA_LOADED := True;
 end;
 
 procedure TfmSchool.GetCenterLogo;
@@ -182,6 +228,8 @@ begin
 end;
 
 procedure TfmSchool.btnAdd3Click(Sender: TObject);
+var
+  sub_id : Integer;
 begin
   fmStudentEdit := TfmStudentEdit.Create(Self);
   try
@@ -197,6 +245,7 @@ begin
       DataModule1.STUDENTS_INS.ParamByName('S_HEIGHT').Value := fmStudentEdit.S_HEIGHT.EditValue;
       DataModule1.STUDENTS_INS.ParamByName('S_WEIGHT').Value := fmStudentEdit.S_WEIGHT.EditValue;
       DataModule1.STUDENTS_INS.ParamByName('BMI_VALUE').Value := StrToFloatDef(fmStudentEdit.BMI_VALUE.Text, 0);
+      DataModule1.STUDENTS_INS.ParamByName('UID').Value := UserInfo.userSubCenterID;
       DataModule1.STUDENTS_INS.ExecProc;
       DataModule1.ds_STUDENTS_SEL_CENTER.DataSet.Refresh;
       DataModule1.ds_STUDENTS_SEL_CENTER.DataSet.Last;
@@ -279,6 +328,82 @@ begin
   end;}
 end;
 
+procedure TfmSchool.btnSchoolAddClick(Sender: TObject);
+begin
+  fmSchoolEdit := TfmSchoolEdit.Create(Self);
+  try
+    fmSchoolEdit.ShowModal;
+    if fmSchoolEdit.ModalResult = mrOk then begin
+      DataModule1.REG_SCHOOL_INS.ParamByName('S_NAME').Value := fmSchoolEdit.S_NAME.Text;
+      DataModule1.REG_SCHOOL_INS.ParamByName('S_AREA').Value := '';
+      DataModule1.REG_SCHOOL_INS.ParamByName('REG_DATE').Value := Date;
+      DataModule1.REG_SCHOOL_INS.ParamByName('S_TEL').Value := fmSchoolEdit.S_TEL.Text;
+      DataModule1.REG_SCHOOL_INS.ParamByName('S_ADDR').Value := fmSchoolEdit.S_ADDR.Text;
+      DataModule1.REG_SCHOOL_INS.ParamByName('USER_ID').Value := UserInfo.userID;
+      DataModule1.REG_SCHOOL_INS.ExecProc;
+      DataModule1.ds_REG_SCHOOL_SEL.DataSet.Refresh;
+    end;
+  finally
+    fmSchoolEdit.Free;
+  end;
+end;
+
+procedure TfmSchool.btnSchoolDelClick(Sender: TObject);
+begin
+  if gridStudent.DataController.RecordCount > 0 then begin
+    ShowMessage('삭제하려는 단체에 소속된 회원이 있습니다.' +
+      #10#13 + '회원자료를 먼저 삭제한 후에 하세요.'
+    );
+    Exit;
+  end;
+  if Application.MessageBox('선택한 자료를 삭제합니다. ' + #13#10 + '삭제한 후에는 되돌릴 수 없습니다.'
+    + #13#10 + '정말 삭제할까요?', 'Application.Title', MB_YESNO + MB_ICONWARNING) =
+    IDYES then
+  begin
+    DataModule1.REG_SCHOOL_DEL.ParamByName('ID').Value := gridCenterID.EditValue;
+    DataModule1.REG_SCHOOL_DEL.ExecProc;
+    DataModule1.ds_REG_SCHOOL_SEL.DataSet.Refresh;
+  end;
+end;
+
+procedure TfmSchool.btnSchoolEditClick(Sender: TObject);
+begin
+  fmSchoolEdit := TfmSchoolEdit.Create(Self);
+  try
+    fmSchoolEdit.S_NAME.Text := VarToStrDef(gridCenterS_NAME.EditValue, '');
+    fmSchoolEdit.S_TEL.Text  := VarToStrDef(gridCenterS_TEL.EditValue, '');
+    fmSchoolEdit.S_ADDR.Text := VarToStrDef(gridCenterS_ADDR.EditValue, '');
+    fmSchoolEdit.ShowModal;
+    if fmSchoolEdit.ModalResult = mrOk then begin
+      //REG_SCHOOL_UPD(:ID, :S_NAME, :S_AREA, :REG_DATE, :S_TEL, :S_ADDR, :USER_ID)
+      DataModule1.REG_SCHOOL_UPD.ParamByName('ID').Value := gridCenterID.EditValue;
+      DataModule1.REG_SCHOOL_UPD.ParamByName('S_NAME').Value := fmSchoolEdit.S_NAME.Text;
+      DataModule1.REG_SCHOOL_UPD.ParamByName('S_AREA').Value := '';
+      DataModule1.REG_SCHOOL_UPD.ParamByName('REG_DATE').Value := gridCenterREG_DATE.EditValue;
+      DataModule1.REG_SCHOOL_UPD.ParamByName('S_TEL').Value := fmSchoolEdit.S_TEL.Text;
+      DataModule1.REG_SCHOOL_UPD.ParamByName('S_ADDR').Value := fmSchoolEdit.S_ADDR.Text;
+      DataModule1.REG_SCHOOL_UPD.ParamByName('USER_ID').Value := UserInfo.userID;
+      DataModule1.REG_SCHOOL_UPD.ExecProc;
+      DataModule1.ds_REG_SCHOOL_SEL.DataSet.Refresh;
+    end;
+  finally
+    fmSchoolEdit.Free;
+  end;
+end;
+
+procedure TfmSchool.btnSetCenterClick(Sender: TObject);
+var
+  center_id : Integer;
+begin
+  center_id := gridCenterID.EditValue;
+  REG_SCHOOL_UPD_DEFAULT.ParamByName('ID').Value := center_id;
+  REG_SCHOOL_UPD_DEFAULT.ParamByName('U_ID').Value := UserInfo.userID;
+  REG_SCHOOL_UPD_DEFAULT.ExecProc;
+  DataModule1.ds_REG_SCHOOL_SEL.DataSet.Refresh;
+  DataModule1.ds_REG_SCHOOL_SEL.DataSet.Locate('ID', center_id, []);
+  UserInfo.userSubCenterID := center_id;
+end;
+
 procedure TfmSchool.btnExcelClick(Sender: TObject);
 var
   fname : string;
@@ -329,6 +454,7 @@ begin
         DataModule1.STUDENTS_INS.ParamByName('S_SEX').Value := s_sex;
         DataModule1.STUDENTS_INS.ParamByName('S_AGE').Value := s_age;
         DataModule1.STUDENTS_INS.ParamByName('CENTER_ID').Value := UserInfo.userCenterID;
+        DataModule1.STUDENTS_INS.ParamByName('UID').Value := UserInfo.userSubCenterID;
         DataModule1.STUDENTS_INS.ExecProc;
 
         strList.Free;
@@ -463,6 +589,23 @@ begin
     Finalize(excel);
     PanelMsg.Visible := False;
   end;}
+end;
+
+procedure TfmSchool.gridCenterCellDblClick(Sender: TcxCustomGridTableView;
+  ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
+  AShift: TShiftState; var AHandled: Boolean);
+begin
+  btnSetCenter.Click;
+end;
+
+procedure TfmSchool.gridCenterFocusedRecordChanged(
+  Sender: TcxCustomGridTableView; APrevFocusedRecord,
+  AFocusedRecord: TcxCustomGridRecord; ANewItemRecordFocusingChanged: Boolean);
+begin
+  if DATA_LOADED then begin
+    UserInfo.userSubCenterID := gridCenterID.EditValue;
+    DataModule1.SelectStudents;
+  end;
 end;
 
 procedure TfmSchool.gridSchoolFocusedRecordChanged(

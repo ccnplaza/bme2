@@ -164,6 +164,7 @@ begin
   UserInfo.centerAddr := REG_USER_SEL_EMAILCENTER_ADDR.Value;
   UserInfo.centerChief := REG_USER_SEL_EMAILCENTER_CHIEF.Value;
   UserInfo.centerTel := REG_USER_SEL_EMAILCENTER_TEL.Value;
+  UserInfo.userKind := REG_USER_SEL_EMAILU_KIND.Value;
 end;
 
 procedure TfmLogin.UpdateLastLogin(cnt : Integer);

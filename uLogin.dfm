@@ -3354,9 +3354,6 @@ object fmLogin: TfmLogin
     object cxTabSheet2: TcxTabSheet
       Caption = 'activate'
       ImageIndex = 1
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Label2: TLabel
         Left = 82
         Top = 13
@@ -3419,9 +3416,6 @@ object fmLogin: TfmLogin
     object cxTabSheet3: TcxTabSheet
       Caption = 'cxTabSheet3'
       ImageIndex = 2
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Label3: TLabel
         Left = 48
         Top = 9
@@ -3449,9 +3443,6 @@ object fmLogin: TfmLogin
     object cxTabSheet4: TcxTabSheet
       Caption = 'cxTabSheet4'
       ImageIndex = 3
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Label1: TLabel
         Left = 21
         Top = 7

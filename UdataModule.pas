@@ -12,17 +12,8 @@ type
   TDataModule1 = class(TDataModule)
     InterBaseUniProvider1: TInterBaseUniProvider;
     UniConnection1: TUniConnection;
-    REG_SCHOOL_INS: TUniStoredProc;
-    REG_SCHOOL_UPD: TUniStoredProc;
-    REG_SCHOOL_SEL: TUniStoredProc;
     STUDENTS_DEL: TUniStoredProc;
     ds_REG_SCHOOL_SEL: TDataSource;
-    REG_SCHOOL_SELID: TIntegerField;
-    REG_SCHOOL_SELS_NAME: TWideStringField;
-    REG_SCHOOL_SELS_AREA: TWideStringField;
-    REG_SCHOOL_SELREG_DATE: TDateField;
-    REG_SCHOOL_SELS_TEL: TWideStringField;
-    REG_SCHOOL_SELS_ADDR: TWideStringField;
     STUDENTS_INS: TUniStoredProc;
     STUDENTS_UPD: TUniStoredProc;
     STUDENTS_SEL_CENTER: TUniStoredProc;
@@ -242,6 +233,22 @@ type
     CHECK_PIC_DATE_EXISTS: TUniStoredProc;
     ds_CHECK_PIC_DATE_EXISTS: TDataSource;
     CHECK_PIC_DATE_EXISTSID: TIntegerField;
+    REG_SCHOOL_DEL: TUniStoredProc;
+    REG_SCHOOL_INS: TUniStoredProc;
+    REG_SCHOOL_SEL: TUniStoredProc;
+    REG_SCHOOL_UPD: TUniStoredProc;
+    REG_SCHOOL_SELID: TIntegerField;
+    REG_SCHOOL_SELS_NAME: TWideStringField;
+    REG_SCHOOL_SELS_AREA: TWideStringField;
+    REG_SCHOOL_SELREG_DATE: TDateField;
+    REG_SCHOOL_SELS_TEL: TWideStringField;
+    REG_SCHOOL_SELS_ADDR: TWideStringField;
+    REG_SCHOOL_SELUSER_ID: TIntegerField;
+    REG_SCHOOL_SELDEFAULT_CENTER: TIntegerField;
+    REG_SCHOOL_SEL_DEFAULT: TUniStoredProc;
+    REG_SCHOOL_SEL_DEFAULTID: TIntegerField;
+    ds_REG_SCHOOL_SEL_DEFAULT: TDataSource;
+    PICTURE_DATE_SELSUB_CENTER: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
@@ -260,6 +267,7 @@ type
     procedure RetrieveCenterLogo;
     procedure UploadImage(imgName : string);
     procedure DownloadImage(imgName : string);
+    function GetSubCenterID : Integer;
   end;
 
 var
@@ -289,6 +297,7 @@ end;
 procedure TDataModule1.SelectStudents;
 begin
   STUDENTS_SEL_CENTER.ParamByName('C_ID').Value := UserInfo.userCenterID;
+  STUDENTS_SEL_CENTER.ParamByName('SUB_ID').Value := UserInfo.userSubCenterID;
   STUDENTS_SEL_CENTER.Open;
   ds_STUDENTS_SEL_CENTER.DataSet.Refresh;
 end;
@@ -446,6 +455,17 @@ begin
   finally
     mStream.Free;
   end;
+end;
+
+function TDataModule1.GetSubCenterID: Integer;
+begin
+  REG_SCHOOL_SEL_DEFAULT.ParamByName('U_ID').Value := UserInfo.userID;
+  REG_SCHOOL_SEL_DEFAULT.Open;
+  ds_REG_SCHOOL_SEL_DEFAULT.DataSet.Refresh;
+  if REG_SCHOOL_SEL_DEFAULTID.Value > 0 then
+    Result := REG_SCHOOL_SEL_DEFAULTID.Value
+  else
+    Result := 0;
 end;
 
 procedure TDataModule1.UpdateStudentDrawing(id, kind : Integer; img_src, drw_src: TMemoryStream);

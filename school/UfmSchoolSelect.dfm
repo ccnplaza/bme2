@@ -4,7 +4,7 @@ object fmSchoolSelect: TfmSchoolSelect
   BorderStyle = bsDialog
   Caption = #54617#44368'/'#52264#49688' '#49440#53469
   ClientHeight = 507
-  ClientWidth = 325
+  ClientWidth = 299
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,11 +19,11 @@ object fmSchoolSelect: TfmSchoolSelect
   object Panel5: TPanel
     Left = 0
     Top = 0
-    Width = 325
+    Width = 299
     Height = 30
     Align = alTop
     TabOrder = 0
-    ExplicitWidth = 385
+    ExplicitWidth = 325
     object btnCancel: TcxButton
       Left = 167
       Top = 2
@@ -124,14 +124,14 @@ object fmSchoolSelect: TfmSchoolSelect
   object cxGrid1: TcxGrid
     Left = 0
     Top = 30
-    Width = 325
+    Width = 299
     Height = 477
     Align = alClient
     BorderWidth = 1
     TabOrder = 1
     LookAndFeel.NativeStyle = False
     LookAndFeel.SkinName = 'Black'
-    ExplicitWidth = 385
+    ExplicitWidth = 325
     object gridSchool: TcxGridDBTableView
       Navigator.Buttons.CustomButtons = <>
       Navigator.Buttons.First.Visible = False
@@ -154,6 +154,7 @@ object fmSchoolSelect: TfmSchoolSelect
       Navigator.InfoPanel.Visible = True
       Navigator.Visible = True
       OnCellDblClick = gridSchoolCellDblClick
+      DataController.DataSource = DataModule1.ds_REG_SCHOOL_SEL
       DataController.Summary.DefaultGroupSummaryItems = <>
       DataController.Summary.FooterSummaryItems = <>
       DataController.Summary.SummaryGroups = <>
@@ -184,6 +185,22 @@ object fmSchoolSelect: TfmSchoolSelect
         Caption = #51204#54868#48264#54840
         DataBinding.FieldName = 'S_TEL'
         Width = 141
+      end
+      object gridSchoolS_AREA: TcxGridDBColumn
+        DataBinding.FieldName = 'S_AREA'
+        Visible = False
+      end
+      object gridSchoolREG_DATE: TcxGridDBColumn
+        DataBinding.FieldName = 'REG_DATE'
+        Visible = False
+      end
+      object gridSchoolS_ADDR: TcxGridDBColumn
+        DataBinding.FieldName = 'S_ADDR'
+        Visible = False
+      end
+      object gridSchoolUSER_ID: TcxGridDBColumn
+        DataBinding.FieldName = 'USER_ID'
+        Visible = False
       end
     end
     object cxGrid1Level1: TcxGridLevel

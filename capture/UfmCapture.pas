@@ -146,12 +146,6 @@ type
       ARecordIndex: Integer; var AText: string);
     procedure btnAddPictureClick(Sender: TObject);
     procedure cxTabControl1Change(Sender: TObject);
-    procedure gridStudentFocusedRecordChanged(Sender: TcxCustomGridTableView;
-      APrevFocusedRecord, AFocusedRecord: TcxCustomGridRecord;
-      ANewItemRecordFocusingChanged: Boolean);
-    procedure gridPictureFocusedRecordChanged(Sender: TcxCustomGridTableView;
-      APrevFocusedRecord, AFocusedRecord: TcxCustomGridRecord;
-      ANewItemRecordFocusingChanged: Boolean);
     procedure gridStudentColumn1GetDataText(Sender: TcxCustomGridTableItem;
       ARecordIndex: Integer; var AText: string);
     procedure gridPictureColumn1GetDataText(Sender: TcxCustomGridTableItem;
@@ -159,6 +153,12 @@ type
     procedure Button1Click(Sender: TObject);
     procedure btnReCalcClick(Sender: TObject);
     procedure FormResize(Sender: TObject);
+    procedure gridPictureCellClick(Sender: TcxCustomGridTableView;
+      ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
+      AShift: TShiftState; var AHandled: Boolean);
+    procedure gridStudentCellClick(Sender: TcxCustomGridTableView;
+      ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
+      AShift: TShiftState; var AHandled: Boolean);
   private
     //procedure GotoNextStudent(student_id: Integer);
     procedure LoadSettings;
@@ -279,7 +279,7 @@ end;
 
 procedure TfmCapture.FormShow(Sender: TObject);
 var
-  c1_act, c2_act : Integer;
+  c1_act, sub_center : Integer;
 begin
   FORM_OPEN := False;
   cxPageControl1.ActivePageIndex := 0;
@@ -295,7 +295,17 @@ begin
   spY2.Value := CamSetINI.ReadInteger('Camera1', 'Bottom', 0);
   c1_act := CamSetINI.ReadInteger('Camera1', 'Active', 0);
   chkCameraMargin.Checked := c1_act = 1;
-  btnRefresh.Click;
+  if UserInfo.userKind = 1 then begin
+    if DataModule1.GetSubCenterID > 0 then begin
+      UserInfo.userSubCenterID := DataModule1.GetSubCenterID;
+      btnRefresh.Click;
+    end else begin
+      ShowMessage('단체(도장)을 선택하세요.');
+      Exit;
+    end;
+  end else begin
+    btnRefresh.Click;
+  end;
 end;
 
 procedure TfmCapture.LoadSettings;
@@ -401,6 +411,7 @@ begin
     DataModule1.PICTURE_DATE_INS.ParamByName('PIC_DATE').Value := Date;
     DataModule1.PICTURE_DATE_INS.ParamByName('PIC_CNT').Value := 0;
     DataModule1.PICTURE_DATE_INS.ParamByName('CENTER_ID').Value := UserInfo.userCenterID;
+    DataModule1.PICTURE_DATE_INS.ParamByName('SUB_CENTER').Value := UserInfo.userSubCenterID;
     DataModule1.PICTURE_DATE_INS.ExecProc;
     DataModule1.ds_PICTURE_DATE_SEL.DataSet.Refresh;
     DataModule1.ds_PICTURE_DATE_SEL.DataSet.Locate('PIC_DATE', Date, []);
@@ -753,6 +764,7 @@ end;
 procedure TfmCapture.RetrieveDateList;
 begin
   DataModule1.PICTURE_DATE_SEL.ParamByName('C_ID').Value := UserInfo.userCenterID;
+  DataModule1.PICTURE_DATE_SEL.ParamByName('SUB_ID').Value := UserInfo.userSubCenterID;
   DataModule1.PICTURE_DATE_SEL.Open;
   DataModule1.ds_PICTURE_DATE_SEL.DataSet.Refresh;
 end;
@@ -762,6 +774,14 @@ begin
   DataModule1.STUDENT_IMAGE_SEL_BYDATE.ParamByName('PIC_DATE').Value := gridPicturePIC_DATE.EditValue;
   DataModule1.STUDENT_IMAGE_SEL_BYDATE.Open;
   DataModule1.ds_STUDENT_IMAGE_SEL_BYDATE.DataSet.Refresh;
+end;
+
+procedure TfmCapture.gridPictureCellClick(Sender: TcxCustomGridTableView;
+  ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
+  AShift: TShiftState; var AHandled: Boolean);
+begin
+  RetrieveStudentList;
+  RetrievePicture;
 end;
 
 procedure TfmCapture.gridPictureCHASOOGetDataText(
@@ -782,14 +802,11 @@ begin
   AText := IntToStr(AIndex + 1);
 end;
 
-procedure TfmCapture.gridPictureFocusedRecordChanged(
-  Sender: TcxCustomGridTableView; APrevFocusedRecord,
-  AFocusedRecord: TcxCustomGridRecord; ANewItemRecordFocusingChanged: Boolean);
+procedure TfmCapture.gridStudentCellClick(Sender: TcxCustomGridTableView;
+  ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
+  AShift: TShiftState; var AHandled: Boolean);
 begin
-  if FORM_OPEN then begin
-    RetrieveStudentList;
-    RetrievePicture;
-  end;
+  RetrievePicture;
 end;
 
 procedure TfmCapture.gridStudentColumn1GetDataText(
@@ -799,14 +816,6 @@ var
 begin
   AIndex := TcxGridTableView(Sender.GridView).DataController.GetRowIndexByRecordIndex(ARecordIndex, False);
   AText := IntToStr(AIndex + 1);
-end;
-
-procedure TfmCapture.gridStudentFocusedRecordChanged(
-  Sender: TcxCustomGridTableView; APrevFocusedRecord,
-  AFocusedRecord: TcxCustomGridRecord; ANewItemRecordFocusingChanged: Boolean);
-begin
-  if FORM_OPEN then
-    RetrievePicture;
 end;
 
 procedure TfmCapture.RetrievePicture;

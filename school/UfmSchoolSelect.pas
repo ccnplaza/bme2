@@ -37,6 +37,10 @@ type
     dxMemData1: TdxMemData;
     dxMemData1id: TIntegerField;
     gridSchoolS_TEL: TcxGridDBColumn;
+    gridSchoolS_AREA: TcxGridDBColumn;
+    gridSchoolREG_DATE: TcxGridDBColumn;
+    gridSchoolS_ADDR: TcxGridDBColumn;
+    gridSchoolUSER_ID: TcxGridDBColumn;
     procedure FormShow(Sender: TObject);
     procedure btnSelectClick(Sender: TObject);
     procedure gridSchoolCellDblClick(Sender: TcxCustomGridTableView;
@@ -59,15 +63,16 @@ uses GlobalVars, UdataModule;
 
 procedure TfmSchoolSelect.btnSelectClick(Sender: TObject);
 begin
-  CurrentSchoolID := gridSchoolID.EditValue;
   CurrentSchoolName := gridSchoolS_NAME.EditValue;
+  UserInfo.userSubCenterID := gridSchoolID.EditValue;
   ModalResult := mrOk;
 end;
 
 procedure TfmSchoolSelect.FormShow(Sender: TObject);
 begin
-//  DataModule1.REG_SCHOOL_SEL.Active := True;
-//  DataModule1.d_REG_SCHOOL_SEL.DataSet.Refresh;
+  DataModule1.REG_SCHOOL_SEL.ParamByName('U_ID').Value := UserInfo.userID;
+  DataModule1.REG_SCHOOL_SEL.Active := True;
+  DataModule1.ds_REG_SCHOOL_SEL.DataSet.Refresh;
 end;
 
 procedure TfmSchoolSelect.gridSchoolCellDblClick(Sender: TcxCustomGridTableView;

@@ -21,149 +21,6 @@ object DataModule1: TDataModule1
     Top = 56
     EncryptedPassword = '92FF9EFF8CFF8BFF9AFF8DFF94FF9AFF86FF'
   end
-  object REG_SCHOOL_INS: TUniStoredProc
-    StoredProcName = 'REG_SCHOOL_INS'
-    Connection = UniConnection1
-    Left = 168
-    Top = 8
-    ParamData = <
-      item
-        DataType = ftWideString
-        Name = 'S_NAME'
-        ParamType = ptInput
-        Size = 50
-      end
-      item
-        DataType = ftWideString
-        Name = 'S_AREA'
-        ParamType = ptInput
-        Size = 50
-      end
-      item
-        DataType = ftDate
-        Name = 'REG_DATE'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftWideString
-        Name = 'S_TEL'
-        ParamType = ptInput
-        Size = 30
-      end
-      item
-        DataType = ftWideString
-        Name = 'S_ADDR'
-        ParamType = ptInput
-        Size = 50
-      end>
-    CommandStoredProcName = 'REG_SCHOOL_INS'
-  end
-  object REG_SCHOOL_UPD: TUniStoredProc
-    StoredProcName = 'REG_SCHOOL_UPD'
-    Connection = UniConnection1
-    Left = 168
-    Top = 56
-    ParamData = <
-      item
-        DataType = ftInteger
-        Name = 'ID'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftWideString
-        Name = 'S_NAME'
-        ParamType = ptInput
-        Size = 50
-      end
-      item
-        DataType = ftWideString
-        Name = 'S_AREA'
-        ParamType = ptInput
-        Size = 50
-      end
-      item
-        DataType = ftDate
-        Name = 'REG_DATE'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftWideString
-        Name = 'S_TEL'
-        ParamType = ptInput
-        Size = 30
-      end
-      item
-        DataType = ftWideString
-        Name = 'S_ADDR'
-        ParamType = ptInput
-        Size = 50
-      end>
-    CommandStoredProcName = 'REG_SCHOOL_UPD'
-  end
-  object REG_SCHOOL_SEL: TUniStoredProc
-    StoredProcName = 'REG_SCHOOL_SEL'
-    Connection = UniConnection1
-    Left = 168
-    Top = 104
-    ParamData = <
-      item
-        DataType = ftInteger
-        Name = 'ID'
-        ParamType = ptOutput
-      end
-      item
-        DataType = ftWideString
-        Name = 'S_NAME'
-        ParamType = ptOutput
-        Size = 50
-      end
-      item
-        DataType = ftWideString
-        Name = 'S_AREA'
-        ParamType = ptOutput
-        Size = 50
-      end
-      item
-        DataType = ftDate
-        Name = 'REG_DATE'
-        ParamType = ptOutput
-      end
-      item
-        DataType = ftWideString
-        Name = 'S_TEL'
-        ParamType = ptOutput
-        Size = 30
-      end
-      item
-        DataType = ftWideString
-        Name = 'S_ADDR'
-        ParamType = ptOutput
-        Size = 50
-      end>
-    CommandStoredProcName = 'REG_SCHOOL_SEL'
-    object REG_SCHOOL_SELID: TIntegerField
-      FieldName = 'ID'
-    end
-    object REG_SCHOOL_SELS_NAME: TWideStringField
-      FieldName = 'S_NAME'
-      Size = 50
-    end
-    object REG_SCHOOL_SELS_AREA: TWideStringField
-      FieldName = 'S_AREA'
-      Size = 50
-    end
-    object REG_SCHOOL_SELREG_DATE: TDateField
-      FieldName = 'REG_DATE'
-    end
-    object REG_SCHOOL_SELS_TEL: TWideStringField
-      FieldName = 'S_TEL'
-      Size = 30
-    end
-    object REG_SCHOOL_SELS_ADDR: TWideStringField
-      FieldName = 'S_ADDR'
-      Size = 50
-    end
-  end
   object STUDENTS_DEL: TUniStoredProc
     StoredProcName = 'STUDENTS_DEL'
     Connection = UniConnection1
@@ -238,6 +95,11 @@ object DataModule1: TDataModule1
       item
         DataType = ftFloat
         Name = 'BMI_VALUE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftLargeint
+        Name = 'UID'
         ParamType = ptInput
       end>
     CommandStoredProcName = 'STUDENTS_INS'
@@ -315,6 +177,11 @@ object DataModule1: TDataModule1
       end
       item
         DataType = ftInteger
+        Name = 'SUB_ID'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
         Name = 'ID'
         ParamType = ptOutput
       end
@@ -344,9 +211,28 @@ object DataModule1: TDataModule1
         DataType = ftInteger
         Name = 'S_AGE'
         ParamType = ptOutput
+      end
+      item
+        DataType = ftDate
+        Name = 'S_BIRTH'
+        ParamType = ptOutput
+      end
+      item
+        DataType = ftFloat
+        Name = 'S_HEIGHT'
+        ParamType = ptOutput
+      end
+      item
+        DataType = ftFloat
+        Name = 'S_WEIGHT'
+        ParamType = ptOutput
+      end
+      item
+        DataType = ftFloat
+        Name = 'BMI_VALUE'
+        ParamType = ptOutput
       end>
     CommandStoredProcName = 'STUDENTS_SEL_CENTER'
-    StoredProcIsQuery = True
     object STUDENTS_SEL_CENTERID: TIntegerField
       Alignment = taCenter
       FieldName = 'ID'
@@ -822,6 +708,11 @@ object DataModule1: TDataModule1
       item
         DataType = ftInteger
         Name = 'W_YEAR'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'SUB_ID'
         ParamType = ptInput
       end
       item
@@ -1989,6 +1880,11 @@ object DataModule1: TDataModule1
         DataType = ftInteger
         Name = 'MAN_CNT'
         ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'SUB_CENTER'
+        ParamType = ptInput
       end>
     CommandStoredProcName = 'PICTURE_DATE_INS'
   end
@@ -2028,6 +1924,11 @@ object DataModule1: TDataModule1
       end
       item
         DataType = ftInteger
+        Name = 'SUB_ID'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
         Name = 'ID'
         ParamType = ptOutput
       end
@@ -2049,6 +1950,11 @@ object DataModule1: TDataModule1
       item
         DataType = ftInteger
         Name = 'MAN_CNT'
+        ParamType = ptOutput
+      end
+      item
+        DataType = ftInteger
+        Name = 'SUB_CENTER'
         ParamType = ptOutput
       end>
     CommandStoredProcName = 'PICTURE_DATE_SEL'
@@ -2073,6 +1979,9 @@ object DataModule1: TDataModule1
     object PICTURE_DATE_SELMAN_CNT: TIntegerField
       Alignment = taCenter
       FieldName = 'MAN_CNT'
+    end
+    object PICTURE_DATE_SELSUB_CENTER: TIntegerField
+      FieldName = 'SUB_CENTER'
     end
   end
   object ds_PICTURE_DATE_SEL: TDataSource
@@ -2704,5 +2613,215 @@ object DataModule1: TDataModule1
     DataSet = CHECK_PIC_DATE_EXISTS
     Left = 480
     Top = 608
+  end
+  object REG_SCHOOL_DEL: TUniStoredProc
+    StoredProcName = 'REG_SCHOOL_DEL'
+    Connection = UniConnection1
+    Left = 168
+    Top = 8
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+      end>
+    CommandStoredProcName = 'REG_SCHOOL_DEL'
+  end
+  object REG_SCHOOL_INS: TUniStoredProc
+    StoredProcName = 'REG_SCHOOL_INS'
+    Connection = UniConnection1
+    Left = 168
+    Top = 56
+    ParamData = <
+      item
+        DataType = ftWideString
+        Name = 'S_NAME'
+        ParamType = ptInput
+        Size = 50
+      end
+      item
+        DataType = ftWideString
+        Name = 'S_AREA'
+        ParamType = ptInput
+        Size = 50
+      end
+      item
+        DataType = ftDate
+        Name = 'REG_DATE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftWideString
+        Name = 'S_TEL'
+        ParamType = ptInput
+        Size = 30
+      end
+      item
+        DataType = ftWideString
+        Name = 'S_ADDR'
+        ParamType = ptInput
+        Size = 100
+      end
+      item
+        DataType = ftInteger
+        Name = 'USER_ID'
+        ParamType = ptInput
+      end>
+    CommandStoredProcName = 'REG_SCHOOL_INS'
+  end
+  object REG_SCHOOL_SEL: TUniStoredProc
+    StoredProcName = 'REG_SCHOOL_SEL'
+    Connection = UniConnection1
+    Left = 168
+    Top = 104
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'U_ID'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptOutput
+      end
+      item
+        DataType = ftWideString
+        Name = 'S_NAME'
+        ParamType = ptOutput
+        Size = 50
+      end
+      item
+        DataType = ftWideString
+        Name = 'S_AREA'
+        ParamType = ptOutput
+        Size = 50
+      end
+      item
+        DataType = ftDate
+        Name = 'REG_DATE'
+        ParamType = ptOutput
+      end
+      item
+        DataType = ftWideString
+        Name = 'S_TEL'
+        ParamType = ptOutput
+        Size = 30
+      end
+      item
+        DataType = ftWideString
+        Name = 'S_ADDR'
+        ParamType = ptOutput
+        Size = 100
+      end
+      item
+        DataType = ftInteger
+        Name = 'USER_ID'
+        ParamType = ptOutput
+      end>
+    CommandStoredProcName = 'REG_SCHOOL_SEL'
+    StoredProcIsQuery = True
+    object REG_SCHOOL_SELID: TIntegerField
+      FieldName = 'ID'
+    end
+    object REG_SCHOOL_SELS_NAME: TWideStringField
+      FieldName = 'S_NAME'
+      Size = 50
+    end
+    object REG_SCHOOL_SELS_AREA: TWideStringField
+      FieldName = 'S_AREA'
+      Size = 50
+    end
+    object REG_SCHOOL_SELREG_DATE: TDateField
+      FieldName = 'REG_DATE'
+    end
+    object REG_SCHOOL_SELS_TEL: TWideStringField
+      FieldName = 'S_TEL'
+      Size = 30
+    end
+    object REG_SCHOOL_SELS_ADDR: TWideStringField
+      FieldName = 'S_ADDR'
+      Size = 100
+    end
+    object REG_SCHOOL_SELUSER_ID: TIntegerField
+      FieldName = 'USER_ID'
+    end
+    object REG_SCHOOL_SELDEFAULT_CENTER: TIntegerField
+      Alignment = taCenter
+      FieldName = 'DEFAULT_CENTER'
+    end
+  end
+  object REG_SCHOOL_UPD: TUniStoredProc
+    StoredProcName = 'REG_SCHOOL_UPD'
+    Connection = UniConnection1
+    Left = 168
+    Top = 200
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftWideString
+        Name = 'S_NAME'
+        ParamType = ptInput
+        Size = 50
+      end
+      item
+        DataType = ftWideString
+        Name = 'S_AREA'
+        ParamType = ptInput
+        Size = 50
+      end
+      item
+        DataType = ftDate
+        Name = 'REG_DATE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftWideString
+        Name = 'S_TEL'
+        ParamType = ptInput
+        Size = 30
+      end
+      item
+        DataType = ftWideString
+        Name = 'S_ADDR'
+        ParamType = ptInput
+        Size = 100
+      end
+      item
+        DataType = ftInteger
+        Name = 'USER_ID'
+        ParamType = ptInput
+      end>
+    CommandStoredProcName = 'REG_SCHOOL_UPD'
+  end
+  object REG_SCHOOL_SEL_DEFAULT: TUniStoredProc
+    StoredProcName = 'REG_SCHOOL_SEL_DEFAULT'
+    Connection = UniConnection1
+    Left = 56
+    Top = 424
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'U_ID'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptOutput
+      end>
+    CommandStoredProcName = 'REG_SCHOOL_SEL_DEFAULT'
+    object REG_SCHOOL_SEL_DEFAULTID: TIntegerField
+      FieldName = 'ID'
+    end
+  end
+  object ds_REG_SCHOOL_SEL_DEFAULT: TDataSource
+    DataSet = REG_SCHOOL_SEL_DEFAULT
+    Left = 56
+    Top = 472
   end
 end
