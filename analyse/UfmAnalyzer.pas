@@ -127,29 +127,10 @@ type
     gridStudentRESULT4: TcxGridDBColumn;
     gridStudentRESULT5: TcxGridDBColumn;
     gridStudentRESULT6: TcxGridDBColumn;
-    cxGroupBox2: TcxGroupBox;
-    FlowPanel2: TFlowPanel;
-    Panel1: TPanel;
-    icbRVAL1: TcxImageComboBox;
-    cxButton1: TcxButton;
-    Panel5: TPanel;
-    icbRVAL2: TcxImageComboBox;
-    cxButton2: TcxButton;
-    Panel7: TPanel;
-    icbRVAL3: TcxImageComboBox;
-    cxButton3: TcxButton;
-    Panel8: TPanel;
-    icbRVAL4: TcxImageComboBox;
-    cxButton4: TcxButton;
-    Panel9: TPanel;
-    icbRVAL5: TcxImageComboBox;
-    cxButton5: TcxButton;
-    Panel11: TPanel;
-    icbRVAL6: TcxImageComboBox;
-    cxButton6: TcxButton;
     gridStudentSTUDENT_ID: TcxGridDBColumn;
     btnMakeList: TcxButton;
     cxButton7: TcxButton;
+    chkAutoNext: TcxCheckBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure ImageEnVect1Paint(Sender: TObject);
@@ -304,41 +285,41 @@ end;
 procedure TfmAnalyzer.ShowAnalyseResults;
 begin
   if DataModule1.ANALYSE_RESULT_CHECK.RecordCount > 0 then begin
-    icbRVAL1.EditValue := DataModule1.ANALYSE_RESULT_CHECKRESULT1.Value;
-    icbRVAL2.EditValue := DataModule1.ANALYSE_RESULT_CHECKRESULT2.Value;
-    icbRVAL3.EditValue := DataModule1.ANALYSE_RESULT_CHECKRESULT3.Value;
-    icbRVAL4.EditValue := DataModule1.ANALYSE_RESULT_CHECKRESULT4.Value;
-    icbRVAL5.EditValue := DataModule1.ANALYSE_RESULT_CHECKRESULT5.Value;
-    icbRVAL6.EditValue := DataModule1.ANALYSE_RESULT_CHECKRESULT6.Value;
-    case icbRVAL1.EditValue of
-      3: icbRVAL1.StyleDisabled.Color := clWhite;
-      4,5: icbRVAL1.StyleDisabled.Color := clYellow;
-      6,7: icbRVAL1.StyleDisabled.Color := clRed;
+    icbResult1.EditValue := DataModule1.ANALYSE_RESULT_CHECKRESULT1.Value;
+    icbResult2.EditValue := DataModule1.ANALYSE_RESULT_CHECKRESULT2.Value;
+    icbResult3.EditValue := DataModule1.ANALYSE_RESULT_CHECKRESULT3.Value;
+    icbResult4.EditValue := DataModule1.ANALYSE_RESULT_CHECKRESULT4.Value;
+    icbResult5.EditValue := DataModule1.ANALYSE_RESULT_CHECKRESULT5.Value;
+    icbResult6.EditValue := DataModule1.ANALYSE_RESULT_CHECKRESULT6.Value;
+    case icbResult1.EditValue of
+      3: icbResult1.Style.Color := clWhite;
+      4,5: icbResult1.Style.Color := clYellow;
+      6,7: icbResult1.Style.Color := clRed;
     end;
-    case icbRVAL2.EditValue of
-      8: icbRVAL2.StyleDisabled.Color := clWhite;
-      9: icbRVAL2.StyleDisabled.Color := clYellow;
-      10: icbRVAL2.StyleDisabled.Color := clRed;
+    case icbResult2.EditValue of
+      8: icbResult2.Style.Color := clWhite;
+      9: icbResult2.Style.Color := clYellow;
+      10: icbResult2.Style.Color := clRed;
     end;
-    case icbRVAL3.EditValue of
-      11: icbRVAL3.StyleDisabled.Color := clWhite;
-      12: icbRVAL3.StyleDisabled.Color := clYellow;
-      13: icbRVAL3.StyleDisabled.Color := clRed;
+    case icbResult3.EditValue of
+      11: icbResult3.Style.Color := clWhite;
+      12: icbResult3.Style.Color := clYellow;
+      13: icbResult3.Style.Color := clRed;
     end;
-    case icbRVAL4.EditValue of
-      14: icbRVAL4.StyleDisabled.Color := clWhite;
-      15: icbRVAL4.StyleDisabled.Color := clYellow;
-      16: icbRVAL4.StyleDisabled.Color := clRed;
+    case icbResult4.EditValue of
+      14: icbResult4.Style.Color := clWhite;
+      15: icbResult4.Style.Color := clYellow;
+      16: icbResult4.Style.Color := clRed;
     end;
-    case icbRVAL5.EditValue of
-      17: icbRVAL5.StyleDisabled.Color := clWhite;
-      18,20: icbRVAL5.StyleDisabled.Color := clYellow;
-      19,21: icbRVAL5.StyleDisabled.Color := clRed;
+    case icbResult5.EditValue of
+      17: icbResult5.Style.Color := clWhite;
+      18,20: icbResult5.Style.Color := clYellow;
+      19,21: icbResult5.Style.Color := clRed;
     end;
-    case icbRVAL6.EditValue of
-      22: icbRVAL6.StyleDisabled.Color := clWhite;
-      23,25: icbRVAL6.StyleDisabled.Color := clYellow;
-      24,26: icbRVAL6.StyleDisabled.Color := clRed;
+    case icbResult6.EditValue of
+      22: icbResult6.Style.Color := clWhite;
+      23,25: icbResult6.Style.Color := clYellow;
+      24,26: icbResult6.Style.Color := clRed;
     end;
 
   end;
@@ -448,13 +429,10 @@ begin
   DataModule1.ANALYSE_RESULT_IU.ExecProc;
   DataModule1.ds_ANALYSE_RESULT_CHECK.DataSet.Refresh;
   DataModule1.ds_ANALYSE_RESULT_CHECK.DataSet.Locate('ID', id, []);
-  ShowAnalyseResults;
-  icbResult1.EditValue := 3;
-  icbResult2.EditValue := 8;
-  icbResult3.EditValue := 11;
-  icbResult4.EditValue := 14;
-  icbResult5.EditValue := 17;
-  icbResult6.EditValue := 22;
+  if (gridStudent.DataController.IsEOF = False) and (chkAutoNext.Checked) then begin
+    gridStudent.DataController.GotoNext;
+    ShowAnalyseResults;
+  end;
 end;
 
 procedure TfmAnalyzer.btnAddClick(Sender: TObject);

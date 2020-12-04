@@ -253,6 +253,7 @@ type
     STUDENT_IMAGE_EXISTS: TUniStoredProc;
     ds_STUDENT_IMAGE_EXISTS: TDataSource;
     STUDENT_IMAGE_EXISTSID: TIntegerField;
+    ANALYSE_RESULT_UPD_DONE: TUniStoredProc;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }

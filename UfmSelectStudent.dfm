@@ -84,7 +84,7 @@ object fmSelectStudent: TfmSelectStudent
           56B70816102B0000000500000001000000000000000000000000}
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 0
+        TabOrder = 3
         OnClick = btnRefreshClick
       end
       object btnAdd: TcxButton
@@ -132,7 +132,7 @@ object fmSelectStudent: TfmSelectStudent
           2FC72121218D1010104600000000000000000000000000000000}
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 1
+        TabOrder = 4
         OnClick = btnAddClick
       end
       object btnEdit3: TcxButton
@@ -180,7 +180,7 @@ object fmSelectStudent: TfmSelectStudent
           0000000000000000000000000000000000000000000000000000}
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 2
+        TabOrder = 5
         OnClick = btnEdit3Click
       end
       object btnDel: TcxButton
@@ -228,7 +228,7 @@ object fmSelectStudent: TfmSelectStudent
           2FC72121218D1010104600000000000000000000000000000000}
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 3
+        TabOrder = 6
         OnClick = btnDelClick
       end
       object btnSelect: TcxButton
@@ -278,15 +278,15 @@ object fmSelectStudent: TfmSelectStudent
           2FC72121218D1010104600000000000000000000000000000000}
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 4
+        TabOrder = 2
       end
       object edtName: TEdit
         Left = 76
         Top = 2
         Width = 84
         Height = 21
-        ImeName = 'Microsoft IME 2010'
-        TabOrder = 5
+        ImeMode = imSHanguel
+        TabOrder = 0
       end
       object btnFilter: TcxButton
         Left = 163
@@ -334,7 +334,8 @@ object fmSelectStudent: TfmSelectStudent
           A5DE286298D11D4872A410284164020509150000000400000001}
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 6
+        TabOrder = 1
+        OnExit = btnFilterExit
         OnClick = btnFilterClick
       end
     end

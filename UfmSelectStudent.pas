@@ -59,6 +59,7 @@ type
     procedure FormActivate(Sender: TObject);
     procedure btnFilterClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure btnFilterExit(Sender: TObject);
   private
     { Private declarations }
   public
@@ -167,10 +168,16 @@ begin
       if edtName.Text <> '' then
         AItemList.AddItem(gridStudentS_NAME, foLike, '%' + edtName.Text + '%', edtName.Text);
     end;
+    btnSelect.SetFocus;
   finally
     gridStudent.DataController.Filter.EndUpdate;
     gridStudent.DataController.Filter.Active := true;
   end;
+end;
+
+procedure TfmSelectStudent.btnFilterExit(Sender: TObject);
+begin
+  btnFilter.Click;
 end;
 
 procedure TfmSelectStudent.btnRefreshClick(Sender: TObject);

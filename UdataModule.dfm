@@ -2552,7 +2552,7 @@ object DataModule1: TDataModule1
     StoredProcName = 'ANALYSE_RESULT_INS'
     Connection = UniConnection1
     Left = 280
-    Top = 568
+    Top = 576
     ParamData = <
       item
         DataType = ftInteger
@@ -2882,5 +2882,23 @@ object DataModule1: TDataModule1
     DataSet = STUDENT_IMAGE_EXISTS
     Left = 656
     Top = 624
+  end
+  object ANALYSE_RESULT_UPD_DONE: TUniStoredProc
+    StoredProcName = 'ANALYSE_RESULT_UPD_DONE'
+    Connection = UniConnection1
+    Left = 280
+    Top = 624
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftSmallint
+        Name = 'CHECK_DONE'
+        ParamType = ptInput
+      end>
+    CommandStoredProcName = 'ANALYSE_RESULT_UPD_DONE'
   end
 end

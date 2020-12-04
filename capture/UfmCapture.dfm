@@ -190,7 +190,6 @@ object fmCapture: TfmCapture
           ShowHint = True
           TabOrder = 0
           OnClick = btnAddClick
-          ExplicitLeft = 153
         end
         object btnDel: TcxButton
           AlignWithMargins = True
@@ -611,7 +610,7 @@ object fmCapture: TfmCapture
         TabOrder = 0
         Properties.CustomButtons.Buttons = <>
         Properties.Style = 9
-        Properties.TabIndex = 3
+        Properties.TabIndex = 0
         Properties.Tabs.Strings = (
           #52769#47732
           #46321
