@@ -361,35 +361,32 @@ object fmAnalyzer: TfmAnalyzer
   object PanelLeft: TPanel
     Left = 0
     Top = 29
-    Width = 265
+    Width = 315
     Height = 632
     Align = alLeft
     TabOrder = 1
     object Panel22: TPanel
       Left = 1
       Top = 1
-      Width = 263
+      Width = 313
       Height = 25
       Align = alTop
       Alignment = taLeftJustify
       BevelOuter = bvNone
       Caption = '  '#52524#50689#45936#51060#53552
       TabOrder = 0
-      ExplicitLeft = -3
-      ExplicitTop = -6
+      ExplicitWidth = 263
     end
     object cxGrid1: TcxGrid
       Left = 1
       Top = 26
-      Width = 263
+      Width = 313
       Height = 247
       Align = alTop
       BorderWidth = 1
       TabOrder = 1
       LookAndFeel.SkinName = 'Black'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 265
+      ExplicitWidth = 263
       object gridPicture: TcxGridDBTableView
         Navigator.Buttons.CustomButtons = <>
         Navigator.Buttons.First.Visible = False
@@ -442,27 +439,39 @@ object fmAnalyzer: TfmAnalyzer
           Properties.Alignment.Horz = taCenter
           OnGetDataText = gridPictureColumn1GetDataText
           HeaderAlignmentHorz = taCenter
-          Width = 37
+          Width = 30
         end
         object gridPicturePIC_DATE: TcxGridDBColumn
           DataBinding.FieldName = 'PIC_DATE'
+          PropertiesClassName = 'TcxDateEditProperties'
+          Properties.DisplayFormat = 'yy-mm-dd'
           HeaderAlignmentHorz = taCenter
-          Width = 115
+          Width = 91
         end
         object gridPictureMAN_CNT: TcxGridDBColumn
           Caption = #51064#50896
           DataBinding.FieldName = 'MAN_CNT'
           HeaderAlignmentHorz = taCenter
-          Width = 47
+          Width = 40
         end
         object gridPicturePIC_CNT: TcxGridDBColumn
           Caption = #52524#50689
           DataBinding.FieldName = 'PIC_CNT'
           HeaderAlignmentHorz = taCenter
-          Width = 48
+          Width = 39
         end
         object gridPictureCENTER_ID: TcxGridDBColumn
           DataBinding.FieldName = 'CENTER_ID'
+          Visible = False
+        end
+        object gridPictureCHECK_CNT: TcxGridDBColumn
+          Caption = #54217#44032
+          DataBinding.FieldName = 'CHECK_CNT'
+          HeaderAlignmentHorz = taCenter
+          Width = 40
+        end
+        object gridPictureSUB_CENTER: TcxGridDBColumn
+          DataBinding.FieldName = 'SUB_CENTER'
           Visible = False
         end
       end
@@ -473,7 +482,7 @@ object fmAnalyzer: TfmAnalyzer
     object cxGrid3: TcxGrid
       Left = 1
       Top = 298
-      Width = 263
+      Width = 313
       Height = 333
       Hint = '|'#54617#49373#47532#49828#53944#47484' '#53364#47533#54616#47732' '#51200#51109#46108' '#49324#51652#46308#51060' '#50040#45348#51068#52285#50640' '#45208#53440#45225#45768#45796'.'
       Align = alClient
@@ -481,10 +490,7 @@ object fmAnalyzer: TfmAnalyzer
       TabOrder = 2
       LookAndFeel.NativeStyle = False
       LookAndFeel.SkinName = 'Black'
-      ExplicitLeft = 0
-      ExplicitTop = 273
-      ExplicitWidth = 265
-      ExplicitHeight = 358
+      ExplicitWidth = 263
       object gridStudent: TcxGridDBTableView
         Navigator.Buttons.CustomButtons = <>
         Navigator.Buttons.First.Visible = False
@@ -549,12 +555,12 @@ object fmAnalyzer: TfmAnalyzer
           Properties.Alignment.Horz = taCenter
           OnGetDataText = gridStudentColumn1GetDataText
           HeaderAlignmentHorz = taCenter
-          Width = 35
+          Width = 30
         end
         object gridStudentS_NAME: TcxGridDBColumn
           Caption = #54924#50896#47749
           DataBinding.FieldName = 'S_NAME'
-          Width = 86
+          Width = 66
         end
         object gridStudentS_SEX: TcxGridDBColumn
           Caption = #49457#48324
@@ -571,17 +577,17 @@ object fmAnalyzer: TfmAnalyzer
               Value = 1
             end>
           HeaderAlignmentHorz = taCenter
-          Width = 35
+          Width = 40
         end
         object gridStudentS_AGE: TcxGridDBColumn
           Caption = #45208#51060
           DataBinding.FieldName = 'S_AGE'
           HeaderAlignmentHorz = taCenter
-          Width = 35
+          Width = 40
         end
-        object gridStudentCHASOO: TcxGridDBColumn
+        object gridStudentPIC_DONE: TcxGridDBColumn
           Caption = #52524#50689
-          DataBinding.FieldName = 'CHASOO'
+          DataBinding.FieldName = 'PIC_DONE'
           PropertiesClassName = 'TcxImageComboBoxProperties'
           Properties.Images = ImageList1
           Properties.Items = <
@@ -597,7 +603,27 @@ object fmAnalyzer: TfmAnalyzer
             end>
           Properties.ShowDescriptions = False
           HeaderAlignmentHorz = taCenter
-          Width = 35
+          Width = 40
+        end
+        object gridStudentCHECK_DONE: TcxGridDBColumn
+          Caption = #54217#44032
+          DataBinding.FieldName = 'CHECK_DONE'
+          PropertiesClassName = 'TcxImageComboBoxProperties'
+          Properties.Images = ImageList1
+          Properties.Items = <
+            item
+              Description = 'X'
+              ImageIndex = 6
+              Value = 0
+            end
+            item
+              Description = 'O'
+              ImageIndex = 7
+              Value = 1
+            end>
+          Properties.ShowDescriptions = False
+          HeaderAlignmentHorz = taCenter
+          Width = 40
         end
       end
       object cxGridLevel2: TcxGridLevel
@@ -607,53 +633,50 @@ object fmAnalyzer: TfmAnalyzer
     object Panel21: TPanel
       Left = 1
       Top = 273
-      Width = 263
+      Width = 313
       Height = 25
       Align = alTop
       Alignment = taLeftJustify
       BevelOuter = bvNone
       Caption = '  '#54924#50896#45936#51060#53552
       TabOrder = 3
-      ExplicitLeft = -3
-      ExplicitTop = 304
+      ExplicitWidth = 263
     end
   end
   object PanelRight: TPanel
-    Left = 265
+    Left = 315
     Top = 29
-    Width = 919
+    Width = 869
     Height = 632
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 2
-    ExplicitLeft = 539
-    ExplicitWidth = 645
+    ExplicitLeft = 265
+    ExplicitWidth = 919
     object PanelImage: TPanel
       Left = 0
       Top = 0
-      Width = 919
+      Width = 869
       Height = 632
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 0
-      ExplicitWidth = 454
+      ExplicitWidth = 919
       object PanelRightImage: TPanel
-        Left = 457
+        Left = 433
         Top = 0
-        Width = 462
+        Width = 436
         Height = 632
         Align = alClient
         DoubleBuffered = False
         ParentDoubleBuffered = False
         TabOrder = 0
-        ExplicitLeft = 1
-        ExplicitTop = 1
-        ExplicitWidth = 452
-        ExplicitHeight = 630
+        ExplicitLeft = 457
+        ExplicitWidth = 462
         object ImageEnView2: TImageEnView
           Left = 1
           Top = 27
-          Width = 460
+          Width = 434
           Height = 604
           Cursor = crDefault
           Background = clBlack
@@ -667,22 +690,17 @@ object fmAnalyzer: TfmAnalyzer
           OnNewLayer = ImageEnView2NewLayer
           Align = alClient
           TabOrder = 0
-          ExplicitLeft = 353
-          ExplicitTop = 1
-          ExplicitWidth = 374
-          ExplicitHeight = 630
+          ExplicitWidth = 460
         end
         object Panel6: TPanel
           Left = 1
           Top = 1
-          Width = 460
+          Width = 434
           Height = 26
           Align = alTop
           BevelOuter = bvNone
           TabOrder = 1
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 366
+          ExplicitWidth = 460
           object btnArrow2: TSpeedButton
             AlignWithMargins = True
             Left = 69
@@ -812,8 +830,6 @@ object fmAnalyzer: TfmAnalyzer
             ShowHint = True
             TabOrder = 0
             Value = 10
-            ExplicitLeft = 88
-            ExplicitHeight = 25
             Width = 46
           end
           object ColorBox2: TcxColorComboBox
@@ -840,7 +856,6 @@ object fmAnalyzer: TfmAnalyzer
             StyleFocused.LookAndFeel.SkinName = 'VS2010'
             StyleHot.LookAndFeel.SkinName = 'VS2010'
             TabOrder = 1
-            ExplicitLeft = 161
             Width = 60
           end
         end
@@ -848,14 +863,14 @@ object fmAnalyzer: TfmAnalyzer
       object PanelLeftImage: TPanel
         Left = 0
         Top = 0
-        Width = 457
+        Width = 433
         Height = 632
         Align = alLeft
         TabOrder = 1
         object ImageEnView1: TImageEnView
           Left = 1
           Top = 27
-          Width = 455
+          Width = 431
           Height = 604
           Cursor = crDefault
           Background = clBlack
@@ -869,22 +884,17 @@ object fmAnalyzer: TfmAnalyzer
           OnNewLayer = ImageEnView1NewLayer
           Align = alClient
           TabOrder = 0
-          ExplicitLeft = 353
-          ExplicitTop = 1
-          ExplicitWidth = 374
-          ExplicitHeight = 630
+          ExplicitWidth = 455
         end
         object Panel1: TPanel
           Left = 1
           Top = 1
-          Width = 455
+          Width = 431
           Height = 26
           Align = alTop
           BevelOuter = bvNone
           TabOrder = 1
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 360
+          ExplicitWidth = 455
           object btnArrow: TSpeedButton
             AlignWithMargins = True
             Left = 69
@@ -1014,8 +1024,6 @@ object fmAnalyzer: TfmAnalyzer
             ShowHint = True
             TabOrder = 0
             Value = 10
-            ExplicitLeft = 88
-            ExplicitHeight = 25
             Width = 46
           end
           object ColorBox: TcxColorComboBox
@@ -1042,7 +1050,6 @@ object fmAnalyzer: TfmAnalyzer
             StyleFocused.LookAndFeel.SkinName = 'VS2010'
             StyleHot.LookAndFeel.SkinName = 'VS2010'
             TabOrder = 1
-            ExplicitLeft = 161
             Width = 60
           end
         end

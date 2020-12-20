@@ -26,7 +26,7 @@ uses
   cxGridLevel, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
   cxClasses, cxGridCustomView, cxGrid, cxButtons, hyiedefs, hyieutils, DateUtils,
   LMDDckSite, dbimageen, iexBitmaps, iesettings, iexLayers, iexRulers,
-  iexToolbars, cxLookupEdit, cxDBLookupEdit, cxDBLookupComboBox;
+  iexToolbars, cxLookupEdit, cxDBLookupEdit, cxDBLookupComboBox, cxCalendar;
 
 type
   TfmCapture = class(TForm)
@@ -93,7 +93,7 @@ type
     Button1: TButton;
     Label5: TLabel;
     gridPictureMAN_CNT: TcxGridDBColumn;
-    gridStudentCHASOO: TcxGridDBColumn;
+    gridStudentPIC_DONE: TcxGridDBColumn;
     btnReCalc: TcxButton;
     PanelLeft: TPanel;
     PanelRight: TPanel;
@@ -105,6 +105,8 @@ type
     cxTabSheet2: TcxTabSheet;
     ImageEnView2: TImageEnView;
     btnCut: TcxButton;
+    gridPictureCHECK_CNT: TcxGridDBColumn;
+    gridPictureSUB_CENTER: TcxGridDBColumn;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure btnStartPreview1Click(Sender: TObject);
@@ -336,7 +338,8 @@ begin
             DataModule1.STUDENT_IMAGE_INS.ParamByName('STUDENT_ID').Value := student_id;
             DataModule1.STUDENT_IMAGE_INS.ParamByName('PICTURE_ID').Value := pic_id;
             DataModule1.STUDENT_IMAGE_INS.ParamByName('P_DATE').Value := p_date;
-            DataModule1.STUDENT_IMAGE_INS.ParamByName('CHASOO').Value := 0;
+            DataModule1.STUDENT_IMAGE_INS.ParamByName('PIC_DONE').Value := 0;
+            DataModule1.STUDENT_IMAGE_INS.ParamByName('CHECK_DONE').Value := 0;
             DataModule1.STUDENT_IMAGE_INS.ParamByName('CHECK_VAL1').Value := 0;
             DataModule1.STUDENT_IMAGE_INS.ParamByName('CHECK_VAL2').Value := 0;
             DataModule1.STUDENT_IMAGE_INS.ParamByName('TOTAL_VAL').Value := 0;

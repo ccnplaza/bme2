@@ -31,7 +31,7 @@ uses
   dxSkinWhiteprint, dxSkinXmas2008Blue, Math, cxSpinEdit, BMDThread, LMDDckSite,
   dxSkinsdxDockControlPainter, dxDockControl, dxDockPanel, DateUtils,
   iexBitmaps, iesettings, iexLayers, iexRulers, iexToolbars, cxLookupEdit,
-  cxDBLookupEdit, cxColorComboBox;
+  cxDBLookupEdit, cxColorComboBox, cxCalendar;
 
 type
   TfmAnalyzer = class(TForm)
@@ -84,7 +84,7 @@ type
     gridStudentS_NAME: TcxGridDBColumn;
     gridStudentS_SEX: TcxGridDBColumn;
     gridStudentS_AGE: TcxGridDBColumn;
-    gridStudentCHASOO: TcxGridDBColumn;
+    gridStudentPIC_DONE: TcxGridDBColumn;
     cxGridLevel2: TcxGridLevel;
     ImageEnView1: TImageEnView;
     ImageEnView2: TImageEnView;
@@ -114,6 +114,9 @@ type
     Label5: TLabel;
     Label7: TLabel;
     STUDENT_IMAGE_UPD_ALL: TUniStoredProc;
+    gridPictureCHECK_CNT: TcxGridDBColumn;
+    gridPictureSUB_CENTER: TcxGridDBColumn;
+    gridStudentCHECK_DONE: TcxGridDBColumn;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure btnRefreshClick(Sender: TObject);
@@ -155,6 +158,7 @@ type
     procedure ShowAnalyseResults;
     procedure AssignControlValues;
     procedure AssignControlValues2;
+    procedure ReFreshStudentList;
     //procedure CreateLocalData;
     { Private declarations }
   public
@@ -402,6 +406,7 @@ end;
 procedure TfmAnalyzer.btnSaveResultClick(Sender: TObject);
 var
   dStream1, dStream2 : TMemoryStream;
+  picture_top, student_top : Integer;
 begin
   dStream1 := TMemoryStream.Create;
   dStream2 := TMemoryStream.Create;
@@ -420,6 +425,12 @@ begin
     STUDENT_IMAGE_UPD_ALL.ParamByName('DRAW1').LoadFromStream(dStream1, ftBlob);
     STUDENT_IMAGE_UPD_ALL.ParamByName('DRAW2').LoadFromStream(dStream2, ftBlob);
     STUDENT_IMAGE_UPD_ALL.ExecProc;
+    picture_top := gridPicture.Controller.TopRowIndex;
+    gridPicture.DataController.SaveBookmark;
+    DataModule1.ds_PICTURE_DATE_SEL.DataSet.Refresh;
+    gridPicture.Controller.TopRowIndex := picture_top;
+    gridPicture.DataController.GotoBookmark;
+    ReFreshStudentList;
     ShowMessage('자료저장 완료.');
   finally
     dStream1.Free;
@@ -462,6 +473,20 @@ begin
   TOTAL_VAL.EditValue := DataModule1.STUDENT_IMAGE_SEL_IMAGETOTAL_VAL.Value;
   RetrievePicture;
   DATA_LOAD := True;
+end;
+
+procedure TfmAnalyzer.ReFreshStudentList;
+var
+  top_row : Integer;
+begin
+  top_row := gridStudent.Controller.TopRowIndex;
+  gridStudent.DataController.SaveBookmark;
+  DataModule1.ds_STUDENT_IMAGE_SEL_BYDATE.DataSet.Refresh;
+  gridStudent.DataController.GotoBookmark;
+  gridStudent.Controller.TopRowIndex := top_row;
+  CHECK_VAL1.EditValue := DataModule1.STUDENT_IMAGE_SEL_IMAGECHECK_VAL1.Value;
+  CHECK_VAL2.EditValue := DataModule1.STUDENT_IMAGE_SEL_IMAGECHECK_VAL2.Value;
+  TOTAL_VAL.EditValue := DataModule1.STUDENT_IMAGE_SEL_IMAGETOTAL_VAL.Value;
 end;
 
 procedure TfmAnalyzer.RetrievePicture;

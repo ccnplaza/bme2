@@ -418,7 +418,12 @@ object DataModule1: TDataModule1
       end
       item
         DataType = ftSmallint
-        Name = 'CHASOO'
+        Name = 'PIC_DONE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftSmallint
+        Name = 'CHECK_DONE'
         ParamType = ptInput
       end
       item
@@ -662,316 +667,6 @@ object DataModule1: TDataModule1
     DataSet = STUDENT_IMAGE_SEL2
     Left = 552
     Top = 200
-  end
-  object CHECK_DATA_DEL: TUniStoredProc
-    StoredProcName = 'CHECK_DATA_DEL'
-    Connection = UniConnection1
-    Left = 672
-    Top = 8
-    ParamData = <
-      item
-        DataType = ftInteger
-        Name = 'ID'
-        ParamType = ptInput
-      end>
-    CommandStoredProcName = 'CHECK_DATA_DEL'
-  end
-  object CHECK_DATA_INS: TUniStoredProc
-    StoredProcName = 'CHECK_DATA_INS'
-    Connection = UniConnection1
-    Left = 672
-    Top = 56
-    ParamData = <
-      item
-        DataType = ftDate
-        Name = 'CHECK_DATE'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
-        Name = 'CHASOO'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
-        Name = 'CENTER_ID'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
-        Name = 'SUB_CENTER'
-        ParamType = ptInput
-      end>
-    CommandStoredProcName = 'CHECK_DATA_INS'
-  end
-  object CHECK_DATA_UPD: TUniStoredProc
-    StoredProcName = 'CHECK_DATA_UPD'
-    Connection = UniConnection1
-    Left = 672
-    Top = 104
-    ParamData = <
-      item
-        DataType = ftInteger
-        Name = 'ID'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftDate
-        Name = 'CHECK_DATE'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
-        Name = 'CHASOO'
-        ParamType = ptInput
-      end>
-    CommandStoredProcName = 'CHECK_DATA_UPD'
-  end
-  object CHECK_DATA_SEL: TUniStoredProc
-    StoredProcName = 'CHECK_DATA_SEL'
-    Connection = UniConnection1
-    Left = 672
-    Top = 152
-    ParamData = <
-      item
-        DataType = ftInteger
-        Name = 'C_ID'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
-        Name = 'W_YEAR'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
-        Name = 'SUB_ID'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
-        Name = 'ID'
-        ParamType = ptOutput
-      end
-      item
-        DataType = ftDate
-        Name = 'CHECK_DATE'
-        ParamType = ptOutput
-      end
-      item
-        DataType = ftInteger
-        Name = 'CHASOO'
-        ParamType = ptOutput
-      end
-      item
-        DataType = ftInteger
-        Name = 'CENTER_ID'
-        ParamType = ptOutput
-      end
-      item
-        DataType = ftInteger
-        Name = 'MAN_COUNT'
-        ParamType = ptOutput
-      end
-      item
-        DataType = ftInteger
-        Name = 'CHECK_CNT'
-        ParamType = ptOutput
-      end>
-    CommandStoredProcName = 'CHECK_DATA_SEL'
-    object CHECK_DATA_SELID: TIntegerField
-      Alignment = taCenter
-      FieldName = 'ID'
-    end
-    object CHECK_DATA_SELCHECK_DATE: TDateField
-      Alignment = taCenter
-      FieldName = 'CHECK_DATE'
-    end
-    object CHECK_DATA_SELCHASOO: TIntegerField
-      Alignment = taCenter
-      FieldName = 'CHASOO'
-    end
-    object CHECK_DATA_SELMAN_COUNT: TIntegerField
-      Alignment = taCenter
-      FieldName = 'MAN_COUNT'
-    end
-    object CHECK_DATA_SELCENTER_ID: TIntegerField
-      FieldName = 'CENTER_ID'
-    end
-    object CHECK_DATA_SELCHECK_CNT: TIntegerField
-      Alignment = taCenter
-      FieldName = 'CHECK_CNT'
-    end
-  end
-  object ds_CHECK_DATA_SEL: TDataSource
-    DataSet = CHECK_DATA_SEL
-    Left = 672
-    Top = 200
-  end
-  object ANALYSE_RESULT_DEL: TUniStoredProc
-    StoredProcName = 'ANALYSE_RESULT_DEL'
-    Connection = UniConnection1
-    Left = 264
-    Top = 304
-    ParamData = <
-      item
-        DataType = ftInteger
-        Name = 'ID'
-        ParamType = ptInput
-      end>
-    CommandStoredProcName = 'ANALYSE_RESULT_DEL'
-  end
-  object ANALYSE_RESULT_IU: TUniStoredProc
-    StoredProcName = 'ANALYSE_RESULT_IU'
-    Connection = UniConnection1
-    Left = 264
-    Top = 352
-    ParamData = <
-      item
-        DataType = ftInteger
-        Name = 'CHECK_ID'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
-        Name = 'STUDENT_ID'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
-        Name = 'PICTURE_ID'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
-        Name = 'RESULT1'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
-        Name = 'RESULT2'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
-        Name = 'RESULT3'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
-        Name = 'RESULT4'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
-        Name = 'RESULT5'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
-        Name = 'RESULT6'
-        ParamType = ptInput
-      end>
-    CommandStoredProcName = 'ANALYSE_RESULT_IU'
-  end
-  object ANALYSE_RESULT_SEL: TUniStoredProc
-    StoredProcName = 'ANALYSE_RESULT_SEL'
-    Connection = UniConnection1
-    Left = 264
-    Top = 400
-    ParamData = <
-      item
-        DataType = ftInteger
-        Name = 'S_ID'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
-        Name = 'C_ID'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
-        Name = 'ID'
-        ParamType = ptOutput
-      end
-      item
-        DataType = ftInteger
-        Name = 'CHECK_ID'
-        ParamType = ptOutput
-      end
-      item
-        DataType = ftInteger
-        Name = 'STUDENT_ID'
-        ParamType = ptOutput
-      end
-      item
-        DataType = ftInteger
-        Name = 'PICTURE_ID'
-        ParamType = ptOutput
-      end
-      item
-        DataType = ftInteger
-        Name = 'RESULT1'
-        ParamType = ptOutput
-      end
-      item
-        DataType = ftInteger
-        Name = 'RESULT2'
-        ParamType = ptOutput
-      end
-      item
-        DataType = ftInteger
-        Name = 'RESULT3'
-        ParamType = ptOutput
-      end
-      item
-        DataType = ftInteger
-        Name = 'RESULT4'
-        ParamType = ptOutput
-      end
-      item
-        DataType = ftInteger
-        Name = 'RESULT5'
-        ParamType = ptOutput
-      end>
-    CommandStoredProcName = 'ANALYSE_RESULT_SEL'
-    StoredProcIsQuery = True
-    object ANALYSE_RESULT_SELID: TIntegerField
-      FieldName = 'ID'
-    end
-    object ANALYSE_RESULT_SELCHECK_ID: TIntegerField
-      FieldName = 'CHECK_ID'
-    end
-    object ANALYSE_RESULT_SELSTUDENT_ID: TIntegerField
-      FieldName = 'STUDENT_ID'
-    end
-    object ANALYSE_RESULT_SELPICTURE_ID: TIntegerField
-      FieldName = 'PICTURE_ID'
-    end
-    object ANALYSE_RESULT_SELRESULT1: TIntegerField
-      FieldName = 'RESULT1'
-    end
-    object ANALYSE_RESULT_SELRESULT2: TIntegerField
-      FieldName = 'RESULT2'
-    end
-    object ANALYSE_RESULT_SELRESULT3: TIntegerField
-      FieldName = 'RESULT3'
-    end
-    object ANALYSE_RESULT_SELRESULT4: TIntegerField
-      FieldName = 'RESULT4'
-    end
-    object ANALYSE_RESULT_SELRESULT5: TIntegerField
-      FieldName = 'RESULT5'
-    end
-    object ANALYSE_RESULT_SELRESULT6: TIntegerField
-      FieldName = 'RESULT6'
-    end
-  end
-  object ds_ANALYSE_RESULT_SEL: TDataSource
-    DataSet = ANALYSE_RESULT_SEL
-    Left = 264
-    Top = 448
   end
   object PRACTICE_LIST_SEL: TUniStoredProc
     StoredProcName = 'PRACTICE_LIST_SEL'
@@ -1940,12 +1635,12 @@ object DataModule1: TDataModule1
       end
       item
         DataType = ftInteger
-        Name = 'PIC_CNT'
+        Name = 'CENTER_ID'
         ParamType = ptOutput
       end
       item
         DataType = ftInteger
-        Name = 'CENTER_ID'
+        Name = 'SUB_CENTER'
         ParamType = ptOutput
       end
       item
@@ -1955,7 +1650,12 @@ object DataModule1: TDataModule1
       end
       item
         DataType = ftInteger
-        Name = 'SUB_CENTER'
+        Name = 'PIC_CNT'
+        ParamType = ptOutput
+      end
+      item
+        DataType = ftInteger
+        Name = 'CHECK_CNT'
         ParamType = ptOutput
       end>
     CommandStoredProcName = 'PICTURE_DATE_SEL'
@@ -1968,18 +1668,22 @@ object DataModule1: TDataModule1
       DisplayLabel = #52524#50689#51068#51088
       FieldName = 'PIC_DATE'
     end
+    object PICTURE_DATE_SELMAN_CNT: TIntegerField
+      Alignment = taCenter
+      FieldName = 'MAN_CNT'
+    end
     object PICTURE_DATE_SELPIC_CNT: TIntegerField
       Alignment = taCenter
       DisplayLabel = #51064#50896
       FieldName = 'PIC_CNT'
     end
+    object PICTURE_DATE_SELCHECK_CNT: TIntegerField
+      Alignment = taCenter
+      FieldName = 'CHECK_CNT'
+    end
     object PICTURE_DATE_SELCENTER_ID: TIntegerField
       Alignment = taCenter
       FieldName = 'CENTER_ID'
-    end
-    object PICTURE_DATE_SELMAN_CNT: TIntegerField
-      Alignment = taCenter
-      FieldName = 'MAN_CNT'
     end
     object PICTURE_DATE_SELSUB_CENTER: TIntegerField
       FieldName = 'SUB_CENTER'
@@ -2123,7 +1827,12 @@ object DataModule1: TDataModule1
       end
       item
         DataType = ftSmallint
-        Name = 'CHASOO'
+        Name = 'PIC_DONE'
+        ParamType = ptOutput
+      end
+      item
+        DataType = ftSmallint
+        Name = 'CHECK_DONE'
         ParamType = ptOutput
       end
       item
@@ -2165,9 +1874,13 @@ object DataModule1: TDataModule1
       Alignment = taCenter
       FieldName = 'S_AGE'
     end
-    object STUDENT_IMAGE_SEL_BYDATECHASOO: TSmallintField
+    object STUDENT_IMAGE_SEL_BYDATEPIC_DONE: TSmallintField
       Alignment = taCenter
-      FieldName = 'CHASOO'
+      FieldName = 'PIC_DONE'
+    end
+    object STUDENT_IMAGE_SEL_BYDATECHECK_DONE: TSmallintField
+      Alignment = taCenter
+      FieldName = 'CHECK_DONE'
     end
   end
   object ds_STUDENT_IMAGE_SEL_BYDATE: TDataSource
@@ -2388,199 +2101,6 @@ object DataModule1: TDataModule1
         ParamType = ptInput
       end>
     CommandStoredProcName = 'PICTURE_DATE_COUNT_UPD'
-  end
-  object ANALYSE_RESULT_CHECK: TUniStoredProc
-    StoredProcName = 'ANALYSE_RESULT_CHECK'
-    Connection = UniConnection1
-    Left = 264
-    Top = 496
-    ParamData = <
-      item
-        DataType = ftInteger
-        Name = 'C_ID'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
-        Name = 'ID'
-        ParamType = ptOutput
-      end
-      item
-        DataType = ftInteger
-        Name = 'CHECK_ID'
-        ParamType = ptOutput
-      end
-      item
-        DataType = ftInteger
-        Name = 'STUDENT_ID'
-        ParamType = ptOutput
-      end
-      item
-        DataType = ftInteger
-        Name = 'PICTURE_ID'
-        ParamType = ptOutput
-      end
-      item
-        DataType = ftSmallint
-        Name = 'CHECK_DONE'
-        ParamType = ptOutput
-      end
-      item
-        DataType = ftInteger
-        Name = 'RESULT1'
-        ParamType = ptOutput
-      end
-      item
-        DataType = ftInteger
-        Name = 'RESULT2'
-        ParamType = ptOutput
-      end
-      item
-        DataType = ftInteger
-        Name = 'RESULT3'
-        ParamType = ptOutput
-      end
-      item
-        DataType = ftInteger
-        Name = 'RESULT4'
-        ParamType = ptOutput
-      end
-      item
-        DataType = ftInteger
-        Name = 'RESULT5'
-        ParamType = ptOutput
-      end
-      item
-        DataType = ftInteger
-        Name = 'RESULT6'
-        ParamType = ptOutput
-      end
-      item
-        DataType = ftWideString
-        Name = 'S_NAME'
-        ParamType = ptOutput
-        Size = 30
-      end
-      item
-        DataType = ftInteger
-        Name = 'S_SEX'
-        ParamType = ptOutput
-      end
-      item
-        DataType = ftInteger
-        Name = 'S_AGE'
-        ParamType = ptOutput
-      end>
-    CommandStoredProcName = 'ANALYSE_RESULT_CHECK'
-    object ANALYSE_RESULT_CHECKID: TIntegerField
-      FieldName = 'ID'
-    end
-    object ANALYSE_RESULT_CHECKCHECK_ID: TIntegerField
-      FieldName = 'CHECK_ID'
-    end
-    object ANALYSE_RESULT_CHECKSTUDENT_ID: TIntegerField
-      FieldName = 'STUDENT_ID'
-    end
-    object ANALYSE_RESULT_CHECKPICTURE_ID: TIntegerField
-      FieldName = 'PICTURE_ID'
-    end
-    object ANALYSE_RESULT_CHECKS_NAME: TWideStringField
-      FieldName = 'S_NAME'
-      Size = 30
-    end
-    object ANALYSE_RESULT_CHECKS_SEX: TIntegerField
-      Alignment = taCenter
-      FieldName = 'S_SEX'
-    end
-    object ANALYSE_RESULT_CHECKS_AGE: TIntegerField
-      Alignment = taCenter
-      FieldName = 'S_AGE'
-    end
-    object ANALYSE_RESULT_CHECKCHECK_DONE: TSmallintField
-      Alignment = taCenter
-      FieldName = 'CHECK_DONE'
-    end
-    object ANALYSE_RESULT_CHECKRESULT1: TIntegerField
-      FieldName = 'RESULT1'
-    end
-    object ANALYSE_RESULT_CHECKRESULT2: TIntegerField
-      FieldName = 'RESULT2'
-    end
-    object ANALYSE_RESULT_CHECKRESULT3: TIntegerField
-      FieldName = 'RESULT3'
-    end
-    object ANALYSE_RESULT_CHECKRESULT4: TIntegerField
-      FieldName = 'RESULT4'
-    end
-    object ANALYSE_RESULT_CHECKRESULT5: TIntegerField
-      FieldName = 'RESULT5'
-    end
-    object ANALYSE_RESULT_CHECKRESULT6: TIntegerField
-      FieldName = 'RESULT6'
-    end
-  end
-  object ds_ANALYSE_RESULT_CHECK: TDataSource
-    DataSet = ANALYSE_RESULT_CHECK
-    Left = 264
-    Top = 544
-  end
-  object ANALYSE_RESULT_INS: TUniStoredProc
-    StoredProcName = 'ANALYSE_RESULT_INS'
-    Connection = UniConnection1
-    Left = 392
-    Top = 576
-    ParamData = <
-      item
-        DataType = ftInteger
-        Name = 'CHECK_ID'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
-        Name = 'STUDENT_ID'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
-        Name = 'PICTURE_ID'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
-        Name = 'RESULT1'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
-        Name = 'RESULT2'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
-        Name = 'RESULT3'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
-        Name = 'RESULT4'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
-        Name = 'RESULT5'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
-        Name = 'RESULT6'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftSmallint
-        Name = 'CHECK_DONE'
-        ParamType = ptInput
-      end>
-    CommandStoredProcName = 'ANALYSE_RESULT_INS'
   end
   object CHECK_PIC_DATE_EXISTS: TUniStoredProc
     StoredProcName = 'CHECK_PIC_DATE_EXISTS'
@@ -2868,24 +2388,6 @@ object DataModule1: TDataModule1
     DataSet = STUDENT_IMAGE_EXISTS
     Left = 712
     Top = 632
-  end
-  object ANALYSE_RESULT_UPD_DONE: TUniStoredProc
-    StoredProcName = 'ANALYSE_RESULT_UPD_DONE'
-    Connection = UniConnection1
-    Left = 392
-    Top = 624
-    ParamData = <
-      item
-        DataType = ftInteger
-        Name = 'ID'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftSmallint
-        Name = 'CHECK_DONE'
-        ParamType = ptInput
-      end>
-    CommandStoredProcName = 'ANALYSE_RESULT_UPD_DONE'
   end
   object REG_SCHOOL_SEL_LOOK: TUniStoredProc
     StoredProcName = 'REG_SCHOOL_SEL_LOOK'

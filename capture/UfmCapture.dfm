@@ -384,9 +384,9 @@ object fmCapture: TfmCapture
             HeaderAlignmentHorz = taCenter
             Width = 35
           end
-          object gridStudentCHASOO: TcxGridDBColumn
+          object gridStudentPIC_DONE: TcxGridDBColumn
             Caption = #52524#50689
-            DataBinding.FieldName = 'CHASOO'
+            DataBinding.FieldName = 'PIC_DONE'
             PropertiesClassName = 'TcxImageComboBoxProperties'
             Properties.Images = ImageList1
             Properties.Items = <
@@ -602,6 +602,8 @@ object fmCapture: TfmCapture
           end
           object gridPicturePIC_DATE: TcxGridDBColumn
             DataBinding.FieldName = 'PIC_DATE'
+            PropertiesClassName = 'TcxDateEditProperties'
+            Properties.DisplayFormat = 'yy-mm-dd'
             HeaderAlignmentHorz = taCenter
             Width = 107
           end
@@ -619,6 +621,14 @@ object fmCapture: TfmCapture
           end
           object gridPictureCENTER_ID: TcxGridDBColumn
             DataBinding.FieldName = 'CENTER_ID'
+            Visible = False
+          end
+          object gridPictureCHECK_CNT: TcxGridDBColumn
+            DataBinding.FieldName = 'CHECK_CNT'
+            Visible = False
+          end
+          object gridPictureSUB_CENTER: TcxGridDBColumn
+            DataBinding.FieldName = 'SUB_CENTER'
             Visible = False
           end
         end

@@ -19,17 +19,19 @@ object fmResultView: TfmResultView
   PixelsPerInch = 96
   TextHeight = 17
   object Panel2: TPanel
-    Left = 240
+    Left = 372
     Top = 29
-    Width = 944
+    Width = 812
     Height = 620
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
+    ExplicitLeft = 240
+    ExplicitWidth = 944
     object cxGrid3: TcxGrid
       Left = 0
       Top = 0
-      Width = 944
+      Width = 812
       Height = 620
       Hint = '|'#54617#49373#47532#49828#53944#47484' '#53364#47533#54616#47732' '#51200#51109#46108' '#49324#51652#46308#51060' '#50040#45348#51068#52285#50640' '#45208#53440#45225#45768#45796'.'
       Align = alClient
@@ -37,6 +39,7 @@ object fmResultView: TfmResultView
       TabOrder = 0
       LookAndFeel.NativeStyle = False
       LookAndFeel.SkinName = 'Black'
+      ExplicitWidth = 944
       object gridStudent: TcxGridDBTableView
         Navigator.Buttons.CustomButtons = <>
         Navigator.Buttons.First.Visible = False
@@ -101,12 +104,12 @@ object fmResultView: TfmResultView
           Properties.Alignment.Horz = taCenter
           OnGetDataText = gridStudentColumn1GetDataText
           HeaderAlignmentHorz = taCenter
-          Width = 49
+          Width = 46
         end
         object gridStudentS_NAME: TcxGridDBColumn
           Caption = #54924#50896#47749
           DataBinding.FieldName = 'S_NAME'
-          Width = 125
+          Width = 117
         end
         object gridStudentS_SEX: TcxGridDBColumn
           Caption = #49457#48324
@@ -123,31 +126,31 @@ object fmResultView: TfmResultView
               Value = 1
             end>
           HeaderAlignmentHorz = taCenter
-          Width = 65
+          Width = 49
         end
         object gridStudentS_BIRTH: TcxGridDBColumn
           Caption = #49373#45380#50900#51068
           DataBinding.FieldName = 'S_BIRTH'
           HeaderAlignmentHorz = taCenter
-          Width = 104
+          Width = 99
         end
         object gridStudentS_AGE: TcxGridDBColumn
           Caption = #45208#51060
           DataBinding.FieldName = 'S_AGE'
           HeaderAlignmentHorz = taCenter
-          Width = 55
+          Width = 52
         end
         object gridStudentS_HEIGHT: TcxGridDBColumn
           Caption = #49888#51109
           DataBinding.FieldName = 'S_HEIGHT'
           HeaderAlignmentHorz = taCenter
-          Width = 76
+          Width = 73
         end
         object gridStudentS_WEIGHT: TcxGridDBColumn
           Caption = #52404#51473
           DataBinding.FieldName = 'S_WEIGHT'
           HeaderAlignmentHorz = taCenter
-          Width = 74
+          Width = 71
         end
         object gridStudentBMI_VALUE: TcxGridDBColumn
           Caption = 'BMI'
@@ -156,10 +159,10 @@ object fmResultView: TfmResultView
           Properties.DecimalPlaces = 2
           Properties.DisplayFormat = ',0.00;-,0.00'
           HeaderAlignmentHorz = taCenter
-          Width = 63
+          Width = 60
         end
         object gridStudentCHECK_VAL1: TcxGridDBColumn
-          Caption = #51204#47732#54217#44032
+          Caption = #51204#47732
           DataBinding.FieldName = 'CHECK_VAL1'
           PropertiesClassName = 'TcxImageComboBoxProperties'
           Properties.Items = <
@@ -181,10 +184,10 @@ object fmResultView: TfmResultView
               Value = 3
             end>
           HeaderAlignmentHorz = taCenter
-          Width = 90
+          Width = 76
         end
         object gridStudentCHECK_VAL2: TcxGridDBColumn
-          Caption = #52769#47732#54217#44032
+          Caption = #52769#47732
           DataBinding.FieldName = 'CHECK_VAL2'
           PropertiesClassName = 'TcxImageComboBoxProperties'
           Properties.Items = <
@@ -206,10 +209,10 @@ object fmResultView: TfmResultView
               Value = 3
             end>
           HeaderAlignmentHorz = taCenter
-          Width = 104
+          Width = 76
         end
         object gridStudentTOTAL_VAL: TcxGridDBColumn
-          Caption = #51333#54633#54217#44032
+          Caption = #51333#54633
           DataBinding.FieldName = 'TOTAL_VAL'
           PropertiesClassName = 'TcxImageComboBoxProperties'
           Properties.Items = <
@@ -239,7 +242,7 @@ object fmResultView: TfmResultView
               Value = 5
             end>
           HeaderAlignmentHorz = taCenter
-          Width = 123
+          Width = 77
         end
       end
       object cxGridLevel2: TcxGridLevel
@@ -338,19 +341,20 @@ object fmResultView: TfmResultView
   object Panel1: TPanel
     Left = 0
     Top = 29
-    Width = 240
+    Width = 372
     Height = 620
     Align = alLeft
     TabOrder = 2
     object cxGrid2: TcxGrid
       Left = 1
       Top = 1
-      Width = 238
+      Width = 370
       Height = 618
       Align = alClient
       BorderWidth = 1
       TabOrder = 0
       LookAndFeel.SkinName = 'Black'
+      ExplicitWidth = 238
       object gridPicture: TcxGridDBTableView
         Navigator.Buttons.CustomButtons = <>
         Navigator.Buttons.First.Visible = False
@@ -424,6 +428,16 @@ object fmResultView: TfmResultView
         end
         object gridPictureCENTER_ID: TcxGridDBColumn
           DataBinding.FieldName = 'CENTER_ID'
+          Visible = False
+        end
+        object gridPictureCHECK_CNT: TcxGridDBColumn
+          Caption = #54217#44032
+          DataBinding.FieldName = 'CHECK_CNT'
+          HeaderAlignmentHorz = taCenter
+          Width = 60
+        end
+        object gridPictureSUB_CENTER: TcxGridDBColumn
+          DataBinding.FieldName = 'SUB_CENTER'
           Visible = False
         end
       end
@@ -635,7 +649,6 @@ object fmResultView: TfmResultView
       ShowHint = True
       TabOrder = 3
       OnClick = btnPrintClick
-      ExplicitLeft = 510
     end
     object lcbSubCenter: TcxLookupComboBox
       AlignWithMargins = True

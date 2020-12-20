@@ -160,6 +160,8 @@ type
     CHECK_COMMENTS_SEL_RAND: TUniStoredProc;
     ds_CHECK_COMMENTS_SEL_RAND: TDataSource;
     CHECK_COMMENTS_SEL_RANDCHECK_COMMENTS: TWideMemoField;
+    gridPictureCHECK_CNT: TcxGridDBColumn;
+    gridPictureSUB_CENTER: TcxGridDBColumn;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnPrintClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -344,24 +346,26 @@ end;
 
 procedure TfmResultView.btnPrintClick(Sender: TObject);
 var
-  MyPage2, MyPage3, MyPage4, MyPage5, MyPage6, MyPage7, MyPage8: TfrxPage;
-  cnt, ridx : Integer;
-  s_id, rid1, rid2, rid3, rid4, rid5, rid6, rid7 : integer;
-  picture : TfrxPictureView;
-  i, page_cnt, s : Integer;
+  cnt, p_cnt, s_id, i, s : Integer;
   is_first: boolean;
 begin
   dxMemData2.Close;
   dxMemData2.Open;
-  page_cnt := 0;
+  p_cnt := 0;
   is_first := true;
   cnt := gridStudent.Controller.SelectedRecordCount;
   Gauge1.MaxValue := cnt;
   PanelMsg.Visible := True;
+  PanelMsg.Refresh;
   for i := 0 to cnt - 1 do begin
     s := gridStudent.Controller.SelectedRecords[i].RecordIndex;
     gridStudent.DataController.FocusedRecordIndex := s;
     s_id := gridStudentID.EditValue;
+    if VarIsNull(gridStudent.DataController.GetValue(s, gridStudentTOTAL_VAL.Index)) then begin
+      ShowMessage('평가 데이터가 없습니다.');
+      Continue;
+    end;
+    Inc(p_cnt);
     CreateReportData(s_id);
     frxReport1.PrepareReport(is_first);
     is_first := False;
@@ -369,8 +373,9 @@ begin
     Application.ProcessMessages;
   end;
   PanelMsg.Visible := False;
-  frxReport1.ShowPreparedReport;
-  
+  if p_cnt > 0 then
+    frxReport1.ShowPreparedReport;
+
 end;
 
 procedure TfmResultView.CreateReportData(id : Integer);
