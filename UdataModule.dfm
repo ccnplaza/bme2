@@ -10,7 +10,7 @@ object DataModule1: TDataModule1
   object UniConnection1: TUniConnection
     ProviderName = 'InterBase'
     Port = 3050
-    Database = 'd:\fb_data\businessmartialart\new_bme.fdb'
+    Database = 'd:\fb_data\businessmartialart\bme2.fdb'
     SpecificOptions.Strings = (
       'InterBase.UseUnicode=True')
     Username = 'sysdba'
@@ -407,8 +407,8 @@ object DataModule1: TDataModule1
         ParamType = ptInput
       end
       item
-        DataType = ftLargeint
-        Name = 'UID'
+        DataType = ftInteger
+        Name = 'PICTURE_ID'
         ParamType = ptInput
       end
       item
@@ -423,7 +423,27 @@ object DataModule1: TDataModule1
       end
       item
         DataType = ftInteger
+        Name = 'CHECK_VAL1'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'CHECK_VAL2'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'TOTAL_VAL'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
         Name = 'CENTER_ID'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'SUB_CENTER_ID'
         ParamType = ptInput
       end>
     CommandStoredProcName = 'STUDENT_IMAGE_INS'
@@ -791,7 +811,7 @@ object DataModule1: TDataModule1
   object ANALYSE_RESULT_DEL: TUniStoredProc
     StoredProcName = 'ANALYSE_RESULT_DEL'
     Connection = UniConnection1
-    Left = 168
+    Left = 264
     Top = 304
     ParamData = <
       item
@@ -804,7 +824,7 @@ object DataModule1: TDataModule1
   object ANALYSE_RESULT_IU: TUniStoredProc
     StoredProcName = 'ANALYSE_RESULT_IU'
     Connection = UniConnection1
-    Left = 168
+    Left = 264
     Top = 352
     ParamData = <
       item
@@ -857,7 +877,7 @@ object DataModule1: TDataModule1
   object ANALYSE_RESULT_SEL: TUniStoredProc
     StoredProcName = 'ANALYSE_RESULT_SEL'
     Connection = UniConnection1
-    Left = 168
+    Left = 264
     Top = 400
     ParamData = <
       item
@@ -950,13 +970,13 @@ object DataModule1: TDataModule1
   end
   object ds_ANALYSE_RESULT_SEL: TDataSource
     DataSet = ANALYSE_RESULT_SEL
-    Left = 168
+    Left = 264
     Top = 448
   end
   object PRACTICE_LIST_SEL: TUniStoredProc
     StoredProcName = 'PRACTICE_LIST_SEL'
     Connection = UniConnection1
-    Left = 312
+    Left = 408
     Top = 304
     ParamData = <
       item
@@ -1014,7 +1034,7 @@ object DataModule1: TDataModule1
   end
   object ds_PRACTICE_LIST_SEL: TDataSource
     DataSet = PRACTICE_LIST_SEL
-    Left = 312
+    Left = 408
     Top = 352
   end
   object UniTransaction1: TUniTransaction
@@ -1025,7 +1045,7 @@ object DataModule1: TDataModule1
   object PRACTICE_LIST_SEL_ALL: TUniStoredProc
     StoredProcName = 'PRACTICE_LIST_SEL_ALL'
     Connection = UniConnection1
-    Left = 312
+    Left = 408
     Top = 400
     ParamData = <
       item
@@ -1076,14 +1096,14 @@ object DataModule1: TDataModule1
   end
   object ds_PRACTICE_LIST_SEL_ALL: TDataSource
     DataSet = PRACTICE_LIST_SEL_ALL
-    Left = 312
+    Left = 408
     Top = 448
   end
   object PRACTICE_CONTENTS_DEL: TUniStoredProc
     StoredProcName = 'PRACTICE_CONTENTS_DEL'
     Connection = UniConnection1
-    Left = 480
-    Top = 296
+    Left = 552
+    Top = 320
     ParamData = <
       item
         DataType = ftInteger
@@ -1095,8 +1115,8 @@ object DataModule1: TDataModule1
   object PRACTICE_CONTENTS_INS: TUniStoredProc
     StoredProcName = 'PRACTICE_CONTENTS_INS'
     Connection = UniConnection1
-    Left = 480
-    Top = 344
+    Left = 552
+    Top = 368
     ParamData = <
       item
         DataType = ftInteger
@@ -1130,8 +1150,8 @@ object DataModule1: TDataModule1
   object PRACTICE_CONTENTS_UPD: TUniStoredProc
     StoredProcName = 'PRACTICE_CONTENTS_UPD'
     Connection = UniConnection1
-    Left = 480
-    Top = 392
+    Left = 552
+    Top = 416
     ParamData = <
       item
         DataType = ftInteger
@@ -1170,8 +1190,8 @@ object DataModule1: TDataModule1
   object PRACTICE_CONTENTS_SEL: TUniStoredProc
     StoredProcName = 'PRACTICE_CONTENTS_SEL'
     Connection = UniConnection1
-    Left = 480
-    Top = 440
+    Left = 552
+    Top = 464
     ParamData = <
       item
         DataType = ftInteger
@@ -1225,14 +1245,14 @@ object DataModule1: TDataModule1
   end
   object ds_PRACTICE_CONTENTS_SEL: TDataSource
     DataSet = PRACTICE_CONTENTS_SEL
-    Left = 480
-    Top = 488
+    Left = 552
+    Top = 512
   end
   object PRACTICE_CONTENTS_SEL_IMAGE: TUniStoredProc
     StoredProcName = 'PRACTICE_CONTENTS_SEL_IMAGE'
     Connection = UniConnection1
-    Left = 656
-    Top = 296
+    Left = 712
+    Top = 304
     ParamData = <
       item
         DataType = ftInteger
@@ -1252,13 +1272,13 @@ object DataModule1: TDataModule1
   end
   object ds_PRACTICE_CONTENTS_SEL_IMAGE: TDataSource
     DataSet = PRACTICE_CONTENTS_SEL_IMAGE
-    Left = 656
-    Top = 344
+    Left = 712
+    Top = 352
   end
   object PRACTICE_TITLE_DEL: TUniStoredProc
     StoredProcName = 'PRACTICE_TITLE_DEL'
     Connection = UniConnection1
-    Left = 832
+    Left = 864
     Top = 384
     ParamData = <
       item
@@ -1271,7 +1291,7 @@ object DataModule1: TDataModule1
   object PRACTICE_TITLE_INS: TUniStoredProc
     StoredProcName = 'PRACTICE_TITLE_INS'
     Connection = UniConnection1
-    Left = 832
+    Left = 864
     Top = 432
     ParamData = <
       item
@@ -1290,7 +1310,7 @@ object DataModule1: TDataModule1
   object PRACTICE_TITLE_UPD: TUniStoredProc
     StoredProcName = 'PRACTICE_TITLE_UPD'
     Connection = UniConnection1
-    Left = 832
+    Left = 864
     Top = 480
     ParamData = <
       item
@@ -1314,7 +1334,7 @@ object DataModule1: TDataModule1
   object PRACTICE_TITLE_SEL: TUniStoredProc
     StoredProcName = 'PRACTICE_TITLE_SEL'
     Connection = UniConnection1
-    Left = 832
+    Left = 864
     Top = 528
     ParamData = <
       item
@@ -1373,13 +1393,13 @@ object DataModule1: TDataModule1
   end
   object ds_PRACTICE_TITLE_SEL: TDataSource
     DataSet = PRACTICE_TITLE_SEL
-    Left = 832
+    Left = 864
     Top = 576
   end
   object STUDENT_IMAGE_UPD_ID: TUniStoredProc
     StoredProcName = 'STUDENT_IMAGE_UPD_ID'
     Connection = UniConnection1
-    Left = 160
+    Left = 256
     Top = 608
     ParamData = <
       item
@@ -1414,11 +1434,6 @@ object DataModule1: TDataModule1
     ParamData = <
       item
         DataType = ftInteger
-        Name = 'C_ID'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
         Name = 'ID'
         ParamType = ptOutput
       end
@@ -1433,27 +1448,10 @@ object DataModule1: TDataModule1
         ParamType = ptOutput
       end
       item
-        DataType = ftWideString
-        Name = 'ITEM_NAME'
-        ParamType = ptOutput
-        Size = 20
-      end
-      item
-        DataType = ftWideString
-        Name = 'COMMENT_NAME'
-        ParamType = ptOutput
-        Size = 30
-      end
-      item
         DataType = ftWideMemo
         Name = 'CHECK_COMMENTS'
         ParamType = ptOutput
         Value = ''
-      end
-      item
-        DataType = ftInteger
-        Name = 'CENTER_ID'
-        ParamType = ptOutput
       end>
     CommandStoredProcName = 'CHECK_COMMENTS_SEL'
     object CHECK_COMMENTS_SELID: TIntegerField
@@ -1468,19 +1466,9 @@ object DataModule1: TDataModule1
       Alignment = taCenter
       FieldName = 'VALUE_ID'
     end
-    object CHECK_COMMENTS_SELCOMMENT_NAME: TWideStringField
-      FieldName = 'COMMENT_NAME'
-      Size = 30
-    end
     object CHECK_COMMENTS_SELCHECK_COMMENTS: TWideMemoField
       FieldName = 'CHECK_COMMENTS'
       BlobType = ftWideMemo
-    end
-    object CHECK_COMMENTS_SELITEM_NAME: TWideStringField
-      FieldName = 'ITEM_NAME'
-    end
-    object CHECK_COMMENTS_SELCENTER_ID: TIntegerField
-      FieldName = 'CENTER_ID'
     end
   end
   object ds_CHECK_COMMENTS_SEL: TDataSource
@@ -1773,7 +1761,7 @@ object DataModule1: TDataModule1
   object IMAGE_UPLOADER_INS: TUniStoredProc
     StoredProcName = 'IMAGE_UPLOADER_INS'
     Connection = UniConnection1
-    Left = 160
+    Left = 256
     Top = 656
     ParamData = <
       item
@@ -2029,6 +2017,21 @@ object DataModule1: TDataModule1
         ParamType = ptOutput
       end
       item
+        DataType = ftInteger
+        Name = 'CHECK_VAL1'
+        ParamType = ptOutput
+      end
+      item
+        DataType = ftInteger
+        Name = 'CHECK_VAL2'
+        ParamType = ptOutput
+      end
+      item
+        DataType = ftInteger
+        Name = 'TOTAL_VAL'
+        ParamType = ptOutput
+      end
+      item
         DataType = ftBlob
         Name = 'DRAW1'
         ParamType = ptOutput
@@ -2037,18 +2040,6 @@ object DataModule1: TDataModule1
       item
         DataType = ftBlob
         Name = 'DRAW2'
-        ParamType = ptOutput
-        Value = ''
-      end
-      item
-        DataType = ftBlob
-        Name = 'DRAW3'
-        ParamType = ptOutput
-        Value = ''
-      end
-      item
-        DataType = ftBlob
-        Name = 'DRAW4'
         ParamType = ptOutput
         Value = ''
       end
@@ -2068,18 +2059,6 @@ object DataModule1: TDataModule1
         Name = 'IMAGE2'
         ParamType = ptOutput
         Value = ''
-      end
-      item
-        DataType = ftBlob
-        Name = 'IMAGE3'
-        ParamType = ptOutput
-        Value = ''
-      end
-      item
-        DataType = ftBlob
-        Name = 'IMAGE4'
-        ParamType = ptOutput
-        Value = ''
       end>
     CommandStoredProcName = 'STUDENT_IMAGE_SEL_IMAGE'
     object STUDENT_IMAGE_SEL_IMAGEID: TIntegerField
@@ -2097,12 +2076,6 @@ object DataModule1: TDataModule1
     object STUDENT_IMAGE_SEL_IMAGEDRAW2: TBlobField
       FieldName = 'DRAW2'
     end
-    object STUDENT_IMAGE_SEL_IMAGEDRAW3: TBlobField
-      FieldName = 'DRAW3'
-    end
-    object STUDENT_IMAGE_SEL_IMAGEDRAW4: TBlobField
-      FieldName = 'DRAW4'
-    end
     object STUDENT_IMAGE_SEL_IMAGECHASOO: TSmallintField
       FieldName = 'CHASOO'
     end
@@ -2112,11 +2085,14 @@ object DataModule1: TDataModule1
     object STUDENT_IMAGE_SEL_IMAGEIMAGE2: TBlobField
       FieldName = 'IMAGE2'
     end
-    object STUDENT_IMAGE_SEL_IMAGEIMAGE3: TBlobField
-      FieldName = 'IMAGE3'
+    object STUDENT_IMAGE_SEL_IMAGECHECK_VAL1: TIntegerField
+      FieldName = 'CHECK_VAL1'
     end
-    object STUDENT_IMAGE_SEL_IMAGEIMAGE4: TBlobField
-      FieldName = 'IMAGE4'
+    object STUDENT_IMAGE_SEL_IMAGECHECK_VAL2: TIntegerField
+      FieldName = 'CHECK_VAL2'
+    end
+    object STUDENT_IMAGE_SEL_IMAGETOTAL_VAL: TIntegerField
+      FieldName = 'TOTAL_VAL'
     end
   end
   object STUDENT_IMAGE_SEL_BYDATE: TUniStoredProc
@@ -2126,8 +2102,8 @@ object DataModule1: TDataModule1
     Top = 360
     ParamData = <
       item
-        DataType = ftDate
-        Name = 'PIC_DATE'
+        DataType = ftInteger
+        Name = 'DATE_ID'
         ParamType = ptInput
       end
       item
@@ -2209,8 +2185,8 @@ object DataModule1: TDataModule1
     Connection = UniConnection1
     SpecificOptions.Strings = (
       'InterBase.FetchAll=True')
-    Left = 656
-    Top = 408
+    Left = 712
+    Top = 416
     ParamData = <
       item
         DataType = ftInteger
@@ -2326,14 +2302,14 @@ object DataModule1: TDataModule1
   end
   object ds_STUDENT_IMAGE_SEL_ALL: TDataSource
     DataSet = STUDENT_IMAGE_SEL_ALL
-    Left = 656
-    Top = 456
+    Left = 712
+    Top = 464
   end
   object STUDENT_IMAGE_UPD_BLOB: TUniStoredProc
     StoredProcName = 'STUDENT_IMAGE_UPD_BLOB'
     Connection = UniConnection1
-    Left = 656
-    Top = 512
+    Left = 712
+    Top = 520
     ParamData = <
       item
         DataType = ftInteger
@@ -2416,7 +2392,7 @@ object DataModule1: TDataModule1
   object ANALYSE_RESULT_CHECK: TUniStoredProc
     StoredProcName = 'ANALYSE_RESULT_CHECK'
     Connection = UniConnection1
-    Left = 168
+    Left = 264
     Top = 496
     ParamData = <
       item
@@ -2545,13 +2521,13 @@ object DataModule1: TDataModule1
   end
   object ds_ANALYSE_RESULT_CHECK: TDataSource
     DataSet = ANALYSE_RESULT_CHECK
-    Left = 168
+    Left = 264
     Top = 544
   end
   object ANALYSE_RESULT_INS: TUniStoredProc
     StoredProcName = 'ANALYSE_RESULT_INS'
     Connection = UniConnection1
-    Left = 280
+    Left = 392
     Top = 576
     ParamData = <
       item
@@ -2609,12 +2585,22 @@ object DataModule1: TDataModule1
   object CHECK_PIC_DATE_EXISTS: TUniStoredProc
     StoredProcName = 'CHECK_PIC_DATE_EXISTS'
     Connection = UniConnection1
-    Left = 480
-    Top = 560
+    Left = 552
+    Top = 584
     ParamData = <
       item
         DataType = ftDate
         Name = 'P_DATE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'CENTER_ID'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'SUB_CENTER_ID'
         ParamType = ptInput
       end
       item
@@ -2629,8 +2615,8 @@ object DataModule1: TDataModule1
   end
   object ds_CHECK_PIC_DATE_EXISTS: TDataSource
     DataSet = CHECK_PIC_DATE_EXISTS
-    Left = 480
-    Top = 608
+    Left = 552
+    Top = 632
   end
   object REG_SCHOOL_DEL: TUniStoredProc
     StoredProcName = 'REG_SCHOOL_DEL'
@@ -2819,8 +2805,8 @@ object DataModule1: TDataModule1
   object REG_SCHOOL_SEL_DEFAULT: TUniStoredProc
     StoredProcName = 'REG_SCHOOL_SEL_DEFAULT'
     Connection = UniConnection1
-    Left = 56
-    Top = 424
+    Left = 96
+    Top = 432
     ParamData = <
       item
         DataType = ftInteger
@@ -2839,14 +2825,14 @@ object DataModule1: TDataModule1
   end
   object ds_REG_SCHOOL_SEL_DEFAULT: TDataSource
     DataSet = REG_SCHOOL_SEL_DEFAULT
-    Left = 56
-    Top = 472
+    Left = 96
+    Top = 480
   end
   object STUDENT_IMAGE_EXISTS: TUniStoredProc
     StoredProcName = 'STUDENT_IMAGE_EXISTS'
     Connection = UniConnection1
-    Left = 656
-    Top = 576
+    Left = 712
+    Top = 584
     ParamData = <
       item
         DataType = ftInteger
@@ -2880,13 +2866,13 @@ object DataModule1: TDataModule1
   end
   object ds_STUDENT_IMAGE_EXISTS: TDataSource
     DataSet = STUDENT_IMAGE_EXISTS
-    Left = 656
-    Top = 624
+    Left = 712
+    Top = 632
   end
   object ANALYSE_RESULT_UPD_DONE: TUniStoredProc
     StoredProcName = 'ANALYSE_RESULT_UPD_DONE'
     Connection = UniConnection1
-    Left = 280
+    Left = 392
     Top = 624
     ParamData = <
       item
@@ -2900,5 +2886,59 @@ object DataModule1: TDataModule1
         ParamType = ptInput
       end>
     CommandStoredProcName = 'ANALYSE_RESULT_UPD_DONE'
+  end
+  object REG_SCHOOL_SEL_LOOK: TUniStoredProc
+    StoredProcName = 'REG_SCHOOL_SEL_LOOK'
+    Connection = UniConnection1
+    Left = 96
+    Top = 528
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'USER_ID'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptOutput
+      end
+      item
+        DataType = ftWideString
+        Name = 'S_NAME'
+        ParamType = ptOutput
+        Size = 50
+      end>
+    CommandStoredProcName = 'REG_SCHOOL_SEL_LOOK'
+    object REG_SCHOOL_SEL_LOOKID: TIntegerField
+      FieldName = 'ID'
+    end
+    object REG_SCHOOL_SEL_LOOKS_NAME: TWideStringField
+      FieldName = 'S_NAME'
+      Size = 50
+    end
+  end
+  object ds_REG_SCHOOL_SEL_LOOK: TDataSource
+    DataSet = REG_SCHOOL_SEL_LOOK
+    Left = 96
+    Top = 576
+  end
+  object REG_SCHOOL_UPD_DEFAULT: TUniStoredProc
+    StoredProcName = 'REG_SCHOOL_UPD_DEFAULT'
+    Connection = UniConnection1
+    Left = 96
+    Top = 632
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'U_ID'
+        ParamType = ptInput
+      end>
+    CommandStoredProcName = 'REG_SCHOOL_UPD_DEFAULT'
   end
 end

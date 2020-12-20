@@ -16,18 +16,10 @@ object fmAnalyzer: TfmAnalyzer
   OldCreateOrder = False
   Visible = True
   OnClose = FormClose
+  OnResize = FormResize
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 17
-  object Splitter1: TSplitter
-    Left = 500
-    Top = 29
-    Width = 4
-    Height = 632
-    Color = clGrayText
-    ParentColor = False
-    ExplicitLeft = 497
-  end
   object PanelTop: TPanel
     Left = 0
     Top = 0
@@ -46,9 +38,41 @@ object fmAnalyzer: TfmAnalyzer
       Layout = tlCenter
       ExplicitHeight = 17
     end
-    object btnRefresh: TcxButton
+    object Label6: TLabel
       AlignWithMargins = True
       Left = 140
+      Top = 4
+      Width = 85
+      Height = 21
+      Align = alLeft
+      Caption = #45800#52404'('#46020#51109#47749'):'
+      Layout = tlCenter
+      ExplicitHeight = 17
+    end
+    object Label1: TLabel
+      Left = 512
+      Top = 6
+      Width = 33
+      Height = 17
+      Caption = #51204#47732':'
+    end
+    object Label2: TLabel
+      Left = 618
+      Top = 6
+      Width = 33
+      Height = 17
+      Caption = #52769#47732':'
+    end
+    object Label4: TLabel
+      Left = 732
+      Top = 6
+      Width = 33
+      Height = 17
+      Caption = #51333#54633':'
+    end
+    object btnRefresh: TcxButton
+      AlignWithMargins = True
+      Left = 378
       Top = 2
       Width = 67
       Height = 25
@@ -111,1384 +135,923 @@ object fmAnalyzer: TfmAnalyzer
       Value = 2000
       Width = 68
     end
+    object lcbSubCenter: TcxLookupComboBox
+      AlignWithMargins = True
+      Left = 229
+      Top = 2
+      Margins.Left = 1
+      Margins.Top = 1
+      Margins.Right = 1
+      Margins.Bottom = 1
+      Align = alLeft
+      Properties.DropDownListStyle = lsFixedList
+      Properties.KeyFieldNames = 'ID'
+      Properties.ListColumns = <
+        item
+          FieldName = 'S_NAME'
+        end>
+      Properties.ListOptions.ShowHeader = False
+      Properties.ListSource = DataModule1.ds_REG_SCHOOL_SEL_LOOK
+      Properties.OnCloseUp = lcbSubCenterPropertiesCloseUp
+      TabOrder = 2
+      Width = 145
+    end
+    object CHECK_VAL1: TcxImageComboBox
+      Left = 548
+      Top = 2
+      EditValue = 0
+      ParentFont = False
+      Properties.Alignment.Horz = taCenter
+      Properties.ImmediatePost = True
+      Properties.Items = <
+        item
+          Description = 'N/A'
+          ImageIndex = 0
+          Value = 0
+        end
+        item
+          Description = 'A'
+          Value = 1
+        end
+        item
+          Description = 'B'
+          Value = 2
+        end
+        item
+          Description = 'C'
+          Value = 3
+        end>
+      Properties.PopupAlignment = taCenter
+      Style.BorderStyle = ebsFlat
+      Style.Font.Charset = DEFAULT_CHARSET
+      Style.Font.Color = clWindowText
+      Style.Font.Height = -15
+      Style.Font.Name = #45208#45588#44256#46357
+      Style.Font.Style = [fsBold]
+      Style.LookAndFeel.NativeStyle = False
+      Style.LookAndFeel.SkinName = 'Black'
+      Style.IsFontAssigned = True
+      StyleDisabled.LookAndFeel.NativeStyle = False
+      StyleDisabled.LookAndFeel.SkinName = 'Black'
+      StyleFocused.LookAndFeel.NativeStyle = False
+      StyleFocused.LookAndFeel.SkinName = 'Black'
+      StyleHot.LookAndFeel.NativeStyle = False
+      StyleHot.LookAndFeel.SkinName = 'Black'
+      TabOrder = 3
+      Width = 60
+    end
+    object CHECK_VAL2: TcxImageComboBox
+      Left = 655
+      Top = 2
+      EditValue = 0
+      ParentFont = False
+      Properties.Alignment.Horz = taCenter
+      Properties.ImmediatePost = True
+      Properties.Items = <
+        item
+          Description = 'N/A'
+          ImageIndex = 0
+          Value = 0
+        end
+        item
+          Description = 'A'
+          Value = 1
+        end
+        item
+          Description = 'B'
+          Value = 2
+        end
+        item
+          Description = 'C'
+          Value = 3
+        end>
+      Properties.PopupAlignment = taCenter
+      Style.BorderStyle = ebsFlat
+      Style.Font.Charset = DEFAULT_CHARSET
+      Style.Font.Color = clWindowText
+      Style.Font.Height = -15
+      Style.Font.Name = #45208#45588#44256#46357
+      Style.Font.Style = [fsBold]
+      Style.LookAndFeel.NativeStyle = False
+      Style.LookAndFeel.SkinName = 'Black'
+      Style.IsFontAssigned = True
+      StyleDisabled.LookAndFeel.NativeStyle = False
+      StyleDisabled.LookAndFeel.SkinName = 'Black'
+      StyleFocused.LookAndFeel.NativeStyle = False
+      StyleFocused.LookAndFeel.SkinName = 'Black'
+      StyleHot.LookAndFeel.NativeStyle = False
+      StyleHot.LookAndFeel.SkinName = 'Black'
+      TabOrder = 4
+      Width = 60
+    end
+    object TOTAL_VAL: TcxImageComboBox
+      Left = 769
+      Top = 2
+      EditValue = 0
+      ParentFont = False
+      Properties.Alignment.Horz = taCenter
+      Properties.ImmediatePost = True
+      Properties.Items = <
+        item
+          Description = 'N/A'
+          ImageIndex = 0
+          Value = 0
+        end
+        item
+          Description = 'A+'
+          Value = 1
+        end
+        item
+          Description = 'A'
+          Value = 2
+        end
+        item
+          Description = 'B+'
+          Value = 3
+        end
+        item
+          Description = 'B'
+          Value = 4
+        end
+        item
+          Description = 'C'
+          Value = 5
+        end>
+      Properties.PopupAlignment = taCenter
+      Properties.ReadOnly = False
+      Style.BorderStyle = ebsFlat
+      Style.Font.Charset = DEFAULT_CHARSET
+      Style.Font.Color = clWindowText
+      Style.Font.Height = -15
+      Style.Font.Name = #45208#45588#44256#46357
+      Style.Font.Style = [fsBold]
+      Style.HotTrack = False
+      Style.LookAndFeel.NativeStyle = False
+      Style.LookAndFeel.SkinName = 'Black'
+      Style.IsFontAssigned = True
+      StyleDisabled.BorderColor = clWindowFrame
+      StyleDisabled.Color = clWhite
+      StyleDisabled.LookAndFeel.NativeStyle = False
+      StyleDisabled.LookAndFeel.SkinName = 'Black'
+      StyleDisabled.TextColor = clBlack
+      StyleFocused.LookAndFeel.NativeStyle = False
+      StyleFocused.LookAndFeel.SkinName = 'Black'
+      StyleHot.LookAndFeel.NativeStyle = False
+      StyleHot.LookAndFeel.SkinName = 'Black'
+      TabOrder = 5
+      Width = 60
+    end
+    object btnSaveResult: TcxButton
+      AlignWithMargins = True
+      Left = 830
+      Top = 1
+      Width = 97
+      Height = 26
+      Margins.Left = 1
+      Margins.Top = 1
+      Margins.Right = 1
+      Margins.Bottom = 1
+      Caption = #44208#44284#51200#51109
+      LookAndFeel.SkinName = 'DevExpressStyle'
+      OptionsImage.Glyph.Data = {
+        36040000424D3604000000000000360000002800000010000000100000000100
+        2000000000000004000000000000000000000000000000000000000000040000
+        00130000001E0000002000000020000000200000002100000021000000210000
+        002200000022000000220000002300000021000000160000000500000012281E
+        16CB37291EFF463A31FFBD8150FFBC7E4DFFB97949FFB67646FFB37141FFB06D
+        3DFFAD6839FFAB6535FF42362EFF3D3026FF241A13CE00000015000000193B2C
+        21FF685C54FF483C34FFE8C28BFFE7C088FFE6BD85FFE5BB81FFE4B87CFFE3B5
+        79FFE2B276FFE2B273FF443931FF51433AFF34261DFF0000001E000000183E2F
+        24FF6C6057FF4A3F37FFD9B27DFFD8B07BFFD7AE77FFD7AB74FFD6A970FFD5A6
+        6DFFD4A56AFFD4A268FF473B33FF5B4F47FF37291EFF0000001D000000164031
+        26FF6F645CFF4C4038FFFFFFFFFFF7F1EBFFF7F0EBFFF7F0EBFFF7EFEBFFF6EF
+        EAFFF6EFEAFFF6EFE9FF463B34FF5D5249FF3A2C21FF0000001B000000144434
+        29FF73675FFF4F443CFFFFFFFFFFF8F2EDFFF8F1EDFFF7F1EDFFF7F0EDFFF8F1
+        EBFFF7F0EBFFF7F0ECFF4A4037FF5F534BFF3D2E23FF00000019000000124637
+        2CFF776B63FF50453DFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFF4E433BFF61544CFF403126FF0000001700000010493A
+        2FFF796E66FF50453DFF61564EFF60564EFF60554DFF5F544CFF5E544CFF5E53
+        4BFF5D524AFF5C5249FF5B5149FF61554DFF433429FF000000150000000E4C3D
+        32FF7C706AFF674E44FF654B42FF634A41FF61473FFF5F473EFF5C443CFF5B43
+        3AFF594139FF584038FF573F37FF63574FFF46362DFF000000130000000D4E3F
+        35FF80746DFF6B5248FFF4ECE6FFE9DACEFFE9D8CDFFE9D8CCFFE9D8CBFFE8D7
+        CAFFF3EAE2FFF3E9E2FF5A4139FF645850FF483A2FFF000000110000000B5142
+        36FF827770FF70564DFFF9F5F2FFF4EAE4FFF1E6DEFFEBDCD2FFE9D9CCFF4E41
+        3DFF60534CFFF3EAE3FF5D453CFF655951FF4C3D32FF0000000F000000095344
+        39FF857A73FF755A50FFFAF6F3FFF5EDE7FFF4EDE6FFF4ECE6FFEFE2DAFF493D
+        38FF5A4D46FFF4EBE4FF60483FFF655A52FF4F3F34FF0000000D000000075545
+        3AFF887D76FF795E54FFFAF6F4FFF5EEE9FFF5EDE7FFF4EDE7FFF4ECE6FF473A
+        36FF483D36FFE9D9CDFF644C43FF675A52FF514137FF0000000B000000065748
+        3DFF898079FF7C6157FFFAF7F4FFFAF6F4FFFAF6F4FFFAF6F3FFFAF6F3FFFAF5
+        F2FFF5EEE9FFF4ECE6FF695046FF82776FFF534439FF00000009000000034235
+        2EC058493DFF7F645AFF998178FF967F75FF937A72FF8E786DFF8B7269FF866E
+        64FF82695FFF7D645BFF6E544AFF56453BFF3F332BC200000005000000000000
+        0002000000030000000400000004000000040000000400000005000000050000
+        0005000000050000000500000006000000060000000400000001}
+      TabOrder = 6
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = #45208#45588#44256#46357
+      Font.Style = [fsBold]
+      ParentFont = False
+      OnClick = btnSaveResultClick
+    end
   end
   object PanelLeft: TPanel
     Left = 0
     Top = 29
-    Width = 500
+    Width = 265
     Height = 632
     Align = alLeft
-    BevelOuter = bvNone
     TabOrder = 1
-    object Panel2: TPanel
-      Left = 0
-      Top = 0
-      Width = 233
-      Height = 632
-      Align = alLeft
+    object Panel22: TPanel
+      Left = 1
+      Top = 1
+      Width = 263
+      Height = 25
+      Align = alTop
+      Alignment = taLeftJustify
+      BevelOuter = bvNone
+      Caption = '  '#52524#50689#45936#51060#53552
       TabOrder = 0
-      object cxGrid2: TcxGrid
-        Left = 1
-        Top = 26
-        Width = 231
-        Height = 605
-        Align = alClient
-        BorderStyle = cxcbsNone
-        TabOrder = 0
-        LookAndFeel.SkinName = 'Black'
-        object gridCheckData: TcxGridDBTableView
-          Navigator.Buttons.CustomButtons = <>
-          Navigator.Buttons.First.Visible = False
-          Navigator.Buttons.PriorPage.Visible = False
-          Navigator.Buttons.Prior.Visible = False
-          Navigator.Buttons.Next.Visible = False
-          Navigator.Buttons.NextPage.Visible = False
-          Navigator.Buttons.Last.Visible = False
-          Navigator.Buttons.Insert.Visible = False
-          Navigator.Buttons.Append.Visible = False
-          Navigator.Buttons.Delete.Visible = False
-          Navigator.Buttons.Edit.Visible = False
-          Navigator.Buttons.Post.Visible = False
-          Navigator.Buttons.Cancel.Visible = False
-          Navigator.Buttons.Refresh.Visible = False
-          Navigator.Buttons.SaveBookmark.Visible = False
-          Navigator.Buttons.GotoBookmark.Visible = False
-          Navigator.Buttons.Filter.Visible = False
-          Navigator.InfoPanel.DisplayMask = '[RecordIndex] / [RecordCount]'
-          Navigator.InfoPanel.Visible = True
-          Navigator.Visible = True
-          OnCellClick = gridCheckDataCellClick
-          DataController.DataSource = DataModule1.ds_CHECK_DATA_SEL
-          DataController.Summary.DefaultGroupSummaryItems = <>
-          DataController.Summary.FooterSummaryItems = <>
-          DataController.Summary.SummaryGroups = <>
-          OptionsCustomize.ColumnsQuickCustomization = True
-          OptionsData.CancelOnExit = False
-          OptionsData.Deleting = False
-          OptionsData.DeletingConfirmation = False
-          OptionsData.Editing = False
-          OptionsData.Inserting = False
-          OptionsSelection.CellSelect = False
-          OptionsSelection.HideFocusRectOnExit = False
-          OptionsSelection.InvertSelect = False
-          OptionsSelection.UnselectFocusedRecordOnExit = False
-          OptionsView.ScrollBars = ssVertical
-          OptionsView.ColumnAutoWidth = True
-          OptionsView.GroupByBox = False
-          OptionsView.Indicator = True
-          OptionsView.RowSeparatorColor = clRed
-          object gridCheckDataID: TcxGridDBColumn
-            DataBinding.FieldName = 'ID'
-            Visible = False
-            Width = 40
-          end
-          object gridCheckDataCHASOO: TcxGridDBColumn
-            Caption = #52264#49688
-            DataBinding.FieldName = 'CHASOO'
-            HeaderAlignmentHorz = taCenter
-            Width = 40
-          end
-          object gridCheckDataCHECK_DATE: TcxGridDBColumn
-            Caption = #54217#44032#51068#51088
-            DataBinding.FieldName = 'CHECK_DATE'
-            HeaderAlignmentHorz = taCenter
-            Width = 90
-          end
-          object gridCheckDataMAN_COUNT: TcxGridDBColumn
-            Caption = #51064#50896
-            DataBinding.FieldName = 'MAN_COUNT'
-            HeaderAlignmentHorz = taCenter
-            HeaderGlyphAlignmentHorz = taCenter
-            Width = 45
-          end
-          object gridCheckDataCHECK_CNT: TcxGridDBColumn
-            Caption = #54217#44032
-            DataBinding.FieldName = 'CHECK_CNT'
-            HeaderAlignmentHorz = taCenter
-            Width = 45
-          end
-          object gridCheckDataCENTER_ID: TcxGridDBColumn
-            DataBinding.FieldName = 'CENTER_ID'
-            Visible = False
-          end
+      ExplicitLeft = -3
+      ExplicitTop = -6
+    end
+    object cxGrid1: TcxGrid
+      Left = 1
+      Top = 26
+      Width = 263
+      Height = 247
+      Align = alTop
+      BorderWidth = 1
+      TabOrder = 1
+      LookAndFeel.SkinName = 'Black'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 265
+      object gridPicture: TcxGridDBTableView
+        Navigator.Buttons.CustomButtons = <>
+        Navigator.Buttons.First.Visible = False
+        Navigator.Buttons.PriorPage.Visible = False
+        Navigator.Buttons.Prior.Visible = False
+        Navigator.Buttons.Next.Visible = False
+        Navigator.Buttons.NextPage.Visible = False
+        Navigator.Buttons.Last.Visible = False
+        Navigator.Buttons.Insert.Visible = False
+        Navigator.Buttons.Append.Visible = False
+        Navigator.Buttons.Delete.Visible = False
+        Navigator.Buttons.Edit.Visible = False
+        Navigator.Buttons.Post.Visible = False
+        Navigator.Buttons.Cancel.Visible = False
+        Navigator.Buttons.Refresh.Visible = False
+        Navigator.Buttons.SaveBookmark.Visible = False
+        Navigator.Buttons.GotoBookmark.Visible = False
+        Navigator.Buttons.Filter.Visible = False
+        Navigator.InfoPanel.DisplayMask = '[RecordIndex] / [RecordCount]'
+        Navigator.InfoPanel.Visible = True
+        Navigator.Visible = True
+        OnCellClick = gridPictureCellClick
+        DataController.DataSource = DataModule1.ds_PICTURE_DATE_SEL
+        DataController.Summary.DefaultGroupSummaryItems = <>
+        DataController.Summary.FooterSummaryItems = <>
+        DataController.Summary.SummaryGroups = <>
+        OptionsCustomize.ColumnsQuickCustomization = True
+        OptionsData.CancelOnExit = False
+        OptionsData.Deleting = False
+        OptionsData.DeletingConfirmation = False
+        OptionsData.Editing = False
+        OptionsData.Inserting = False
+        OptionsSelection.CellSelect = False
+        OptionsSelection.HideFocusRectOnExit = False
+        OptionsSelection.InvertSelect = False
+        OptionsSelection.UnselectFocusedRecordOnExit = False
+        OptionsView.ScrollBars = ssVertical
+        OptionsView.ColumnAutoWidth = True
+        OptionsView.GroupByBox = False
+        OptionsView.Indicator = True
+        OptionsView.RowSeparatorColor = clRed
+        object gridPictureID: TcxGridDBColumn
+          DataBinding.FieldName = 'ID'
+          Visible = False
+          Width = 50
         end
-        object cxGridLevel1: TcxGridLevel
-          GridView = gridCheckData
+        object gridPictureColumn1: TcxGridDBColumn
+          Caption = 'No'
+          PropertiesClassName = 'TcxTextEditProperties'
+          Properties.Alignment.Horz = taCenter
+          OnGetDataText = gridPictureColumn1GetDataText
+          HeaderAlignmentHorz = taCenter
+          Width = 37
+        end
+        object gridPicturePIC_DATE: TcxGridDBColumn
+          DataBinding.FieldName = 'PIC_DATE'
+          HeaderAlignmentHorz = taCenter
+          Width = 115
+        end
+        object gridPictureMAN_CNT: TcxGridDBColumn
+          Caption = #51064#50896
+          DataBinding.FieldName = 'MAN_CNT'
+          HeaderAlignmentHorz = taCenter
+          Width = 47
+        end
+        object gridPicturePIC_CNT: TcxGridDBColumn
+          Caption = #52524#50689
+          DataBinding.FieldName = 'PIC_CNT'
+          HeaderAlignmentHorz = taCenter
+          Width = 48
+        end
+        object gridPictureCENTER_ID: TcxGridDBColumn
+          DataBinding.FieldName = 'CENTER_ID'
+          Visible = False
         end
       end
-      object Panel22: TPanel
-        Left = 1
-        Top = 1
-        Width = 231
-        Height = 25
-        Align = alTop
-        Alignment = taLeftJustify
-        BevelOuter = bvNone
-        TabOrder = 1
-        object Label1: TLabel
-          Left = 13
-          Top = 4
-          Width = 80
-          Height = 17
-          Caption = '['#54217#44032#45936#51060#53552']'
-        end
-        object btnAdd: TcxButton
-          Left = 137
-          Top = 1
-          Width = 30
-          Height = 23
-          Hint = #52628#44032
-          LookAndFeel.NativeStyle = False
-          LookAndFeel.SkinName = 'DevExpressStyle'
-          OptionsImage.Glyph.Data = {
-            36040000424D3604000000000000360000002800000010000000100000000100
-            2000000000000004000000000000000000000000000000000000000000000000
-            00000000000000000000101010462121218D2F2F2FC7383838F0383838F02F2F
-            2FC72121218D1010104600000000000000000000000000000000000000000000
-            0000080808202121218C393939F33C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
-            3CFF3C3C3CFF393939F32121218C080808200000000000000000000000000808
-            0820262626A33C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
-            3CFF3C3C3CFF3C3C3CFF3C3C3CFF262626A30808082000000000000000002121
-            218C3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
-            3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF2121218C00000000101010463939
-            39F33C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF00000000000000003C3C
-            3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF393939F3101010462121218D3C3C
-            3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF00000000000000003C3C
-            3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF2121218D2F2F2FC73C3C
-            3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF00000000000000003C3C
-            3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF2F2F2FC7383838F03C3C
-            3CFF3C3C3CFF3C3C3CFF00000000000000000000000000000000000000000000
-            000000000000000000003C3C3CFF3C3C3CFF3C3C3CFF383838F0383838F03C3C
-            3CFF3C3C3CFF3C3C3CFF00000000000000000000000000000000000000000000
-            000000000000000000003C3C3CFF3C3C3CFF3C3C3CFF383838F02F2F2FC73C3C
-            3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF00000000000000003C3C
-            3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF2F2F2FC72121218D3C3C
-            3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF00000000000000003C3C
-            3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF2121218D101010463939
-            39F33C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF00000000000000003C3C
-            3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF393939F310101046000000002121
-            218C3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
-            3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF2121218C00000000000000000808
-            0820262626A33C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
-            3CFF3C3C3CFF3C3C3CFF3C3C3CFF262626A30808082000000000000000000000
-            0000080808202121218C393939F33C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
-            3CFF3C3C3CFF393939F32121218C080808200000000000000000000000000000
-            00000000000000000000101010462121218D2F2F2FC7383838F0383838F02F2F
-            2FC72121218D1010104600000000000000000000000000000000}
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 0
-          OnClick = btnAddClick
-        end
-        object btnDel: TcxButton
-          Left = 168
-          Top = 1
-          Width = 30
-          Height = 23
-          Hint = #49325#51228
-          LookAndFeel.NativeStyle = False
-          LookAndFeel.SkinName = 'DevExpressStyle'
-          OptionsImage.Glyph.Data = {
-            36040000424D3604000000000000360000002800000010000000100000000100
-            2000000000000004000000000000000000000000000000000000000000000000
-            00000000000000000000101010462121218D2F2F2FC7383838F0383838F02F2F
-            2FC72121218D1010104600000000000000000000000000000000000000000000
-            0000080808202121218C393939F33C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
-            3CFF3C3C3CFF393939F32121218C080808200000000000000000000000000808
-            0820262626A33C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
-            3CFF3C3C3CFF3C3C3CFF3C3C3CFF262626A30808082000000000000000002121
-            218C3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
-            3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF2121218C00000000101010463939
-            39F33C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
-            3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF393939F3101010462121218D3C3C
-            3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
-            3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF2121218D2F2F2FC73C3C
-            3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
-            3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF2F2F2FC7383838F03C3C
-            3CFF3C3C3CFF3C3C3CFF00000000000000000000000000000000000000000000
-            000000000000000000003C3C3CFF3C3C3CFF3C3C3CFF383838F0383838F03C3C
-            3CFF3C3C3CFF3C3C3CFF00000000000000000000000000000000000000000000
-            000000000000000000003C3C3CFF3C3C3CFF3C3C3CFF383838F02F2F2FC73C3C
-            3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
-            3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF2F2F2FC72121218D3C3C
-            3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
-            3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF2121218D101010463939
-            39F33C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
-            3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF393939F310101046000000002121
-            218C3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
-            3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF2121218C00000000000000000808
-            0820262626A33C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
-            3CFF3C3C3CFF3C3C3CFF3C3C3CFF262626A30808082000000000000000000000
-            0000080808202121218C393939F33C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
-            3CFF3C3C3CFF393939F32121218C080808200000000000000000000000000000
-            00000000000000000000101010462121218D2F2F2FC7383838F0383838F02F2F
-            2FC72121218D1010104600000000000000000000000000000000}
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 1
-          OnClick = btnDelClick
-        end
-        object btnEdit: TcxButton
-          Left = 201
-          Top = 1
-          Width = 30
-          Height = 23
-          Hint = #49688#51221
-          LookAndFeel.NativeStyle = False
-          LookAndFeel.SkinName = 'DevExpressStyle'
-          OptionsImage.Glyph.Data = {
-            36040000424D3604000000000000360000002800000010000000100000000100
-            2000000000000004000000000000000000000000000000000000000000000000
-            0000000000000000000000000000000000000000000000000000000000000000
-            0000000000000000000000000000000000000000000000000000000000000000
-            0000000000003C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
-            3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF0000000000000000000000000000
-            0000000000003C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
-            3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF0000000000000000000000000000
-            0000000000003C3C3CFF3C3C3CFF000000000000000000000000000000000000
-            000000000000000000003C3C3CFF3C3C3CFF0000000000000000000000000000
-            0000000000003C3C3CFF2D2D2DBE00000000000000001E1E1E7E3C3C3CFF0000
-            000000000000000000003C3C3CFF3C3C3CFF0000000000000000000000000000
-            0000000000002D2D2DBE040404101E1E1E811E1E1E81000000001E1E1E7E0000
-            000000000000000000003C3C3CFF3C3C3CFF0000000000000000000000000000
-            000000000000040404101E1E1E813C3C3CFF3C3C3CFF1E1E1E81000000000000
-            000000000000000000003C3C3CFF3C3C3CFF0000000000000000000000000000
-            0000000000001E1E1E813C3C3CFF3C3C3CFF3C3C3CFF1E1E1E7E000000000000
-            000000000000000000003C3C3CFF3C3C3CFF0000000000000000000000000000
-            00001E1E1E813C3C3CFF3C3C3CFF3C3C3CFF1E1E1E7E00000000000000000000
-            000000000000000000003C3C3CFF3C3C3CFF0000000000000000000000001A1A
-            1A703C3C3CFF3C3C3CFF3C3C3CFF1E1E1E7E0000000000000000000000000000
-            000000000000000000003C3C3CFF3C3C3CFF00000000000000001A1A1A703C3C
-            3CFF3C3C3CFF3C3C3CFF1E1E1E7E040404100000000000000000000000003C3C
-            3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF0000000000000000353535E03C3C
-            3CFF3C3C3CFF1A1A1A700A0A0A2C000000000000000000000000000000003C3C
-            3CFF3C3C3CFF3C3C3CFF3C3C3CFF1E1E1E7E00000000000000001A1A1A703535
-            35E01A1A1A700A0A0A2C3C3C3CFF000000000000000000000000000000003C3C
-            3CFF3C3C3CFF3C3C3CFF1E1E1E7E000000000000000000000000000000000000
-            0000000000003C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
-            3CFF3C3C3CFF1E1E1E7E00000000000000000000000000000000000000000000
-            0000000000003C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
-            3CFF1E1E1E7E0000000000000000000000000000000000000000000000000000
-            0000000000000000000000000000000000000000000000000000000000000000
-            0000000000000000000000000000000000000000000000000000}
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 2
-          OnClick = btnEditClick
-        end
+      object cxGrid1Level1: TcxGridLevel
+        GridView = gridPicture
       end
     end
-    object Panel4: TPanel
-      Left = 233
-      Top = 0
-      Width = 267
-      Height = 632
+    object cxGrid3: TcxGrid
+      Left = 1
+      Top = 298
+      Width = 263
+      Height = 333
+      Hint = '|'#54617#49373#47532#49828#53944#47484' '#53364#47533#54616#47732' '#51200#51109#46108' '#49324#51652#46308#51060' '#50040#45348#51068#52285#50640' '#45208#53440#45225#45768#45796'.'
       Align = alClient
-      Caption = 'Panel4'
-      TabOrder = 1
-      object Panel21: TPanel
-        Left = 1
-        Top = 1
-        Width = 265
-        Height = 25
-        Align = alTop
-        Alignment = taLeftJustify
-        BevelOuter = bvNone
-        Caption = '  ['#54217#44032' '#45824#49345' '#54924#50896']'
-        TabOrder = 0
-        object btnMakeList: TcxButton
-          AlignWithMargins = True
-          Left = 130
-          Top = 1
-          Width = 102
-          Height = 23
-          Margins.Top = 1
-          Margins.Bottom = 1
-          Align = alRight
-          Caption = #54217#44032#47749#45800#49373#49457
-          LookAndFeel.SkinName = 'DevExpressStyle'
-          TabOrder = 0
-          OnClick = btnMakeListClick
+      BorderWidth = 1
+      TabOrder = 2
+      LookAndFeel.NativeStyle = False
+      LookAndFeel.SkinName = 'Black'
+      ExplicitLeft = 0
+      ExplicitTop = 273
+      ExplicitWidth = 265
+      ExplicitHeight = 358
+      object gridStudent: TcxGridDBTableView
+        Navigator.Buttons.CustomButtons = <>
+        Navigator.Buttons.First.Visible = False
+        Navigator.Buttons.PriorPage.Visible = False
+        Navigator.Buttons.Prior.Visible = False
+        Navigator.Buttons.Next.Visible = False
+        Navigator.Buttons.NextPage.Visible = False
+        Navigator.Buttons.Last.Visible = False
+        Navigator.Buttons.Insert.Visible = False
+        Navigator.Buttons.Append.Visible = False
+        Navigator.Buttons.Delete.Visible = False
+        Navigator.Buttons.Edit.Visible = False
+        Navigator.Buttons.Post.Visible = False
+        Navigator.Buttons.Cancel.Visible = False
+        Navigator.Buttons.Refresh.Visible = False
+        Navigator.Buttons.SaveBookmark.Visible = False
+        Navigator.Buttons.GotoBookmark.Visible = False
+        Navigator.Buttons.Filter.Visible = False
+        Navigator.InfoPanel.DisplayMask = '[RecordIndex]/[RecordCount]'
+        Navigator.InfoPanel.Visible = True
+        Navigator.Visible = True
+        OnFocusedRecordChanged = gridStudentFocusedRecordChanged
+        DataController.DataSource = DataModule1.ds_STUDENT_IMAGE_SEL_BYDATE
+        DataController.Summary.DefaultGroupSummaryItems = <>
+        DataController.Summary.FooterSummaryItems = <>
+        DataController.Summary.SummaryGroups = <>
+        OptionsBehavior.CellHints = True
+        OptionsCustomize.ColumnsQuickCustomization = True
+        OptionsData.CancelOnExit = False
+        OptionsData.Deleting = False
+        OptionsData.DeletingConfirmation = False
+        OptionsData.Editing = False
+        OptionsData.Inserting = False
+        OptionsSelection.CellSelect = False
+        OptionsSelection.UnselectFocusedRecordOnExit = False
+        OptionsView.ScrollBars = ssVertical
+        OptionsView.ColumnAutoWidth = True
+        OptionsView.FooterAutoHeight = True
+        OptionsView.GroupByBox = False
+        OptionsView.GroupByHeaderLayout = ghlHorizontal
+        OptionsView.GroupSummaryLayout = gslAlignWithColumns
+        OptionsView.Indicator = True
+        object gridStudentID: TcxGridDBColumn
+          Caption = 'No'
+          DataBinding.FieldName = 'ID'
+          Visible = False
+          Width = 42
         end
-        object cxButton7: TcxButton
-          Left = 235
-          Top = 0
-          Width = 30
-          Height = 25
-          Hint = #49325#51228
-          Align = alRight
-          LookAndFeel.NativeStyle = False
-          LookAndFeel.SkinName = 'DevExpressStyle'
-          OptionsImage.Glyph.Data = {
-            36040000424D3604000000000000360000002800000010000000100000000100
-            2000000000000004000000000000000000000000000000000000000000000000
-            00000000000000000000101010462121218D2F2F2FC7383838F0383838F02F2F
-            2FC72121218D1010104600000000000000000000000000000000000000000000
-            0000080808202121218C393939F33C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
-            3CFF3C3C3CFF393939F32121218C080808200000000000000000000000000808
-            0820262626A33C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
-            3CFF3C3C3CFF3C3C3CFF3C3C3CFF262626A30808082000000000000000002121
-            218C3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
-            3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF2121218C00000000101010463939
-            39F33C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
-            3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF393939F3101010462121218D3C3C
-            3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
-            3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF2121218D2F2F2FC73C3C
-            3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
-            3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF2F2F2FC7383838F03C3C
-            3CFF3C3C3CFF3C3C3CFF00000000000000000000000000000000000000000000
-            000000000000000000003C3C3CFF3C3C3CFF3C3C3CFF383838F0383838F03C3C
-            3CFF3C3C3CFF3C3C3CFF00000000000000000000000000000000000000000000
-            000000000000000000003C3C3CFF3C3C3CFF3C3C3CFF383838F02F2F2FC73C3C
-            3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
-            3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF2F2F2FC72121218D3C3C
-            3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
-            3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF2121218D101010463939
-            39F33C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
-            3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF393939F310101046000000002121
-            218C3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
-            3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF2121218C00000000000000000808
-            0820262626A33C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
-            3CFF3C3C3CFF3C3C3CFF3C3C3CFF262626A30808082000000000000000000000
-            0000080808202121218C393939F33C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
-            3CFF3C3C3CFF393939F32121218C080808200000000000000000000000000000
-            00000000000000000000101010462121218D2F2F2FC7383838F0383838F02F2F
-            2FC72121218D1010104600000000000000000000000000000000}
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 1
-          OnClick = cxButton7Click
+        object gridStudentSTUDENT_ID: TcxGridDBColumn
+          DataBinding.FieldName = 'STUDENT_ID'
+          Visible = False
+          Width = 74
         end
-      end
-      object cxGrid4: TcxGrid
-        Left = 1
-        Top = 26
-        Width = 265
-        Height = 605
-        Hint = '|'#54617#49373#47532#49828#53944#47484' '#53364#47533#54616#47732' '#51200#51109#46108' '#49324#51652#46308#51060' '#50040#45348#51068#52285#50640' '#45208#53440#45225#45768#45796'.'
-        Align = alClient
-        BevelInner = bvNone
-        BevelOuter = bvNone
-        TabOrder = 1
-        LookAndFeel.NativeStyle = False
-        LookAndFeel.SkinName = 'Black'
-        object gridStudent: TcxGridDBTableView
-          Navigator.Buttons.CustomButtons = <>
-          Navigator.Buttons.First.Visible = False
-          Navigator.Buttons.PriorPage.Visible = False
-          Navigator.Buttons.Prior.Visible = False
-          Navigator.Buttons.Next.Visible = False
-          Navigator.Buttons.NextPage.Visible = False
-          Navigator.Buttons.Last.Visible = False
-          Navigator.Buttons.Insert.Visible = False
-          Navigator.Buttons.Append.Visible = False
-          Navigator.Buttons.Delete.Visible = False
-          Navigator.Buttons.Edit.Visible = False
-          Navigator.Buttons.Post.Visible = False
-          Navigator.Buttons.Cancel.Visible = False
-          Navigator.Buttons.Refresh.Visible = False
-          Navigator.Buttons.SaveBookmark.Visible = False
-          Navigator.Buttons.GotoBookmark.Visible = False
-          Navigator.Buttons.Filter.Visible = False
-          Navigator.InfoPanel.DisplayMask = '[RecordIndex]/[RecordCount]'
-          Navigator.InfoPanel.Visible = True
-          Navigator.Visible = True
-          OnFocusedRecordChanged = gridStudentFocusedRecordChanged
-          DataController.DataSource = DataModule1.ds_ANALYSE_RESULT_CHECK
-          DataController.Summary.DefaultGroupSummaryItems = <>
-          DataController.Summary.FooterSummaryItems = <>
-          DataController.Summary.SummaryGroups = <>
-          OptionsBehavior.CellHints = True
-          OptionsCustomize.ColumnsQuickCustomization = True
-          OptionsData.CancelOnExit = False
-          OptionsData.Deleting = False
-          OptionsData.DeletingConfirmation = False
-          OptionsData.Editing = False
-          OptionsData.Inserting = False
-          OptionsSelection.CellSelect = False
-          OptionsSelection.UnselectFocusedRecordOnExit = False
-          OptionsView.ScrollBars = ssVertical
-          OptionsView.ColumnAutoWidth = True
-          OptionsView.FooterAutoHeight = True
-          OptionsView.GroupByBox = False
-          OptionsView.GroupByHeaderLayout = ghlHorizontal
-          OptionsView.GroupSummaryLayout = gslAlignWithColumns
-          OptionsView.Indicator = True
-          object gridStudentColumn1: TcxGridDBColumn
-            Caption = 'No'
-            PropertiesClassName = 'TcxTextEditProperties'
-            Properties.Alignment.Horz = taCenter
-            OnGetDataText = gridStudentColumn1GetDataText
-            HeaderAlignmentHorz = taCenter
-            Width = 35
-          end
-          object gridStudentID: TcxGridDBColumn
-            Caption = 'No'
-            DataBinding.FieldName = 'ID'
-            Visible = False
-            Width = 42
-          end
-          object gridStudentS_NAME: TcxGridDBColumn
-            Caption = #54924#50896#47749
-            DataBinding.FieldName = 'S_NAME'
-            Width = 86
-          end
-          object gridStudentS_SEX: TcxGridDBColumn
-            Caption = #49457#48324
-            DataBinding.FieldName = 'S_SEX'
-            PropertiesClassName = 'TcxImageComboBoxProperties'
-            Properties.Items = <
-              item
-                Description = #45224
-                ImageIndex = 0
-                Value = 0
-              end
-              item
-                Description = #50668
-                Value = 1
-              end>
-            HeaderAlignmentHorz = taCenter
-            Width = 35
-          end
-          object gridStudentS_AGE: TcxGridDBColumn
-            Caption = #45208#51060
-            DataBinding.FieldName = 'S_AGE'
-            HeaderAlignmentHorz = taCenter
-            Width = 35
-          end
-          object gridStudentCHECK_ID: TcxGridDBColumn
-            DataBinding.FieldName = 'CHECK_ID'
-            Visible = False
-          end
-          object gridStudentPICTURE_ID: TcxGridDBColumn
-            DataBinding.FieldName = 'PICTURE_ID'
-            Visible = False
-          end
-          object gridStudentCHECK_DONE: TcxGridDBColumn
-            Caption = #54217#44032
-            DataBinding.FieldName = 'CHECK_DONE'
-            PropertiesClassName = 'TcxImageComboBoxProperties'
-            Properties.Images = ImageList1
-            Properties.Items = <
-              item
-                ImageIndex = 6
-              end
-              item
-                Description = 'N'
-                ImageIndex = 6
-                Value = 0
-              end
-              item
-                Description = 'Y'
-                ImageIndex = 7
-                Value = 1
-              end>
-            Properties.ShowDescriptions = False
-            HeaderAlignmentHorz = taCenter
-            Width = 40
-          end
-          object gridStudentRESULT1: TcxGridDBColumn
-            DataBinding.FieldName = 'RESULT1'
-            Visible = False
-            VisibleForCustomization = False
-          end
-          object gridStudentRESULT2: TcxGridDBColumn
-            DataBinding.FieldName = 'RESULT2'
-            Visible = False
-            VisibleForCustomization = False
-          end
-          object gridStudentRESULT3: TcxGridDBColumn
-            DataBinding.FieldName = 'RESULT3'
-            Visible = False
-            VisibleForCustomization = False
-          end
-          object gridStudentRESULT4: TcxGridDBColumn
-            DataBinding.FieldName = 'RESULT4'
-            Visible = False
-            VisibleForCustomization = False
-          end
-          object gridStudentRESULT5: TcxGridDBColumn
-            DataBinding.FieldName = 'RESULT5'
-            Visible = False
-            VisibleForCustomization = False
-          end
-          object gridStudentRESULT6: TcxGridDBColumn
-            DataBinding.FieldName = 'RESULT6'
-            Visible = False
-            VisibleForCustomization = False
-          end
-          object gridStudentSTUDENT_ID: TcxGridDBColumn
-            DataBinding.FieldName = 'STUDENT_ID'
-            Visible = False
-          end
+        object gridStudentP_DATE: TcxGridDBColumn
+          DataBinding.FieldName = 'P_DATE'
+          Visible = False
+          Width = 73
         end
-        object cxGridLevel3: TcxGridLevel
-          GridView = gridStudent
+        object gridStudentColumn1: TcxGridDBColumn
+          Caption = 'No'
+          PropertiesClassName = 'TcxTextEditProperties'
+          Properties.Alignment.Horz = taCenter
+          OnGetDataText = gridStudentColumn1GetDataText
+          HeaderAlignmentHorz = taCenter
+          Width = 35
+        end
+        object gridStudentS_NAME: TcxGridDBColumn
+          Caption = #54924#50896#47749
+          DataBinding.FieldName = 'S_NAME'
+          Width = 86
+        end
+        object gridStudentS_SEX: TcxGridDBColumn
+          Caption = #49457#48324
+          DataBinding.FieldName = 'S_SEX'
+          PropertiesClassName = 'TcxImageComboBoxProperties'
+          Properties.Items = <
+            item
+              Description = #45224
+              ImageIndex = 0
+              Value = 0
+            end
+            item
+              Description = #50668
+              Value = 1
+            end>
+          HeaderAlignmentHorz = taCenter
+          Width = 35
+        end
+        object gridStudentS_AGE: TcxGridDBColumn
+          Caption = #45208#51060
+          DataBinding.FieldName = 'S_AGE'
+          HeaderAlignmentHorz = taCenter
+          Width = 35
+        end
+        object gridStudentCHASOO: TcxGridDBColumn
+          Caption = #52524#50689
+          DataBinding.FieldName = 'CHASOO'
+          PropertiesClassName = 'TcxImageComboBoxProperties'
+          Properties.Images = ImageList1
+          Properties.Items = <
+            item
+              Description = 'O'
+              ImageIndex = 5
+              Value = 1
+            end
+            item
+              Description = 'X'
+              ImageIndex = 4
+              Value = 0
+            end>
+          Properties.ShowDescriptions = False
+          HeaderAlignmentHorz = taCenter
+          Width = 35
         end
       end
+      object cxGridLevel2: TcxGridLevel
+        GridView = gridStudent
+      end
+    end
+    object Panel21: TPanel
+      Left = 1
+      Top = 273
+      Width = 263
+      Height = 25
+      Align = alTop
+      Alignment = taLeftJustify
+      BevelOuter = bvNone
+      Caption = '  '#54924#50896#45936#51060#53552
+      TabOrder = 3
+      ExplicitLeft = -3
+      ExplicitTop = 304
     end
   end
   object PanelRight: TPanel
-    Left = 504
+    Left = 265
     Top = 29
-    Width = 680
+    Width = 919
     Height = 632
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 2
-    object Panel3: TPanel
-      Left = 430
-      Top = 0
-      Width = 250
-      Height = 632
-      Align = alRight
-      TabOrder = 0
-      object cxGroupBox1: TcxGroupBox
-        Left = 1
-        Top = 1
-        Align = alClient
-        Caption = '['#51088#49464' '#54217#44032']'
-        Style.LookAndFeel.SkinName = 'Black'
-        StyleDisabled.LookAndFeel.SkinName = 'Black'
-        StyleFocused.LookAndFeel.SkinName = 'Black'
-        StyleHot.LookAndFeel.SkinName = 'Black'
-        TabOrder = 0
-        ExplicitHeight = 416
-        Height = 630
-        Width = 248
-        object FlowPanel1: TFlowPanel
-          Left = 3
-          Top = 19
-          Width = 242
-          Height = 601
-          Align = alClient
-          BevelOuter = bvNone
-          TabOrder = 0
-          ExplicitHeight = 374
-          object pItem1: TPanel
-            Left = 0
-            Top = 0
-            Width = 240
-            Height = 32
-            BevelOuter = bvNone
-            TabOrder = 0
-            object icbResult1: TcxImageComboBox
-              Left = 100
-              Top = 0
-              Align = alRight
-              EditValue = 3
-              ParentFont = False
-              Properties.Alignment.Horz = taCenter
-              Properties.Items = <
-                item
-                  Description = #51221#49345
-                  ImageIndex = 0
-                  Value = 3
-                end
-                item
-                  Description = #51068#51088#47785'-'#44221#48120
-                  Value = 4
-                end
-                item
-                  Description = #44144#48513#47785'-'#44221#48120
-                  Value = 5
-                end
-                item
-                  Description = #51068#51088#47785'-'#49900#44033
-                  Value = 6
-                end
-                item
-                  Description = #44144#48513#47785'-'#49900#44033
-                  Value = 7
-                end>
-              Properties.OnEditValueChanged = icbResult1PropertiesEditValueChanged
-              Style.Font.Charset = DEFAULT_CHARSET
-              Style.Font.Color = clBlue
-              Style.Font.Height = -15
-              Style.Font.Name = #45208#45588#44256#46357
-              Style.Font.Style = [fsBold]
-              Style.LookAndFeel.SkinName = 'DevExpressStyle'
-              Style.IsFontAssigned = True
-              StyleDisabled.LookAndFeel.SkinName = 'DevExpressStyle'
-              StyleFocused.LookAndFeel.SkinName = 'DevExpressStyle'
-              StyleHot.LookAndFeel.SkinName = 'DevExpressStyle'
-              TabOrder = 0
-              Width = 140
-            end
-            object btnItem1: TcxButton
-              AlignWithMargins = True
-              Left = 1
-              Top = 1
-              Width = 98
-              Height = 30
-              Margins.Left = 1
-              Margins.Top = 1
-              Margins.Right = 1
-              Margins.Bottom = 1
-              Align = alClient
-              Caption = #44221#52628
-              TabOrder = 1
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -15
-              Font.Name = #45208#45588#44256#46357
-              Font.Style = [fsBold]
-              ParentFont = False
-              OnClick = btnItem1Click
-            end
-          end
-          object pItem2: TPanel
-            Left = 0
-            Top = 32
-            Width = 240
-            Height = 32
-            BevelOuter = bvNone
-            TabOrder = 1
-            object icbResult2: TcxImageComboBox
-              Left = 100
-              Top = 0
-              Align = alRight
-              EditValue = 8
-              ParentFont = False
-              Properties.Alignment.Horz = taCenter
-              Properties.Items = <
-                item
-                  Description = #51221#49345
-                  ImageIndex = 0
-                  Value = 8
-                end
-                item
-                  Description = #44221#48120
-                  Value = 9
-                end
-                item
-                  Description = #49900#44033
-                  Value = 10
-                end>
-              Properties.OnEditValueChanged = icbResult2PropertiesEditValueChanged
-              Style.Font.Charset = DEFAULT_CHARSET
-              Style.Font.Color = clBlue
-              Style.Font.Height = -15
-              Style.Font.Name = #45208#45588#44256#46357
-              Style.Font.Style = [fsBold]
-              Style.LookAndFeel.SkinName = 'DevExpressStyle'
-              Style.IsFontAssigned = True
-              StyleDisabled.LookAndFeel.SkinName = 'DevExpressStyle'
-              StyleFocused.LookAndFeel.SkinName = 'DevExpressStyle'
-              StyleHot.LookAndFeel.SkinName = 'DevExpressStyle'
-              TabOrder = 0
-              Width = 140
-            end
-            object btnItem2: TcxButton
-              AlignWithMargins = True
-              Left = 1
-              Top = 1
-              Width = 98
-              Height = 30
-              Margins.Left = 1
-              Margins.Top = 1
-              Margins.Right = 1
-              Margins.Bottom = 1
-              Align = alClient
-              Caption = #52377#52628#51204#47564
-              TabOrder = 1
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -15
-              Font.Name = #45208#45588#44256#46357
-              Font.Style = [fsBold]
-              ParentFont = False
-              OnClick = btnItem1Click
-            end
-          end
-          object pItem3: TPanel
-            Left = 0
-            Top = 64
-            Width = 240
-            Height = 32
-            BevelOuter = bvNone
-            TabOrder = 2
-            object icbResult3: TcxImageComboBox
-              Left = 100
-              Top = 0
-              Align = alRight
-              EditValue = 11
-              ParentFont = False
-              Properties.Alignment.Horz = taCenter
-              Properties.Items = <
-                item
-                  Description = #51221#49345
-                  ImageIndex = 0
-                  Value = 11
-                end
-                item
-                  Description = #44221#48120
-                  Value = 12
-                end
-                item
-                  Description = #49900#44033
-                  Value = 13
-                end>
-              Properties.OnEditValueChanged = icbResult3PropertiesEditValueChanged
-              Style.Font.Charset = DEFAULT_CHARSET
-              Style.Font.Color = clBlue
-              Style.Font.Height = -15
-              Style.Font.Name = #45208#45588#44256#46357
-              Style.Font.Style = [fsBold]
-              Style.LookAndFeel.SkinName = 'DevExpressStyle'
-              Style.IsFontAssigned = True
-              StyleDisabled.LookAndFeel.SkinName = 'DevExpressStyle'
-              StyleFocused.LookAndFeel.SkinName = 'DevExpressStyle'
-              StyleHot.LookAndFeel.SkinName = 'DevExpressStyle'
-              TabOrder = 0
-              Width = 140
-            end
-            object btnItem3: TcxButton
-              AlignWithMargins = True
-              Left = 1
-              Top = 1
-              Width = 98
-              Height = 30
-              Margins.Left = 1
-              Margins.Top = 1
-              Margins.Right = 1
-              Margins.Bottom = 1
-              Align = alClient
-              Caption = #52377#52628#54980#47564
-              TabOrder = 1
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -15
-              Font.Name = #45208#45588#44256#46357
-              Font.Style = [fsBold]
-              ParentFont = False
-              OnClick = btnItem1Click
-            end
-          end
-          object pItem4: TPanel
-            Left = 0
-            Top = 96
-            Width = 240
-            Height = 32
-            BevelOuter = bvNone
-            TabOrder = 3
-            object icbResult4: TcxImageComboBox
-              Left = 100
-              Top = 0
-              Align = alRight
-              EditValue = 14
-              ParentFont = False
-              Properties.Alignment.Horz = taCenter
-              Properties.Items = <
-                item
-                  Description = #51221#49345
-                  ImageIndex = 0
-                  Value = 14
-                end
-                item
-                  Description = #44221#48120
-                  Value = 15
-                end
-                item
-                  Description = #49900#44033
-                  Value = 16
-                end>
-              Properties.OnEditValueChanged = icbResult4PropertiesEditValueChanged
-              Style.Font.Charset = DEFAULT_CHARSET
-              Style.Font.Color = clBlue
-              Style.Font.Height = -15
-              Style.Font.Name = #45208#45588#44256#46357
-              Style.Font.Style = [fsBold]
-              Style.LookAndFeel.SkinName = 'DevExpressStyle'
-              Style.IsFontAssigned = True
-              StyleDisabled.LookAndFeel.SkinName = 'DevExpressStyle'
-              StyleFocused.LookAndFeel.SkinName = 'DevExpressStyle'
-              StyleHot.LookAndFeel.SkinName = 'DevExpressStyle'
-              TabOrder = 0
-              Width = 140
-            end
-            object btnItem4: TcxButton
-              Tag = 1
-              AlignWithMargins = True
-              Left = 1
-              Top = 1
-              Width = 98
-              Height = 30
-              Margins.Left = 1
-              Margins.Top = 1
-              Margins.Right = 1
-              Margins.Bottom = 1
-              Align = alClient
-              Caption = #52377#52628#52769#47564
-              TabOrder = 1
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -15
-              Font.Name = #45208#45588#44256#46357
-              Font.Style = [fsBold]
-              ParentFont = False
-              OnClick = btnItem1Click
-            end
-          end
-          object pItem5: TPanel
-            Left = 0
-            Top = 128
-            Width = 240
-            Height = 32
-            BevelOuter = bvNone
-            TabOrder = 5
-            object icbResult5: TcxImageComboBox
-              Left = 100
-              Top = 0
-              Align = alRight
-              EditValue = 17
-              ParentFont = False
-              Properties.Alignment.Horz = taCenter
-              Properties.Items = <
-                item
-                  Description = #51221#49345
-                  ImageIndex = 0
-                  Value = 17
-                end
-                item
-                  Description = 'O'#45796#47532'-'#44221#48120
-                  Value = 18
-                end
-                item
-                  Description = 'O'#45796#47532'-'#49900#44033
-                  Value = 19
-                end
-                item
-                  Description = 'X'#45796#47532'-'#44221#48120
-                  Value = 20
-                end
-                item
-                  Description = 'X'#45796#47532'-'#49900#44033
-                  Value = 21
-                end>
-              Properties.OnEditValueChanged = icbResult5PropertiesEditValueChanged
-              Style.Font.Charset = DEFAULT_CHARSET
-              Style.Font.Color = clBlue
-              Style.Font.Height = -15
-              Style.Font.Name = #45208#45588#44256#46357
-              Style.Font.Style = [fsBold]
-              Style.LookAndFeel.SkinName = 'DevExpressStyle'
-              Style.IsFontAssigned = True
-              StyleDisabled.LookAndFeel.SkinName = 'DevExpressStyle'
-              StyleFocused.LookAndFeel.SkinName = 'DevExpressStyle'
-              StyleHot.LookAndFeel.SkinName = 'DevExpressStyle'
-              TabOrder = 0
-              Width = 140
-            end
-            object btnItem5: TcxButton
-              Tag = 2
-              AlignWithMargins = True
-              Left = 1
-              Top = 1
-              Width = 98
-              Height = 30
-              Margins.Left = 1
-              Margins.Top = 1
-              Margins.Right = 1
-              Margins.Bottom = 1
-              Align = alClient
-              Caption = 'O'#45796#47532'/X'#45796#47532
-              TabOrder = 1
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -15
-              Font.Name = #45208#45588#44256#46357
-              Font.Style = [fsBold]
-              ParentFont = False
-              OnClick = btnItem1Click
-            end
-          end
-          object pItem6: TPanel
-            Left = 0
-            Top = 160
-            Width = 240
-            Height = 32
-            BevelOuter = bvNone
-            TabOrder = 6
-            object icbResult6: TcxImageComboBox
-              Left = 100
-              Top = 0
-              Align = alRight
-              EditValue = 22
-              ParentFont = False
-              Properties.Alignment.Horz = taCenter
-              Properties.Items = <
-                item
-                  Description = #51221#49345
-                  ImageIndex = 0
-                  Value = 22
-                end
-                item
-                  Description = #50836#51313'-'#44221#48120
-                  Value = 23
-                end
-                item
-                  Description = #50836#51313'-'#49900#44033
-                  Value = 24
-                end
-                item
-                  Description = #54217#48156'-'#44221#48120
-                  Value = 25
-                end
-                item
-                  Description = #54217#48156'-'#49900#44033
-                  Value = 26
-                end>
-              Properties.OnChange = icbResult6PropertiesChange
-              Style.Font.Charset = DEFAULT_CHARSET
-              Style.Font.Color = clBlue
-              Style.Font.Height = -15
-              Style.Font.Name = #45208#45588#44256#46357
-              Style.Font.Style = [fsBold]
-              Style.LookAndFeel.SkinName = 'DevExpressStyle'
-              Style.IsFontAssigned = True
-              StyleDisabled.LookAndFeel.SkinName = 'DevExpressStyle'
-              StyleFocused.LookAndFeel.SkinName = 'DevExpressStyle'
-              StyleHot.LookAndFeel.SkinName = 'DevExpressStyle'
-              TabOrder = 0
-              Width = 140
-            end
-            object btnItem6: TcxButton
-              Tag = 3
-              AlignWithMargins = True
-              Left = 1
-              Top = 1
-              Width = 98
-              Height = 30
-              Margins.Left = 1
-              Margins.Top = 1
-              Margins.Right = 1
-              Margins.Bottom = 1
-              Align = alClient
-              Caption = #50836#51313'/'#54217#48156
-              TabOrder = 1
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -15
-              Font.Name = #45208#45588#44256#46357
-              Font.Style = [fsBold]
-              ParentFont = False
-              OnClick = btnItem1Click
-            end
-          end
-          object btnSave: TcxButton
-            AlignWithMargins = True
-            Left = 70
-            Top = 195
-            Width = 95
-            Height = 33
-            Margins.Left = 70
-            Caption = #51200#51109
-            LookAndFeel.SkinName = 'DevExpressStyle'
-            OptionsImage.Glyph.Data = {
-              36040000424D3604000000000000360000002800000010000000100000000100
-              2000000000000004000000000000000000000000000000000000000000040000
-              00130000001E0000002000000020000000200000002100000021000000210000
-              002200000022000000220000002300000021000000160000000500000012281E
-              16CB37291EFF463A31FFBD8150FFBC7E4DFFB97949FFB67646FFB37141FFB06D
-              3DFFAD6839FFAB6535FF42362EFF3D3026FF241A13CE00000015000000193B2C
-              21FF685C54FF483C34FFE8C28BFFE7C088FFE6BD85FFE5BB81FFE4B87CFFE3B5
-              79FFE2B276FFE2B273FF443931FF51433AFF34261DFF0000001E000000183E2F
-              24FF6C6057FF4A3F37FFD9B27DFFD8B07BFFD7AE77FFD7AB74FFD6A970FFD5A6
-              6DFFD4A56AFFD4A268FF473B33FF5B4F47FF37291EFF0000001D000000164031
-              26FF6F645CFF4C4038FFFFFFFFFFF7F1EBFFF7F0EBFFF7F0EBFFF7EFEBFFF6EF
-              EAFFF6EFEAFFF6EFE9FF463B34FF5D5249FF3A2C21FF0000001B000000144434
-              29FF73675FFF4F443CFFFFFFFFFFF8F2EDFFF8F1EDFFF7F1EDFFF7F0EDFFF8F1
-              EBFFF7F0EBFFF7F0ECFF4A4037FF5F534BFF3D2E23FF00000019000000124637
-              2CFF776B63FF50453DFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFF4E433BFF61544CFF403126FF0000001700000010493A
-              2FFF796E66FF50453DFF61564EFF60564EFF60554DFF5F544CFF5E544CFF5E53
-              4BFF5D524AFF5C5249FF5B5149FF61554DFF433429FF000000150000000E4C3D
-              32FF7C706AFF674E44FF654B42FF634A41FF61473FFF5F473EFF5C443CFF5B43
-              3AFF594139FF584038FF573F37FF63574FFF46362DFF000000130000000D4E3F
-              35FF80746DFF6B5248FFF4ECE6FFE9DACEFFE9D8CDFFE9D8CCFFE9D8CBFFE8D7
-              CAFFF3EAE2FFF3E9E2FF5A4139FF645850FF483A2FFF000000110000000B5142
-              36FF827770FF70564DFFF9F5F2FFF4EAE4FFF1E6DEFFEBDCD2FFE9D9CCFF4E41
-              3DFF60534CFFF3EAE3FF5D453CFF655951FF4C3D32FF0000000F000000095344
-              39FF857A73FF755A50FFFAF6F3FFF5EDE7FFF4EDE6FFF4ECE6FFEFE2DAFF493D
-              38FF5A4D46FFF4EBE4FF60483FFF655A52FF4F3F34FF0000000D000000075545
-              3AFF887D76FF795E54FFFAF6F4FFF5EEE9FFF5EDE7FFF4EDE7FFF4ECE6FF473A
-              36FF483D36FFE9D9CDFF644C43FF675A52FF514137FF0000000B000000065748
-              3DFF898079FF7C6157FFFAF7F4FFFAF6F4FFFAF6F4FFFAF6F3FFFAF6F3FFFAF5
-              F2FFF5EEE9FFF4ECE6FF695046FF82776FFF534439FF00000009000000034235
-              2EC058493DFF7F645AFF998178FF967F75FF937A72FF8E786DFF8B7269FF866E
-              64FF82695FFF7D645BFF6E544AFF56453BFF3F332BC200000005000000000000
-              0002000000030000000400000004000000040000000400000005000000050000
-              0005000000050000000500000006000000060000000400000001}
-            TabOrder = 4
-            OnClick = btnSaveClick
-          end
-          object chkAutoNext: TcxCheckBox
-            AlignWithMargins = True
-            Left = 70
-            Top = 234
-            Margins.Left = 70
-            Caption = #51088#46041#51060#46041
-            State = cbsChecked
-            Style.LookAndFeel.SkinName = 'DevExpressStyle'
-            StyleDisabled.LookAndFeel.SkinName = 'DevExpressStyle'
-            StyleFocused.LookAndFeel.SkinName = 'DevExpressStyle'
-            StyleHot.LookAndFeel.SkinName = 'DevExpressStyle'
-            TabOrder = 7
-            Width = 97
-          end
-        end
-      end
-    end
-    object Panel10: TPanel
+    ExplicitLeft = 539
+    ExplicitWidth = 645
+    object PanelImage: TPanel
       Left = 0
       Top = 0
-      Width = 430
+      Width = 919
       Height = 632
       Align = alClient
-      Caption = 'Panel10'
-      TabOrder = 1
-      object Panel6: TPanel
-        Left = 387
-        Top = 1
-        Width = 42
-        Height = 630
-        Align = alRight
-        BevelOuter = bvNone
-        TabOrder = 0
-        object cxButton10: TcxButton
-          Left = 5
-          Top = 66
-          Width = 31
-          Height = 25
-          Hint = #54868#47732#47582#52644
-          LookAndFeel.SkinName = 'UserSkin'
-          OptionsImage.Glyph.Data = {
-            36040000424D3604000000000000360000002800000010000000100000000100
-            200000000000000400000000000000000000000000000000000080584ABCB076
-            62FFAF7562FFB07461FFAF7460FFAF7460FFAF7360FFAE745FFFAE735FFFAE73
-            5FFFAE725EFFAD725EFF7D5143BD000000060000000000000000B57C69FFFAF5
-            F2FFF9F5F2FFF9F4F1FFF9F4F1FFF9F4F1FFF9F3F0FFF8F2F0FFF8F2EFFFF8F2
-            EEFFF8F2EEFFF7F1EDFFAE725FFF000000090000000000000000B77F6DFFFAF7
-            F4FF66564FFFF6EEEBFFBAAFA9FF66574FFFBAAEA9FFF5EEEAFFB9AFA9FF6656
-            4FFFBAAFA9FFF9F2EFFFAF7460FF000000080000000000000000B88270FFFBF8
-            F6FF695952FFF7EFECFF6A5952FFF7EFEBFF6A5952FFF7EFEBFF695A52FFF6EF
-            EBFF6A5952FFF9F5F1FFBE9182FF0000000F0000000D0000000ABA8572FFFCF9
-            F8FF6D5D55FFF7F1EDFF6C5C55FFF7F1ECFF6D5C55FFF7F0ECFF6D5D55FFF7F0
-            EBFF6C5C55FFF9F6F4FFCFB3AAFF0B14318029458CFA1D2F58A0BC8775FFFDFB
-            FAFF6F5E57FFF8F1EEFFBFB3AFFF6F5E57FFBEB3AEFFF7F1EDFFBEB3AEFF6F5E
-            57FFCAC2BEFFF2F1F0FF787590FF386BB2FF55AFF9FF325196F3BE8A78FFFDFC
-            FBFFF8F3F0FFF8F3EFFFF8F3EFFFF9F4F2FFF6F2F0FFF3F0EEFFEFECEBFFF1ED
-            ECFFEDEBE8FF8D9AB9FF4177BCFF64BCFFFF417AC3FF1726447EC08D7BFFFDFD
-            FCFFF8F4F0FFF9F3F0FFF9F6F4FFF1EDECFFBFA8A2FF9B756BFF8A5B4DFF9570
-            65FF867A85FF4C7FC1FF71C5FFFF4982C7FF142343810000000AC1907FFFFEFD
-            FDFFF9F4F2FFF9F6F3FFF2EFEDFFAC8A7FFFB79589FFE3D4CDFFF4ECE6FFE4D4
-            CDFFAF8E83FF837577FF5188C9FF1525457E0000000900000001C39281FFFEFE
-            FEFFF9F5F3FFF8F5F4FFC7B1AAFFBE9D93FFF1E4DDFFCDA384FFBD875CFFCFA7
-            86FFF0E3D8FFB29287FF84717AFF000000110000000100000000C49583FFFFFE
-            FEFFF9F6F4FFF6F4F3FFB28C80FFEDE2DEFFCC9B83FFD9955FFFF6B06DFFDBA2
-            69FFCDA382FFECE0DBFF7E584CE30000000A0000000000000000C59686FFFFFF
-            FFFFFAF7F4FFF5F4F3FFB3887AFFFAF6F5FFBC7E60FFF9D8C7FFFCDFCEFFF3AF
-            6CFFBE8961FFF9F4F0FF976D5EFA0000000A0000000000000000C79889FFFFFF
-            FFFFFFFFFFFFFAFAFAFFBD988CFFF0E7E3FFCB9A84FFDCAC96FFFCDFD0FFD894
-            5FFFCDA182FFEFE6E2FF8E695CE2000000080000000000000000947266BEC89A
-            8AFFC89A89FFDCC3BAFFC9ABA0FFCCAEA4FFF7EFEBFFCEA08AFFBC7C5CFFCEA2
-            8BFFF6EEE9FFC8AAA0FF513D3782000000040000000000000000000000000000
-            00010000000100000002020202098E7065C4CFB2A8FFF0E7E4FFFEFEFEFFEFE6
-            E4FFCEB2A8FF8A6B60C50202010A000000010000000000000000000000000000
-            00000000000000000000000000010202020856433D7898786DCFBA9185F99575
-            69CD54413B790202020900000001000000000000000000000000}
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 0
-          OnClick = cxButton10Click
-        end
-        object cxButton13: TcxButton
-          Left = 5
-          Top = 97
-          Width = 31
-          Height = 25
-          Hint = #54869#45824
-          LookAndFeel.SkinName = 'UserSkin'
-          OptionsImage.Glyph.Data = {
-            36040000424D3604000000000000360000002800000010000000100000000100
-            2000000000000004000000000000000000000000000000000000000000000000
-            0000000000000000000000000000000000000000000000000000000000000000
-            000000000000000000020000000E0B14308329448DFB1D2F58A5000000000000
-            0000000000000000000000000000000000000000000000000000000000000000
-            0000000000020000000E0D1937883C6DB2FF5BB1F9FF325196F4000000000000
-            00000000000100000004000000090000000D0000000F0000000F0000000C0000
-            00070000000E0F1D3C864A7CBCFF73C4FFFF467CC3FF17254485000000000000
-            0002000000081C130F465A3B31BC7C5043F87F5244FF7B4E42FA57382FC11E14
-            1059112142875686C2FF88D0FFFF5186C7FF142343880000000F000000010302
-            02104A332C91946B5DFDC6ACA1FFE4D1C6FFEDDDD2FFE2D0C5FFC0A599FF855C
-            50FF6E6B7EFF98D4F8FF5B8ECBFF152545840000000D00000002000000076046
-            3DA6B39288FFE9DAD0FFDAC0A1FFCBA87AFFC49B66FFCCAA7EFFDCC2A5FFE5D2
-            C6FF9A766AFF736A77FF162747850000000E00000002000000002A201D4AAE88
-            7CFFEFE6DFFFCDA67CFFCDA36EFFE4C693FFEFD9ABFFEAD2A8FFD4B284FFD0AE
-            88FFE7D5CAFF885F53FF25181464000000070000000000000000755B53ACDFCE
-            C9FFDDC1A8FFC99966FFE8C085FFE9C388FF8F4B24FFF1D8B1FFF3DDB8FFD6B3
-            8AFFDBBEA6FFC5ACA2FF5A3D33C10000000C0000000000000000A9877CE9F8F4
-            F2FFC79873FFDEAB77FFEFCDABFFF1D2B5FF8F4524FFEDC99EFFF1D4B2FFECCF
-            AEFFC89B77FFE6D6CEFF7C5448F10000000F0000000000000000C09C90FFFDFD
-            FCFFBE875FFFEDCFB9FF682612FF8A3F22FF8C4024FF8F4225FF924427FFF1CE
-            AEFFC08B67FFF1E6DFFF8B6154FF0000000F0000000000000000AF9186E6F9F5
-            F4FFC69474FFE8CDC3FFF9E8E4FFF6DED2FF8B3C23FFF1CEB6FFEBB78FFFE7BC
-            9AFFC59172FFEBDFD9FF866055EE0000000D0000000000000000876F68B0E7D9
-            D4FFE2C6B7FFC89072FFFAEFF2FFF9E7E4FF6A2213FFF1C8B2FFEBB08AFFCA8F
-            6FFFDCBBAAFFD3C0B7FF6B4F46BC00000009000000000000000026201E36CCAF
-            A7FAFBF8F7FFCF9F88FFC78E72FFE9CDC6FFEDC7B5FFDD9F79FFC88967FFCE9D
-            84FFF5EFEBFFB39387FF2A201D52000000040000000000000000000000036454
-            4F84D9C2BAFFFDFBFAFFE2C6B8FFCB977EFFC08163FFCB977DFFE0C4B4FFFAF6
-            F5FFC9B0A7FF6B564EA700000009000000010000000000000000000000000202
-            020762534D81CEB2A9FAEADDD8FFF9F5F4FFFFFFFFFFF9F5F4FFE9DCD7FFC8AC
-            A2FC62504B900404031000000002000000000000000000000000000000000000
-            000000000003241F1D3486726BADB69B91E6CCADA1FFB99C92E988736CB22822
-            1F3E000000060000000100000000000000000000000000000000}
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 1
-          OnClick = cxButton13Click
-        end
-        object cxButton14: TcxButton
-          Left = 5
-          Top = 123
-          Width = 31
-          Height = 25
-          Hint = #52629#49548
-          LookAndFeel.SkinName = 'UserSkin'
-          OptionsImage.Glyph.Data = {
-            36040000424D3604000000000000360000002800000010000000100000000100
-            2000000000000004000000000000000000000000000000000000000000000000
-            0000000000000000000000000000000000000000000000000000000000000000
-            000000000000000000020000000E0B14308329448DFB1D2F58A5000000000000
-            0000000000000000000000000000000000000000000000000000000000000000
-            0000000000020000000E0D1937883C6DB2FF5BB1F9FF325196F4000000000000
-            00000000000100000004000000090000000D0000000F0000000F0000000C0000
-            00070000000E0F1D3C864A7CBCFF73C4FFFF467CC3FF17254485000000000000
-            0002000000081C130F465A3B31BC7C5043F87F5244FF7B4E42FA57382FC11E14
-            1059112142875686C2FF88D0FFFF5186C7FF142343880000000F000000010302
-            02104A332C91946B5DFDC6ACA1FFE4D1C6FFEDDDD2FFE2D0C5FFC0A599FF855C
-            50FF6E6B7EFF98D4F8FF5B8ECBFF152545840000000D00000002000000076046
-            3DA6B39288FFE9DAD0FFDAC0A1FFCBA87AFFC49B66FFCCAA7EFFDCC2A5FFE5D2
-            C6FF9A766AFF736A77FF162747850000000E00000002000000002A201D4AAE88
-            7CFFEFE6DFFFCDA67CFFCDA36EFFE4C693FFEFD9ABFFE9D0A4FFD4B284FFD0AE
-            88FFE7D5CAFF885F53FF25181464000000070000000000000000755B53ACDFCE
-            C9FFDDC1A8FFC99966FFE8C085FFE9C388FFEDCB99FFF0D6ADFFF3DDB8FFD6B3
-            8AFFDBBEA6FFC5ACA2FF5A3D33C10000000C0000000000000000A9877CE9F8F4
-            F2FFC79873FFDEAB77FFEFCDABFFF4DBC3FFF2D6B6FFF1D4B0FFF4DDC1FFF0D9
-            BDFFC89B77FFE6D6CEFF7C5448F10000000F0000000000000000C09C90FFFDFD
-            FCFFBE875FFFEDCFB9FF682612FF8A3F22FF8C4024FF8F4225FF924427FFF1CE
-            AEFFC08B67FFF1E6DFFF8B6154FF0000000F0000000000000000AF9186E6F9F5
-            F4FFC69474FFE8CDC3FFF9E8E4FFF6DED2FFF3D4C2FFF0CBB2FFEBB78FFFE7BC
-            9AFFC59172FFEBDFD9FF866055EE0000000D0000000000000000876F68B0E7D9
-            D4FFE2C6B7FFC89072FFFAEFF2FFF9E7E4FFF6DDD3FFF1C8B2FFEBB08AFFCA8F
-            6FFFDCBBAAFFD3C0B7FF6B4F46BC00000009000000000000000026201E36CCAF
-            A7FAFBF8F7FFCF9F88FFC78E72FFE9CDC6FFEDC7B5FFDD9F79FFC88967FFCE9D
-            84FFF5EFEBFFB39387FF2A201D52000000040000000000000000000000036454
-            4F84D9C2BAFFFDFBFAFFE2C6B8FFCB977EFFC08163FFCB977DFFE0C4B4FFFAF6
-            F5FFC9B0A7FF6B564EA700000009000000010000000000000000000000000202
-            020762534D81CEB2A9FAEADDD8FFF9F5F4FFFFFFFFFFF9F5F4FFE9DCD7FFC8AC
-            A2FC62504B900404031000000002000000000000000000000000000000000000
-            000000000003241F1D3486726BADB69B91E6CCADA1FFB99C92E988736CB22822
-            1F3E000000060000000100000000000000000000000000000000}
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 2
-          OnClick = cxButton14Click
-        end
-        object btnGridMode: TcxButton
-          Left = 5
-          Top = 149
-          Width = 31
-          Height = 25
-          Hint = #44201#51088#48372#44592
-          LookAndFeel.SkinName = 'UserSkin'
-          OptionsImage.Glyph.Data = {
-            36040000424D3604000000000000360000002800000010000000100000000100
-            2000000000000004000000000000000000000000000000000000000000003333
-            33FF333333FF333333FF333333FF333333FF333333FF333333FF333333FF3333
-            33FF333333FF333333FF333333FF333333FF333333FF00000000000000003333
-            33FF333333FF333333FF333333FF333333FF333333FF333333FF333333FF3333
-            33FF333333FF333333FF333333FF333333FF333333FF00000000000000003333
-            33FF333333FF0000000000000000333333FF0000000000000000000000000000
-            0000333333FF0000000000000000333333FF333333FF00000000000000003333
-            33FF333333FF0000000000000000333333FF0000000000000000000000000000
-            0000333333FF0000000000000000333333FF333333FF00000000000000003333
-            33FF333333FF0000000000000000333333FF0000000000000000000000000000
-            0000333333FF0000000000000000333333FF333333FF00000000000000003333
-            33FF333333FF333333FF333333FF333333FF333333FF333333FF333333FF3333
-            33FF333333FF333333FF333333FF333333FF333333FF00000000000000003333
-            33FF333333FF0000000000000000333333FF0000000000000000000000000000
-            0000333333FF0000000000000000333333FF333333FF00000000000000003333
-            33FF333333FF0000000000000000333333FF0000000000000000000000000000
-            0000333333FF0000000000000000333333FF333333FF00000000000000003333
-            33FF333333FF0000000000000000333333FF0000000000000000000000000000
-            0000333333FF0000000000000000333333FF333333FF00000000000000003333
-            33FF333333FF0000000000000000333333FF0000000000000000000000000000
-            0000333333FF0000000000000000333333FF333333FF00000000000000003333
-            33FF333333FF333333FF333333FF333333FF333333FF333333FF333333FF3333
-            33FF333333FF333333FF333333FF333333FF333333FF00000000000000003333
-            33FF333333FF0000000000000000333333FF0000000000000000000000000000
-            0000333333FF0000000000000000333333FF333333FF00000000000000003333
-            33FF333333FF0000000000000000333333FF0000000000000000000000000000
-            0000333333FF0000000000000000333333FF333333FF00000000000000003333
-            33FF333333FF0000000000000000333333FF0000000000000000000000000000
-            0000333333FF0000000000000000333333FF333333FF00000000000000003333
-            33FF333333FF333333FF333333FF333333FF333333FF333333FF333333FF3333
-            33FF333333FF333333FF333333FF333333FF333333FF00000000000000003333
-            33FF333333FF333333FF333333FF333333FF333333FF333333FF333333FF3333
-            33FF333333FF333333FF333333FF333333FF333333FF00000000}
-          ParentShowHint = False
-          ShowHint = True
-          SpeedButtonOptions.GroupIndex = 3
-          SpeedButtonOptions.AllowAllUp = True
-          TabOrder = 3
-        end
-        object btnTabFixed: TcxButton
-          Left = 5
-          Top = 24
-          Width = 31
-          Height = 25
-          Hint = #51088#49464#48372#44592#44256#51221
-          LookAndFeel.SkinName = 'UserSkin'
-          OptionsImage.Glyph.Data = {
-            36040000424D3604000000000000360000002800000010000000100000000100
-            2000000000000004000000000000000000000000000000000000000000000000
-            0000000000000000000000000000000000000000000000000000000000002525
-            25B7333333FF333333FF333333FF333333FF333333FF252525B7000000000000
-            0000000000000000000000000000000000000000000000000000000000003333
-            33FF333333FF333333FF00000000333333FF333333FF333333FF000000000000
-            0000333333FF333333FF333333FF333333FF333333FF333333FF000000003333
-            33FF333333FF1D1D1D8F000000001D1D1D8F333333FF333333FF000000000000
-            0000333333FF333333FF333333FF333333FF333333FF333333FF000000003333
-            33FF333333FF0606061F000000000606061F333333FF333333FF000000000000
-            0000333333FF333333FF00000000000000000000000000000000000000003333
-            33FF333333FF1D1D1D8F0606061F1D1D1D8F333333FF333333FF000000000000
-            0000333333FF333333FF00000000000000000000000000000000000000002626
-            26BD333333FF333333FF333333FF333333FF333333FF262626BD000000000000
-            0000333333FF333333FF00000000262626BF262626BF262626BF0A0A0A300000
-            0000333333FF000000000000000000000000333333FF00000000000000000000
-            0000333333FF333333FF00000000000000000000000000000000000000000000
-            0000333333FF0D0D0D40000000000D0D0D40333333FF00000000000000000000
-            0000333333FF333333FF00000000262626BF262626BF262626BF262626BF0000
-            00000D0D0D40333333FF333333FF333333FF0D0D0D4000000000000000000000
-            0000333333FF333333FF00000000000000000000000000000000000000000000
-            0000000000000000000000000000000000000000000000000000000000000000
-            0000333333FF333333FF00000000262626BF262626BF262626BF262626BF2626
-            26BF00000000333333FF333333FF000000000000000000000000000000000000
-            0000333333FF333333FF00000000000000000000000000000000000000000000
-            000000000000333333FF333333FF000000000000000000000000000000000000
-            0000333333FF333333FF00000000262626BF262626BF262626BF262626BF2626
-            26BF00000000333333FF333333FF000000000000000000000000000000000000
-            0000333333FF333333FF00000000000000000000000000000000000000000000
-            000000000000333333FF333333FF000000000000000000000000000000000000
-            0000333333FF333333FF333333FF333333FF333333FF333333FF333333FF3333
-            33FF333333FF333333FF333333FF000000000000000000000000000000000000
-            0000333333FF333333FF333333FF333333FF333333FF333333FF333333FF3333
-            33FF333333FF333333FF333333FF000000000000000000000000}
-          ParentShowHint = False
-          ShowHint = True
-          SpeedButtonOptions.GroupIndex = 1
-          SpeedButtonOptions.AllowAllUp = True
-          TabOrder = 4
-        end
-        object btnDrawing: TcxButton
-          Left = 5
-          Top = 183
-          Width = 31
-          Height = 25
-          Hint = #46300#47196#51081
-          LookAndFeel.SkinName = 'UserSkin'
-          OptionsImage.Glyph.Data = {
-            36040000424D3604000000000000360000002800000010000000100000000100
-            20000000000000040000000000000000000000000000000000004E392EFF4B37
-            2DFF48352BFF0000000E0000000E0000000F0000000F0000000F000000100000
-            00100000001000000010000000114E392EFF4B372DFF48352BFF533E32FFF8F1
-            ECFF4E392EFF1B1A9DFF1B1A9DFF1B1A9DFF1B1A9DFF1B1A9DFF1B1A9DFF1B1A
-            9DFF1B1A9DFF1B1A9DFF1B1A9DFF533E32FFF8F1ECFF4E392EFF574134FF553F
-            34FF533D32FFF7EEE8FFF6EEE7FFF6EDE6FFF6EDE6FFF6EDE5FFF6EDE5FFF6EC
-            E4FFF5ECE5FFF5EBE4FFF5EBE3FF574134FF553F34FF533D32FF0000000A1B1A
-            9DFFF7EFE9FFF7EFE9FF564E49FF2F2824FFD6CDC7FFD5CDC7FF2E2724FF544D
-            49FFF5ECE5FFF5ECE4FFF5ECE4FFF5ECE4FF1B1A9DFF0000000E000000091B1A
-            9DFFF8EFEBFFF7EFEAFF43342BFF160D09FF524945FF6B5C54FF2E1F18FF1C15
-            11FFF6ECE6FFF6EDE5FFF6EDE5FFF6ECE4FF1B1A9DFF0000000D000000081B1A
-            9DFFF8F1EBFFF8F0EBFF7E6E65FF34241BFF32221BFF402C22FF3B2920FF5B53
-            4FFFF6EDE6FFF6EDE6FFF6EDE6FFF6ECE5FF1B1A9DFF0000000C000000061B1A
-            9DFFF9F1ECFFEDE5DFFF68564CFF432F25FF432E24FF402D24FF312119FF3E36
-            32FFE8E0DAFFF7EEE7FFF6EDE7FF4E392EFF4B372DFF48352BFF000000051B1A
-            9DFFF8F2EEFF9D918AFF453126FF453026FF4E3B31FF4F3A30FF39271FFF140A
-            07FF88807BFFF6EEE7FFF7EEE8FF533E32FFF8F1ECFF4E392EFF000000051B1A
-            9DFFF9F2EFFF705E53FF483327FF453024FFA3968EFFA4968FFF453126FF2A1C
-            14FF453C38FFF7EFE9FFC2BDD6FF574134FF553F34FF533D32FF000000041B1A
-            9DFFF9F3EFFF523E32FF726157FFA59B95FFF8F1EEFFF8F1EDFFAFA29BFF6757
-            50FF1E1411FFC3BED8FF302EA4FF060625400000000000000000000000031B1A
-            9DFFF9F4F1FFF9F4F1FFFAF3EFFFF9F3EFFFF9F2EFFFF9F2EEFFF8F1EDFFF9F1
-            ECFFC4BED9FF19188EE80606253F000000010000000000000000000000021B1A
-            9DFFFAF5F2FFFAF4F2FFFAF4F0FFFAF3F0FFF9F3EFFFF9F3EEFFF9F2EEFFC5BF
-            DBFF18188EE70606233A00000000000000000000000000000000000000011B1A
-            9DFFFAF6F3FFFAF5F2FFFBF4F2FFFAF5F1FFF9F4F1FFF9F4EFFFC5C0DCFF1818
-            8EE70606233A00000000000000000000000000000000000000004E392EFF4B37
-            2DFF48352BFFFBF6F3FFFAF6F3FFFBF5F2FF4E392EFF4B372DFF48352BFF0606
-            2339000000000000000000000000000000000000000000000000533E32FFF8F1
-            ECFF4E392EFF1B1A9DFF1B1A9DFF1B1A9DFF533E32FFF8F1ECFF4E392EFF0000
-            0000000000000000000000000000000000000000000000000000574134FF553F
-            34FF533D32FF000000000000000000000000574134FF553F34FF533D32FF0000
-            0000000000000000000000000000000000000000000000000000}
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 5
-          OnClick = btnDrawingClick
-        end
-      end
-      object Panel13: TPanel
-        Left = 1
-        Top = 1
-        Width = 386
-        Height = 630
+      BevelOuter = bvNone
+      TabOrder = 0
+      ExplicitWidth = 454
+      object PanelRightImage: TPanel
+        Left = 457
+        Top = 0
+        Width = 462
+        Height = 632
         Align = alClient
-        BevelOuter = bvNone
         DoubleBuffered = False
         ParentDoubleBuffered = False
-        TabOrder = 1
-        object cxTabControl1: TcxTabControl
-          Left = 0
-          Top = 0
-          Width = 386
-          Height = 27
-          Align = alTop
-          TabOrder = 0
-          Properties.CustomButtons.Buttons = <>
-          Properties.Style = 9
-          Properties.TabIndex = 0
-          Properties.Tabs.Strings = (
-            #52769#47732
-            ' '#46321' '
-            #51221#47732
-            #51313#48512)
-          OnChange = cxTabControl1Change
-          ClientRectBottom = 27
-          ClientRectRight = 386
-          ClientRectTop = 24
-        end
-        object ImageEnVect1: TImageEnVect
-          Left = 0
+        TabOrder = 0
+        ExplicitLeft = 1
+        ExplicitTop = 1
+        ExplicitWidth = 452
+        ExplicitHeight = 630
+        object ImageEnView2: TImageEnView
+          Left = 1
           Top = 27
-          Width = 386
-          Height = 603
+          Width = 460
+          Height = 604
+          Cursor = crDefault
           Background = clBlack
+          ScrollBars = ssNone
+          PopupMenus = [ievViewing, ievEditing, ievLayerEditing, ievSelection, ievLayerSelection]
+          MouseInteractLayers = [mlMoveLayers, mlResizeLayers, mlRotateLayers, mlEditLayerPoints]
+          DelayZoomFilter = True
           AutoStretch = True
           AutoShrink = True
-          OnDrawBackBuffer = ImageEnVect1DrawBackBuffer
+          OnLayerNotify = ImageEnView2LayerNotify
+          OnNewLayer = ImageEnView2NewLayer
           Align = alClient
+          TabOrder = 0
+          ExplicitLeft = 353
+          ExplicitTop = 1
+          ExplicitWidth = 374
+          ExplicitHeight = 630
+        end
+        object Panel6: TPanel
+          Left = 1
+          Top = 1
+          Width = 460
+          Height = 26
+          Align = alTop
+          BevelOuter = bvNone
           TabOrder = 1
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 366
+          object btnArrow2: TSpeedButton
+            AlignWithMargins = True
+            Left = 69
+            Top = 1
+            Width = 29
+            Height = 24
+            Hint = #49440#53469
+            Margins.Left = 20
+            Margins.Top = 1
+            Margins.Right = 1
+            Margins.Bottom = 1
+            Align = alLeft
+            AllowAllUp = True
+            GroupIndex = 1
+            Down = True
+            Glyph.Data = {
+              F6000000424DF600000000000000760000002800000010000000100000000100
+              04000000000080000000120B0000120B00001000000000000000000000000000
+              8000008000000080800080000000800080008080000080808000C0C0C0000000
+              FF00C0C0C00000FFFF00FF000000C0C0C000FFFF0000FFFFFF00DADADADADADA
+              DADAADADADADA00DADADDADADADAD0F0DADAADAD0DAD0FF0ADADDADA00DA0F0A
+              DADAADAD0F00FF0DADADDADA0FF0F0DADADAADAD0FFFF0000DADDADA0FFFFFF0
+              DADAADAD0FFFFF0DADADDADA0FFFF0DADADAADAD0FFF0DADADADDADA0FF0DADA
+              DADAADAD0F0DADADADADDADA00DADADADADAADAD0DADADADADAD}
+            Margin = 0
+            ParentShowHint = False
+            ShowHint = True
+            Spacing = 1
+            OnClick = btnArrow2Click
+            ExplicitLeft = 3
+            ExplicitTop = 0
+            ExplicitHeight = 26
+          end
+          object btnLine2: TSpeedButton
+            AlignWithMargins = True
+            Left = 100
+            Top = 1
+            Width = 29
+            Height = 24
+            Hint = #46972#51064
+            Margins.Left = 1
+            Margins.Top = 1
+            Margins.Right = 1
+            Margins.Bottom = 1
+            Align = alLeft
+            AllowAllUp = True
+            GroupIndex = 1
+            Glyph.Data = {
+              F6000000424DF600000000000000760000002800000010000000100000000100
+              04000000000080000000120B0000120B00001000000000000000000000000000
+              8000008000000080800080000000800080008080000080808000C0C0C0000000
+              FF00C0C0C00000FFFF00FF000000C0C0C000FFFF0000FFFFFF00DADADADADADA
+              0000ADADADADADAD0FF0DADADADADADA0FF0ADADADADADAD0000DADADADADAD4
+              DADAADADADADAD4DADADDADADADAD4DADADAADADADAD4DADADADDADADAD4DADA
+              DADAADADAD4DADADADADDADAD4DADADADADAADAD4DADADADADAD0000DADADADA
+              DADA0FF0ADADADADADAD0FF0DADADADADADA0000ADADADADADAD}
+            Margin = 0
+            ParentShowHint = False
+            ShowHint = True
+            Spacing = 1
+            OnClick = btnLine2Click
+            ExplicitLeft = 31
+            ExplicitTop = 0
+            ExplicitHeight = 26
+          end
+          object btnMultiLine2: TSpeedButton
+            AlignWithMargins = True
+            Left = 131
+            Top = 1
+            Width = 29
+            Height = 24
+            Hint = #45796#51473#46972#51064
+            Margins.Left = 1
+            Margins.Top = 1
+            Margins.Right = 1
+            Margins.Bottom = 1
+            Align = alLeft
+            AllowAllUp = True
+            GroupIndex = 1
+            Glyph.Data = {
+              F6000000424DF600000000000000760000002800000010000000100000000100
+              04000000000080000000120B0000120B00001000000000000000000000000000
+              8000008000000080800080000000800080008080000080808000C0C0C0000000
+              FF00C0C0C00000FFFF00FF000000C0C0C000FFFF0000FFFFFF00DADADADAD4DA
+              0000ADADADADA44D0FF0DADADAD444440FF0ADADADA4A44D0000DADADAD4D4DA
+              DADAADADADA4ADADADADDADADAD4DADADADAADADADA4ADADADADDADADAD4DADA
+              DADAADADADA4ADADADADDADADAD4DADADADAADADADA4ADADADAD0000DAD4DADA
+              DADA0FF04444ADADADAD0FF0DADADADADADA0000ADADADADADAD}
+            Margin = 0
+            ParentShowHint = False
+            ShowHint = True
+            Spacing = 1
+            OnClick = btnLine2Click
+            ExplicitLeft = 59
+            ExplicitTop = 0
+            ExplicitHeight = 26
+          end
+          object Label7: TLabel
+            Left = 0
+            Top = 0
+            Width = 49
+            Height = 26
+            Align = alLeft
+            Alignment = taCenter
+            AutoSize = False
+            Caption = '['#52769#47732']'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlue
+            Font.Height = -15
+            Font.Name = #45208#45588#44256#46357
+            Font.Style = [fsBold]
+            ParentFont = False
+            Layout = tlCenter
+          end
+          object speLineThick2: TcxSpinEdit
+            AlignWithMargins = True
+            Left = 162
+            Top = 1
+            Hint = #46972#51064#46160#44760
+            Margins.Left = 1
+            Margins.Top = 1
+            Margins.Right = 1
+            Margins.Bottom = 1
+            Align = alLeft
+            ParentShowHint = False
+            Properties.OnChange = speLineThick2PropertiesChange
+            ShowHint = True
+            TabOrder = 0
+            Value = 10
+            ExplicitLeft = 88
+            ExplicitHeight = 25
+            Width = 46
+          end
+          object ColorBox2: TcxColorComboBox
+            AlignWithMargins = True
+            Left = 210
+            Top = 1
+            Hint = #46972#51064#49353#49345
+            Margins.Left = 1
+            Margins.Top = 1
+            Margins.Right = 1
+            Margins.Bottom = 1
+            Align = alLeft
+            ParentShowHint = False
+            Properties.ColorDialogType = cxcdtAdvanced
+            Properties.CustomColors = <>
+            Properties.DefaultColor = clRed
+            Properties.DropDownAutoWidth = False
+            Properties.ImmediatePost = True
+            Properties.ShowDescriptions = False
+            Properties.OnCloseUp = ColorBox2PropertiesCloseUp
+            ShowHint = True
+            Style.LookAndFeel.SkinName = 'VS2010'
+            StyleDisabled.LookAndFeel.SkinName = 'VS2010'
+            StyleFocused.LookAndFeel.SkinName = 'VS2010'
+            StyleHot.LookAndFeel.SkinName = 'VS2010'
+            TabOrder = 1
+            ExplicitLeft = 161
+            Width = 60
+          end
+        end
+      end
+      object PanelLeftImage: TPanel
+        Left = 0
+        Top = 0
+        Width = 457
+        Height = 632
+        Align = alLeft
+        TabOrder = 1
+        object ImageEnView1: TImageEnView
+          Left = 1
+          Top = 27
+          Width = 455
+          Height = 604
+          Cursor = crDefault
+          Background = clBlack
+          ScrollBars = ssNone
+          PopupMenus = [ievViewing, ievEditing, ievLayerEditing, ievSelection, ievLayerSelection]
+          MouseInteractLayers = [mlMoveLayers, mlResizeLayers, mlRotateLayers, mlEditLayerPoints]
+          DelayZoomFilter = True
+          AutoStretch = True
+          AutoShrink = True
+          OnLayerNotify = ImageEnView1LayerNotify
+          OnNewLayer = ImageEnView1NewLayer
+          Align = alClient
+          TabOrder = 0
+          ExplicitLeft = 353
+          ExplicitTop = 1
+          ExplicitWidth = 374
+          ExplicitHeight = 630
+        end
+        object Panel1: TPanel
+          Left = 1
+          Top = 1
+          Width = 455
+          Height = 26
+          Align = alTop
+          BevelOuter = bvNone
+          TabOrder = 1
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 360
+          object btnArrow: TSpeedButton
+            AlignWithMargins = True
+            Left = 69
+            Top = 1
+            Width = 29
+            Height = 24
+            Hint = #49440#53469
+            Margins.Left = 20
+            Margins.Top = 1
+            Margins.Right = 1
+            Margins.Bottom = 1
+            Align = alLeft
+            AllowAllUp = True
+            GroupIndex = 1
+            Down = True
+            Glyph.Data = {
+              F6000000424DF600000000000000760000002800000010000000100000000100
+              04000000000080000000120B0000120B00001000000000000000000000000000
+              8000008000000080800080000000800080008080000080808000C0C0C0000000
+              FF00C0C0C00000FFFF00FF000000C0C0C000FFFF0000FFFFFF00DADADADADADA
+              DADAADADADADA00DADADDADADADAD0F0DADAADAD0DAD0FF0ADADDADA00DA0F0A
+              DADAADAD0F00FF0DADADDADA0FF0F0DADADAADAD0FFFF0000DADDADA0FFFFFF0
+              DADAADAD0FFFFF0DADADDADA0FFFF0DADADAADAD0FFF0DADADADDADA0FF0DADA
+              DADAADAD0F0DADADADADDADA00DADADADADAADAD0DADADADADAD}
+            Margin = 0
+            ParentShowHint = False
+            ShowHint = True
+            Spacing = 1
+            OnClick = btnArrowClick
+            ExplicitLeft = 3
+            ExplicitTop = 0
+            ExplicitHeight = 26
+          end
+          object btnLine: TSpeedButton
+            AlignWithMargins = True
+            Left = 100
+            Top = 1
+            Width = 29
+            Height = 24
+            Hint = #46972#51064
+            Margins.Left = 1
+            Margins.Top = 1
+            Margins.Right = 1
+            Margins.Bottom = 1
+            Align = alLeft
+            AllowAllUp = True
+            GroupIndex = 1
+            Glyph.Data = {
+              F6000000424DF600000000000000760000002800000010000000100000000100
+              04000000000080000000120B0000120B00001000000000000000000000000000
+              8000008000000080800080000000800080008080000080808000C0C0C0000000
+              FF00C0C0C00000FFFF00FF000000C0C0C000FFFF0000FFFFFF00DADADADADADA
+              0000ADADADADADAD0FF0DADADADADADA0FF0ADADADADADAD0000DADADADADAD4
+              DADAADADADADAD4DADADDADADADAD4DADADAADADADAD4DADADADDADADAD4DADA
+              DADAADADAD4DADADADADDADAD4DADADADADAADAD4DADADADADAD0000DADADADA
+              DADA0FF0ADADADADADAD0FF0DADADADADADA0000ADADADADADAD}
+            Margin = 0
+            ParentShowHint = False
+            ShowHint = True
+            Spacing = 1
+            OnClick = btnLineClick
+            ExplicitLeft = 31
+            ExplicitTop = 0
+            ExplicitHeight = 26
+          end
+          object btnMultiLine: TSpeedButton
+            AlignWithMargins = True
+            Left = 131
+            Top = 1
+            Width = 29
+            Height = 24
+            Hint = #45796#51473#46972#51064
+            Margins.Left = 1
+            Margins.Top = 1
+            Margins.Right = 1
+            Margins.Bottom = 1
+            Align = alLeft
+            AllowAllUp = True
+            GroupIndex = 1
+            Glyph.Data = {
+              F6000000424DF600000000000000760000002800000010000000100000000100
+              04000000000080000000120B0000120B00001000000000000000000000000000
+              8000008000000080800080000000800080008080000080808000C0C0C0000000
+              FF00C0C0C00000FFFF00FF000000C0C0C000FFFF0000FFFFFF00DADADADAD4DA
+              0000ADADADADA44D0FF0DADADAD444440FF0ADADADA4A44D0000DADADAD4D4DA
+              DADAADADADA4ADADADADDADADAD4DADADADAADADADA4ADADADADDADADAD4DADA
+              DADAADADADA4ADADADADDADADAD4DADADADAADADADA4ADADADAD0000DAD4DADA
+              DADA0FF04444ADADADAD0FF0DADADADADADA0000ADADADADADAD}
+            Margin = 0
+            ParentShowHint = False
+            ShowHint = True
+            Spacing = 1
+            OnClick = btnLineClick
+            ExplicitLeft = 59
+            ExplicitTop = 0
+            ExplicitHeight = 26
+          end
+          object Label5: TLabel
+            Left = 0
+            Top = 0
+            Width = 49
+            Height = 26
+            Align = alLeft
+            Alignment = taCenter
+            AutoSize = False
+            Caption = '['#51204#47732']'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlue
+            Font.Height = -15
+            Font.Name = #45208#45588#44256#46357
+            Font.Style = [fsBold]
+            ParentFont = False
+            Layout = tlCenter
+          end
+          object speLineThick: TcxSpinEdit
+            AlignWithMargins = True
+            Left = 162
+            Top = 1
+            Hint = #46972#51064#46160#44760
+            Margins.Left = 1
+            Margins.Top = 1
+            Margins.Right = 1
+            Margins.Bottom = 1
+            Align = alLeft
+            ParentShowHint = False
+            Properties.OnChange = speLineThickPropertiesChange
+            ShowHint = True
+            TabOrder = 0
+            Value = 10
+            ExplicitLeft = 88
+            ExplicitHeight = 25
+            Width = 46
+          end
+          object ColorBox: TcxColorComboBox
+            AlignWithMargins = True
+            Left = 210
+            Top = 1
+            Hint = #46972#51064#49353#49345
+            Margins.Left = 1
+            Margins.Top = 1
+            Margins.Right = 1
+            Margins.Bottom = 1
+            Align = alLeft
+            ParentShowHint = False
+            Properties.ColorDialogType = cxcdtAdvanced
+            Properties.CustomColors = <>
+            Properties.DefaultColor = clRed
+            Properties.DropDownAutoWidth = False
+            Properties.ImmediatePost = True
+            Properties.ShowDescriptions = False
+            Properties.OnCloseUp = ColorBoxPropertiesCloseUp
+            ShowHint = True
+            Style.LookAndFeel.SkinName = 'VS2010'
+            StyleDisabled.LookAndFeel.SkinName = 'VS2010'
+            StyleFocused.LookAndFeel.SkinName = 'VS2010'
+            StyleHot.LookAndFeel.SkinName = 'VS2010'
+            TabOrder = 1
+            ExplicitLeft = 161
+            Width = 60
+          end
         end
       end
     end
   end
   object ImageList1: TImageList
-    Left = 32
-    Top = 248
+    Left = 48
+    Top = 104
     Bitmap = {
       494C010108000D00040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
@@ -3429,8 +2992,8 @@ object fmAnalyzer: TfmAnalyzer
   object UniAlerter1: TUniAlerter
     Events = 'student_event'
     AutoRegister = True
-    Left = 32
-    Top = 304
+    Left = 48
+    Top = 152
   end
   object ColorDialog1: TColorDialog
     Color = clRed
@@ -3439,8 +3002,8 @@ object fmAnalyzer: TfmAnalyzer
   end
   object BMDThread1: TBMDThread
     UpdateEnabled = False
-    Left = 136
-    Top = 192
+    Left = 152
+    Top = 104
   end
   object ImageEnProc1: TImageEnProc
     PreviewFont.Charset = DEFAULT_CHARSET
@@ -3450,5 +3013,111 @@ object fmAnalyzer: TfmAnalyzer
     PreviewFont.Style = []
     Left = 296
     Top = 352
+  end
+  object STUDENT_IMAGE_UPD_RESULT: TUniStoredProc
+    StoredProcName = 'STUDENT_IMAGE_UPD_RESULT'
+    Connection = DataModule1.UniConnection1
+    Left = 1080
+    Top = 448
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'CHECK_VAL1'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'CHECK_VAL2'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'TOTAL_VAL'
+        ParamType = ptInput
+      end>
+    CommandStoredProcName = 'STUDENT_IMAGE_UPD_RESULT'
+  end
+  object STUDENT_IMAGE_UPD_DRAW1: TUniStoredProc
+    StoredProcName = 'STUDENT_IMAGE_UPD_DRAW1'
+    Connection = DataModule1.UniConnection1
+    Left = 1080
+    Top = 504
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftBlob
+        Name = 'DRAW1'
+        ParamType = ptInput
+        Value = ''
+      end>
+    CommandStoredProcName = 'STUDENT_IMAGE_UPD_DRAW1'
+  end
+  object STUDENT_IMAGE_UPD_DRAW2: TUniStoredProc
+    StoredProcName = 'STUDENT_IMAGE_UPD_DRAW2'
+    Connection = DataModule1.UniConnection1
+    Left = 1080
+    Top = 552
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftBlob
+        Name = 'DRAW2'
+        ParamType = ptInput
+        Value = ''
+      end>
+    CommandStoredProcName = 'STUDENT_IMAGE_UPD_DRAW2'
+  end
+  object STUDENT_IMAGE_UPD_ALL: TUniStoredProc
+    StoredProcName = 'STUDENT_IMAGE_UPD_ALL'
+    Connection = DataModule1.UniConnection1
+    Left = 792
+    Top = 288
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'CHECK_VAL1'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'CHECK_VAL2'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'TOTAL_VAL'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftBlob
+        Name = 'DRAW1'
+        ParamType = ptInput
+        Value = ''
+      end
+      item
+        DataType = ftBlob
+        Name = 'DRAW2'
+        ParamType = ptInput
+        Value = ''
+      end>
+    CommandStoredProcName = 'STUDENT_IMAGE_UPD_ALL'
   end
 end

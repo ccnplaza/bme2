@@ -21,7 +21,7 @@ uses
   dxSkinscxPCPainter, cxCustomData, cxFilter, cxData, cxDataStorage, cxEdit,
   cxNavigator, DB, cxDBData, cxGridLevel, cxClasses, cxGridCustomView,
   cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGrid, ExtCtrls,
-  Menus, StdCtrls, cxButtons, MemDS, DBAccess, Uni;
+  Menus, StdCtrls, cxButtons, MemDS, DBAccess, Uni, cxImageComboBox;
 
 type
   TfmComments = class(TForm)
@@ -41,6 +41,7 @@ type
     gridcommentsITEM_NAME: TcxGridDBColumn;
     btnDeleteNew: TcxButton;
     CHECK_COMMENTS_DEL: TUniStoredProc;
+    CHECK_COMMENTS_INS: TUniStoredProc;
     procedure FormShow(Sender: TObject);
     procedure btnEditClick(Sender: TObject);
     procedure btnCreateNewClick(Sender: TObject);
@@ -52,6 +53,9 @@ type
       AShift: TShiftState; var AHandled: Boolean);
     procedure btnDeleteNewClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure gridcommentsITEM_IDCustomDrawCell(Sender: TcxCustomGridTableView;
+      ACanvas: TcxCanvas; AViewInfo: TcxGridTableDataCellViewInfo;
+      var ADone: Boolean);
   private
     procedure RetrieveData;
     { Private declarations }
@@ -71,13 +75,29 @@ uses
 {$R *.dfm}
 
 procedure TfmComments.btnCreateNewClick(Sender: TObject);
+var
+  id : Integer;
 begin
-  CREATE_CENTER_CHECK_COMMENTS.ParamByName('C_ID').Value := UserInfo.userCenterID;
-  CREATE_CENTER_CHECK_COMMENTS.ExecProc;
-  RetrieveData;
-  ShowMessage('결과코멘트 세트가 생성되었습니다. ' + #13#10 +
-              '항목별 결과 코멘트를 수정하세요.'
-  );
+  fmCommentEdit := TfmCommentEdit.Create(Self);
+  try
+    id := gridcommentsID.EditValue;
+    fmCommentEdit.ITEM_ID.EditValue := gridcommentsITEM_ID.EditValue;
+    fmCommentEdit.ITEM_VALUE.EditValue := gridcommentsVALUE_ID.EditValue;
+    fmCommentEdit.ShowModal;
+    if fmCommentEdit.ModalResult = mrOk then begin
+      //CHECK_COMMENTS_INS(:ITEM_ID, :VALUE_ID, :COMMENT_NAME, :CHECK_COMMENTS, :CENTER_ID, :ITEM_NAME)
+
+      CHECK_COMMENTS_INS.ParamByName('ITEM_ID').Value := fmCommentEdit.ITEM_ID.EditValue;
+      CHECK_COMMENTS_INS.ParamByName('VALUE_ID').Value := fmCommentEdit.ITEM_VALUE.EditValue;
+      CHECK_COMMENTS_INS.ParamByName('COMMENT_NAME').Value := '';
+      CHECK_COMMENTS_INS.ParamByName('ITEM_NAME').Value := '';
+      CHECK_COMMENTS_INS.ParamByName('CHECK_COMMENTS').Value := fmCommentEdit.Memo1.Text;
+      CHECK_COMMENTS_INS.ExecProc;
+      DataModule1.ds_CHECK_COMMENTS_SEL.DataSet.Refresh;
+    end;
+  finally
+    fmCommentEdit.Free;
+  end;
 end;
 
 procedure TfmComments.btnDeleteNewClick(Sender: TObject);
@@ -102,11 +122,14 @@ begin
   fmCommentEdit := TfmCommentEdit.Create(Self);
   try
     id := gridcommentsID.EditValue;
-    fmCommentEdit.Edit1.Text := gridcommentsCOMMENT_NAME.EditValue;
+    fmCommentEdit.ITEM_ID.EditValue := gridcommentsITEM_ID.EditValue;
+    fmCommentEdit.ITEM_VALUE.EditValue := gridcommentsVALUE_ID.EditValue;
     fmCommentEdit.Memo1.Text := gridcommentsCHECK_COMMENTS.EditValue;
     fmCommentEdit.ShowModal;
     if fmCommentEdit.ModalResult = mrOk then begin
       CHECK_COMMENTS_UPD.ParamByName('ID').Value := gridcommentsID.EditValue;
+      CHECK_COMMENTS_UPD.ParamByName('ITEM_ID').Value := fmCommentEdit.ITEM_ID.EditValue;
+      CHECK_COMMENTS_UPD.ParamByName('VALUE_ID').Value := fmCommentEdit.ITEM_VALUE.EditValue;
       CHECK_COMMENTS_UPD.ParamByName('CHECK_COMMENTS').Value := fmCommentEdit.Memo1.Text;
       CHECK_COMMENTS_UPD.ExecProc;
       DataModule1.ds_CHECK_COMMENTS_SEL.DataSet.Refresh;
@@ -128,21 +151,8 @@ end;
 
 procedure TfmComments.RetrieveData;
 begin
-  DataModule1.CHECK_COMMENTS_SEL.ParamByName('C_ID').Value := UserInfo.userCenterID;
   DataModule1.CHECK_COMMENTS_SEL.Active := True;
   DataModule1.ds_CHECK_COMMENTS_SEL.DataSet.Refresh;
-  if not (DataModule1.CHECK_COMMENTS_SEL.RecordCount > 0) then begin
-    USER_HAS_OWN_COMMENT := False;
-    btnCreateNew.Enabled := True;
-    btnDeleteNew.Enabled := False;
-    DataModule1.CHECK_COMMENTS_SEL.ParamByName('C_ID').Value := 0;
-    DataModule1.CHECK_COMMENTS_SEL.Active := True;
-    DataModule1.ds_CHECK_COMMENTS_SEL.DataSet.Refresh;
-  end else begin
-    USER_HAS_OWN_COMMENT := true;
-    btnCreateNew.Enabled := False;
-    btnDeleteNew.Enabled := True;
-  end;
 end;
 
 procedure TfmComments.gridcommentsCellDblClick(Sender: TcxCustomGridTableView;
@@ -150,6 +160,19 @@ procedure TfmComments.gridcommentsCellDblClick(Sender: TcxCustomGridTableView;
   AShift: TShiftState; var AHandled: Boolean);
 begin
   btnEdit.Click;
+end;
+
+procedure TfmComments.gridcommentsITEM_IDCustomDrawCell(
+  Sender: TcxCustomGridTableView; ACanvas: TcxCanvas;
+  AViewInfo: TcxGridTableDataCellViewInfo; var ADone: Boolean);
+begin
+  if AViewInfo.Selected then begin
+    if (AViewInfo.GridRecord.Index mod 2 = 1) then
+      ACanvas.Brush.Color := RootLookAndFeel.Painter.DefaultContentOddColor
+    else
+      ACanvas.Brush.Color := RootLookAndFeel.Painter.DefaultContentEvenColor;
+    ACanvas.Font.Color := RootLookAndFeel.Painter.DefaultContentTextColor;
+  end;
 end;
 
 procedure TfmComments.gridcommentsITEM_NAMECustomDrawCell(

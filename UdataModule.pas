@@ -109,10 +109,7 @@ type
     CHECK_COMMENTS_SELID: TIntegerField;
     CHECK_COMMENTS_SELITEM_ID: TIntegerField;
     CHECK_COMMENTS_SELVALUE_ID: TIntegerField;
-    CHECK_COMMENTS_SELCOMMENT_NAME: TWideStringField;
     CHECK_COMMENTS_SELCHECK_COMMENTS: TWideMemoField;
-    CHECK_COMMENTS_SELITEM_NAME: TWideStringField;
-    CHECK_COMMENTS_SELCENTER_ID: TIntegerField;
     STUDENT_IMAGE_SEL2: TUniStoredProc;
     ds_STUDENT_IMAGE_SEL2: TDataSource;
     STUDENT_IMAGE_SEL2ID: TIntegerField;
@@ -183,8 +180,6 @@ type
     STUDENT_IMAGE_SEL_IMAGEP_DATE: TDateField;
     STUDENT_IMAGE_SEL_IMAGEDRAW1: TBlobField;
     STUDENT_IMAGE_SEL_IMAGEDRAW2: TBlobField;
-    STUDENT_IMAGE_SEL_IMAGEDRAW3: TBlobField;
-    STUDENT_IMAGE_SEL_IMAGEDRAW4: TBlobField;
     STUDENT_IMAGE_SEL_IMAGECHASOO: TSmallintField;
     STUDENT_IMAGE_SEL_BYDATES_NAME: TWideStringField;
     STUDENT_IMAGE_SEL_BYDATES_SEX: TIntegerField;
@@ -206,8 +201,6 @@ type
     STUDENT_IMAGE_UPD_BLOB: TUniStoredProc;
     STUDENT_IMAGE_SEL_IMAGEIMAGE1: TBlobField;
     STUDENT_IMAGE_SEL_IMAGEIMAGE2: TBlobField;
-    STUDENT_IMAGE_SEL_IMAGEIMAGE3: TBlobField;
-    STUDENT_IMAGE_SEL_IMAGEIMAGE4: TBlobField;
     STUDENT_IMAGE_UPD_ONE: TUniStoredProc;
     PICTURE_DATE_SELMAN_CNT: TIntegerField;
     STUDENT_IMAGE_SEL_BYDATECHASOO: TSmallintField;
@@ -254,12 +247,20 @@ type
     ds_STUDENT_IMAGE_EXISTS: TDataSource;
     STUDENT_IMAGE_EXISTSID: TIntegerField;
     ANALYSE_RESULT_UPD_DONE: TUniStoredProc;
+    REG_SCHOOL_SEL_LOOK: TUniStoredProc;
+    ds_REG_SCHOOL_SEL_LOOK: TDataSource;
+    REG_SCHOOL_SEL_LOOKID: TIntegerField;
+    REG_SCHOOL_SEL_LOOKS_NAME: TWideStringField;
+    REG_SCHOOL_UPD_DEFAULT: TUniStoredProc;
+    STUDENT_IMAGE_SEL_IMAGECHECK_VAL1: TIntegerField;
+    STUDENT_IMAGE_SEL_IMAGECHECK_VAL2: TIntegerField;
+    STUDENT_IMAGE_SEL_IMAGETOTAL_VAL: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
-    procedure SelectStudents;
+    procedure SelectStudents(sub_center_id : Integer);
     procedure InsertPictureData(student_id, chasoo, uid : Integer);
     procedure UpdateStudentPicture(imgName : string; img_src : TMemoryStream);
     procedure UpdateStudentDrawing(id, kind: Integer; img_src, drw_src: TMemoryStream);
@@ -274,6 +275,8 @@ type
     procedure DownloadImage(imgName : string);
     function GetSubCenterID : Integer;
     function CheckStudentImageExists(student_id:Integer;p_date:TDate) : Boolean;
+    procedure SelectRegistedCenter;
+    procedure SetActiveCenter(id: Integer);
   end;
 
 var
@@ -304,7 +307,7 @@ end;
 
 procedure TDataModule1.DataModuleCreate(Sender: TObject);
 begin
-  UniConnection1.Database := 'd:\fb_data\businessmartialart\new_bme.fdb';
+  UniConnection1.Database := 'd:\fb_data\businessmartialart\bme2.fdb';
   UniConnection1.Server := '210.122.7.67';
   UniConnection1.Port := 3050;
   UniConnection1.ProviderName := 'InterBase';
@@ -314,12 +317,26 @@ begin
   UniConnection1.Connected := True;
 end;
 
-procedure TDataModule1.SelectStudents;
+procedure TDataModule1.SelectStudents(sub_center_id : Integer);
 begin
   STUDENTS_SEL_CENTER.ParamByName('C_ID').Value := UserInfo.userCenterID;
-  STUDENTS_SEL_CENTER.ParamByName('SUB_ID').Value := UserInfo.userSubCenterID;
+  STUDENTS_SEL_CENTER.ParamByName('SUB_ID').Value := sub_center_id;
   STUDENTS_SEL_CENTER.Open;
   ds_STUDENTS_SEL_CENTER.DataSet.Refresh;
+end;
+
+procedure TDataModule1.SelectRegistedCenter;
+begin
+  REG_SCHOOL_SEL_LOOK.ParamByName('USER_ID').Value := UserInfo.userID;
+  REG_SCHOOL_SEL_LOOK.Open();
+  ds_REG_SCHOOL_SEL_LOOK.DataSet.Refresh;
+end;
+
+procedure TDataModule1.SetActiveCenter(id : Integer);
+begin
+  REG_SCHOOL_UPD_DEFAULT.ParamByName('ID').Value := id;
+  REG_SCHOOL_UPD_DEFAULT.ParamByName('U_ID').Value := UserInfo.userID;
+  REG_SCHOOL_UPD_DEFAULT.ExecProc;
 end;
 
 procedure TDataModule1.RetrieveMemberImageEnView(var ImageView : array of TImageEnView);

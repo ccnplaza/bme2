@@ -196,6 +196,9 @@
 			<DCCReference Include="analyse\UfmSelectStudentPicture.pas">
 				<Form>fmSelectStudentPicture</Form>
 			</DCCReference>
+			<DCCReference Include="capture\UfmPictureZoom.pas">
+				<Form>fmPictureZoom</Form>
+			</DCCReference>
 			<BuildConfiguration Include="Base">
 				<Key>Base</Key>
 			</BuildConfiguration>

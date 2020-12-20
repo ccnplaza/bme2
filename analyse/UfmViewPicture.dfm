@@ -3,7 +3,7 @@ object fmViewPicture: TfmViewPicture
   Top = 0
   Caption = #51088#49464#48372#44592
   ClientHeight = 681
-  ClientWidth = 1185
+  ClientWidth = 834
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -13,87 +13,36 @@ object fmViewPicture: TfmViewPicture
   OldCreateOrder = False
   Position = poMainFormCenter
   OnResize = FormResize
-  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
-  object ImageEnVect1: TImageEnDBVect
+  object ImageEnView1: TImageEnView
     Left = 0
     Top = 0
-    Width = 290
+    Width = 417
     Height = 681
-    Background = clBlack
+    Background = clBtnFace
     ZoomFilter = rfFastLinear
-    MouseInteractGeneral = [miZoom, miScroll]
     AutoStretch = True
     AutoShrink = True
+    AsyncLoading = True
     Align = alLeft
     TabOrder = 0
-    DataField = 'IMAGE1'
-    DataFieldImageFormat = ifJpeg
-    PreviewFont.Charset = DEFAULT_CHARSET
-    PreviewFont.Color = clWindowText
-    PreviewFont.Height = -11
-    PreviewFont.Name = 'Tahoma'
-    PreviewFont.Style = []
   end
-  object ImageEnVect2: TImageEnDBVect
-    Left = 290
+  object ImageEnView2: TImageEnView
+    Left = 417
     Top = 0
-    Width = 290
+    Width = 417
     Height = 681
-    Background = clBlack
+    Background = clBtnFace
     ZoomFilter = rfFastLinear
-    MouseInteractGeneral = [miZoom, miScroll]
     AutoStretch = True
     AutoShrink = True
-    Align = alLeft
+    AsyncLoading = True
+    Align = alClient
     TabOrder = 1
-    DataField = 'IMAGE2'
-    DataFieldImageFormat = ifJpeg
-    PreviewFont.Charset = DEFAULT_CHARSET
-    PreviewFont.Color = clWindowText
-    PreviewFont.Height = -11
-    PreviewFont.Name = 'Tahoma'
-    PreviewFont.Style = []
-  end
-  object ImageEnVect3: TImageEnDBVect
-    Left = 580
-    Top = 0
-    Width = 290
-    Height = 681
-    Background = clBlack
-    ZoomFilter = rfFastLinear
-    MouseInteractGeneral = [miZoom, miScroll]
-    AutoStretch = True
-    AutoShrink = True
-    Align = alLeft
-    TabOrder = 2
-    DataField = 'IMAGE3'
-    DataFieldImageFormat = ifJpeg
-    PreviewFont.Charset = DEFAULT_CHARSET
-    PreviewFont.Color = clWindowText
-    PreviewFont.Height = -11
-    PreviewFont.Name = 'Tahoma'
-    PreviewFont.Style = []
-  end
-  object ImageEnVect4: TImageEnDBVect
-    Left = 870
-    Top = 0
-    Width = 290
-    Height = 681
-    Background = clBlack
-    ZoomFilter = rfFastLinear
-    MouseInteractGeneral = [miZoom, miScroll]
-    AutoStretch = True
-    AutoShrink = True
-    Align = alLeft
-    TabOrder = 3
-    DataField = 'IMAGE4'
-    DataFieldImageFormat = ifJpeg
-    PreviewFont.Charset = DEFAULT_CHARSET
-    PreviewFont.Color = clWindowText
-    PreviewFont.Height = -11
-    PreviewFont.Name = 'Tahoma'
-    PreviewFont.Style = []
+    ExplicitLeft = 456
+    ExplicitTop = 224
+    ExplicitWidth = 105
+    ExplicitHeight = 105
   end
 end

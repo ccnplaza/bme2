@@ -65,7 +65,6 @@ type
     N12: TMenuItem;
     N13: TMenuItem;
     N14: TMenuItem;
-    N21: TMenuItem;
     N15: TMenuItem;
     N16: TMenuItem;
     MENU_SETTING: TMenuItem;
@@ -86,7 +85,6 @@ type
     procedure N12Click(Sender: TObject);
     procedure N13Click(Sender: TObject);
     procedure N14Click(Sender: TObject);
-    procedure N21Click(Sender: TObject);
     procedure N15Click(Sender: TObject);
     procedure MENU_SETTINGClick(Sender: TObject);
   private
@@ -230,11 +228,6 @@ begin
   finally
     fmFolderSelect.Free;
   end;
-end;
-
-procedure TfmMain.N21Click(Sender: TObject);
-begin
-  OpenMDIForm('TfmCaptureNew');
 end;
 
 procedure TfmMain.N6Click(Sender: TObject);

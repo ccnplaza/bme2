@@ -173,7 +173,6 @@ begin
   ImageView[3] := ImageEnView4;
   ImageView[4] := ImageEnView5;
 
-  DataModule1.SelectStudents;
   RetrievePicture;
   UniAlerter1.Active := True;
   FORM_OPEN := True;

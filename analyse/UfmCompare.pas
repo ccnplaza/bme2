@@ -719,8 +719,6 @@ begin
   case tab_id of
     0: DataModule1.STUDENT_IMAGE_SEL_IMAGEIMAGE1.SaveToStream(mStream);
     1: DataModule1.STUDENT_IMAGE_SEL_IMAGEIMAGE2.SaveToStream(mStream);
-    2: DataModule1.STUDENT_IMAGE_SEL_IMAGEIMAGE3.SaveToStream(mStream);
-    3: DataModule1.STUDENT_IMAGE_SEL_IMAGEIMAGE4.SaveToStream(mStream);
   end;
   mStream.Position := 0;
   ImageEnView1.Clear;

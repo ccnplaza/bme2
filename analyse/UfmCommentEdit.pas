@@ -17,17 +17,20 @@ uses
   dxSkinSevenClassic, dxSkinSharp, dxSkinSharpPlus, dxSkinSilver,
   dxSkinSpringTime, dxSkinStardust, dxSkinSummer2008, dxSkinTheAsphaltWorld,
   dxSkinsDefaultPainters, dxSkinValentine, dxSkinVS2010, dxSkinWhiteprint,
-  dxSkinXmas2008Blue, StdCtrls, cxButtons;
+  dxSkinXmas2008Blue, StdCtrls, cxButtons, cxControls, cxContainer, cxEdit,
+  cxTextEdit, cxMaskEdit, cxDropDownEdit, cxImageComboBox;
 
 type
   TfmCommentEdit = class(TForm)
     GroupBox1: TGroupBox;
     Label1: TLabel;
-    Edit1: TEdit;
     Label2: TLabel;
     Memo1: TMemo;
     btnSelectComment: TcxButton;
     cxButton1: TcxButton;
+    ITEM_ID: TcxImageComboBox;
+    Label3: TLabel;
+    ITEM_VALUE: TcxImageComboBox;
   private
     { Private declarations }
   public

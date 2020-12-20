@@ -24,19 +24,13 @@ uses
 
 type
   TfmViewPicture = class(TForm)
-    ImageEnVect1: TImageEnDBVect;
-    ImageEnVect2: TImageEnDBVect;
-    ImageEnVect3: TImageEnDBVect;
-    ImageEnVect4: TImageEnDBVect;
-    procedure FormShow(Sender: TObject);
+    ImageEnView1: TImageEnView;
+    ImageEnView2: TImageEnView;
     procedure FormResize(Sender: TObject);
   private
-    procedure RetrieveImage;
     { Private declarations }
   public
     { Public declarations }
-    ievPosture : array[0..3] of TImageEnVect;
-    STUDENT_IMAGE_ID : Integer;
   end;
 
 var
@@ -49,45 +43,8 @@ uses GlobalVars, UdataModule;
 {$R *.dfm}
 
 procedure TfmViewPicture.FormResize(Sender: TObject);
-var
-  i : Integer;
 begin
-  for i := 0 to 3 do begin
-    ievPosture[i].Width := ClientWidth div 4;
-  end;
+  ImageEnView1.Width := ClientWidth div 2;
 end;
-
-procedure TfmViewPicture.FormShow(Sender: TObject);
-var
-  i : Integer;
-begin
-  ievPosture[0] := ImageEnVect1;
-  ievPosture[1] := ImageEnVect2;
-  ievPosture[2] := ImageEnVect3;
-  ievPosture[3] := ImageEnVect4;
-
-  DataModule1.STUDENT_IMAGE_SEL_ID.ParamByName('ID').Value := STUDENT_IMAGE_ID;
-  DataModule1.STUDENT_IMAGE_SEL_ID.Open;
-  DataModule1.ds_STUDENT_IMAGE_SEL_ID.DataSet.Refresh;
-  RetrieveImage;
-end;
-
-procedure TfmViewPicture.RetrieveImage;
-var
-  img_id, i, cnt, r : Integer;
-  img1, img2, img3, img4, img5, img_url : string;
-  img : array[0..3] of string;
-begin
-  for i := 0 to 3 do begin
-    img[i] := DataModule1.ds_STUDENT_IMAGE_SEL_ID.DataSet.FieldByName('IMG_STR' + IntToStr(i+1)).AsString;
-    ievPosture[i].Clear;
-    if (Length(img[i]) > 10) then begin
-      ievPosture[i].IO.LoadFromFileJpeg(gsImageFolder + '\' + img[i]);
-      if ievPosture[i].IEBitmap.Width > ievPosture[i].IEBitmap.Height then
-        ievPosture[i].Proc.Rotate(-90);
-    end;
-  end;
-end;
-
 
 end.

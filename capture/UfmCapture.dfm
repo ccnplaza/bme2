@@ -20,12 +20,13 @@ object fmCapture: TfmCapture
   PixelsPerInch = 96
   TextHeight = 17
   object Splitter1: TSplitter
-    Left = 497
+    Left = 577
     Top = 29
     Width = 4
     Height = 632
     Color = clGrayText
     ParentColor = False
+    ExplicitLeft = 497
   end
   object Panel5: TPanel
     Left = 0
@@ -45,9 +46,20 @@ object fmCapture: TfmCapture
       Layout = tlCenter
       ExplicitHeight = 17
     end
-    object btnRefresh: TcxButton
+    object Label6: TLabel
       AlignWithMargins = True
       Left = 140
+      Top = 4
+      Width = 85
+      Height = 21
+      Align = alLeft
+      Caption = #45800#52404'('#46020#51109#47749'):'
+      Layout = tlCenter
+      ExplicitHeight = 17
+    end
+    object btnRefresh: TcxButton
+      AlignWithMargins = True
+      Left = 378
       Top = 2
       Width = 67
       Height = 25
@@ -110,11 +122,32 @@ object fmCapture: TfmCapture
       Value = 2020
       Width = 68
     end
+    object lcbSubCenter: TcxLookupComboBox
+      AlignWithMargins = True
+      Left = 229
+      Top = 2
+      Margins.Left = 1
+      Margins.Top = 1
+      Margins.Right = 1
+      Margins.Bottom = 1
+      Align = alLeft
+      Properties.DropDownListStyle = lsFixedList
+      Properties.KeyFieldNames = 'ID'
+      Properties.ListColumns = <
+        item
+          FieldName = 'S_NAME'
+        end>
+      Properties.ListOptions.ShowHeader = False
+      Properties.ListSource = DataModule1.ds_REG_SCHOOL_SEL_LOOK
+      Properties.OnCloseUp = lcbSubCenterPropertiesCloseUp
+      TabOrder = 2
+      Width = 145
+    end
   end
   object PanelLeft: TPanel
     Left = 0
     Top = 29
-    Width = 497
+    Width = 577
     Height = 632
     Align = alLeft
     BevelOuter = bvNone
@@ -278,7 +311,7 @@ object fmCapture: TfmCapture
           Navigator.InfoPanel.DisplayMask = '[RecordIndex]/[RecordCount]'
           Navigator.InfoPanel.Visible = True
           Navigator.Visible = True
-          OnCellClick = gridStudentCellClick
+          OnFocusedRecordChanged = gridStudentFocusedRecordChanged
           DataController.DataSource = DataModule1.ds_STUDENT_IMAGE_SEL_BYDATE
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
@@ -597,57 +630,77 @@ object fmCapture: TfmCapture
     object Panel3: TPanel
       Left = 250
       Top = 0
-      Width = 247
+      Width = 327
       Height = 632
       Align = alClient
       TabOrder = 1
-      object cxTabControl1: TcxTabControl
+      object cxPageControl1: TcxPageControl
         Left = 1
         Top = 1
-        Width = 245
-        Height = 27
-        Align = alTop
+        Width = 325
+        Height = 630
+        Align = alClient
         TabOrder = 0
+        Properties.ActivePage = cxTabSheet1
         Properties.CustomButtons.Buttons = <>
         Properties.Style = 9
-        Properties.TabIndex = 0
-        Properties.Tabs.Strings = (
-          #52769#47732
-          #46321
-          #51221#47732
-          #51313#48512)
-        OnChange = cxTabControl1Change
-        ClientRectBottom = 27
-        ClientRectRight = 245
+        OnChange = cxPageControl1Change
+        ClientRectBottom = 630
+        ClientRectRight = 325
         ClientRectTop = 24
-      end
-      object ImageEnView1: TImageEnView
-        Left = 1
-        Top = 28
-        Width = 245
-        Height = 603
-        Cursor = crDefault
-        Background = clBlack
-        ScrollBars = ssNone
-        ZoomFilter = rfFastLinear
-        DelayZoomFilter = True
-        AutoStretch = True
-        AutoShrink = True
-        Align = alClient
-        TabOrder = 1
+        object cxTabSheet1: TcxTabSheet
+          Caption = #51221#47732
+          ImageIndex = 0
+          object ImageEnView1: TImageEnView
+            Left = 0
+            Top = 0
+            Width = 325
+            Height = 606
+            Cursor = crDefault
+            Background = clBlack
+            ScrollBars = ssNone
+            ZoomFilter = rfFastLinear
+            MouseInteractGeneral = [miCropTool]
+            DelayZoomFilter = True
+            AutoStretch = True
+            AutoShrink = True
+            Align = alClient
+            TabOrder = 0
+          end
+        end
+        object cxTabSheet2: TcxTabSheet
+          Caption = #52769#47732
+          ImageIndex = 1
+          object ImageEnView2: TImageEnView
+            Left = 0
+            Top = 0
+            Width = 325
+            Height = 606
+            Cursor = crDefault
+            Background = clBlack
+            ScrollBars = ssNone
+            ZoomFilter = rfFastLinear
+            MouseInteractGeneral = [miCropTool]
+            DelayZoomFilter = True
+            AutoStretch = True
+            AutoShrink = True
+            Align = alClient
+            TabOrder = 0
+          end
+        end
       end
     end
   end
   object PanelRight: TPanel
-    Left = 501
+    Left = 581
     Top = 29
-    Width = 683
+    Width = 603
     Height = 632
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 2
     object Panel4: TPanel
-      Left = 442
+      Left = 362
       Top = 0
       Width = 241
       Height = 632
@@ -674,7 +727,7 @@ object fmCapture: TfmCapture
         StyleFocused.LookAndFeel.SkinName = 'Black'
         StyleHot.LookAndFeel.SkinName = 'Black'
         TabOrder = 0
-        Height = 215
+        Height = 285
         Width = 233
         object Label8: TLabel
           Left = 14
@@ -877,13 +930,13 @@ object fmCapture: TfmCapture
           OnClick = btnStopPreview1Click
         end
         object btnCapture1: TcxButton
-          Tag = 3
-          Left = 155
+          Tag = 1
+          Left = 15
           Top = 94
-          Width = 60
+          Width = 96
           Height = 25
           Hint = #51221#47732#52897#52432
-          Caption = #51221#47732
+          Caption = #51221#47732#52524#50689
           LookAndFeel.NativeStyle = False
           LookAndFeel.SkinName = 'DevExpressStyle'
           ParentShowHint = False
@@ -892,33 +945,18 @@ object fmCapture: TfmCapture
           OnClick = btnCapture1Click
         end
         object btnCapture2: TcxButton
-          Tag = 1
-          Left = 15
+          Tag = 2
+          Left = 117
           Top = 94
-          Width = 60
+          Width = 98
           Height = 25
           Hint = #52769#47732#52897#52432
-          Caption = #52769#47732
+          Caption = #52769#47732#52524#50689
           LookAndFeel.NativeStyle = False
           LookAndFeel.SkinName = 'DevExpressStyle'
           ParentShowHint = False
           ShowHint = True
           TabOrder = 4
-          OnClick = btnCapture1Click
-        end
-        object btnCapture4: TcxButton
-          Tag = 2
-          Left = 85
-          Top = 94
-          Width = 60
-          Height = 25
-          Hint = #46321#52897#52432
-          Caption = #46321
-          LookAndFeel.NativeStyle = False
-          LookAndFeel.SkinName = 'DevExpressStyle'
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 5
           OnClick = btnCapture1Click
         end
         object cboVideoDevices1: TComboBox
@@ -935,7 +973,7 @@ object fmCapture: TfmCapture
           Font.Style = []
           ImeName = 'Microsoft IME 2010'
           ParentFont = False
-          TabOrder = 6
+          TabOrder = 5
           OnChange = cboVideoDevices1Change
         end
         object cboVideoFormats1: TComboBox
@@ -952,7 +990,7 @@ object fmCapture: TfmCapture
           Font.Style = []
           ImeName = 'Microsoft IME 2010'
           ParentFont = False
-          TabOrder = 7
+          TabOrder = 6
         end
         object cbRotation1: TcxImageComboBox
           Tag = 1
@@ -987,35 +1025,35 @@ object fmCapture: TfmCapture
           StyleFocused.LookAndFeel.SkinName = 'DevExpressStyle'
           StyleHot.LookAndFeel.NativeStyle = False
           StyleHot.LookAndFeel.SkinName = 'DevExpressStyle'
-          TabOrder = 8
+          TabOrder = 7
           Width = 63
         end
         object spX: TcxSpinEdit
           Left = 57
           Top = 150
           Properties.ImmediatePost = True
-          TabOrder = 9
+          TabOrder = 8
           Width = 53
         end
         object spX2: TcxSpinEdit
           Left = 151
           Top = 149
           Properties.ImmediatePost = True
-          TabOrder = 10
+          TabOrder = 9
           Width = 53
         end
         object spY: TcxSpinEdit
           Left = 57
           Top = 175
           Properties.ImmediatePost = True
-          TabOrder = 11
+          TabOrder = 10
           Width = 53
         end
         object spY2: TcxSpinEdit
           Left = 151
           Top = 174
           Properties.ImmediatePost = True
-          TabOrder = 12
+          TabOrder = 11
           Width = 53
         end
         object chkCameraMargin: TCheckBox
@@ -1024,231 +1062,66 @@ object fmCapture: TfmCapture
           Width = 88
           Height = 17
           Caption = #47560#51652#51201#50857
-          TabOrder = 13
+          TabOrder = 12
           OnClick = chkCameraMarginClick
         end
-      end
-      object cxGroupBox1: TcxGroupBox
-        AlignWithMargins = True
-        Left = 4
-        Top = 225
-        Align = alTop
-        Caption = #52852#47700#46972' '#49444#51221'/'#52524#50689'('#51313#48512')'
-        Style.LookAndFeel.SkinName = 'Black'
-        Style.TextColor = clBlue
-        Style.TextStyle = [fsBold]
-        StyleDisabled.LookAndFeel.SkinName = 'Black'
-        StyleFocused.LookAndFeel.SkinName = 'Black'
-        StyleHot.LookAndFeel.SkinName = 'Black'
-        TabOrder = 1
-        Height = 112
-        Width = 233
-        object btnSet2: TcxButton
-          Tag = 1
-          Left = 87
-          Top = 68
-          Width = 35
-          Height = 25
-          Hint = #52852#47700#46972#49444#51221
-          LookAndFeel.NativeStyle = False
+        object btnCut: TcxButton
+          AlignWithMargins = True
+          Left = 15
+          Top = 217
+          Width = 103
+          Height = 29
+          Hint = #51088#47476#44592
+          Margins.Left = 1
+          Margins.Top = 1
+          Margins.Right = 1
+          Margins.Bottom = 1
+          Caption = #49324#51652#51088#47476#44592
           LookAndFeel.SkinName = 'DevExpressStyle'
           OptionsImage.Glyph.Data = {
             36040000424D3604000000000000360000002800000010000000100000000100
             2000000000000004000000000000000000000000000000000000000000000000
-            0000000000000000000000000000000000010000000900000012000000120000
-            0009000000020000000000000000000000000000000000000000000000000000
-            0000000000030000000A0000000A0000000B2519156F68473BFF67443BFF1D13
-            0F700000000C0000000B0000000C000000050000000100000000000000000000
-            00030403021A543B33C738251EB30D0907454C362DC4B5A198FFAB958AFF3E29
-            23C50D080748311F1AB13A241ECE030202220000000400000000000000000000
-            00085A4138C9C7B9B0FFA8958BFF6C4F47FF715044FECABAB0FFC6B5AAFF6142
-            37FE6B5047FE9C857AFFA89388FF3B241FCB0000000B00000000000000000000
-            00074C3930ABC0AEA7FFE3DBD5FFD2C3BAFFC1AFA6FFCFC0B7FFCEBEB5FFBCAA
-            9FFFCAB9AEFFC9B8ADFF9F897FFF36221DB20000000A00000000000000010000
-            0007110C0B368D6F65FCEAE3DFFFDACDC6FFD8CCC3FFE3D9D3FFE7E0DAFFE1D6
-            D0FFD2C3B9FFCDBCB3FF705449FE0D0907410000000A00000002000000042A1E
-            1A6B4C372EBB846356FED9CEC8FFE3DAD5FFCDBEB7FF8E6F62FF947567FFD0C0
-            B9FFE3DAD3FFC8B7ADFF6A4940FF47312AC22418147100000007000000088D6D
-            60FFD8CCC7FFEEE8E5FFEBE6E0FFEAE3DDFF7F6257FF2219155E241B175E9374
-            67FFEBE4DFFFD6C8C0FFD3C6BDFFB9A59BFF78574BFF0000000D000000079373
-            64FFD9CECAFFF6F3F2FFFAF7F6FFEFEAE5FF76574DFF1D1411551E1613568869
-            5DFFEFE9E6FFDDD2CBFFD8CAC3FFC7B8B1FF7E5B4FFF0000000C000000033428
-            245F665046B5937467FEECE6E3FFF0ECE8FFCEC2BDFF856961FF886D65FFD2C7
-            C2FFECE4DFFFD9CFC9FF856458FD5A443AB92B201C6102010108000000000000
-            000316110F2EA78B7EFDF6F4F1FFF3EFECFFF2EEEAFFF3EFECFFF0EBE7FFEFEA
-            E6FFEFEBE7FFECE5E0FF83665BFD110C0B390000000600000001000000000000
-            0003685349AADCD1CBFFF8F6F3FFF8F5F3FFEBE4E1FFFDFCFBFFF3EEECFFE2D8
-            D3FFFAF9F8FFF9F7F5FFC8B9B3FF4E3931B00000000500000000000000000000
-            0002776055BDE5DDD8FFDCD0CBFFAC9183FD9E7E6EFDFBF8F8FFF5F1EEFF9979
-            6AFDA3897EFCD7CBC5FFE0D6D1FF6E564CC20000000500000000000000000000
-            00010605040D7C6458BF69544BA51713102B6F594EB2E1D7D2FFE0D6D1FF6D57
-            4DB314100E2B614D44A4775E53C7050404110000000100000000000000000000
-            0000000000000000000100000002000000023B302A5EA68676FFA58375FF3A2F
-            295F000000030000000300000003000000010000000000000000000000000000
-            0000000000000000000000000000000000000000000100000002000000030000
-            0001000000000000000000000000000000000000000000000000}
+            00030000000E00000018000000180000000F0000000400000000000000000000
+            00030000000E00000018000000180000000F0000000400000000000000030402
+            011A512408A5833A0BEE81380AEF4F2105A70301001C00000003000000030302
+            001A512408A5833A0BEE81380AEF4F2105A70301001C00000003000000095931
+            159BB8763BFFF1BF6EFFF1BD6BFFB56F33FF52280DA10000000C00000009552C
+            129BB76F34FFEEA457FFEDA354FFB3672CFF52280DA10000000C0000000CA868
+            37EEF6CE8FFFC08B57FFD2A26DFFF3C983FF985525F00000001400000010A05E
+            2FEFF4B775FFB57A47FFC8905BFFF0B06AFF995425EF0000001000000009B77C
+            48EDFAE3BFFFA26638FFAE7545FFF8DEB5FFAC6A38FF0000002A0000002AB777
+            44FFF9D4A9FF97592FFFA3663AFFF7CFA0FFA56735EE0000000D000000047251
+            3290DFAE7EFFF4DDC1FFF3DDC0FFDEB58BFFCB9C76FF67372BFF603226FFD0A1
+            7AFFE1B58AFFF4D5B3FFF3D4B1FFD49F6EFF68462A9300000006000000010504
+            030B7356378ECD9762F2D69F69FFE0BA94FFE6CBB4FFF0DED4FF9E796DFFCAAB
+            94FFDDB591FFD29964FFC28C5AF36D4E33910504020D00000001000000000000
+            0000000000030000000A35241F66AD8577FBF9F4F2FFF2E2D9FFE4CDC4FF9772
+            68FF865B4EFB23120D6F00000010000000040000000100000000000000000000
+            000000000000000000010000000C5B3B32B2B58B7EFFFAF5F3FFF4E5DCFFB799
+            8EFF43241CB40000000F00000001000000000000000000000000000000000000
+            000000000000000000031E141142A07567FDDECAC2FFB89388FFF8F3F1FFF3E7
+            DFFF8A6054FD150B093F00000003000000000000000000000000000000000000
+            0000000000010403020F82584BD8E6D1C9FFEFE5E1FF795144E0885E53DFF6F1
+            EEFFDFCFC6FF61382ED70201010E000000010000000000000000000000000000
+            0000000000045339318ACCAEA3FFF0E5E1FF734D41C80805041E0A0605197550
+            45C5F4EEECFFB99B93FF39201988000000040000000000000000000000000000
+            00022219153BB68D7EFBEEE2DDFF68473DB00402021000000002000000010403
+            020C644237ACF2EAE7FF92695DFD170D0A390000000200000000000000010403
+            030B946C5FD6EBDED9FF5C413894000000070000000200000000000000000000
+            00010000000454372E91ECE3E0FF683F34D50301010A00000001000000025E45
+            3B85EBDCD6FF4B362E7200000005000000010000000000000000000000000000
+            000000000000000000023F2A236FE9DFDCFF3E231D8400000002000000028965
+            58BB3D2D27590000000300000001000000000000000000000000000000000000
+            000000000000000000000000000131201B57654236BA00000001}
           ParentShowHint = False
           ShowHint = True
-          TabOrder = 0
-          OnClick = btnSet2Click
-        end
-        object btnStartPreview2: TcxButton
-          Tag = 1
-          Left = 15
-          Top = 68
-          Width = 35
-          Height = 25
-          Hint = #48120#47532#48372#44592'ON'
-          LookAndFeel.NativeStyle = False
-          LookAndFeel.SkinName = 'DevExpressStyle'
-          OptionsImage.Glyph.Data = {
-            36040000424D3604000000000000360000002800000010000000100000000100
-            2000000000000004000000000000000000000000000000000000000000000000
-            0000000000000000000000000000000000000000000000000000AD6A27FF7144
-            19A9000000000000000000000000000000000000000000000000242424460909
-            0912000000000000000000000000000000000000000000000000AD6A27FFAA67
-            26FFAA6726FF79491BB5000000000000000000000000000000007A7A7AFF6F6F
-            6FFF737373F0535353AD3C3C3C7E2E2E2E602A2A2A5802020205AD6A27FFAA67
-            26FFAA6726FFAA6726FFAA6726FF704319A700000000000000001D1D1D386F6F
-            6FFF6F6F6FFF464646A011111126080808130A0A0A1700000000AD6A27FFAA67
-            26FFAA6726FFAA6726FFAA6726FFAA6726FFAA6726FF643D1695000000000F0F
-            0F200F0F0F23313131706C6C6CF86F6F6FFF6F6F6FFF0505050CAD6A27FFAA67
-            26FFAA6726FFAA6726FFAA6726FFAA6726FFAA6726FF55341380000000000000
-            0000636363E36F6F6FFF6D6D6DFF676767FF676767FF0505050CAD6A27FFAA67
-            26FFAA6726FFAA6726FFAA6726FF613B16910000000000000000000000005C5C
-            5CD36F6F6FFF696969FF7C7C7CFFC3C3C3FFCFCFCFFF0808080CAD6A27FFAA67
-            26FFAA6726FF6940189E00000000000000000000000000000000212121456F6F
-            6FFF6B6B6BFF959595FFFFFFFFFFF5F5F5FFDDDDDDFF13131313AD6A27FF7748
-            1BB2000000012121214500000000000000000000000000000000505050A76E6E
-            6EFF666666FFFFFFFFFFC8C8C8FF5D5D5DFF646464FF444444951B1B1B1B3434
-            344C545454CA6F6F6FFF0707070D000000000000000000000000666666D66C6C
-            6CFF8B8B8BFFFFFFFFFF707070FF6E6E6EFF6B6B6BFF656565FFCBCBCBFFE2E2
-            E2FF666666FF6F6F6FFF1E1E1E3F000000000000000000000000646464D16C6C
-            6CFF838383FFFFFFFFFF727272FFFFFFFFFFB0B0B0FF5D5D5DFFD9D9D9FFDADA
-            DAFF666666FF6F6F6FFF1A1A1A37000000000000000000000000464646936F6F
-            6FFF626262FFF5F5F5FFEAEAEAFF8B8B8BFF626262FFA3A3A3FFFFFFFFFF9898
-            98FF6B6B6BFF6F6F6FFF000000000000000000000000000000001010101F6F6F
-            6FFF6D6D6DFF767676FFFBFBFBFFFFFFFFFFFFFFFFFFFFFFFFFFB8B8B8FF6464
-            64FF6F6F6FFF575757B600000000000000000000000000000000000000004848
-            48966F6F6FFF6D6D6DFF656565FF898989FF969696FF737373FF666666FF6F6F
-            6FFF6F6F6FFF0404040700000000000000000000000000000000000000000000
-            00004B4B4B9D6E6E6EFF696969FFEDEDEDFFE8E8E8FFA2A2A2FF6B6B6BFF6E6E
-            6EFD0F0F0F1D0000000000000000000000000000000000000000000000000000
-            000000000000131313284343439C5E5E5ED96D6D6DE5515151BF2E2E2E6A0000
-            0000000000000000000000000000000000000000000000000000}
-          OptionsImage.ImageIndex = 8
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 1
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clGreen
-          Font.Height = -13
-          Font.Name = #44404#47548
-          Font.Style = []
-          ParentFont = False
-          OnClick = btnStartPreview2Click
-        end
-        object btnStopPreview2: TcxButton
-          Tag = 1
-          Left = 51
-          Top = 68
-          Width = 35
-          Height = 25
-          Hint = #48120#47532#48372#44592'OFF'
-          LookAndFeel.NativeStyle = False
-          LookAndFeel.SkinName = 'DevExpressStyle'
-          OptionsImage.Glyph.Data = {
-            36040000424D3604000000000000360000002800000010000000100000000100
-            2000000000000004000000000000000000000000000000000000000000000000
-            00000000000000000000000000000000000000000000000000009C6128E7AC6B
-            2CFFAC6B2CFFAC6B2CFFAC6B2CFFAC6B2CFFAC6B2CFF9C6128E7242424460909
-            0912000000000000000000000000000000000000000001000001AC6B2CFFAC6B
-            2CFFAC6B2CFFAC6B2CFFAC6B2CFFAC6B2CFFAC6B2CFFAC6B2CFF7A7A7AFF6F6F
-            6FFF737373F0535353AD3C3C3C7E2E2E2E602A2A2A5701000001AC6B2CFFAC6B
-            2CFFAC6B2CFFAC6B2CFFAC6B2CFFAC6B2CFFAC6B2CFFAC6B2CFF1D1D1D386F6F
-            6FFF6F6F6FFF464646A011111126080808130A0A0A1601000001AC6B2CFFAC6B
-            2CFFAC6B2CFFAC6B2CFFAC6B2CFFAC6B2CFFAC6B2CFFAC6B2CFF000000000F0F
-            0F200F0F0F23313131706C6C6CF86F6F6FFF6F6F6FFE01010102AC6B2CFFAC6B
-            2CFFAC6B2CFFAC6B2CFFAC6B2CFFAC6B2CFFAC6B2CFFAC6B2CFF000000000000
-            0000636363E36F6F6FFF6D6D6DFF676767FF676767FE01010102AC6B2CFFAC6B
-            2CFFAC6B2CFFAC6B2CFFAC6B2CFFAC6B2CFFAC6B2CFFAC6B2CFF000000005C5C
-            5CD36F6F6FFF696969FF7C7C7CFFC3C3C3FFCECECEFE01010102AC6B2CFFAC6B
-            2CFFAC6B2CFFAC6B2CFFAC6B2CFFAC6B2CFFAC6B2CFFAC6B2CFF212121456F6F
-            6FFF6B6B6BFF959595FFFFFFFFFFF5F5F5FFDDDDDDFF0D0D0D0D9A6028E5AC6B
-            2CFFAC6B2CFFAC6B2CFFAC6B2CFFAC6B2CFFAC6B2CFF925B25D8505050A76E6E
-            6EFF666666FFFFFFFFFFC8C8C8FF5D5D5DFF646464FF434343910F0F0F0F0202
-            0203010101030101010300000000000000000000000000000000666666D66C6C
-            6CFF8B8B8BFFFFFFFFFF707070FF6E6E6EFF6B6B6BFF656565FFCBCBCBFFE2E2
-            E2FF666666FF6F6F6FFF1E1E1E3F000000000000000000000000646464D16C6C
-            6CFF838383FFFFFFFFFF727272FFFFFFFFFFB0B0B0FF5D5D5DFFD9D9D9FFDADA
-            DAFF666666FF6F6F6FFF1A1A1A37000000000000000000000000464646936F6F
-            6FFF626262FFF5F5F5FFEAEAEAFF8B8B8BFF626262FFA3A3A3FFFFFFFFFF9898
-            98FF6B6B6BFF6F6F6FFF000000000000000000000000000000001010101F6F6F
-            6FFF6D6D6DFF767676FFFBFBFBFFFFFFFFFFFFFFFFFFFFFFFFFFB8B8B8FF6464
-            64FF6F6F6FFF575757B600000000000000000000000000000000000000004848
-            48966F6F6FFF6D6D6DFF656565FF898989FF969696FF737373FF666666FF6F6F
-            6FFF6F6F6FFF0404040700000000000000000000000000000000000000000000
-            00004B4B4B9D6E6E6EFF696969FFEDEDEDFFE8E8E8FFA2A2A2FF6B6B6BFF6E6E
-            6EFD0F0F0F1D0000000000000000000000000000000000000000000000000000
-            000000000000131313284343439C5E5E5ED96D6D6DE5515151BF2E2E2E6A0000
-            0000000000000000000000000000000000000000000000000000}
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 2
-          OnClick = btnStopPreview2Click
-        end
-        object cxButton4: TcxButton
-          Tag = 1
-          Left = 128
-          Top = 68
-          Width = 87
-          Height = 25
-          Hint = #51221#47732#52897#52432
-          Caption = #51313#48512#52524#50689
-          LookAndFeel.NativeStyle = False
-          LookAndFeel.SkinName = 'DevExpressStyle'
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 3
-          OnClick = cxButton4Click
-        end
-        object cboVideoDevices2: TComboBox
-          Tag = 1
-          Left = 15
-          Top = 22
-          Width = 200
-          Height = 22
-          Style = csOwnerDrawFixed
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = #45208#45588#44256#46357
-          Font.Style = []
-          ImeName = 'Microsoft IME 2010'
-          ParentFont = False
-          TabOrder = 4
-          OnChange = cboVideoDevices2Change
-        end
-        object cboVideoFormats2: TComboBox
-          Tag = 1
-          Left = 15
-          Top = 45
-          Width = 200
-          Height = 22
-          Style = csOwnerDrawFixed
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = #45208#45588#44256#46357
-          Font.Style = []
-          ImeName = 'Microsoft IME 2010'
-          ParentFont = False
-          TabOrder = 5
+          TabOrder = 13
+          OnClick = btnCutClick
         end
       end
       object btnImportImage: TcxButton
         Left = 38
-        Top = 343
+        Top = 324
         Width = 155
         Height = 35
         Hint = #49324#51652' '#44032#51256#50724#44592
@@ -1292,16 +1165,16 @@ object fmCapture: TfmCapture
           0104010101030000000100000000000000000000000000000000}
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 2
+        TabOrder = 1
         OnClick = btnImportImageClick
       end
       object Button1: TButton
-        Left = 40
-        Top = 416
+        Left = 56
+        Top = 396
         Width = 129
         Height = 33
         Caption = #49324#51652#51200#51109
-        TabOrder = 3
+        TabOrder = 2
         Visible = False
         OnClick = Button1Click
       end
@@ -1309,64 +1182,27 @@ object fmCapture: TfmCapture
     object Panel2: TPanel
       Left = 0
       Top = 0
-      Width = 442
+      Width = 362
       Height = 632
       Align = alClient
       Caption = 'Panel2'
       TabOrder = 1
-      object cxPageControl1: TcxPageControl
+      object ImageEnVect1: TImageEnVect
         Left = 1
         Top = 1
-        Width = 440
+        Width = 360
         Height = 630
+        Background = clBackground
+        BorderStyle = bsNone
+        MouseInteractGeneral = [miSelect]
+        AutoStretch = True
+        AutoShrink = True
+        OnDShowNewFrame = ImageEnVect1DShowNewFrame
+        EnableInteractionHints = False
         Align = alClient
         TabOrder = 0
-        Properties.ActivePage = cxTabSheet2
-        Properties.CustomButtons.Buttons = <>
-        Properties.Style = 9
-        ClientRectBottom = 630
-        ClientRectRight = 440
-        ClientRectTop = 24
-        object cxTabSheet1: TcxTabSheet
-          Caption = #52404#54805#52852#47700#46972
-          ImageIndex = 0
-          object ImageEnVect1: TImageEnVect
-            Left = 0
-            Top = 0
-            Width = 440
-            Height = 606
-            Background = clBackground
-            BorderStyle = bsNone
-            MouseInteractGeneral = [miSelect]
-            AutoStretch = True
-            AutoShrink = True
-            OnDShowNewFrame = ImageEnVect1DShowNewFrame
-            EnableInteractionHints = False
-            Align = alClient
-            TabOrder = 0
-            OnMouseDown = ImageEnVect1MouseDown
-            OnMouseUp = ImageEnVect1MouseUp
-          end
-        end
-        object cxTabSheet2: TcxTabSheet
-          Caption = #51313#48512#52852#47700#46972
-          ImageIndex = 1
-          object ImageEnVect2: TImageEnVect
-            Left = 0
-            Top = 0
-            Width = 440
-            Height = 606
-            Background = clBackground
-            BorderStyle = bsNone
-            MouseInteractGeneral = [miSelect]
-            AutoStretch = True
-            AutoShrink = True
-            OnDShowNewFrame = ImageEnVect2DShowNewFrame
-            EnableInteractionHints = False
-            Align = alClient
-            TabOrder = 0
-          end
-        end
+        OnMouseDown = ImageEnVect1MouseDown
+        OnMouseUp = ImageEnVect1MouseUp
       end
     end
   end

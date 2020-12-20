@@ -58,7 +58,8 @@ uses
   UfmEditAnalyseDate in 'analyse\UfmEditAnalyseDate.pas' {fmEditAnalyseDate},
   UfmVideoPlayer in 'common\UfmVideoPlayer.pas' {fmVideoPlayer},
   UfmFolderSelect in 'common\UfmFolderSelect.pas' {fmFolderSelect},
-  UfmSelectStudentPicture in 'analyse\UfmSelectStudentPicture.pas' {fmSelectStudentPicture};
+  UfmSelectStudentPicture in 'analyse\UfmSelectStudentPicture.pas' {fmSelectStudentPicture},
+  UfmPictureZoom in 'capture\UfmPictureZoom.pas' {fmPictureZoom};
 
 {$R *.res}
 
@@ -69,7 +70,6 @@ begin
   if fmLogin.ShowModal = mrOk then begin
     Application.CreateForm(TDataModule1, DataModule1);
   Application.CreateForm(TfmMain, fmMain);
-  Application.CreateForm(TfmSelectStudentPicture, fmSelectStudentPicture);
   Application.Title := '¹Ù¸¥GYM';
   Application.Run;
   end else begin

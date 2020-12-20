@@ -25,11 +25,10 @@ object fmComments: TfmComments
     Height = 33
     Align = alTop
     TabOrder = 0
-    ExplicitWidth = 907
     object btnEdit: TcxButton
-      Left = 408
+      Left = 142
       Top = 4
-      Width = 143
+      Width = 115
       Height = 25
       Hint = #49688#51221
       Caption = #53076#47704#53944' '#49688#51221
@@ -78,10 +77,10 @@ object fmComments: TfmComments
     object btnCreateNew: TcxButton
       Left = 24
       Top = 4
-      Width = 143
+      Width = 115
       Height = 25
       Hint = #49688#51221
-      Caption = #49352' '#53076#47704#53944' '#49373#49457
+      Caption = #53076#47704#53944' '#52628#44032
       LookAndFeel.NativeStyle = False
       LookAndFeel.SkinName = 'DevExpressStyle'
       OptionsImage.Glyph.Data = {
@@ -125,12 +124,12 @@ object fmComments: TfmComments
       OnClick = btnCreateNewClick
     end
     object btnDeleteNew: TcxButton
-      Left = 173
+      Left = 260
       Top = 4
-      Width = 143
+      Width = 115
       Height = 25
       Hint = #49688#51221
-      Caption = #49352' '#53076#47704#53944' '#49325#51228
+      Caption = #53076#47704#53944' '#49325#51228
       LookAndFeel.NativeStyle = False
       LookAndFeel.SkinName = 'DevExpressStyle'
       OptionsImage.Glyph.Data = {
@@ -182,8 +181,6 @@ object fmComments: TfmComments
     Align = alClient
     TabOrder = 1
     LookAndFeel.SkinName = 'Black'
-    ExplicitWidth = 907
-    ExplicitHeight = 549
     object gridcomments: TcxGridDBTableView
       Navigator.Buttons.CustomButtons = <>
       Navigator.Buttons.First.Hint = #52376#51020#51004#47196
@@ -232,30 +229,76 @@ object fmComments: TfmComments
         HeaderAlignmentHorz = taCenter
         Width = 51
       end
-      object gridcommentsITEM_NAME: TcxGridDBColumn
-        Caption = #52769#51221#54637#47785
-        DataBinding.FieldName = 'ITEM_NAME'
-        OnCustomDrawCell = gridcommentsITEM_NAMECustomDrawCell
-        Options.CellMerging = True
-        Width = 114
-      end
-      object gridcommentsCOMMENT_NAME: TcxGridDBColumn
-        Caption = #52769#51221#44208#44284
-        DataBinding.FieldName = 'COMMENT_NAME'
-        Width = 162
-      end
-      object gridcommentsCHECK_COMMENTS: TcxGridDBColumn
-        Caption = #53076#47704#53944' '#45236#50857
-        DataBinding.FieldName = 'CHECK_COMMENTS'
-        Width = 750
-      end
       object gridcommentsITEM_ID: TcxGridDBColumn
+        Caption = #52769#51221#47732
         DataBinding.FieldName = 'ITEM_ID'
-        Visible = False
+        PropertiesClassName = 'TcxImageComboBoxProperties'
+        Properties.Items = <
+          item
+            Description = #51221#47732
+            ImageIndex = 0
+            Value = 1
+          end
+          item
+            Description = #52769#47732
+            Value = 2
+          end
+          item
+            Description = #51333#54633
+            Value = 3
+          end>
+        OnCustomDrawCell = gridcommentsITEM_IDCustomDrawCell
+        HeaderAlignmentHorz = taCenter
+        Options.CellMerging = True
       end
       object gridcommentsVALUE_ID: TcxGridDBColumn
+        Caption = #52769#51221#50976#54805
         DataBinding.FieldName = 'VALUE_ID'
+        PropertiesClassName = 'TcxImageComboBoxProperties'
+        Properties.Items = <
+          item
+            Description = 'A+'
+            ImageIndex = 0
+            Value = 1
+          end
+          item
+            Description = 'A'
+            Value = 2
+          end
+          item
+            Description = 'B+'
+            Value = 3
+          end
+          item
+            Description = 'B'
+            Value = 4
+          end
+          item
+            Description = 'C'
+            Value = 5
+          end>
+        HeaderAlignmentHorz = taCenter
+      end
+      object gridcommentsITEM_NAME: TcxGridDBColumn
+        Caption = #52769#51221#47732
+        DataBinding.FieldName = 'ITEM_NAME'
         Visible = False
+        OnCustomDrawCell = gridcommentsITEM_NAMECustomDrawCell
+        HeaderAlignmentHorz = taCenter
+        Options.CellMerging = True
+        Width = 76
+      end
+      object gridcommentsCOMMENT_NAME: TcxGridDBColumn
+        Caption = #52769#51221#50976#54805
+        DataBinding.FieldName = 'COMMENT_NAME'
+        Visible = False
+        HeaderAlignmentHorz = taCenter
+        Width = 75
+      end
+      object gridcommentsCHECK_COMMENTS: TcxGridDBColumn
+        Caption = #51204#47928#44032' '#51032#44204
+        DataBinding.FieldName = 'CHECK_COMMENTS'
+        Width = 926
       end
     end
     object cxGrid1Level1: TcxGridLevel
@@ -271,6 +314,16 @@ object fmComments: TfmComments
       item
         DataType = ftInteger
         Name = 'ID'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ITEM_ID'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'VALUE_ID'
         ParamType = ptInput
       end
       item
@@ -306,5 +359,46 @@ object fmComments: TfmComments
         ParamType = ptInput
       end>
     CommandStoredProcName = 'CHECK_COMMENTS_DEL'
+  end
+  object CHECK_COMMENTS_INS: TUniStoredProc
+    StoredProcName = 'CHECK_COMMENTS_INS'
+    Connection = DataModule1.UniConnection1
+    Left = 184
+    Top = 312
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'ITEM_ID'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'VALUE_ID'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftWideString
+        Name = 'COMMENT_NAME'
+        ParamType = ptInput
+        Size = 30
+      end
+      item
+        DataType = ftWideMemo
+        Name = 'CHECK_COMMENTS'
+        ParamType = ptInput
+        Value = ''
+      end
+      item
+        DataType = ftInteger
+        Name = 'CENTER_ID'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftWideString
+        Name = 'ITEM_NAME'
+        ParamType = ptInput
+        Size = 20
+      end>
+    CommandStoredProcName = 'CHECK_COMMENTS_INS'
   end
 end

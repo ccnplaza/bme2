@@ -27,33 +27,32 @@ object fmCommentEdit: TfmCommentEdit
     object Label1: TLabel
       Left = 20
       Top = 24
-      Width = 33
+      Width = 47
       Height = 17
-      Caption = #51228#47785':'
+      Caption = #52769#51221#47732':'
     end
     object Label2: TLabel
-      Left = 20
+      Left = 34
       Top = 51
       Width = 33
       Height = 17
-      Caption = #45236#50857':'
+      Caption = #51032#44204':'
     end
-    object Edit1: TEdit
-      Left = 56
-      Top = 21
-      Width = 257
-      Height = 25
-      ImeName = 'Microsoft IME 2010'
-      TabOrder = 0
+    object Label3: TLabel
+      Left = 188
+      Top = 24
+      Width = 61
+      Height = 17
+      Caption = #52769#51221#50976#54805':'
     end
     object Memo1: TMemo
-      Left = 56
+      Left = 72
       Top = 48
-      Width = 569
+      Width = 553
       Height = 266
       ImeName = 'Microsoft IME 2010'
       ScrollBars = ssVertical
-      TabOrder = 1
+      TabOrder = 0
       WantTabs = True
     end
     object btnSelectComment: TcxButton
@@ -102,7 +101,7 @@ object fmCommentEdit: TfmCommentEdit
         2FC72121218D1010104600000000000000000000000000000000}
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 2
+      TabOrder = 1
     end
     object cxButton1: TcxButton
       Left = 343
@@ -151,7 +150,56 @@ object fmCommentEdit: TfmCommentEdit
         2FC72121218D1010104600000000000000000000000000000000}
       ParentShowHint = False
       ShowHint = True
+      TabOrder = 2
+    end
+    object ITEM_ID: TcxImageComboBox
+      Left = 72
+      Top = 20
+      Properties.Items = <
+        item
+          Description = #51221#47732
+          ImageIndex = 0
+          Value = 1
+        end
+        item
+          Description = #52769#47732
+          Value = 2
+        end
+        item
+          Description = #51333#54633
+          Value = 3
+        end>
       TabOrder = 3
+      Width = 89
+    end
+    object ITEM_VALUE: TcxImageComboBox
+      Left = 261
+      Top = 20
+      EditValue = 2
+      Properties.Items = <
+        item
+          Description = 'A+'
+          ImageIndex = 0
+          Value = 1
+        end
+        item
+          Description = 'A'
+          Value = 2
+        end
+        item
+          Description = 'B+'
+          Value = 3
+        end
+        item
+          Description = 'B'
+          Value = 4
+        end
+        item
+          Description = 'C'
+          Value = 5
+        end>
+      TabOrder = 4
+      Width = 60
     end
   end
 end

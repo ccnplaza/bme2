@@ -43,9 +43,6 @@ type
     cxGridPopupMenu1: TcxGridPopupMenu;
     btnExcel: TcxButton;
     ImageList1: TImageList;
-    Label1: TLabel;
-    cbClass: TComboBox;
-    btnFilter: TcxButton;
     PanelMsg: TPanel;
     Label3: TLabel;
     LabelCount: TLabel;
@@ -73,8 +70,6 @@ type
     Label2: TLabel;
     Label4: TLabel;
     PanelBtnSchool: TPanel;
-    Label5: TLabel;
-    edtName: TEdit;
     btnRecalcMonth: TcxButton;
     cxButton1: TcxButton;
     cxGroupBox1: TcxGroupBox;
@@ -140,9 +135,6 @@ type
     procedure btnExcelClick(Sender: TObject);
     procedure btnDel3Click(Sender: TObject);
     procedure FormResize(Sender: TObject);
-    procedure btnFilterClick(Sender: TObject);
-    procedure cbYearChange(Sender: TObject);
-    procedure cbClassChange(Sender: TObject);
     procedure UniAlerter1Event(Sender: TDAAlerter; const EventName,
       Message: string);
     procedure btnRecalcMonthClick(Sender: TObject);
@@ -203,16 +195,7 @@ begin
   edtCenterAddr.Text := UserInfo.centerAddr;
   cxPageControl1.ActivePageIndex := UserInfo.userKind;
   GetCenterLogo;
-  if UserInfo.userKind = 1 then begin
-    DataModule1.REG_SCHOOL_SEL.ParamByName('U_ID').Value := UserInfo.userID;
-    DataModule1.REG_SCHOOL_SEL.Open;
-    DataModule1.ds_REG_SCHOOL_SEL.DataSet.Refresh;
-    UserInfo.userSubCenterID := DataModule1.REG_SCHOOL_SELID.Value;
-    DataModule1.SelectStudents;
-  end else begin
-    UserInfo.userSubCenterID := 0;
-    DataModule1.SelectStudents;
-  end;
+  btnRefresh.Click;
   DATA_LOADED := True;
 end;
 
@@ -391,9 +374,7 @@ var
   center_id : Integer;
 begin
   center_id := gridCenterID.EditValue;
-  REG_SCHOOL_UPD_DEFAULT.ParamByName('ID').Value := center_id;
-  REG_SCHOOL_UPD_DEFAULT.ParamByName('U_ID').Value := UserInfo.userID;
-  REG_SCHOOL_UPD_DEFAULT.ExecProc;
+  DataModule1.SetActiveCenter(center_id);
   DataModule1.ds_REG_SCHOOL_SEL.DataSet.Refresh;
   DataModule1.ds_REG_SCHOOL_SEL.DataSet.Locate('ID', center_id, []);
   UserInfo.userSubCenterID := center_id;
@@ -477,11 +458,6 @@ begin
   end;
 end;
 
-procedure TfmSchool.btnFilterClick(Sender: TObject);
-begin
-  DataModule1.SelectStudents;
-end;
-
 procedure TfmSchool.btnRecalcMonthClick(Sender: TObject);
 var
   i, cnt : integer;
@@ -506,20 +482,17 @@ begin
 end;
 
 procedure TfmSchool.btnRefreshClick(Sender: TObject);
-var
-  cnt : Integer;
 begin
-  DataModule1.SelectStudents;
-end;
-
-procedure TfmSchool.cbClassChange(Sender: TObject);
-begin
-  btnFilter.Click;
-end;
-
-procedure TfmSchool.cbYearChange(Sender: TObject);
-begin
-  btnFilter.Click;
+  if UserInfo.userKind = 1 then begin
+    DataModule1.REG_SCHOOL_SEL.ParamByName('U_ID').Value := UserInfo.userID;
+    DataModule1.REG_SCHOOL_SEL.Open;
+    DataModule1.ds_REG_SCHOOL_SEL.DataSet.Refresh;
+    UserInfo.userSubCenterID := DataModule1.REG_SCHOOL_SELID.Value;
+    DataModule1.SelectStudents(UserInfo.userSubCenterID);
+  end else begin
+    UserInfo.userSubCenterID := 0;
+    DataModule1.SelectStudents(UserInfo.userSubCenterID);
+  end;
 end;
 
 procedure TfmSchool.ImportFromExcel(filepath: string);
@@ -598,8 +571,11 @@ procedure TfmSchool.gridCenterFocusedRecordChanged(
   AFocusedRecord: TcxCustomGridRecord; ANewItemRecordFocusingChanged: Boolean);
 begin
   if DATA_LOADED then begin
-    UserInfo.userSubCenterID := gridCenterID.EditValue;
-    DataModule1.SelectStudents;
+    if UserInfo.userKind = 1 then begin
+      DataModule1.SelectStudents(gridCenterID.EditValue);
+    end else begin
+      DataModule1.SelectStudents(0);
+    end;
   end;
 end;
 

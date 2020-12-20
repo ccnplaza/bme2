@@ -32,11 +32,10 @@ object fmCompare: TfmCompare
       Left = 4
       Top = 4
       Width = 56
-      Height = 21
+      Height = 17
       Align = alLeft
       Caption = #51089#50629#45380#46020
       Layout = tlCenter
-      ExplicitHeight = 17
     end
     object btnRefresh: TcxButton
       AlignWithMargins = True

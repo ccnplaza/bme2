@@ -2664,10 +2664,6 @@ object fmMain: TfmMain
         Caption = #51088#49464#52524#50689
         OnClick = N12Click
       end
-      object N21: TMenuItem
-        Caption = #51088#49464#52524#50689'2'
-        OnClick = N21Click
-      end
     end
     object N3: TMenuItem
       Caption = #51088#49464#54217#44032

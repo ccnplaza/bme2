@@ -26,7 +26,7 @@ uses
   cxGridLevel, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
   cxClasses, cxGridCustomView, cxGrid, cxButtons, hyiedefs, hyieutils, DateUtils,
   LMDDckSite, dbimageen, iexBitmaps, iesettings, iexLayers, iexRulers,
-  iexToolbars;
+  iexToolbars, cxLookupEdit, cxDBLookupEdit, cxDBLookupComboBox;
 
 type
   TfmCapture = class(TForm)
@@ -53,7 +53,6 @@ type
     ImageEnVect1: TImageEnVect;
     btnCapture1: TcxButton;
     btnCapture2: TcxButton;
-    btnCapture4: TcxButton;
     cboVideoDevices1: TComboBox;
     cboVideoFormats1: TComboBox;
     cbRotation1: TcxImageComboBox;
@@ -77,20 +76,8 @@ type
     btnRefresh: TcxButton;
     Label3: TLabel;
     WORK_YEAR: TcxSpinEdit;
-    cxPageControl1: TcxPageControl;
-    cxTabSheet1: TcxTabSheet;
-    cxTabSheet2: TcxTabSheet;
-    ImageEnVect2: TImageEnVect;
-    cxGroupBox1: TcxGroupBox;
-    btnSet2: TcxButton;
-    btnStartPreview2: TcxButton;
-    btnStopPreview2: TcxButton;
-    cxButton4: TcxButton;
-    cboVideoDevices2: TComboBox;
-    cboVideoFormats2: TComboBox;
     btnImportImage: TcxButton;
     btnAddPicture: TcxButton;
-    cxTabControl1: TcxTabControl;
     ImageEnView1: TImageEnView;
     gridPicturePIC_DATE: TcxGridDBColumn;
     gridPicturePIC_CNT: TcxGridDBColumn;
@@ -111,6 +98,13 @@ type
     PanelLeft: TPanel;
     PanelRight: TPanel;
     Splitter1: TSplitter;
+    lcbSubCenter: TcxLookupComboBox;
+    Label6: TLabel;
+    cxPageControl1: TcxPageControl;
+    cxTabSheet1: TcxTabSheet;
+    cxTabSheet2: TcxTabSheet;
+    ImageEnView2: TImageEnView;
+    btnCut: TcxButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure btnStartPreview1Click(Sender: TObject);
@@ -133,17 +127,10 @@ type
     procedure chkCameraMarginClick(Sender: TObject);
     procedure ImageEnVect1DShowNewFrame(Sender: TObject);
     procedure cboVideoDevices1Change(Sender: TObject);
-    procedure cboVideoDevices2Change(Sender: TObject);
-    procedure btnStartPreview2Click(Sender: TObject);
-    procedure btnStopPreview2Click(Sender: TObject);
-    procedure btnSet2Click(Sender: TObject);
-    procedure cxButton4Click(Sender: TObject);
-    procedure ImageEnVect2DShowNewFrame(Sender: TObject);
     procedure btnImportImageClick(Sender: TObject);
     procedure gridPictureCHASOOGetDataText(Sender: TcxCustomGridTableItem;
       ARecordIndex: Integer; var AText: string);
     procedure btnAddPictureClick(Sender: TObject);
-    procedure cxTabControl1Change(Sender: TObject);
     procedure gridStudentColumn1GetDataText(Sender: TcxCustomGridTableItem;
       ARecordIndex: Integer; var AText: string);
     procedure gridPictureColumn1GetDataText(Sender: TcxCustomGridTableItem;
@@ -154,9 +141,12 @@ type
     procedure gridPictureCellClick(Sender: TcxCustomGridTableView;
       ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
       AShift: TShiftState; var AHandled: Boolean);
-    procedure gridStudentCellClick(Sender: TcxCustomGridTableView;
-      ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
-      AShift: TShiftState; var AHandled: Boolean);
+    procedure lcbSubCenterPropertiesCloseUp(Sender: TObject);
+    procedure gridStudentFocusedRecordChanged(Sender: TcxCustomGridTableView;
+      APrevFocusedRecord, AFocusedRecord: TcxCustomGridRecord;
+      ANewItemRecordFocusingChanged: Boolean);
+    procedure btnCutClick(Sender: TObject);
+    procedure cxPageControl1Change(Sender: TObject);
   private
     //procedure GotoNextStudent(student_id: Integer);
     procedure LoadSettings;
@@ -165,9 +155,6 @@ type
     procedure Connect;
     procedure Disconnect;
     procedure ShowVideoFormats;
-    procedure Connect2;
-    procedure Disconnect2;
-    procedure ShowVideoFormats2;
     procedure RetrieveDateList;
     procedure RetrieveStudentList;
     procedure UpdateStudentPictureCount;
@@ -181,9 +168,10 @@ type
     isClickedCheckData : Boolean;
     SelectedPosture : Integer;
     SelectedRect : TIERectangle;
-    DATA_HAS_OPEND : Boolean;
+    DATA_LOAD : Boolean;
     FORM_OPEN : Boolean;
-    ievPosture : array[0..4] of TImageEnDBView;
+    ActivePage : Integer;
+    ienPosture : array[0..1] of TImageEnView;
   end;
 
 
@@ -194,13 +182,11 @@ implementation
 
 uses CommonLogic, GlobalVars, UdataModule, UfmSchoolSelect,
   UfmStudentEdit, UfmCameraPreview, UfmDateSelector, UfmSelectStudent,
-  UfmPictureViewer, miscCameraControl, UfmPostureView, UfmImportImage;
+  UfmPictureViewer, miscCameraControl, UfmPostureView, UfmImportImage,
+  UfmPictureZoom;
 
 {$R *.dfm}
 
-
-const
-  server_url = 'http://ccnplaza.com/bmae/uploads/';
 
 procedure TfmCapture.Connect;
 var
@@ -225,37 +211,14 @@ begin
   end;
 end;
 
-procedure TfmCapture.Connect2;
-var
-  w, h : Integer;
-  vformat : string;
+procedure TfmCapture.cxPageControl1Change(Sender: TObject);
 begin
-  w := 0; h := 0;
-  if cboVideoFormats2.ItemIndex > -1 then begin
-    w := ImageEnVect2.IO.DShowParams.VideoFormats[cboVideoFormats2.ItemIndex].MaxWidth;
-    h := ImageEnVect2.IO.DShowParams.VideoFormats[cboVideoFormats2.ItemIndex].MaxHeight;
-    vformat := ImageEnVect2.IO.DShowParams.VideoFormats[cboVideoFormats2.ItemIndex].Format;
-  end;
-  if not (ImageEnVect2.IO.DShowParams.Connected) then begin
-    ImageEnVect2.IO.DShowParams.SetVideoInput(cboVideoDevices2.ItemIndex, 0, w, h, vformat);
-    ImageEnVect2.IO.DShowParams.EnableSampleGrabber := true;
-    ImageEnVect2.IO.DShowParams.Connect;
-  end else begin
-    Disconnect2;
-    ImageEnVect2.IO.DShowParams.SetVideoInput(cboVideoDevices2.ItemIndex, 0, w, h, vformat);
-    ImageEnVect2.IO.DShowParams.EnableSampleGrabber := true;
-    ImageEnVect2.IO.DShowParams.Connect;
-  end;
+  ActivePage := cxPageControl1.ActivePageIndex;
 end;
 
 procedure TfmCapture.Disconnect;
 begin
   ImageEnVect1.IO.DShowParams.Disconnect;
-end;
-
-procedure TfmCapture.Disconnect2;
-begin
-  ImageEnVect2.IO.DShowParams.Disconnect;
 end;
 
 procedure TfmCapture.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -278,11 +241,14 @@ end;
 
 procedure TfmCapture.FormShow(Sender: TObject);
 var
-  c1_act, sub_center : Integer;
+  c1_act : Integer;
 begin
-  FORM_OPEN := False;
-  cxPageControl1.ActivePageIndex := 0;
+  DATA_LOAD := False;
   WORK_YEAR.Value := YearOf(Date);
+  cxPageControl1.ActivePageIndex := 0;
+  ActivePage := 0;
+  ienPosture[0] := ImageEnView1;
+  ienPosture[1] := ImageEnView2;
   LoadSettings;
   isCameraView := False;
   SelectedPosture := 1;
@@ -297,6 +263,8 @@ begin
   UserInfo.userSubCenterID := DataModule1.GetSubCenterID;
   if UserInfo.userKind = 1 then begin
     if DataModule1.GetSubCenterID > 0 then begin
+      DataModule1.SelectRegistedCenter;
+      lcbSubCenter.EditValue := DataModule1.GetSubCenterID;
       btnRefresh.Click;
     end else begin
       ShowMessage('단체(도장)을 선택하세요.');
@@ -313,13 +281,11 @@ begin
   ImageEnVect1.AutoFit := True;
   ImageEnVect1.Clear;
   ImageEnVect1.Update;
-  ImageEnVect2.AutoFit := True;
-  ImageEnVect2.Clear;
-  ImageEnVect2.Update;
   isClickedCheckData := False;
+  ImageEnView1.CropTool.LockAspectRatio := 3 / 8;
+  ImageEnView2.CropTool.LockAspectRatio := 3 / 8;
 
   ShowVideoFormats;
-  ShowVideoFormats2;
 end;
 
 procedure TfmCapture.ShowVideoFormats;
@@ -343,31 +309,10 @@ begin
   Disconnect;
 end;
 
-procedure TfmCapture.ShowVideoFormats2;
-var
-  i, maxID : integer;
-  s: string;
-begin
-  cboVideoDevices2.Items.Assign(ImageEnVect2.IO.DShowParams.VideoInputs);
-  cboVideoDevices2.ItemIndex := 0;
-  Connect2;
-  cboVideoFormats2.Clear;
-  with ImageEnVect2.IO.DShowParams do
-    for i := 0 to VideoFormatsCount - 1 do begin
-      s := SysUtils.Format('%s %dx%d', [VideoFormats[i].Format, VideoFormats[i].MaxWidth, VideoFormats[i].MaxHeight]);
-      if VideoFormats[i].MaxWidth = 1920 then
-        maxID := i;
-
-      cboVideoFormats2.Items.Add(s);
-    end;
-  cboVideoFormats2.ItemIndex := maxID;
-  Disconnect2;
-end;
-
 procedure TfmCapture.btnAddClick(Sender: TObject);
 var
   i, cnt, sid : Integer;
-  student_id, sub_id : Integer;
+  student_id, pic_id, sub_id : Integer;
   p_date : TDate;
 begin
   if not (gridPicture.DataController.RecordCount > 0) then begin
@@ -382,16 +327,21 @@ begin
       with fmSelectStudent.gridStudent do begin
         cnt := Controller.SelectedRecordCount;
         p_date := gridPicturePIC_DATE.EditValue;
+        pic_id := gridPictureID.EditValue;
         for i := 0 to cnt - 1 do begin
           sid := Controller.SelectedRecords[i].RecordIndex;
           student_id := DataController.GetValue(sid, GetColumnByFieldName('ID').Index);
           sub_id := DataController.GetValue(sid, GetColumnByFieldName('UID').Index);
           if DataModule1.CheckStudentImageExists(student_id, p_date) = False then begin
             DataModule1.STUDENT_IMAGE_INS.ParamByName('STUDENT_ID').Value := student_id;
-            DataModule1.STUDENT_IMAGE_INS.ParamByName('UID').Value := sub_id;
+            DataModule1.STUDENT_IMAGE_INS.ParamByName('PICTURE_ID').Value := pic_id;
             DataModule1.STUDENT_IMAGE_INS.ParamByName('P_DATE').Value := p_date;
             DataModule1.STUDENT_IMAGE_INS.ParamByName('CHASOO').Value := 0;
+            DataModule1.STUDENT_IMAGE_INS.ParamByName('CHECK_VAL1').Value := 0;
+            DataModule1.STUDENT_IMAGE_INS.ParamByName('CHECK_VAL2').Value := 0;
+            DataModule1.STUDENT_IMAGE_INS.ParamByName('TOTAL_VAL').Value := 0;
             DataModule1.STUDENT_IMAGE_INS.ParamByName('CENTER_ID').Value := UserInfo.userCenterID;
+            DataModule1.STUDENT_IMAGE_INS.ParamByName('SUB_CENTER_ID').Value := UserInfo.userSubCenterID;
             DataModule1.STUDENT_IMAGE_INS.ExecProc;
           end else begin
             ShowMessage('중복자료입니다.');
@@ -410,25 +360,36 @@ end;
 procedure TfmCapture.btnAddPictureClick(Sender: TObject);
 var
   uid : Int64;
+  pdate : TDateTime;
 begin
-  Screen.Cursor := crHourGlass;
-  DataModule1.CHECK_PIC_DATE_EXISTS.ParamByName('P_DATE').Value := Date;
-  DataModule1.CHECK_PIC_DATE_EXISTS.Open;
-  DataModule1.ds_CHECK_PIC_DATE_EXISTS.DataSet.Refresh;
-  if DataModule1.CHECK_PIC_DATE_EXISTSID.Value > 0 then begin
-    ShowMessage('동일 날짜가 있습니다.');
-    Exit;
-  end else begin
-    DataModule1.PICTURE_DATE_INS.ParamByName('PIC_DATE').Value := Date;
-    DataModule1.PICTURE_DATE_INS.ParamByName('PIC_CNT').Value := 0;
-    DataModule1.PICTURE_DATE_INS.ParamByName('CENTER_ID').Value := UserInfo.userCenterID;
-    DataModule1.PICTURE_DATE_INS.ParamByName('SUB_CENTER').Value := UserInfo.userSubCenterID;
-    DataModule1.PICTURE_DATE_INS.ExecProc;
-    DataModule1.ds_PICTURE_DATE_SEL.DataSet.Refresh;
-    DataModule1.ds_PICTURE_DATE_SEL.DataSet.Locate('PIC_DATE', Date, []);
-    RetrieveStudentList;
+  fmDateSelector := TfmDateSelector.Create(Self);
+  try
+    fmDateSelector.MonthCalendar1.Date := Date;
+    fmDateSelector.ShowModal;
+    if fmDateSelector.ModalResult = mrOk then begin
+      pdate := fmDateSelector.MonthCalendar1.Date;
+      DataModule1.CHECK_PIC_DATE_EXISTS.ParamByName('P_DATE').Value := pDate;
+      DataModule1.CHECK_PIC_DATE_EXISTS.ParamByName('CENTER_ID').Value := UserInfo.userCenterID;
+      DataModule1.CHECK_PIC_DATE_EXISTS.ParamByName('SUB_CENTER_ID').Value := UserInfo.userSubCenterID;
+      DataModule1.CHECK_PIC_DATE_EXISTS.Open;
+      DataModule1.ds_CHECK_PIC_DATE_EXISTS.DataSet.Refresh;
+      if DataModule1.CHECK_PIC_DATE_EXISTSID.Value > 0 then begin
+        ShowMessage('동일 날짜가 있습니다.');
+        Exit;
+      end else begin
+        DataModule1.PICTURE_DATE_INS.ParamByName('PIC_DATE').Value := pDate;
+        DataModule1.PICTURE_DATE_INS.ParamByName('PIC_CNT').Value := 0;
+        DataModule1.PICTURE_DATE_INS.ParamByName('CENTER_ID').Value := UserInfo.userCenterID;
+        DataModule1.PICTURE_DATE_INS.ParamByName('SUB_CENTER').Value := UserInfo.userSubCenterID;
+        DataModule1.PICTURE_DATE_INS.ExecProc;
+        DataModule1.ds_PICTURE_DATE_SEL.DataSet.Refresh;
+        DataModule1.ds_PICTURE_DATE_SEL.DataSet.Locate('PIC_DATE', pDate, []);
+        RetrieveStudentList;
+      end;
+    end;
+  finally
+    fmDateSelector.Free;
   end;
-  Screen.Cursor := crArrow;
 end;
 
 procedure TfmCapture.btnCapture1Click(Sender: TObject);
@@ -463,46 +424,7 @@ begin
   DataModule1.ds_STUDENT_IMAGE_SEL_BYDATE.DataSet.Refresh;
   gridStudent.DataController.GotoBookmark;
   gridStudent.Controller.TopRowIndex := top_row;
-  cxTabControl1.TabIndex := tagno - 1;
-end;
-
-procedure TfmCapture.cxButton4Click(Sender: TObject);
-var
-  tagno : Integer;
-  student_id, pic_id, top_row : Integer;
-  mStream : TMemoryStream;
-begin
-  cxTabControl1.TabIndex := 3;
-  if not (gridPicture.DataController.RecordCount > 0) then begin
-    ShowMessage('촬영일자를 입력하세요.');
-    Exit;
-  end;
-  if not (gridStudent.DataController.RecordCount > 0) then begin
-    ShowMessage('회원자료를 입력하세요.');
-    Exit;
-  end;
-  student_id := gridStudentID.EditValue;
-  ImageEnVect2.Proc.SelCopyToClip(True);
-  ImageEnView1.Proc.SelPasteFromClip(True);
-  ImageEnView1.Update;
-  mStream := TMemoryStream.Create;
-  ImageEnView1.IO.SaveToStreamJpeg(mStream);
-  mStream.Position := 0;
-  DataModule1.STUDENT_IMAGE_UPD_ONE.ParamByName('PIC_ID').Value := student_id;
-  DataModule1.STUDENT_IMAGE_UPD_ONE.ParamByName('IMAGE_SRC').LoadFromStream(mStream, ftBlob);
-  DataModule1.STUDENT_IMAGE_UPD_ONE.ParamByName('IMAGE_KIND').Value := 4;
-  DataModule1.STUDENT_IMAGE_UPD_ONE.ExecProc;
-  mStream.Free;
-  top_row := gridStudent.Controller.TopRowIndex;
-  gridStudent.DataController.SaveBookmark;
-  DataModule1.ds_STUDENT_IMAGE_SEL_BYDATE.DataSet.Refresh;
-  gridStudent.DataController.GotoBookmark;
-  gridStudent.Controller.TopRowIndex := top_row;
-end;
-
-procedure TfmCapture.cxTabControl1Change(Sender: TObject);
-begin
-  RetrievePicture;
+  cxPageControl1.ActivePageIndex := tagno - 1;
 end;
 
 procedure TfmCapture.AddCheckData;
@@ -524,6 +446,21 @@ begin
   end;
 end;
 
+procedure TfmCapture.btnCutClick(Sender: TObject);
+var
+  mStream : TMemoryStream;
+begin
+  ienPosture[ActivePage].CropTool.Enact();
+  mStream := TMemoryStream.Create;
+  ienPosture[ActivePage].IO.SaveToStreamJpeg(mStream);
+  mStream.Position := 0;
+  DataModule1.STUDENT_IMAGE_UPD_ONE.ParamByName('PIC_ID').Value := gridStudentID.EditValue;
+  DataModule1.STUDENT_IMAGE_UPD_ONE.ParamByName('IMAGE_SRC').LoadFromStream(mStream, ftBlob);
+  DataModule1.STUDENT_IMAGE_UPD_ONE.ParamByName('IMAGE_KIND').Value := ActivePage + 1;
+  DataModule1.STUDENT_IMAGE_UPD_ONE.ExecProc;
+  mStream.Free;
+end;
+
 procedure TfmCapture.btnDelClick(Sender: TObject);
 begin
   if MessageDlg('선택한 자료를 삭제합니다. ' + #13#10 + '삭제한 후에는 되돌릴 수 없습니다.'
@@ -541,17 +478,14 @@ var
   uid : Int64;
   student_id, chasoo : integer;
   imgName : string;
-  img1, img2, img3, img4 : TMemoryStream;
+  img1, img2 : TMemoryStream;
 begin
   fmImportImage := TfmImportImage.Create(Self);
   img1 := TMemoryStream.Create;
   img2 := TMemoryStream.Create;
-  img3 := TMemoryStream.Create;
-  img4 := TMemoryStream.Create;
   try
     fmImportImage.ShowModal;
     if fmImportImage.ModalResult = mrOk then begin
-      //DataModule1.InsertPictureData(student_id, chasoo, uid);
       if FileExists(fmImportImage.Edit1.Text) then begin
         img1.LoadFromFile(fmImportImage.Edit1.Text);
         img1.Position := 0;
@@ -568,29 +502,11 @@ begin
         DataModule1.STUDENT_IMAGE_UPD_ONE.ParamByName('IMAGE_KIND').Value := 2;
         DataModule1.STUDENT_IMAGE_UPD_ONE.ExecProc;
       end;
-      if FileExists(fmImportImage.Edit3.Text) then begin
-        img3.LoadFromFile(fmImportImage.Edit3.Text);
-        img3.Position := 0;
-        DataModule1.STUDENT_IMAGE_UPD_ONE.ParamByName('PIC_ID').Value := gridStudentID.EditValue;
-        DataModule1.STUDENT_IMAGE_UPD_ONE.ParamByName('IMAGE_SRC').LoadFromStream(img3, ftBlob);
-        DataModule1.STUDENT_IMAGE_UPD_ONE.ParamByName('IMAGE_KIND').Value := 3;
-        DataModule1.STUDENT_IMAGE_UPD_ONE.ExecProc;
-      end;
-      if FileExists(fmImportImage.Edit4.Text) then begin
-        img4.LoadFromFile(fmImportImage.Edit4.Text);
-        img4.Position := 0;
-        DataModule1.STUDENT_IMAGE_UPD_ONE.ParamByName('PIC_ID').Value := gridStudentID.EditValue;
-        DataModule1.STUDENT_IMAGE_UPD_ONE.ParamByName('IMAGE_SRC').LoadFromStream(img4, ftBlob);
-        DataModule1.STUDENT_IMAGE_UPD_ONE.ParamByName('IMAGE_KIND').Value := 4;
-        DataModule1.STUDENT_IMAGE_UPD_ONE.ExecProc;
-      end;
       RetrievePicture;
     end;
   finally
     img1.Free;
     img2.Free;
-    img3.Free;
-    img4.Free;
     fmImportImage.Free;
   end;
 end;
@@ -602,43 +518,16 @@ begin
   ImageEnVect1.IO.DShowParams.ShowPropertyPages(iepVideoInput, ietFilter,false);
 end;
 
-procedure TfmCapture.btnSet2Click(Sender: TObject);
-begin
-  if not (ImageEnVect2.IO.DShowParams.Connected) then
-    Connect2;
-  ImageEnVect2.IO.DShowParams.ShowPropertyPages(iepVideoInput, ietFilter,false);
-end;
-
 procedure TfmCapture.btnStartPreview1Click(Sender: TObject);
 begin
-//  if ImageEnVect1.IO.DShowParams.Connected then begin
-//    Disconnect;
     Connect;
     ImageEnVect1.IO.DShowParams.Run;
-    cxPageControl1.ActivePageIndex := 0;
-//  end else begin
-//    Connect;
-//    ImageEnVect1.IO.DShowParams.Run
-//  end;
-end;
-
-procedure TfmCapture.btnStartPreview2Click(Sender: TObject);
-begin
-    Connect2;
-    ImageEnVect2.IO.DShowParams.Run;
-    cxPageControl1.ActivePageIndex := 1;
 end;
 
 procedure TfmCapture.btnStopPreview1Click(Sender: TObject);
 begin
   Disconnect;
   ImageEnVect1.Blank;
-end;
-
-procedure TfmCapture.btnStopPreview2Click(Sender: TObject);
-begin
-  Disconnect2;
-  ImageEnVect2.Blank;
 end;
 
 procedure TfmCapture.Button1Click(Sender: TObject);
@@ -696,25 +585,6 @@ begin
   Disconnect;
 end;
 
-procedure TfmCapture.cboVideoDevices2Change(Sender: TObject);
-var
-  i, maxID : integer;
-  s: string;
-begin
-  Connect2;
-  cboVideoFormats2.Clear;
-  with ImageEnVect2.IO.DShowParams do
-    for i := 0 to VideoFormatsCount - 1 do begin
-      s := SysUtils.Format('%s %dx%d', [VideoFormats[i].Format, VideoFormats[i].MaxWidth, VideoFormats[i].MaxHeight]);
-      if VideoFormats[i].MaxWidth = 1920 then
-        maxID := i;
-
-      cboVideoFormats2.Items.Add(s);
-    end;
-  cboVideoFormats2.ItemIndex := maxID;
-  Disconnect2;
-end;
-
 procedure TfmCapture.chkCameraMarginClick(Sender: TObject);
 var
   x1, x2, y1, y2 : Integer;
@@ -754,10 +624,9 @@ end;
 
 procedure TfmCapture.btnRefreshClick(Sender: TObject);
 begin
+  DataModule1.SetActiveCenter(lcbSubCenter.EditValue);
+  UserInfo.userSubCenterID := lcbSubCenter.EditValue;
   RetrieveDateList;
-  RetrieveStudentList;
-  RetrievePicture;
-  FORM_OPEN := True;
 end;
 
 procedure TfmCapture.RetrieveDateList;
@@ -766,21 +635,63 @@ begin
   DataModule1.PICTURE_DATE_SEL.ParamByName('SUB_ID').Value := UserInfo.userSubCenterID;
   DataModule1.PICTURE_DATE_SEL.Open;
   DataModule1.ds_PICTURE_DATE_SEL.DataSet.Refresh;
+
+  DataModule1.STUDENT_IMAGE_SEL_BYDATE.ParamByName('DATE_ID').Value := DataModule1.PICTURE_DATE_SELID.Value;
+  DataModule1.STUDENT_IMAGE_SEL_BYDATE.Open;
+  DataModule1.ds_STUDENT_IMAGE_SEL_BYDATE.DataSet.Refresh;
+
+  DataModule1.STUDENT_IMAGE_SEL_IMAGE.ParamByName('S_ID').Value := DataModule1.STUDENT_IMAGE_SEL_BYDATEID.Value;
+  DataModule1.STUDENT_IMAGE_SEL_IMAGE.Open;
+  DataModule1.ds_STUDENT_IMAGE_SEL_IMAGE.DataSet.Refresh;
+  RetrievePicture;
+  DATA_LOAD := True;
 end;
 
 procedure TfmCapture.RetrieveStudentList;
 begin
-  DataModule1.STUDENT_IMAGE_SEL_BYDATE.ParamByName('PIC_DATE').Value := gridPicturePIC_DATE.EditValue;
+  DataModule1.STUDENT_IMAGE_SEL_BYDATE.ParamByName('DATE_ID').Value := gridPictureID.EditValue;
   DataModule1.STUDENT_IMAGE_SEL_BYDATE.Open;
   DataModule1.ds_STUDENT_IMAGE_SEL_BYDATE.DataSet.Refresh;
+
+  DataModule1.STUDENT_IMAGE_SEL_IMAGE.ParamByName('S_ID').Value := DataModule1.STUDENT_IMAGE_SEL_BYDATEID.Value;
+  DataModule1.STUDENT_IMAGE_SEL_IMAGE.Open;
+  DataModule1.ds_STUDENT_IMAGE_SEL_IMAGE.DataSet.Refresh;
+  RetrievePicture;
+  DATA_LOAD := True;
+end;
+
+procedure TfmCapture.RetrievePicture;
+var
+  mStream, mStream2 : TMemoryStream;
+begin
+  mStream := TMemoryStream.Create;
+  mStream2 := TMemoryStream.Create;
+  try
+    DataModule1.STUDENT_IMAGE_SEL_IMAGEIMAGE1.SaveToStream(mStream);
+    DataModule1.STUDENT_IMAGE_SEL_IMAGEIMAGE2.SaveToStream(mStream2);
+    mStream.Position := 0;
+    mStream2.Position := 0;
+    ImageEnView1.Clear;
+    ImageEnView2.Clear;
+    ImageEnView1.IO.LoadFromStreamJpeg(mStream);
+    ImageEnView2.IO.LoadFromStreamJpeg(mStream2);
+    if ImageEnView1.IEBitmap.Width > ImageEnView1.IEBitmap.Height then
+      ImageEnView1.Proc.Rotate(-90);
+    if ImageEnView2.IEBitmap.Width > ImageEnView2.IEBitmap.Height then
+      ImageEnView2.Proc.Rotate(-90);
+
+  finally
+    mStream.Free;
+    mStream2.Free;
+  end;
 end;
 
 procedure TfmCapture.gridPictureCellClick(Sender: TcxCustomGridTableView;
   ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
   AShift: TShiftState; var AHandled: Boolean);
 begin
+  DATA_LOAD := False;
   RetrieveStudentList;
-  RetrievePicture;
 end;
 
 procedure TfmCapture.gridPictureCHASOOGetDataText(
@@ -801,13 +712,6 @@ begin
   AText := IntToStr(AIndex + 1);
 end;
 
-procedure TfmCapture.gridStudentCellClick(Sender: TcxCustomGridTableView;
-  ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
-  AShift: TShiftState; var AHandled: Boolean);
-begin
-  RetrievePicture;
-end;
-
 procedure TfmCapture.gridStudentColumn1GetDataText(
   Sender: TcxCustomGridTableItem; ARecordIndex: Integer; var AText: string);
 var
@@ -817,30 +721,17 @@ begin
   AText := IntToStr(AIndex + 1);
 end;
 
-procedure TfmCapture.RetrievePicture;
-var
-  tab_id : Integer;
-  img_url : string;
-  mStream : TMemoryStream;
+procedure TfmCapture.gridStudentFocusedRecordChanged(
+  Sender: TcxCustomGridTableView; APrevFocusedRecord,
+  AFocusedRecord: TcxCustomGridRecord; ANewItemRecordFocusingChanged: Boolean);
 begin
-  tab_id := cxTabControl1.TabIndex;
-  img_url := server_url;
-  DataModule1.STUDENT_IMAGE_SEL_IMAGE.ParamByName('S_ID').Value := gridStudentID.EditValue;
-  DataModule1.STUDENT_IMAGE_SEL_IMAGE.Open;
-  DataModule1.ds_STUDENT_IMAGE_SEL_IMAGE.DataSet.Refresh;
+  if DATA_LOAD then begin
+    DataModule1.STUDENT_IMAGE_SEL_IMAGE.ParamByName('S_ID').Value := gridStudentID.EditValue;
+    DataModule1.STUDENT_IMAGE_SEL_IMAGE.Open;
+    DataModule1.ds_STUDENT_IMAGE_SEL_IMAGE.DataSet.Refresh;
 
-  mStream := TMemoryStream.Create;
-  case tab_id of
-    0: DataModule1.STUDENT_IMAGE_SEL_IMAGEIMAGE1.SaveToStream(mStream);
-    1: DataModule1.STUDENT_IMAGE_SEL_IMAGEIMAGE2.SaveToStream(mStream);
-    2: DataModule1.STUDENT_IMAGE_SEL_IMAGEIMAGE3.SaveToStream(mStream);
-    3: DataModule1.STUDENT_IMAGE_SEL_IMAGEIMAGE4.SaveToStream(mStream);
+    RetrievePicture;
   end;
-  mStream.Position := 0;
-  ImageEnView1.Clear;
-  ImageEnView1.IO.LoadFromStreamJpeg(mStream);
-  if ImageEnView1.IEBitmap.Width > ImageEnView1.IEBitmap.Height then
-    ImageEnView1.Proc.Rotate(-90);
 end;
 
 procedure TfmCapture.ImageEnDBVect1DblClick(Sender: TObject);
@@ -938,11 +829,9 @@ begin
   ImageEnVect1.Cursor := 1785;
 end;
 
-
-procedure TfmCapture.ImageEnVect2DShowNewFrame(Sender: TObject);
+procedure TfmCapture.lcbSubCenterPropertiesCloseUp(Sender: TObject);
 begin
-  ImageEnVect2.IO.DShowParams.GetSample(ImageEnVect2.IEBitmap);
-  ImageEnVect2.Update;
+  btnRefresh.Click;
 end;
 
 initialization RegisterClasses([TfmCapture]);
