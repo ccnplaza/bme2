@@ -179,7 +179,6 @@ type
     STUDENT_IMAGE_SEL_IMAGEIMAGE2: TBlobField;
     STUDENT_IMAGE_UPD_ONE: TUniStoredProc;
     PICTURE_DATE_SELMAN_CNT: TIntegerField;
-    PICTURE_DATE_COUNT_UPD: TUniStoredProc;
     CHECK_PIC_DATE_EXISTS: TUniStoredProc;
     ds_CHECK_PIC_DATE_EXISTS: TDataSource;
     CHECK_PIC_DATE_EXISTSID: TIntegerField;
@@ -214,6 +213,21 @@ type
     PICTURE_DATE_SELCHECK_CNT: TIntegerField;
     STUDENT_IMAGE_SEL_BYDATEPIC_DONE: TSmallintField;
     STUDENT_IMAGE_SEL_BYDATECHECK_DONE: TSmallintField;
+    CHECK_COMMENTS_SELIDX: TIntegerField;
+    CHECK_COMMENTS_SEL_POSTURE: TUniStoredProc;
+    IntegerField1: TIntegerField;
+    IntegerField2: TIntegerField;
+    IntegerField3: TIntegerField;
+    WideMemoField1: TWideMemoField;
+    IntegerField4: TIntegerField;
+    ds_CHECK_COMMENTS_SEL_POSTURE: TDataSource;
+    CHECK_COMMENTS_SEL_TOTAL: TUniStoredProc;
+    IntegerField5: TIntegerField;
+    IntegerField6: TIntegerField;
+    IntegerField7: TIntegerField;
+    WideMemoField2: TWideMemoField;
+    IntegerField8: TIntegerField;
+    ds_CHECK_COMMENTS_SEL_TOTAL: TDataSource;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }

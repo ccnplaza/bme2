@@ -38,17 +38,6 @@ object fmAnalyzer: TfmAnalyzer
       Layout = tlCenter
       ExplicitHeight = 17
     end
-    object Label6: TLabel
-      AlignWithMargins = True
-      Left = 140
-      Top = 4
-      Width = 85
-      Height = 21
-      Align = alLeft
-      Caption = #45800#52404'('#46020#51109#47749'):'
-      Layout = tlCenter
-      ExplicitHeight = 17
-    end
     object Label1: TLabel
       Left = 512
       Top = 6
@@ -72,7 +61,7 @@ object fmAnalyzer: TfmAnalyzer
     end
     object btnRefresh: TcxButton
       AlignWithMargins = True
-      Left = 378
+      Left = 379
       Top = 2
       Width = 67
       Height = 25
@@ -122,6 +111,7 @@ object fmAnalyzer: TfmAnalyzer
       ShowHint = True
       TabOrder = 0
       OnClick = btnRefreshClick
+      ExplicitLeft = 378
     end
     object WORK_YEAR: TcxSpinEdit
       AlignWithMargins = True
@@ -134,27 +124,6 @@ object fmAnalyzer: TfmAnalyzer
       TabOrder = 1
       Value = 2000
       Width = 68
-    end
-    object lcbSubCenter: TcxLookupComboBox
-      AlignWithMargins = True
-      Left = 229
-      Top = 2
-      Margins.Left = 1
-      Margins.Top = 1
-      Margins.Right = 1
-      Margins.Bottom = 1
-      Align = alLeft
-      Properties.DropDownListStyle = lsFixedList
-      Properties.KeyFieldNames = 'ID'
-      Properties.ListColumns = <
-        item
-          FieldName = 'S_NAME'
-        end>
-      Properties.ListOptions.ShowHeader = False
-      Properties.ListSource = DataModule1.ds_REG_SCHOOL_SEL_LOOK
-      Properties.OnCloseUp = lcbSubCenterPropertiesCloseUp
-      TabOrder = 2
-      Width = 145
     end
     object CHECK_VAL1: TcxImageComboBox
       Left = 548
@@ -179,9 +148,10 @@ object fmAnalyzer: TfmAnalyzer
         end
         item
           Description = 'C'
-          Value = 3
+          Value = 4
         end>
       Properties.PopupAlignment = taCenter
+      Properties.OnEditValueChanged = CHECK_VAL1PropertiesEditValueChanged
       Style.BorderStyle = ebsFlat
       Style.Font.Charset = DEFAULT_CHARSET
       Style.Font.Color = clWindowText
@@ -197,7 +167,7 @@ object fmAnalyzer: TfmAnalyzer
       StyleFocused.LookAndFeel.SkinName = 'Black'
       StyleHot.LookAndFeel.NativeStyle = False
       StyleHot.LookAndFeel.SkinName = 'Black'
-      TabOrder = 3
+      TabOrder = 2
       Width = 60
     end
     object CHECK_VAL2: TcxImageComboBox
@@ -223,9 +193,10 @@ object fmAnalyzer: TfmAnalyzer
         end
         item
           Description = 'C'
-          Value = 3
+          Value = 4
         end>
       Properties.PopupAlignment = taCenter
+      Properties.OnEditValueChanged = CHECK_VAL2PropertiesEditValueChanged
       Style.BorderStyle = ebsFlat
       Style.Font.Charset = DEFAULT_CHARSET
       Style.Font.Color = clWindowText
@@ -241,13 +212,14 @@ object fmAnalyzer: TfmAnalyzer
       StyleFocused.LookAndFeel.SkinName = 'Black'
       StyleHot.LookAndFeel.NativeStyle = False
       StyleHot.LookAndFeel.SkinName = 'Black'
-      TabOrder = 4
+      TabOrder = 3
       Width = 60
     end
     object TOTAL_VAL: TcxImageComboBox
       Left = 769
       Top = 2
       EditValue = 0
+      Enabled = False
       ParentFont = False
       Properties.Alignment.Horz = taCenter
       Properties.ImmediatePost = True
@@ -278,7 +250,7 @@ object fmAnalyzer: TfmAnalyzer
           Value = 5
         end>
       Properties.PopupAlignment = taCenter
-      Properties.ReadOnly = False
+      Properties.ReadOnly = True
       Style.BorderStyle = ebsFlat
       Style.Font.Charset = DEFAULT_CHARSET
       Style.Font.Color = clWindowText
@@ -298,7 +270,7 @@ object fmAnalyzer: TfmAnalyzer
       StyleFocused.LookAndFeel.SkinName = 'Black'
       StyleHot.LookAndFeel.NativeStyle = False
       StyleHot.LookAndFeel.SkinName = 'Black'
-      TabOrder = 5
+      TabOrder = 4
       Width = 60
     end
     object btnSaveResult: TcxButton
@@ -348,7 +320,7 @@ object fmAnalyzer: TfmAnalyzer
         64FF82695FFF7D645BFF6E544AFF56453BFF3F332BC200000005000000000000
         0002000000030000000400000004000000040000000400000005000000050000
         0005000000050000000500000006000000060000000400000001}
-      TabOrder = 6
+      TabOrder = 5
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -15
@@ -356,6 +328,47 @@ object fmAnalyzer: TfmAnalyzer
       Font.Style = [fsBold]
       ParentFont = False
       OnClick = btnSaveResultClick
+    end
+    object PanelSubCenter: TPanel
+      Left = 137
+      Top = 1
+      Width = 239
+      Height = 27
+      Align = alLeft
+      BevelOuter = bvNone
+      TabOrder = 6
+      object Label6: TLabel
+        AlignWithMargins = True
+        Left = 3
+        Top = 3
+        Width = 85
+        Height = 21
+        Align = alLeft
+        Caption = #45800#52404'('#46020#51109#47749'):'
+        Layout = tlCenter
+        ExplicitHeight = 17
+      end
+      object lcbSubCenter: TcxLookupComboBox
+        AlignWithMargins = True
+        Left = 92
+        Top = 1
+        Margins.Left = 1
+        Margins.Top = 1
+        Margins.Right = 1
+        Margins.Bottom = 1
+        Align = alLeft
+        Properties.DropDownListStyle = lsFixedList
+        Properties.KeyFieldNames = 'ID'
+        Properties.ListColumns = <
+          item
+            FieldName = 'S_NAME'
+          end>
+        Properties.ListOptions.ShowHeader = False
+        Properties.ListSource = DataModule1.ds_REG_SCHOOL_SEL_LOOK
+        Properties.OnCloseUp = lcbSubCenterPropertiesCloseUp
+        TabOrder = 0
+        Width = 145
+      end
     end
   end
   object PanelLeft: TPanel
@@ -375,7 +388,6 @@ object fmAnalyzer: TfmAnalyzer
       BevelOuter = bvNone
       Caption = '  '#52524#50689#45936#51060#53552
       TabOrder = 0
-      ExplicitWidth = 263
     end
     object cxGrid1: TcxGrid
       Left = 1
@@ -386,7 +398,6 @@ object fmAnalyzer: TfmAnalyzer
       BorderWidth = 1
       TabOrder = 1
       LookAndFeel.SkinName = 'Black'
-      ExplicitWidth = 263
       object gridPicture: TcxGridDBTableView
         Navigator.Buttons.CustomButtons = <>
         Navigator.Buttons.First.Visible = False
@@ -490,7 +501,6 @@ object fmAnalyzer: TfmAnalyzer
       TabOrder = 2
       LookAndFeel.NativeStyle = False
       LookAndFeel.SkinName = 'Black'
-      ExplicitWidth = 263
       object gridStudent: TcxGridDBTableView
         Navigator.Buttons.CustomButtons = <>
         Navigator.Buttons.First.Visible = False
@@ -640,7 +650,6 @@ object fmAnalyzer: TfmAnalyzer
       BevelOuter = bvNone
       Caption = '  '#54924#50896#45936#51060#53552
       TabOrder = 3
-      ExplicitWidth = 263
     end
   end
   object PanelRight: TPanel
@@ -651,8 +660,6 @@ object fmAnalyzer: TfmAnalyzer
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 2
-    ExplicitLeft = 265
-    ExplicitWidth = 919
     object PanelImage: TPanel
       Left = 0
       Top = 0
@@ -661,7 +668,6 @@ object fmAnalyzer: TfmAnalyzer
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 0
-      ExplicitWidth = 919
       object PanelRightImage: TPanel
         Left = 433
         Top = 0
@@ -671,8 +677,6 @@ object fmAnalyzer: TfmAnalyzer
         DoubleBuffered = False
         ParentDoubleBuffered = False
         TabOrder = 0
-        ExplicitLeft = 457
-        ExplicitWidth = 462
         object ImageEnView2: TImageEnView
           Left = 1
           Top = 27
@@ -690,7 +694,6 @@ object fmAnalyzer: TfmAnalyzer
           OnNewLayer = ImageEnView2NewLayer
           Align = alClient
           TabOrder = 0
-          ExplicitWidth = 460
         end
         object Panel6: TPanel
           Left = 1
@@ -700,7 +703,6 @@ object fmAnalyzer: TfmAnalyzer
           Align = alTop
           BevelOuter = bvNone
           TabOrder = 1
-          ExplicitWidth = 460
           object btnArrow2: TSpeedButton
             AlignWithMargins = True
             Left = 69
@@ -884,7 +886,6 @@ object fmAnalyzer: TfmAnalyzer
           OnNewLayer = ImageEnView1NewLayer
           Align = alClient
           TabOrder = 0
-          ExplicitWidth = 455
         end
         object Panel1: TPanel
           Left = 1
@@ -894,7 +895,6 @@ object fmAnalyzer: TfmAnalyzer
           Align = alTop
           BevelOuter = bvNone
           TabOrder = 1
-          ExplicitWidth = 455
           object btnArrow: TSpeedButton
             AlignWithMargins = True
             Left = 69

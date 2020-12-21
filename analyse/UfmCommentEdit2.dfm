@@ -1,4 +1,4 @@
-object fmCommentEdit: TfmCommentEdit
+object fmCommentEdit2: TfmCommentEdit2
   Left = 0
   Top = 0
   BorderStyle = bsDialog
@@ -22,14 +22,14 @@ object fmCommentEdit: TfmCommentEdit
     Width = 639
     Height = 361
     Align = alClient
-    Caption = #53076#47704#53944' '#46321#47197'/'#49688#51221
+    Caption = #51333#54633' '#53076#47704#53944' '#46321#47197'/'#49688#51221
     TabOrder = 0
     object Label1: TLabel
-      Left = 20
+      Left = 34
       Top = 24
-      Width = 47
+      Width = 33
       Height = 17
-      Caption = #52769#51221#47732':'
+      Caption = #51333#54633':'
     end
     object Label2: TLabel
       Left = 34
@@ -162,6 +162,8 @@ object fmCommentEdit: TfmCommentEdit
     object ITEM_ID: TcxImageComboBox
       Left = 72
       Top = 20
+      EditValue = 3
+      Enabled = False
       Properties.Items = <
         item
           Description = #51221#47732
@@ -171,26 +173,43 @@ object fmCommentEdit: TfmCommentEdit
         item
           Description = #52769#47732
           Value = 2
+        end
+        item
+          Description = #51333#54633
+          Value = 3
         end>
+      Properties.ReadOnly = True
+      StyleDisabled.BorderColor = clWindowFrame
+      StyleDisabled.Color = clWhite
+      StyleDisabled.TextColor = clBlack
       TabOrder = 0
       Width = 89
     end
     object ITEM_VALUE: TcxImageComboBox
       Left = 261
       Top = 20
-      EditValue = 1
+      EditValue = 2
       Properties.Items = <
         item
-          Description = 'A'
+          Description = 'A+'
+          ImageIndex = 0
           Value = 1
         end
         item
-          Description = 'B'
+          Description = 'A'
           Value = 2
         end
         item
-          Description = 'C'
+          Description = 'B+'
+          Value = 3
+        end
+        item
+          Description = 'B'
           Value = 4
+        end
+        item
+          Description = 'C'
+          Value = 5
         end>
       TabOrder = 1
       Width = 60

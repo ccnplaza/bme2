@@ -27,7 +27,7 @@ uses
   dxSkinWhiteprint, dxSkinXmas2008Blue, ieview, imageenview, dxBarBuiltInMenu,
   cxPC, cxTextEdit, cxMaskEdit, cxSpinEdit, DateUtils, cxCurrencyEdit,
   hyieutils, iexBitmaps, hyiedefs, iesettings, iexLayers, iexRulers, iexToolbars,
-  cxDropDownEdit, cxLookupEdit, cxDBLookupEdit, Gauges;
+  cxDropDownEdit, cxLookupEdit, cxDBLookupEdit, Gauges, cxCheckBox;
 
 type
   TfmResultView = class(TForm)
@@ -115,8 +115,6 @@ type
     gridPicturePIC_CNT: TcxGridDBColumn;
     gridPictureCENTER_ID: TcxGridDBColumn;
     cxGridLevel1: TcxGridLevel;
-    Label6: TLabel;
-    lcbSubCenter: TcxLookupComboBox;
     cxGrid3: TcxGrid;
     gridStudent: TcxGridDBTableView;
     gridStudentID: TcxGridDBColumn;
@@ -162,14 +160,16 @@ type
     CHECK_COMMENTS_SEL_RANDCHECK_COMMENTS: TWideMemoField;
     gridPictureCHECK_CNT: TcxGridDBColumn;
     gridPictureSUB_CENTER: TcxGridDBColumn;
+    chkCheckDone: TcxCheckBox;
+    PanelSubCenter: TPanel;
+    Label6: TLabel;
+    lcbSubCenter: TcxLookupComboBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnPrintClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormResize(Sender: TObject);
     procedure btnReportChartClick(Sender: TObject);
     procedure btnRefreshClick(Sender: TObject);
-    procedure UniAlerter1Event(Sender: TDAAlerter; const EventName,
-      Message: string);
     procedure lcbSubCenterPropertiesCloseUp(Sender: TObject);
     procedure gridPictureCellClick(Sender: TcxCustomGridTableView;
       ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
@@ -181,23 +181,15 @@ type
     procedure gridStudentCellDblClick(Sender: TcxCustomGridTableView;
       ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
       AShift: TShiftState; var AHandled: Boolean);
+    procedure chkCheckDoneClick(Sender: TObject);
   private
-    function GetStandartBMI(age, sex: Integer): Double;
-    function CreateMixedImage(mStream, dStream: TMemoryStream): TMemoryStream;
-    procedure GetCheckitemCount;
     procedure CreateReportData(id : Integer);
-    procedure RetrieveReportPictures(result_id, rPage: Integer);
     procedure ResetImageEnVect;
     function GetResultComments(item_id, value_id: Integer): string;
-    procedure RetrieveCommentData;
-    function GetPracticeList(item_id, value_id : Integer): string;
     procedure RetrieveDateList;
     procedure RetrieveStudentList;
     { Private declarations }
   public
-    { Public declarations }
-    kind_total1, kind_total2, kind_total3 : Double;
-    kind_perc1, kind_perc2, kind_perc3 : Double;
     imgView : array[0..1] of TImageEnView;
     I_RESULT1, I_RESULT2, I_RESULT3 : Integer;
     S_RESULT1, S_RESULT2, S_RESULT3 : string;
@@ -229,6 +221,7 @@ begin
   DATA_LOAD := False;
   WORK_YEAR.Value := YearOf(Date);
   UserInfo.userSubCenterID := DataModule1.GetSubCenterID;
+  PanelSubCenter.Visible := UserInfo.userKind = 1;
   if UserInfo.userKind = 1 then begin
     if DataModule1.GetSubCenterID > 0 then begin
       DataModule1.SelectRegistedCenter;
@@ -245,12 +238,18 @@ end;
 
 procedure TfmResultView.btnRefreshClick(Sender: TObject);
 begin
-  DataModule1.SetActiveCenter(lcbSubCenter.EditValue);
-  UserInfo.userSubCenterID := lcbSubCenter.EditValue;
+  if UserInfo.userKind = 1 then begin
+    DataModule1.SetActiveCenter(lcbSubCenter.EditValue);
+    UserInfo.userSubCenterID := lcbSubCenter.EditValue;
+  end else begin
+    UserInfo.userSubCenterID := 0;
+  end;
   RetrieveDateList;
 end;
 
 procedure TfmResultView.RetrieveDateList;
+var
+  AItemList: TcxFilterCriteriaItemList;
 begin
   DataModule1.PICTURE_DATE_SEL.ParamByName('C_ID').Value := UserInfo.userCenterID;
   DataModule1.PICTURE_DATE_SEL.ParamByName('SUB_ID').Value := UserInfo.userSubCenterID;
@@ -260,31 +259,43 @@ begin
   STUDENT_IMAGE_SEL_RESULT.ParamByName('DATE_ID').Value := DataModule1.PICTURE_DATE_SELID.Value;
   STUDENT_IMAGE_SEL_RESULT.Open;
   ds_STUDENT_IMAGE_SEL_RESULT.DataSet.Refresh;
+  if chkCheckDone.Checked then begin
+    gridStudent.DataController.Filter.BeginUpdate;
+    gridStudent.DataController.Filter.Root.Clear;
+    AItemList := gridStudent.DataController.Filter.Root.AddItemList(fboAnd);
+    AItemList.AddItem(gridStudentTOTAL_VAL, foGreater, 0, '0');
+    gridStudent.DataController.Filter.EndUpdate;
+    gridStudent.DataController.Filter.Active := true;
+  end else begin
+    gridStudent.DataController.Filter.BeginUpdate;
+    gridStudent.DataController.Filter.Root.Clear;
+    gridStudent.DataController.Filter.EndUpdate;
+    gridStudent.DataController.Filter.Active := true;
+  end;
   DATA_LOAD := True;
 end;
 
 procedure TfmResultView.RetrieveStudentList;
+var
+  AItemList: TcxFilterCriteriaItemList;
 begin
   STUDENT_IMAGE_SEL_RESULT.ParamByName('DATE_ID').Value := gridPictureID.EditValue;
   STUDENT_IMAGE_SEL_RESULT.Open;
   ds_STUDENT_IMAGE_SEL_RESULT.DataSet.Refresh;
-  DATA_LOAD := True;
-end;
-
-procedure TfmResultView.RetrieveCommentData;
-begin
-  DataModule1.CHECK_COMMENTS_SEL.ParamByName('C_ID').Value := UserInfo.userCenterID;
-  DataModule1.CHECK_COMMENTS_SEL.Active := True;
-  DataModule1.ds_CHECK_COMMENTS_SEL.DataSet.Refresh;
-  if not (DataModule1.CHECK_COMMENTS_SEL.RecordCount > 0) then begin
-    USER_HAS_OWN_COMMENT := False;
-    DataModule1.CHECK_COMMENTS_SEL.ParamByName('C_ID').Value := 0;
-    DataModule1.CHECK_COMMENTS_SEL.Active := True;
-    DataModule1.ds_CHECK_COMMENTS_SEL.DataSet.Refresh;
+  if chkCheckDone.Checked then begin
+    gridStudent.DataController.Filter.BeginUpdate;
+    gridStudent.DataController.Filter.Root.Clear;
+    AItemList := gridStudent.DataController.Filter.Root.AddItemList(fboAnd);
+    AItemList.AddItem(gridStudentTOTAL_VAL, foGreater, 0, '0');
+    gridStudent.DataController.Filter.EndUpdate;
+    gridStudent.DataController.Filter.Active := true;
   end else begin
-    USER_HAS_OWN_COMMENT := true;
+    gridStudent.DataController.Filter.BeginUpdate;
+    gridStudent.DataController.Filter.Root.Clear;
+    gridStudent.DataController.Filter.EndUpdate;
+    gridStudent.DataController.Filter.Active := true;
   end;
-//  ShowMessage(IntToStr(DataModule1.CHECK_COMMENTS_SEL.RecordCount));
+  DATA_LOAD := True;
 end;
 
 procedure TfmResultView.gridPictureCellClick(Sender: TcxCustomGridTableView;
@@ -331,19 +342,6 @@ begin
   btnRefresh.Click;
 end;
 
-function TfmResultView.GetStandartBMI(age, sex : Integer) : Double;
-begin
-{  DataModule1.GET_STANDARD_BMI.ParamByName('age').Value := age;
-  DataModule1.GET_STANDARD_BMI.ParamByName('sex').Value := sex;
-  DataModule1.GET_STANDARD_BMI.Active := True;
-  DataModule1.d_GET_STANDARD_BMI.DataSet.Refresh;
-  if DataModule1.d_GET_STANDARD_BMI.DataSet.FieldByName('result_bmi').Value > 0 then
-    Result := DataModule1.d_GET_STANDARD_BMI.DataSet.FieldByName('result_bmi').Value
-  else
-    Result := 0;
-}
-end;
-
 procedure TfmResultView.btnPrintClick(Sender: TObject);
 var
   cnt, p_cnt, s_id, i, s : Integer;
@@ -355,6 +353,7 @@ begin
   is_first := true;
   cnt := gridStudent.Controller.SelectedRecordCount;
   Gauge1.MaxValue := cnt;
+  Gauge1.Progress := 0;
   PanelMsg.Visible := True;
   PanelMsg.Refresh;
   for i := 0 to cnt - 1 do begin
@@ -362,7 +361,9 @@ begin
     gridStudent.DataController.FocusedRecordIndex := s;
     s_id := gridStudentID.EditValue;
     if VarIsNull(gridStudent.DataController.GetValue(s, gridStudentTOTAL_VAL.Index)) then begin
-      ShowMessage('평가 데이터가 없습니다.');
+      ShowMessage('평가 데이터가 없습니다.' +
+         #10#13 + '평가를 완료한 데이터만 출력이 가능합니다.'
+      );
       Continue;
     end;
     Inc(p_cnt);
@@ -390,6 +391,8 @@ var
   s_height, s_weight : Integer;
   bmi_val, bmi_result : string;
 begin
+//  ImageEnView1.IO.WicFastLoading := True;
+//  ImageEnView2.IO.WicFastLoading := True;
   imgPrint1.ClearAll;
   imgPrint2.ClearAll;
   ImageEnView1.ClearAll;
@@ -423,9 +426,9 @@ begin
         dStream[0].Position := 0;
         ImageEnView1.IO.LoadFromStreamIEN(dStream[0]);
         ImageEnView1.LayersDrawTo(imgPrint1.IEBitmap);
-        imgPrint1.IO.SaveToStream(pStream[0], 0);
+        imgPrint1.IO.SaveToStreamJpeg(pStream[0]);
         pStream[0].Position := 0;
-      end;        
+      end;
     end;
     if not VarIsNull(DataModule1.STUDENT_IMAGE_SEL_IMAGEDRAW2.Value) then begin
       DataModule1.STUDENT_IMAGE_SEL_IMAGEDRAW2.SaveToStream(dStream[1]);
@@ -433,7 +436,7 @@ begin
         dStream[1].Position := 0;
         ImageEnView2.IO.LoadFromStreamIEN(dStream[1]);
         ImageEnView2.LayersDrawTo(imgPrint2.IEBitmap);
-        imgPrint2.IO.SaveToStream(pStream[1], 0);
+        imgPrint2.IO.SaveToStreamJpeg(pStream[1]);
         pStream[1].Position := 0;
       end;
     end;
@@ -478,106 +481,6 @@ begin
   Result := CHECK_COMMENTS_SEL_RANDCHECK_COMMENTS.Value;
 end;
 
-function TfmResultView.GetPracticeList(item_id, value_id : Integer) : string;
-var
-  fstr : TStringList;
-  i, cnt : integer;
-  title_name, title_desc : string;
-begin
-  if value_id > 0 then begin
-    fstr := TStringList.Create;
-    DataModule1.PRACTICE_TITLE_SEL.ParamByName('P_ID').Value := item_id;
-    DataModule1.PRACTICE_TITLE_SEL.Open;
-    DataModule1.ds_PRACTICE_TITLE_SEL.DataSet.Refresh;
-    cnt := DataModule1.PRACTICE_TITLE_SEL.RecordCount;
-    DataModule1.PRACTICE_TITLE_SEL.First;
-    for i := 0 to cnt - 1 do begin
-      title_name := DataModule1.PRACTICE_TITLE_SELP_TITLE.Value;
-      title_desc := DataModule1.PRACTICE_TITLE_SELTITLE_DESC.Value;
-      fstr.Append(IntToStr(i+1) + '. ' + title_name + ' - ' + title_desc);
-      DataModule1.PRACTICE_TITLE_SEL.Next;
-    end;
-    Result := fstr.Text;
-  end else begin
-    Result := '';
-  end;
-end;
-
-procedure TfmResultView.RetrieveReportPictures(result_id, rPage : Integer);
-var
-  rStream, pStream, dStream : TMemoryStream;
-begin
-{  rStream := TMemoryStream.Create;
-  pStream := TMemoryStream.Create;
-  dStream := TMemoryStream.Create;
-  try
-    REPORT_IMAGE_SEL.ParamByName('RESULT_VALUE').Value := result_id;
-    REPORT_IMAGE_SEL.Active := True;
-    d_REPORT_IMAGE_SEL.DataSet.Refresh;
-    REPORT_IMAGE_SELRESULT_IMAGE.SaveToStream(rStream);
-    REPORT_IMAGE_SELPRACTICE_IMAGE.SaveToStream(pStream);
-    rStream.Position := 0;
-    pStream.Position := 0;
-    if rPage = 1 then begin   //얼굴
-      dxMemData2.Edit;
-      dxMemData2page2result.LoadFromStream(rStream);
-      dxMemData2page2practice.LoadFromStream(pStream);
-      dxMemData2.Post;
-    end;
-    if rPage = 2 then begin   //어깨
-      dxMemData2.Edit;
-      dxMemData2page3result.LoadFromStream(rStream);
-      dxMemData2page3practice.LoadFromStream(pStream);
-      dxMemData2.Post;
-    end;
-    if rPage = 3 then begin  //등
-      dxMemData2.Edit;
-      dxMemData2page4result.LoadFromStream(rStream);
-      dxMemData2page4practice.LoadFromStream(pStream);
-      dxMemData2.Post;
-    end;
-    if rPage = 4 then begin  //목
-      REPORT_IMAGE_SELDESC_IMAGE.SaveToStream(dStream);
-      dStream.Position := 0;
-      dxMemData2.Edit;
-      dxMemData2page5result.LoadFromStream(rStream);
-      dxMemData2page5practice.LoadFromStream(pStream);
-      dxMemData2page5desc.LoadFromStream(dStream);
-      dxMemData2.Post;
-    end;
-    if rPage = 5 then begin  //다리
-      dxMemData2.Edit;
-      dxMemData2page6result.LoadFromStream(rStream);
-      dxMemData2page6practice.LoadFromStream(pStream);
-      dxMemData2.Post;
-    end;
-    if rPage = 6 then begin  //족부(좌)
-      dxMemData2.Edit;
-      dxMemData2page7result.LoadFromStream(rStream);
-//      dxMemData2page7practice.LoadFromStream(pStream);
-      dxMemData2.Post;
-    end;
-    if rPage = 7 then begin  //족부(우)
-      dxMemData2.Edit;
-      dxMemData2page8result.LoadFromStream(rStream);
-//      dxMemData2page8practice.LoadFromStream(pStream);
-      dxMemData2.Post;
-    end;
-  finally
-    rStream.Free;
-    pStream.Free;
-    dStream.Free;
-  end;
-  }
-end;
-
-procedure TfmResultView.UniAlerter1Event(Sender: TDAAlerter; const EventName,
-  Message: string);
-begin
-//  ShowMessage(EventName);
-//  btnRefresh.Click;
-end;
-
 procedure TfmResultView.btnReportChartClick(Sender: TObject);
 var
   dStream1, dStream2 : TMemoryStream;
@@ -614,59 +517,23 @@ begin
   end;
 end;
 
-procedure TfmResultView.GetCheckitemCount;
+procedure TfmResultView.chkCheckDoneClick(Sender: TObject);
 var
-  r_total : integer;
-  i, cnt : Integer;
+  AItemList: TcxFilterCriteriaItemList;
 begin
-{  kind_total1 := 0;
-  kind_total2 := 0;
-  kind_total3 := 0;
-
-  DataModule1.d_STUDENTS_SEL.DataSet.DisableControls;
-  cnt := DataModule1.d_STUDENTS_SEL.DataSet.RecordCount;
-  DataModule1.d_STUDENTS_SEL.DataSet.First;
-  for i := 0 to cnt - 1 do begin
-    r_total := DataModule1.d_STUDENTS_SEL.DataSet.FieldByName('check_item1').AsInteger +
-               DataModule1.d_STUDENTS_SEL.DataSet.FieldByName('check_item2').AsInteger +
-               DataModule1.d_STUDENTS_SEL.DataSet.FieldByName('check_item3').AsInteger +
-               DataModule1.d_STUDENTS_SEL.DataSet.FieldByName('check_item4').AsInteger +
-               DataModule1.d_STUDENTS_SEL.DataSet.FieldByName('check_item5').AsInteger +
-               DataModule1.d_STUDENTS_SEL.DataSet.FieldByName('check_item6').AsInteger +
-               DataModule1.d_STUDENTS_SEL.DataSet.FieldByName('check_item7').AsInteger +
-               DataModule1.d_STUDENTS_SEL.DataSet.FieldByName('check_item8').AsInteger +
-               DataModule1.d_STUDENTS_SEL.DataSet.FieldByName('check_item9').AsInteger;
-
-    if r_total = 171 then
-      kind_total2 := kind_total2 + 1;
-    if r_total > 171 then
-      kind_total3 := kind_total3 + 1;
-
-    DataModule1.d_STUDENTS_SEL.DataSet.Next;
+  if chkCheckDone.Checked then begin
+    gridStudent.DataController.Filter.BeginUpdate;
+    gridStudent.DataController.Filter.Root.Clear;
+    AItemList := gridStudent.DataController.Filter.Root.AddItemList(fboAnd);
+    AItemList.AddItem(gridStudentTOTAL_VAL, foGreater, 0, '0');
+    gridStudent.DataController.Filter.EndUpdate;
+    gridStudent.DataController.Filter.Active := true;
+  end else begin
+    gridStudent.DataController.Filter.BeginUpdate;
+    gridStudent.DataController.Filter.Root.Clear;
+    gridStudent.DataController.Filter.EndUpdate;
+    gridStudent.DataController.Filter.Active := true;
   end;
-  DataModule1.d_STUDENTS_SEL.DataSet.First;
-  DataModule1.d_STUDENTS_SEL.DataSet.EnableControls;
-}
-end;
-
-function TfmResultView.CreateMixedImage(mStream, dStream : TMemoryStream) : TMemoryStream;
-var
-  Imv: TImageEnVect;
-  mixStream : TMemoryStream;
-begin
-   mixStream := TMemoryStream.Create;
-   Imv := TImageEnVect.Create(nil);
-   TRY
-      Imv.IO.LoadFromStreamJpeg(mStream);
-      Imv.LoadFromStreamIEV(dStream);
-      Imv.CopyObjectsToBack(true);
-      Imv.Update;
-      Imv.IO.SaveToStreamJpeg(mixStream);
-      Result := mixStream;
-   FINALLY
-      //mixStream.Free;
-      Imv.free;
-   END;
 end;
 
 procedure TfmResultView.FormClose(Sender: TObject; var Action: TCloseAction);

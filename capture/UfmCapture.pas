@@ -50,7 +50,6 @@ type
     btnSet1: TcxButton;
     btnStartPreview1: TcxButton;
     btnStopPreview1: TcxButton;
-    ImageEnVect1: TImageEnVect;
     btnCapture1: TcxButton;
     btnCapture2: TcxButton;
     cboVideoDevices1: TComboBox;
@@ -76,7 +75,6 @@ type
     btnRefresh: TcxButton;
     Label3: TLabel;
     WORK_YEAR: TcxSpinEdit;
-    btnImportImage: TcxButton;
     btnAddPicture: TcxButton;
     ImageEnView1: TImageEnView;
     gridPicturePIC_DATE: TcxGridDBColumn;
@@ -90,23 +88,25 @@ type
     gridStudentS_AGE: TcxGridDBColumn;
     gridStudentColumn1: TcxGridDBColumn;
     gridPictureColumn1: TcxGridDBColumn;
-    Button1: TButton;
-    Label5: TLabel;
     gridPictureMAN_CNT: TcxGridDBColumn;
     gridStudentPIC_DONE: TcxGridDBColumn;
-    btnReCalc: TcxButton;
     PanelLeft: TPanel;
     PanelRight: TPanel;
-    Splitter1: TSplitter;
-    lcbSubCenter: TcxLookupComboBox;
-    Label6: TLabel;
     cxPageControl1: TcxPageControl;
     cxTabSheet1: TcxTabSheet;
     cxTabSheet2: TcxTabSheet;
     ImageEnView2: TImageEnView;
-    btnCut: TcxButton;
     gridPictureCHECK_CNT: TcxGridDBColumn;
     gridPictureSUB_CENTER: TcxGridDBColumn;
+    ImageEnCam: TImageEnView;
+    cxGroupBox1: TcxGroupBox;
+    btnCut: TcxButton;
+    btnImportImage: TcxButton;
+    btnExportImage: TcxButton;
+    Label5: TLabel;
+    PanelSubCenter: TPanel;
+    Label6: TLabel;
+    lcbSubCenter: TcxLookupComboBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure btnStartPreview1Click(Sender: TObject);
@@ -137,8 +137,6 @@ type
       ARecordIndex: Integer; var AText: string);
     procedure gridPictureColumn1GetDataText(Sender: TcxCustomGridTableItem;
       ARecordIndex: Integer; var AText: string);
-    procedure Button1Click(Sender: TObject);
-    procedure btnReCalcClick(Sender: TObject);
     procedure FormResize(Sender: TObject);
     procedure gridPictureCellClick(Sender: TcxCustomGridTableView;
       ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
@@ -149,6 +147,12 @@ type
       ANewItemRecordFocusingChanged: Boolean);
     procedure btnCutClick(Sender: TObject);
     procedure cxPageControl1Change(Sender: TObject);
+    procedure ImageEnCamDShowNewFrame(Sender: TObject);
+    procedure ImageEnCamMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure ImageEnCamMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure btnExportImageClick(Sender: TObject);
   private
     //procedure GotoNextStudent(student_id: Integer);
     procedure LoadSettings;
@@ -197,19 +201,19 @@ var
 begin
   w := 0; h := 0;
   if cboVideoFormats1.ItemIndex > -1 then begin
-    w := ImageEnVect1.IO.DShowParams.VideoFormats[cboVideoFormats1.ItemIndex].MaxWidth;
-    h := ImageEnVect1.IO.DShowParams.VideoFormats[cboVideoFormats1.ItemIndex].MaxHeight;
-    vformat := ImageEnVect1.IO.DShowParams.VideoFormats[cboVideoFormats1.ItemIndex].Format;
+    w := ImageEnCam.IO.DShowParams.VideoFormats[cboVideoFormats1.ItemIndex].MaxWidth;
+    h := ImageEnCam.IO.DShowParams.VideoFormats[cboVideoFormats1.ItemIndex].MaxHeight;
+    vformat := ImageEnCam.IO.DShowParams.VideoFormats[cboVideoFormats1.ItemIndex].Format;
   end;
-  if not (ImageEnVect1.IO.DShowParams.Connected) then begin
-    ImageEnVect1.IO.DShowParams.SetVideoInput(cboVideoDevices1.ItemIndex, 0, w, h, vformat);
-    ImageEnVect1.IO.DShowParams.EnableSampleGrabber := true;
-    ImageEnVect1.IO.DShowParams.Connect;
+  if not (ImageEnCam.IO.DShowParams.Connected) then begin
+    ImageEnCam.IO.DShowParams.SetVideoInput(cboVideoDevices1.ItemIndex, 0, w, h, vformat);
+    ImageEnCam.IO.DShowParams.EnableSampleGrabber := true;
+    ImageEnCam.IO.DShowParams.Connect;
   end else begin
     Disconnect;
-    ImageEnVect1.IO.DShowParams.SetVideoInput(cboVideoDevices1.ItemIndex, 0, w, h, vformat);
-    ImageEnVect1.IO.DShowParams.EnableSampleGrabber := true;
-    ImageEnVect1.IO.DShowParams.Connect;
+    ImageEnCam.IO.DShowParams.SetVideoInput(cboVideoDevices1.ItemIndex, 0, w, h, vformat);
+    ImageEnCam.IO.DShowParams.EnableSampleGrabber := true;
+    ImageEnCam.IO.DShowParams.Connect;
   end;
 end;
 
@@ -220,7 +224,7 @@ end;
 
 procedure TfmCapture.Disconnect;
 begin
-  ImageEnVect1.IO.DShowParams.Disconnect;
+  ImageEnCam.IO.DShowParams.Disconnect;
 end;
 
 procedure TfmCapture.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -251,6 +255,8 @@ begin
   ActivePage := 0;
   ienPosture[0] := ImageEnView1;
   ienPosture[1] := ImageEnView2;
+  ImageEnView1.IO.WicFastLoading := True;
+  ImageEnView2.IO.WicFastLoading := True;
   LoadSettings;
   isCameraView := False;
   SelectedPosture := 1;
@@ -262,10 +268,11 @@ begin
   spY2.Value := CamSetINI.ReadInteger('Camera1', 'Bottom', 0);
   c1_act := CamSetINI.ReadInteger('Camera1', 'Active', 0);
   chkCameraMargin.Checked := c1_act = 1;
-  UserInfo.userSubCenterID := DataModule1.GetSubCenterID;
+  PanelSubCenter.Visible := UserInfo.userKind = 1;
   if UserInfo.userKind = 1 then begin
     if DataModule1.GetSubCenterID > 0 then begin
       DataModule1.SelectRegistedCenter;
+      UserInfo.userSubCenterID := DataModule1.GetSubCenterID;
       lcbSubCenter.EditValue := DataModule1.GetSubCenterID;
       btnRefresh.Click;
     end else begin
@@ -274,15 +281,16 @@ begin
     end;
   end else begin
     btnRefresh.Click;
+    UserInfo.userSubCenterID := 0;
   end;
 end;
 
 procedure TfmCapture.LoadSettings;
 begin
   fmCameraPreview := TfmCameraPreview.Create(Self);
-  ImageEnVect1.AutoFit := True;
-  ImageEnVect1.Clear;
-  ImageEnVect1.Update;
+  ImageEnCam.AutoFit := True;
+  ImageEnCam.Clear;
+  ImageEnCam.Update;
   isClickedCheckData := False;
   ImageEnView1.CropTool.LockAspectRatio := 3 / 8;
   ImageEnView2.CropTool.LockAspectRatio := 3 / 8;
@@ -295,11 +303,11 @@ var
   i, maxID : integer;
   s: string;
 begin
-  cboVideoDevices1.Items.Assign(ImageEnVect1.IO.DShowParams.VideoInputs);
+  cboVideoDevices1.Items.Assign(ImageEnCam.IO.DShowParams.VideoInputs);
   cboVideoDevices1.ItemIndex := 0;
   Connect;
   cboVideoFormats1.Clear;
-  with ImageEnVect1.IO.DShowParams do
+  with ImageEnCam.IO.DShowParams do
     for i := 0 to VideoFormatsCount - 1 do begin
       s := SysUtils.Format('%s %dx%d', [VideoFormats[i].Format, VideoFormats[i].MaxWidth, VideoFormats[i].MaxHeight]);
       if VideoFormats[i].MaxWidth = 1920 then
@@ -351,7 +359,6 @@ begin
           end;
         end;
       end;
-      DataModule1.ds_STUDENT_IMAGE_SEL_BYDATE.DataSet.Refresh;
       UpdateStudentPictureCount;
     end;
   finally
@@ -411,7 +418,7 @@ begin
     Exit;
   end;
   student_id := gridStudentID.EditValue;
-  ImageEnVect1.Proc.SelCopyToClip(True);
+  ImageEnCam.Proc.SelCopyToClip(True);
   ImageEnView1.Proc.SelPasteFromClip(True);
   ImageEnView1.Update;
   mStream := TMemoryStream.Create;
@@ -476,6 +483,42 @@ begin
   end;
 end;
 
+procedure TfmCapture.btnExportImageClick(Sender: TObject);
+var
+  i, cnt : integer;
+  img1, img2, img3 : TMemoryStream;
+  iname1, iname2, iname3 : string;
+begin
+  DataModule1.STUDENT_IMAGE_SEL_ALL.Open;
+  DataModule1.ds_STUDENT_IMAGE_SEL_ALL.DataSet.Refresh;
+  cnt := DataModule1.STUDENT_IMAGE_SEL_ALL.RecordCount;
+  ShowMessage(IntToStr(cnt));
+  DataModule1.STUDENT_IMAGE_SEL_ALL.First;
+  for i := 0 to cnt - 1 do begin
+    img1 := TMemoryStream.Create;
+    img2 := TMemoryStream.Create;
+    img3 := TMemoryStream.Create;
+    iname1 := 'D:\Delphi2010\02_자세평가\businessmartialart\BME\image\' + DataModule1.STUDENT_IMAGE_SEL_ALLIMG_STR1.Value;
+    iname2 := 'D:\Delphi2010\02_자세평가\businessmartialart\BME\image\' + DataModule1.STUDENT_IMAGE_SEL_ALLIMG_STR2.Value;
+    iname3 := 'D:\Delphi2010\02_자세평가\businessmartialart\BME\image\' + DataModule1.STUDENT_IMAGE_SEL_ALLIMG_STR3.Value;
+    if FileExists(iname1) then img1.LoadFromFile(iname1) else img1.Clear;
+    if FileExists(iname2) then img2.LoadFromFile(iname2) else img2.Clear;
+    if FileExists(iname3) then img3.LoadFromFile(iname3) else img3.Clear;
+    img1.Position := 0;
+    img2.Position := 0;
+    img3.Position := 0;
+    DataModule1.STUDENT_IMAGE_UPD_BLOB.ParamByName('ID').Value := DataModule1.STUDENT_IMAGE_SEL_ALLID.Value;
+    DataModule1.STUDENT_IMAGE_UPD_BLOB.ParamByName('IMAGE1').LoadFromStream(img1, ftBlob);
+    DataModule1.STUDENT_IMAGE_UPD_BLOB.ParamByName('IMAGE2').LoadFromStream(img2, ftBlob);
+    DataModule1.STUDENT_IMAGE_UPD_BLOB.ParamByName('IMAGE3').LoadFromStream(img3, ftBlob);
+    DataModule1.STUDENT_IMAGE_UPD_BLOB.ParamByName('IMAGE4').Clear;
+    DataModule1.STUDENT_IMAGE_UPD_BLOB.ExecProc;
+    Label5.Caption := IntToStr(i) + ' saved...';
+    Application.ProcessMessages;
+    DataModule1.STUDENT_IMAGE_SEL_ALL.Next;
+  end;
+end;
+
 procedure TfmCapture.btnImportImageClick(Sender: TObject);
 var
   uid : Int64;
@@ -516,57 +559,21 @@ end;
 
 procedure TfmCapture.btnSet1Click(Sender: TObject);
 begin
-  if not (ImageEnVect1.IO.DShowParams.Connected) then
+  if not (ImageEnCam.IO.DShowParams.Connected) then
     Connect;
-  ImageEnVect1.IO.DShowParams.ShowPropertyPages(iepVideoInput, ietFilter,false);
+  ImageEnCam.IO.DShowParams.ShowPropertyPages(iepVideoInput, ietFilter,false);
 end;
 
 procedure TfmCapture.btnStartPreview1Click(Sender: TObject);
 begin
     Connect;
-    ImageEnVect1.IO.DShowParams.Run;
+    ImageEnCam.IO.DShowParams.Run;
 end;
 
 procedure TfmCapture.btnStopPreview1Click(Sender: TObject);
 begin
   Disconnect;
-  ImageEnVect1.Blank;
-end;
-
-procedure TfmCapture.Button1Click(Sender: TObject);
-var
-  i, cnt : integer;
-  img1, img2, img3 : TMemoryStream;
-  iname1, iname2, iname3 : string;
-begin
-  DataModule1.STUDENT_IMAGE_SEL_ALL.Open;
-  DataModule1.ds_STUDENT_IMAGE_SEL_ALL.DataSet.Refresh;
-  cnt := DataModule1.STUDENT_IMAGE_SEL_ALL.RecordCount;
-  ShowMessage(IntToStr(cnt));
-  DataModule1.STUDENT_IMAGE_SEL_ALL.First;
-  for i := 0 to cnt - 1 do begin
-    img1 := TMemoryStream.Create;
-    img2 := TMemoryStream.Create;
-    img3 := TMemoryStream.Create;
-    iname1 := 'D:\Delphi2010\02_자세평가\businessmartialart\BME\image\' + DataModule1.STUDENT_IMAGE_SEL_ALLIMG_STR1.Value;
-    iname2 := 'D:\Delphi2010\02_자세평가\businessmartialart\BME\image\' + DataModule1.STUDENT_IMAGE_SEL_ALLIMG_STR2.Value;
-    iname3 := 'D:\Delphi2010\02_자세평가\businessmartialart\BME\image\' + DataModule1.STUDENT_IMAGE_SEL_ALLIMG_STR3.Value;
-    if FileExists(iname1) then img1.LoadFromFile(iname1) else img1.Clear;
-    if FileExists(iname2) then img2.LoadFromFile(iname2) else img2.Clear;
-    if FileExists(iname3) then img3.LoadFromFile(iname3) else img3.Clear;
-    img1.Position := 0;
-    img2.Position := 0;
-    img3.Position := 0;
-    DataModule1.STUDENT_IMAGE_UPD_BLOB.ParamByName('ID').Value := DataModule1.STUDENT_IMAGE_SEL_ALLID.Value;
-    DataModule1.STUDENT_IMAGE_UPD_BLOB.ParamByName('IMAGE1').LoadFromStream(img1, ftBlob);
-    DataModule1.STUDENT_IMAGE_UPD_BLOB.ParamByName('IMAGE2').LoadFromStream(img2, ftBlob);
-    DataModule1.STUDENT_IMAGE_UPD_BLOB.ParamByName('IMAGE3').LoadFromStream(img3, ftBlob);
-    DataModule1.STUDENT_IMAGE_UPD_BLOB.ParamByName('IMAGE4').Clear;
-    DataModule1.STUDENT_IMAGE_UPD_BLOB.ExecProc;
-    Label5.Caption := IntToStr(i) + ' saved...';
-    Application.ProcessMessages;
-    DataModule1.STUDENT_IMAGE_SEL_ALL.Next;
-  end;
+  ImageEnCam.Blank;
 end;
 
 procedure TfmCapture.cboVideoDevices1Change(Sender: TObject);
@@ -576,7 +583,7 @@ var
 begin
   Connect;
   cboVideoFormats1.Clear;
-  with ImageEnVect1.IO.DShowParams do
+  with ImageEnCam.IO.DShowParams do
     for i := 0 to VideoFormatsCount - 1 do begin
       s := SysUtils.Format('%s %dx%d', [VideoFormats[i].Format, VideoFormats[i].MaxWidth, VideoFormats[i].MaxHeight]);
       if VideoFormats[i].MaxWidth = 1920 then
@@ -593,42 +600,43 @@ var
   x1, x2, y1, y2 : Integer;
 begin
   if chkCameraMargin.Checked then begin
-    if ImageEnVect1.Selected then begin
-      x1 := ImageEnVect1.SelX1;
-      y1 := ImageEnVect1.SelY1;
-      x2 := ImageEnVect1.IEBitmap.Width - ImageEnVect1.SelX2;
-      y2 := ImageEnVect1.IEBitmap.Height - ImageEnVect1.SelY2;
+    if ImageEnCam.Selected then begin
+      x1 := ImageEnCam.SelX1;
+      y1 := ImageEnCam.SelY1;
+      x2 := ImageEnCam.IEBitmap.Width - ImageEnCam.SelX2;
+      y2 := ImageEnCam.IEBitmap.Height - ImageEnCam.SelY2;
       spX.Value := x1;
       spY.Value := y1;
       spX2.Value := x2;
       spY2.Value := y2;
-      ImageEnVect1.DeSelect;
+      ImageEnCam.DeSelect;
     end;
   end;
 end;
 
-procedure TfmCapture.btnReCalcClick(Sender: TObject);
-begin
-  UpdateStudentPictureCount;
-end;
-
 procedure TfmCapture.UpdateStudentPictureCount;
+var
+  top_row : Integer;
 begin
-  Screen.Cursor := crHourGlass;
+  top_row := gridPicture.Controller.TopRowIndex;
   gridPicture.DataController.SaveBookmark;
-  DataModule1.PICTURE_DATE_COUNT_UPD.ParamByName('CENTER_ID').Value := UserInfo.userCenterID;
-  DataModule1.PICTURE_DATE_COUNT_UPD.ParamByName('SUB_ID').Value := UserInfo.userSubCenterID;
-  DataModule1.PICTURE_DATE_COUNT_UPD.ParamByName('P_DATE').Value := gridPicturePIC_DATE.EditValue;
-  DataModule1.PICTURE_DATE_COUNT_UPD.ExecProc;
   DataModule1.ds_PICTURE_DATE_SEL.DataSet.Refresh;
+  gridPicture.Controller.TopRowIndex := top_row;
   gridPicture.DataController.GotoBookmark;
-  Screen.Cursor := crArrow;
+
+  DataModule1.STUDENT_IMAGE_SEL_BYDATE.ParamByName('DATE_ID').Value := gridPictureID.EditValue;
+  DataModule1.STUDENT_IMAGE_SEL_BYDATE.Open;
+  DataModule1.ds_STUDENT_IMAGE_SEL_BYDATE.DataSet.Refresh;
 end;
 
 procedure TfmCapture.btnRefreshClick(Sender: TObject);
 begin
-  DataModule1.SetActiveCenter(lcbSubCenter.EditValue);
-  UserInfo.userSubCenterID := lcbSubCenter.EditValue;
+  if UserInfo.userKind = 1 then begin
+    DataModule1.SetActiveCenter(lcbSubCenter.EditValue);
+    UserInfo.userSubCenterID := lcbSubCenter.EditValue;
+  end else begin
+    UserInfo.userSubCenterID := 0;
+  end;
   RetrieveDateList;
 end;
 
@@ -676,8 +684,8 @@ begin
     mStream2.Position := 0;
     ImageEnView1.Clear;
     ImageEnView2.Clear;
-    ImageEnView1.IO.LoadFromStreamJpeg(mStream);
-    ImageEnView2.IO.LoadFromStreamJpeg(mStream2);
+    ImageEnView1.IO.LoadFromStream(mStream);
+    ImageEnView2.IO.LoadFromStream(mStream2);
     if ImageEnView1.IEBitmap.Width > ImageEnView1.IEBitmap.Height then
       ImageEnView1.Proc.Rotate(-90);
     if ImageEnView2.IEBitmap.Width > ImageEnView2.IEBitmap.Height then
@@ -796,40 +804,80 @@ procedure TfmCapture.ImageEnVect1DShowNewFrame(Sender: TObject);
 var
   angle : Integer;
 begin
-  angle := cbRotation1.EditValue;
-  ImageEnVect1.IO.DShowParams.GetSample(ImageEnVect1.IEBitmap);
-  case angle of
-    0: ImageEnVect1.Proc.Rotate(0);
-    1: ImageEnVect1.Proc.Rotate(90);
-    2: ImageEnVect1.Proc.Rotate(-90);
-  end;
-  if chkCameraMargin.Checked then begin
-    ImageEnVect1.Proc.Crop(spX.Value, spY.Value,
-    ImageEnVect1.IEBitmap.Width - spX2.Value,
-    ImageEnVect1.IEBitmap.Height - spY2.Value);
-  end;
-  ImageEnVect1.Update;
+//  angle := cbRotation1.EditValue;
+//  ImageEnVect1.IO.DShowParams.GetSample(ImageEnVect1.IEBitmap);
+//  case angle of
+//    0: ImageEnVect1.Proc.Rotate(0);
+//    1: ImageEnVect1.Proc.Rotate(90);
+//    2: ImageEnVect1.Proc.Rotate(-90);
+//  end;
+//  if chkCameraMargin.Checked then begin
+//    ImageEnVect1.Proc.Crop(spX.Value, spY.Value,
+//    ImageEnVect1.IEBitmap.Width - spX2.Value,
+//    ImageEnVect1.IEBitmap.Height - spY2.Value);
+//  end;
+//  ImageEnVect1.Update;
 end;
 
 procedure TfmCapture.ImageEnVect1MouseDown(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
-  if ssCtrl in Shift then begin
-    ImageEnVect1.MouseInteract := [miScroll];
-    ImageEnVect1.Cursor := 1782;
-  end else begin
-    ImageEnVect1.MouseInteract := [];
-    ImageEnVect1.MouseInteract := [miSelect];
-    ImageEnVect1.Cursor := 1785;
-  end;
+//  if ssCtrl in Shift then begin
+//    ImageEnVect1.MouseInteract := [miScroll];
+//    ImageEnVect1.Cursor := 1782;
+//  end else begin
+//    ImageEnVect1.MouseInteract := [];
+//    ImageEnVect1.MouseInteract := [miSelect];
+//    ImageEnVect1.Cursor := 1785;
+//  end;
 end;
 
 procedure TfmCapture.ImageEnVect1MouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
-  ImageEnVect1.MouseInteract := [];
-  ImageEnVect1.MouseInteract := [miSelect];
-  ImageEnVect1.Cursor := 1785;
+//  ImageEnVect1.MouseInteract := [];
+//  ImageEnVect1.MouseInteract := [miSelect];
+//  ImageEnVect1.Cursor := 1785;
+end;
+
+procedure TfmCapture.ImageEnCamDShowNewFrame(Sender: TObject);
+var
+  angle : Integer;
+begin
+  angle := cbRotation1.EditValue;
+  ImageEnCam.IO.DShowParams.GetSample(ImageEnCam.IEBitmap);
+  case angle of
+    0: ImageEnCam.Proc.Rotate(0);
+    1: ImageEnCam.Proc.Rotate(90);
+    2: ImageEnCam.Proc.Rotate(-90);
+  end;
+  if chkCameraMargin.Checked then begin
+    ImageEnCam.Proc.Crop(spX.Value, spY.Value,
+    ImageEnCam.IEBitmap.Width - spX2.Value,
+    ImageEnCam.IEBitmap.Height - spY2.Value);
+  end;
+  ImageEnCam.Update;
+end;
+
+procedure TfmCapture.ImageEnCamMouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  if ssCtrl in Shift then begin
+    ImageEnCam.MouseInteract := [miScroll];
+    ImageEnCam.Cursor := 1782;
+  end else begin
+    ImageEnCam.MouseInteract := [];
+    ImageEnCam.MouseInteract := [miSelect];
+    ImageEnCam.Cursor := 1785;
+  end;
+end;
+
+procedure TfmCapture.ImageEnCamMouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  ImageEnCam.MouseInteract := [];
+  ImageEnCam.MouseInteract := [miSelect];
+  ImageEnCam.Cursor := 1785;
 end;
 
 procedure TfmCapture.lcbSubCenterPropertiesCloseUp(Sender: TObject);

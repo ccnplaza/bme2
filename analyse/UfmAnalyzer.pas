@@ -62,8 +62,6 @@ type
     PanelRightImage: TPanel;
     PanelLeft: TPanel;
     PanelRight: TPanel;
-    Label6: TLabel;
-    lcbSubCenter: TcxLookupComboBox;
     Panel22: TPanel;
     cxGrid1: TcxGrid;
     gridPicture: TcxGridDBTableView;
@@ -117,6 +115,9 @@ type
     gridPictureCHECK_CNT: TcxGridDBColumn;
     gridPictureSUB_CENTER: TcxGridDBColumn;
     gridStudentCHECK_DONE: TcxGridDBColumn;
+    PanelSubCenter: TPanel;
+    Label6: TLabel;
+    lcbSubCenter: TcxLookupComboBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure btnRefreshClick(Sender: TObject);
@@ -149,6 +150,8 @@ type
     procedure btnLine2Click(Sender: TObject);
     procedure speLineThick2PropertiesChange(Sender: TObject);
     procedure ColorBox2PropertiesCloseUp(Sender: TObject);
+    procedure CHECK_VAL1PropertiesEditValueChanged(Sender: TObject);
+    procedure CHECK_VAL2PropertiesEditValueChanged(Sender: TObject);
   private
     procedure LoadCheckData;
     procedure LoadAnalyseResult;
@@ -159,6 +162,7 @@ type
     procedure AssignControlValues;
     procedure AssignControlValues2;
     procedure ReFreshStudentList;
+    procedure ResultCalculate;
     //procedure CreateLocalData;
     { Private declarations }
   public
@@ -201,9 +205,12 @@ procedure TfmAnalyzer.FormShow(Sender: TObject);
 var
   c1_act : Integer;
 begin
+  ImageEnView1.IO.WicFastLoading := True;
+  ImageEnView2.IO.WicFastLoading := True;
   DATA_LOAD := False;
   WORK_YEAR.Value := YearOf(Date);
   UserInfo.userSubCenterID := DataModule1.GetSubCenterID;
+  PanelSubCenter.Visible := UserInfo.userKind = 1;
   if UserInfo.userKind = 1 then begin
     if DataModule1.GetSubCenterID > 0 then begin
       DataModule1.SelectRegistedCenter;
@@ -388,9 +395,43 @@ end;
 
 procedure TfmAnalyzer.btnRefreshClick(Sender: TObject);
 begin
-  DataModule1.SetActiveCenter(lcbSubCenter.EditValue);
-  UserInfo.userSubCenterID := lcbSubCenter.EditValue;
+  if UserInfo.userKind = 1 then begin
+    DataModule1.SetActiveCenter(lcbSubCenter.EditValue);
+    UserInfo.userSubCenterID := lcbSubCenter.EditValue;
+  end else begin
+    UserInfo.userSubCenterID := 0;
+  end;
   RetrieveDateList;
+end;
+
+procedure TfmAnalyzer.ResultCalculate;
+var
+  chk_val1, chk_val2 : Integer;
+begin
+  chk_val1 := CHECK_VAL1.EditValue;
+  chk_val2 := CHECK_VAL2.EditValue;
+  if (chk_val1 > 0) and (chk_val2 > 0) then begin
+    case chk_val1 + chk_val2 of
+      2: TOTAL_VAL.EditValue := 1;
+      3: TOTAL_VAL.EditValue := 2;
+      4: TOTAL_VAL.EditValue := 3;
+      5: TOTAL_VAL.EditValue := 4;
+      6: TOTAL_VAL.EditValue := 4;
+      8: TOTAL_VAL.EditValue := 5;
+    end;
+  end else begin
+    TOTAL_VAL.EditValue := 0;
+  end;
+end;
+
+procedure TfmAnalyzer.CHECK_VAL1PropertiesEditValueChanged(Sender: TObject);
+begin
+  ResultCalculate;
+end;
+
+procedure TfmAnalyzer.CHECK_VAL2PropertiesEditValueChanged(Sender: TObject);
+begin
+  ResultCalculate;
 end;
 
 procedure TfmAnalyzer.ColorBox2PropertiesCloseUp(Sender: TObject);
@@ -411,6 +452,7 @@ begin
   dStream1 := TMemoryStream.Create;
   dStream2 := TMemoryStream.Create;
   try
+    Screen.Cursor := crHourGlass;
     ImageEnView1.IO.Params.IEN_Compression := ioJPEG;
     ImageEnView1.IO.SaveToStreamIEN(dStream1);
     dStream1.Position := 0;
@@ -435,6 +477,7 @@ begin
   finally
     dStream1.Free;
     dStream2.Free;
+    Screen.Cursor := crArrow;
   end;
 end;
 

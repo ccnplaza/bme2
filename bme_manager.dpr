@@ -59,7 +59,8 @@ uses
   UfmVideoPlayer in 'common\UfmVideoPlayer.pas' {fmVideoPlayer},
   UfmFolderSelect in 'common\UfmFolderSelect.pas' {fmFolderSelect},
   UfmSelectStudentPicture in 'analyse\UfmSelectStudentPicture.pas' {fmSelectStudentPicture},
-  UfmPictureZoom in 'capture\UfmPictureZoom.pas' {fmPictureZoom};
+  UfmPictureZoom in 'capture\UfmPictureZoom.pas' {fmPictureZoom},
+  UfmCommentEdit2 in 'analyse\UfmCommentEdit2.pas' {fmCommentEdit2};
 
 {$R *.res}
 

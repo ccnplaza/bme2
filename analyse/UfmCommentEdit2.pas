@@ -1,4 +1,4 @@
-unit UfmCommentEdit;
+unit UfmCommentEdit2;
 
 interface
 
@@ -21,7 +21,7 @@ uses
   cxTextEdit, cxMaskEdit, cxDropDownEdit, cxImageComboBox, cxSpinEdit;
 
 type
-  TfmCommentEdit = class(TForm)
+  TfmCommentEdit2 = class(TForm)
     GroupBox1: TGroupBox;
     Label1: TLabel;
     Label2: TLabel;
@@ -40,7 +40,7 @@ type
   end;
 
 var
-  fmCommentEdit: TfmCommentEdit;
+  fmCommentEdit2: TfmCommentEdit2;
 
 implementation
 

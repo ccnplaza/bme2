@@ -1124,7 +1124,7 @@ object DataModule1: TDataModule1
   object CHECK_COMMENTS_SEL: TUniStoredProc
     StoredProcName = 'CHECK_COMMENTS_SEL'
     Connection = UniConnection1
-    Left = 840
+    Left = 752
     Top = 8
     ParamData = <
       item
@@ -1147,6 +1147,11 @@ object DataModule1: TDataModule1
         Name = 'CHECK_COMMENTS'
         ParamType = ptOutput
         Value = ''
+      end
+      item
+        DataType = ftInteger
+        Name = 'IDX'
+        ParamType = ptOutput
       end>
     CommandStoredProcName = 'CHECK_COMMENTS_SEL'
     object CHECK_COMMENTS_SELID: TIntegerField
@@ -1165,17 +1170,21 @@ object DataModule1: TDataModule1
       FieldName = 'CHECK_COMMENTS'
       BlobType = ftWideMemo
     end
+    object CHECK_COMMENTS_SELIDX: TIntegerField
+      Alignment = taCenter
+      FieldName = 'IDX'
+    end
   end
   object ds_CHECK_COMMENTS_SEL: TDataSource
     DataSet = CHECK_COMMENTS_SEL
-    Left = 840
+    Left = 752
     Top = 56
   end
   object STUDENT_IMAGE_SEL2: TUniStoredProc
     StoredProcName = 'STUDENT_IMAGE_SEL2'
     Connection = UniConnection1
-    Left = 840
-    Top = 112
+    Left = 1000
+    Top = 16
     ParamData = <
       item
         DataType = ftInteger
@@ -1306,14 +1315,14 @@ object DataModule1: TDataModule1
   end
   object ds_STUDENT_IMAGE_SEL2: TDataSource
     DataSet = STUDENT_IMAGE_SEL2
-    Left = 840
-    Top = 160
+    Left = 1000
+    Top = 64
   end
   object STUDENT_IMAGE_SEL_ID: TUniStoredProc
     StoredProcName = 'STUDENT_IMAGE_SEL_ID'
     Connection = UniConnection1
-    Left = 840
-    Top = 208
+    Left = 1000
+    Top = 112
     ParamData = <
       item
         DataType = ftInteger
@@ -1450,8 +1459,8 @@ object DataModule1: TDataModule1
   end
   object ds_STUDENT_IMAGE_SEL_ID: TDataSource
     DataSet = STUDENT_IMAGE_SEL_ID
-    Left = 840
-    Top = 256
+    Left = 1000
+    Top = 160
   end
   object IMAGE_UPLOADER_INS: TUniStoredProc
     StoredProcName = 'IMAGE_UPLOADER_INS'
@@ -1541,7 +1550,7 @@ object DataModule1: TDataModule1
   object PICTURE_DATE_DEL: TUniStoredProc
     StoredProcName = 'PICTURE_DATE_DEL'
     Connection = UniConnection1
-    Left = 1008
+    Left = 1120
     Top = 8
     ParamData = <
       item
@@ -1554,7 +1563,7 @@ object DataModule1: TDataModule1
   object PICTURE_DATE_INS: TUniStoredProc
     StoredProcName = 'PICTURE_DATE_INS'
     Connection = UniConnection1
-    Left = 1008
+    Left = 1120
     Top = 56
     ParamData = <
       item
@@ -1587,7 +1596,7 @@ object DataModule1: TDataModule1
   object PICTURE_DATE_UPD: TUniStoredProc
     StoredProcName = 'PICTURE_DATE_UPD'
     Connection = UniConnection1
-    Left = 1008
+    Left = 1120
     Top = 104
     ParamData = <
       item
@@ -1610,7 +1619,7 @@ object DataModule1: TDataModule1
   object PICTURE_DATE_SEL: TUniStoredProc
     StoredProcName = 'PICTURE_DATE_SEL'
     Connection = UniConnection1
-    Left = 1008
+    Left = 1120
     Top = 152
     ParamData = <
       item
@@ -1691,7 +1700,7 @@ object DataModule1: TDataModule1
   end
   object ds_PICTURE_DATE_SEL: TDataSource
     DataSet = PICTURE_DATE_SEL
-    Left = 1008
+    Left = 1120
     Top = 200
   end
   object STUDENT_IMAGE_SEL_IMAGE: TUniStoredProc
@@ -2079,29 +2088,6 @@ object DataModule1: TDataModule1
       end>
     CommandStoredProcName = 'STUDENT_IMAGE_UPD_ONE'
   end
-  object PICTURE_DATE_COUNT_UPD: TUniStoredProc
-    StoredProcName = 'PICTURE_DATE_COUNT_UPD'
-    Connection = UniConnection1
-    Left = 1008
-    Top = 248
-    ParamData = <
-      item
-        DataType = ftInteger
-        Name = 'CENTER_ID'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
-        Name = 'SUB_ID'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftDate
-        Name = 'P_DATE'
-        ParamType = ptInput
-      end>
-    CommandStoredProcName = 'PICTURE_DATE_COUNT_UPD'
-  end
   object CHECK_PIC_DATE_EXISTS: TUniStoredProc
     StoredProcName = 'CHECK_PIC_DATE_EXISTS'
     Connection = UniConnection1
@@ -2442,5 +2428,123 @@ object DataModule1: TDataModule1
         ParamType = ptInput
       end>
     CommandStoredProcName = 'REG_SCHOOL_UPD_DEFAULT'
+  end
+  object CHECK_COMMENTS_SEL_POSTURE: TUniStoredProc
+    StoredProcName = 'CHECK_COMMENTS_SEL_POSTURE'
+    Connection = UniConnection1
+    Left = 752
+    Top = 104
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptOutput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ITEM_ID'
+        ParamType = ptOutput
+      end
+      item
+        DataType = ftInteger
+        Name = 'VALUE_ID'
+        ParamType = ptOutput
+      end
+      item
+        DataType = ftWideMemo
+        Name = 'CHECK_COMMENTS'
+        ParamType = ptOutput
+        Value = ''
+      end
+      item
+        DataType = ftInteger
+        Name = 'IDX'
+        ParamType = ptOutput
+      end>
+    CommandStoredProcName = 'CHECK_COMMENTS_SEL_POSTURE'
+    object IntegerField1: TIntegerField
+      Alignment = taCenter
+      FieldName = 'ID'
+    end
+    object IntegerField2: TIntegerField
+      Alignment = taCenter
+      FieldName = 'ITEM_ID'
+    end
+    object IntegerField3: TIntegerField
+      Alignment = taCenter
+      FieldName = 'VALUE_ID'
+    end
+    object WideMemoField1: TWideMemoField
+      FieldName = 'CHECK_COMMENTS'
+      BlobType = ftWideMemo
+    end
+    object IntegerField4: TIntegerField
+      Alignment = taCenter
+      FieldName = 'IDX'
+    end
+  end
+  object ds_CHECK_COMMENTS_SEL_POSTURE: TDataSource
+    DataSet = CHECK_COMMENTS_SEL_POSTURE
+    Left = 752
+    Top = 152
+  end
+  object CHECK_COMMENTS_SEL_TOTAL: TUniStoredProc
+    StoredProcName = 'CHECK_COMMENTS_SEL_TOTAL'
+    Connection = UniConnection1
+    Left = 752
+    Top = 200
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptOutput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ITEM_ID'
+        ParamType = ptOutput
+      end
+      item
+        DataType = ftInteger
+        Name = 'VALUE_ID'
+        ParamType = ptOutput
+      end
+      item
+        DataType = ftWideMemo
+        Name = 'CHECK_COMMENTS'
+        ParamType = ptOutput
+        Value = ''
+      end
+      item
+        DataType = ftInteger
+        Name = 'IDX'
+        ParamType = ptOutput
+      end>
+    CommandStoredProcName = 'CHECK_COMMENTS_SEL_TOTAL'
+    object IntegerField5: TIntegerField
+      Alignment = taCenter
+      FieldName = 'ID'
+    end
+    object IntegerField6: TIntegerField
+      Alignment = taCenter
+      FieldName = 'ITEM_ID'
+    end
+    object IntegerField7: TIntegerField
+      Alignment = taCenter
+      FieldName = 'VALUE_ID'
+    end
+    object WideMemoField2: TWideMemoField
+      FieldName = 'CHECK_COMMENTS'
+      BlobType = ftWideMemo
+    end
+    object IntegerField8: TIntegerField
+      Alignment = taCenter
+      FieldName = 'IDX'
+    end
+  end
+  object ds_CHECK_COMMENTS_SEL_TOTAL: TDataSource
+    DataSet = CHECK_COMMENTS_SEL_TOTAL
+    Left = 752
+    Top = 248
   end
 end
