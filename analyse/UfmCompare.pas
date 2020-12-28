@@ -30,7 +30,7 @@ uses
   dxSkinStardust, dxSkinSummer2008, dxSkinTheAsphaltWorld, dxSkinValentine,
   dxSkinWhiteprint, dxSkinXmas2008Blue, Math, cxSpinEdit, frxClass, frxDBSet,
   BMDThread, DateUtils, dbimageen, iexBitmaps, iesettings, iexLayers, iexRulers,
-  iexToolbars;
+  iexToolbars, cxLookupEdit, cxDBLookupEdit;
 
 type
   TfmCompare = class(TForm)
@@ -188,8 +188,14 @@ type
     gridPictureCENTER_ID: TcxGridDBColumn;
     cxGridLevel1: TcxGridLevel;
     Panel4: TPanel;
-    cxTabControl1: TcxTabControl;
+    cxPageControl1: TcxPageControl;
+    cxTabSheet1: TcxTabSheet;
     ImageEnView1: TImageEnView;
+    cxTabSheet2: TcxTabSheet;
+    ImageEnView2: TImageEnView;
+    PanelSubCenter: TPanel;
+    Label6: TLabel;
+    lcbSubCenter: TcxLookupComboBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure ImageEnVect1MouseEnter(Sender: TObject);
@@ -236,8 +242,6 @@ type
     procedure btnRefreshClick(Sender: TObject);
     procedure gridPictureCHASOOGetDataText(Sender: TcxCustomGridTableItem;
       ARecordIndex: Integer; var AText: string);
-    procedure ImageEnDBView1StartDrag(Sender: TObject;
-      var DragObject: TDragObject);
     procedure gridStudentCellClick(Sender: TcxCustomGridTableView;
       ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
       AShift: TShiftState; var AHandled: Boolean);
@@ -251,12 +255,11 @@ type
       ARecordIndex: Integer; var AText: string);
     procedure gridStudentColumn1GetDataText(Sender: TcxCustomGridTableItem;
       ARecordIndex: Integer; var AText: string);
-    procedure gridPictureFocusedRecordChanged(Sender: TcxCustomGridTableView;
-      APrevFocusedRecord, AFocusedRecord: TcxCustomGridRecord;
-      ANewItemRecordFocusingChanged: Boolean);
     procedure gridStudentFocusedRecordChanged(Sender: TcxCustomGridTableView;
       APrevFocusedRecord, AFocusedRecord: TcxCustomGridRecord;
       ANewItemRecordFocusingChanged: Boolean);
+    procedure ImageEnView2StartDrag(Sender: TObject;
+      var DragObject: TDragObject);
   private
     procedure LoadResultAndPicture;
     procedure SetResizeWindows;
@@ -282,7 +285,7 @@ type
     DragImageID : Integer;
     DragImageView : TImageEnView;
     sCompareMemo : string;
-    FORM_OPEN : Boolean;
+    DATA_LOAD : Boolean;
   end;
 
 var
@@ -294,9 +297,6 @@ uses GlobalVars, UdataModule, UfmSchoolSelect, UfmStudentEdit, UfmPopupHowto,
   UfmComments, UfmImportImage, UfmCompareMemo, UfmImageEditor, UfmCompareComments;
 
 {$R *.dfm}
-
-const
-  server_url = 'http://ccnplaza.com/bmae/uploads/';
 
 procedure TfmCompare.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
@@ -329,12 +329,16 @@ procedure TfmCompare.FormShow(Sender: TObject);
 var
   i : Integer;
 begin
-  FORM_OPEN := False;
+  DATA_LOAD := False;
   WORK_YEAR.Value := YearOf(Date);
   ImageEnView1.Clear;
   UserInfo.userSubCenterID := DataModule1.GetSubCenterID;
+  PanelSubCenter.Visible := UserInfo.userKind = 1;
   if UserInfo.userKind = 1 then begin
     if DataModule1.GetSubCenterID > 0 then begin
+      DataModule1.SelectRegistedCenter;
+      UserInfo.userSubCenterID := DataModule1.GetSubCenterID;
+      lcbSubCenter.EditValue := DataModule1.GetSubCenterID;
       btnRefresh.Click;
     end else begin
       ShowMessage('단체(도장)을 선택하세요.');
@@ -342,7 +346,26 @@ begin
     end;
   end else begin
     btnRefresh.Click;
+    UserInfo.userSubCenterID := 0;
   end;
+end;
+
+procedure TfmCompare.RetrieveDateList;
+begin
+  DataModule1.PICTURE_DATE_SEL.ParamByName('C_ID').Value := UserInfo.userCenterID;
+  DataModule1.PICTURE_DATE_SEL.ParamByName('SUB_ID').Value := UserInfo.userSubCenterID;
+  DataModule1.PICTURE_DATE_SEL.Open;
+  DataModule1.ds_PICTURE_DATE_SEL.DataSet.Refresh;
+
+  DataModule1.STUDENT_IMAGE_SEL_BYDATE.ParamByName('DATE_ID').Value := DataModule1.PICTURE_DATE_SELID.Value;
+  DataModule1.STUDENT_IMAGE_SEL_BYDATE.Open;
+  DataModule1.ds_STUDENT_IMAGE_SEL_BYDATE.DataSet.Refresh;
+
+  DataModule1.STUDENT_IMAGE_SEL_IMAGE.ParamByName('S_ID').Value := DataModule1.STUDENT_IMAGE_SEL_BYDATEID.Value;
+  DataModule1.STUDENT_IMAGE_SEL_IMAGE.Open;
+  DataModule1.ds_STUDENT_IMAGE_SEL_IMAGE.DataSet.Refresh;
+  RetrievePicture;
+  DATA_LOAD := True;
 end;
 
 procedure TfmCompare.LoadPictureData;
@@ -681,50 +704,52 @@ begin
   ImageEnVect3.Clear;
   ImageEnVect4.Clear;
 
+  if UserInfo.userKind = 1 then begin
+    DataModule1.SetActiveCenter(lcbSubCenter.EditValue);
+    UserInfo.userSubCenterID := lcbSubCenter.EditValue;
+  end else begin
+    UserInfo.userSubCenterID := 0;
+  end;
   RetrieveDateList;
-  RetrieveStudentList;
-  RetrievePicture;
-  FORM_OPEN := True;
-
-end;
-
-procedure TfmCompare.RetrieveDateList;
-begin
-  DataModule1.PICTURE_DATE_SEL.ParamByName('C_ID').Value := UserInfo.userCenterID;
-  DataModule1.PICTURE_DATE_SEL.ParamByName('SUB_ID').Value := UserInfo.userSubCenterID;
-  DataModule1.PICTURE_DATE_SEL.Open;
-  DataModule1.ds_PICTURE_DATE_SEL.DataSet.Refresh;
 end;
 
 procedure TfmCompare.RetrieveStudentList;
 begin
-  DataModule1.STUDENT_IMAGE_SEL_BYDATE.ParamByName('PIC_DATE').Value := gridPicturePIC_DATE.EditValue;
+  DataModule1.STUDENT_IMAGE_SEL_BYDATE.ParamByName('DATE_ID').Value := gridPictureID.EditValue;
   DataModule1.STUDENT_IMAGE_SEL_BYDATE.Open;
   DataModule1.ds_STUDENT_IMAGE_SEL_BYDATE.DataSet.Refresh;
+
+  DataModule1.STUDENT_IMAGE_SEL_IMAGE.ParamByName('S_ID').Value := DataModule1.STUDENT_IMAGE_SEL_BYDATEID.Value;
+  DataModule1.STUDENT_IMAGE_SEL_IMAGE.Open;
+  DataModule1.ds_STUDENT_IMAGE_SEL_IMAGE.DataSet.Refresh;
+  RetrievePicture;
+  DATA_LOAD := True;
 end;
 
 procedure TfmCompare.RetrievePicture;
 var
-  tab_id : Integer;
-  img_url : string;
-  mStream : TMemoryStream;
+  mStream, mStream2 : TMemoryStream;
 begin
-  tab_id := cxTabControl1.TabIndex;
-  img_url := server_url;
-  DataModule1.STUDENT_IMAGE_SEL_IMAGE.ParamByName('S_ID').Value := gridStudentID.EditValue;
-  DataModule1.STUDENT_IMAGE_SEL_IMAGE.Open;
-  DataModule1.ds_STUDENT_IMAGE_SEL_IMAGE.DataSet.Refresh;
-
   mStream := TMemoryStream.Create;
-  case tab_id of
-    0: DataModule1.STUDENT_IMAGE_SEL_IMAGEIMAGE1.SaveToStream(mStream);
-    1: DataModule1.STUDENT_IMAGE_SEL_IMAGEIMAGE2.SaveToStream(mStream);
+  mStream2 := TMemoryStream.Create;
+  try
+    DataModule1.STUDENT_IMAGE_SEL_IMAGEIMAGE1.SaveToStream(mStream);
+    DataModule1.STUDENT_IMAGE_SEL_IMAGEIMAGE2.SaveToStream(mStream2);
+    mStream.Position := 0;
+    mStream2.Position := 0;
+    ImageEnView1.Clear;
+    ImageEnView2.Clear;
+    ImageEnView1.IO.LoadFromStream(mStream);
+    ImageEnView2.IO.LoadFromStream(mStream2);
+    if ImageEnView1.IEBitmap.Width > ImageEnView1.IEBitmap.Height then
+      ImageEnView1.Proc.Rotate(-90);
+    if ImageEnView2.IEBitmap.Width > ImageEnView2.IEBitmap.Height then
+      ImageEnView2.Proc.Rotate(-90);
+
+  finally
+    mStream.Free;
+    mStream2.Free;
   end;
-  mStream.Position := 0;
-  ImageEnView1.Clear;
-  ImageEnView1.IO.LoadFromStreamJpeg(mStream);
-  if ImageEnView1.IEBitmap.Width > ImageEnView1.IEBitmap.Height then
-    ImageEnView1.Proc.Rotate(-90);
 end;
 
 procedure TfmCompare.gridCompareCellDblClick(Sender: TcxCustomGridTableView;
@@ -738,7 +763,8 @@ procedure TfmCompare.gridPictureCellClick(Sender: TcxCustomGridTableView;
   ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
   AShift: TShiftState; var AHandled: Boolean);
 begin
-  RetrievePicture;
+  DATA_LOAD := False;
+  RetrieveStudentList;
 end;
 
 procedure TfmCompare.gridPictureCHASOOGetDataText(
@@ -757,16 +783,6 @@ var
 begin
   AIndex := TcxGridTableView(Sender.GridView).DataController.GetRowIndexByRecordIndex(ARecordIndex, False);
   AText := IntToStr(AIndex + 1);
-end;
-
-procedure TfmCompare.gridPictureFocusedRecordChanged(
-  Sender: TcxCustomGridTableView; APrevFocusedRecord,
-  AFocusedRecord: TcxCustomGridRecord; ANewItemRecordFocusingChanged: Boolean);
-begin
-  if FORM_OPEN then begin
-    RetrieveStudentList;
-    RetrievePicture;
-  end;
 end;
 
 procedure TfmCompare.gridStudentCellClick(Sender: TcxCustomGridTableView;
@@ -791,8 +807,13 @@ procedure TfmCompare.gridStudentFocusedRecordChanged(
   Sender: TcxCustomGridTableView; APrevFocusedRecord,
   AFocusedRecord: TcxCustomGridRecord; ANewItemRecordFocusingChanged: Boolean);
 begin
-  if FORM_OPEN then
+  if DATA_LOAD then begin
+    DataModule1.STUDENT_IMAGE_SEL_IMAGE.ParamByName('S_ID').Value := gridStudentID.EditValue;
+    DataModule1.STUDENT_IMAGE_SEL_IMAGE.Open;
+    DataModule1.ds_STUDENT_IMAGE_SEL_IMAGE.DataSet.Refresh;
+
     RetrievePicture;
+  end;
 end;
 
 procedure TfmCompare.LoadResultAndPicture;
@@ -806,16 +827,6 @@ begin
 //    STUDENT_COMPARE_SEL_ALL.Active := True;
 //    ds_STUDENT_COMPARE_SEL_ALL.DataSet.Refresh;
 //  end;
-end;
-
-procedure TfmCompare.ImageEnDBView1StartDrag(Sender: TObject;
-  var DragObject: TDragObject);
-var
-  tno : Integer;
-begin
-  tno := cxTabControl1.TabIndex + 1;
-  DragImageView := ImageEnView1;
-  DragImageIdx := tno;
 end;
 
 procedure TfmCompare.ImageEnMView1EndDrag(Sender, Target: TObject; X,
@@ -963,12 +974,16 @@ end;
 
 procedure TfmCompare.ImageEnView1StartDrag(Sender: TObject;
   var DragObject: TDragObject);
-var
-  tno : Integer;
 begin
-  tno := cxTabControl1.TabIndex + 1;
   DragImageView := ImageEnView1;
-  DragImageIdx := tno;
+  DragImageIdx := 1;
+end;
+
+procedure TfmCompare.ImageEnView2StartDrag(Sender: TObject;
+  var DragObject: TDragObject);
+begin
+  DragImageView := ImageEnView2;
+  DragImageIdx := 2;
 end;
 
 procedure TfmCompare.ImageEnVect2DblClick(Sender: TObject);

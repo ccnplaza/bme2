@@ -32,14 +32,15 @@ object fmCompare: TfmCompare
       Left = 4
       Top = 4
       Width = 56
-      Height = 17
+      Height = 21
       Align = alLeft
       Caption = #51089#50629#45380#46020
       Layout = tlCenter
+      ExplicitHeight = 17
     end
     object btnRefresh: TcxButton
       AlignWithMargins = True
-      Left = 140
+      Left = 379
       Top = 2
       Width = 67
       Height = 25
@@ -89,6 +90,7 @@ object fmCompare: TfmCompare
       ShowHint = True
       TabOrder = 0
       OnClick = btnRefreshClick
+      ExplicitLeft = 378
     end
     object WORK_YEAR: TcxSpinEdit
       AlignWithMargins = True
@@ -101,6 +103,46 @@ object fmCompare: TfmCompare
       TabOrder = 1
       Value = 2000
       Width = 68
+    end
+    object PanelSubCenter: TPanel
+      Left = 137
+      Top = 1
+      Width = 239
+      Height = 27
+      Align = alLeft
+      BevelOuter = bvNone
+      TabOrder = 2
+      object Label6: TLabel
+        AlignWithMargins = True
+        Left = 3
+        Top = 3
+        Width = 85
+        Height = 21
+        Align = alLeft
+        Caption = #45800#52404'('#46020#51109#47749'):'
+        Layout = tlCenter
+        ExplicitHeight = 17
+      end
+      object lcbSubCenter: TcxLookupComboBox
+        AlignWithMargins = True
+        Left = 92
+        Top = 1
+        Margins.Left = 1
+        Margins.Top = 1
+        Margins.Right = 1
+        Margins.Bottom = 1
+        Align = alLeft
+        Properties.DropDownListStyle = lsFixedList
+        Properties.KeyFieldNames = 'ID'
+        Properties.ListColumns = <
+          item
+            FieldName = 'S_NAME'
+          end>
+        Properties.ListOptions.ShowHeader = False
+        Properties.ListSource = DataModule1.ds_REG_SCHOOL_SEL_LOOK
+        TabOrder = 0
+        Width = 145
+      end
     end
   end
   object PanelRight: TPanel
@@ -1165,7 +1207,7 @@ object fmCompare: TfmCompare
           Navigator.InfoPanel.DisplayMask = '[RecordIndex] / [RecordCount]'
           Navigator.InfoPanel.Visible = True
           Navigator.Visible = True
-          OnFocusedRecordChanged = gridPictureFocusedRecordChanged
+          OnCellClick = gridPictureCellClick
           DataController.DataSource = DataModule1.ds_PICTURE_DATE_SEL
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
@@ -1232,42 +1274,61 @@ object fmCompare: TfmCompare
       Height = 668
       Align = alClient
       TabOrder = 1
-      object cxTabControl1: TcxTabControl
+      object cxPageControl1: TcxPageControl
         Left = 1
         Top = 1
         Width = 245
-        Height = 27
-        Align = alTop
+        Height = 666
+        Align = alClient
         TabOrder = 0
+        Properties.ActivePage = cxTabSheet1
         Properties.CustomButtons.Buttons = <>
         Properties.Style = 9
-        Properties.TabIndex = 0
-        Properties.Tabs.Strings = (
-          #52769#47732
-          #46321
-          #51221#47732
-          #51313#48512)
-        OnChange = cxTabControl1Change
-        ClientRectBottom = 27
+        ClientRectBottom = 666
         ClientRectRight = 245
         ClientRectTop = 24
-      end
-      object ImageEnView1: TImageEnView
-        Left = 1
-        Top = 28
-        Width = 245
-        Height = 639
-        Cursor = crDefault
-        Background = clBlack
-        ScrollBars = ssNone
-        ZoomFilter = rfFastLinear
-        DelayZoomFilter = True
-        AutoStretch = True
-        AutoShrink = True
-        Align = alClient
-        DragMode = dmAutomatic
-        TabOrder = 1
-        OnStartDrag = ImageEnView1StartDrag
+        object cxTabSheet1: TcxTabSheet
+          Caption = #51221#47732
+          ImageIndex = 0
+          object ImageEnView1: TImageEnView
+            Left = 0
+            Top = 0
+            Width = 245
+            Height = 642
+            Cursor = crDefault
+            Background = clBlack
+            ScrollBars = ssNone
+            ZoomFilter = rfFastLinear
+            DelayZoomFilter = True
+            AutoStretch = True
+            AutoShrink = True
+            Align = alClient
+            DragMode = dmAutomatic
+            TabOrder = 0
+            OnStartDrag = ImageEnView1StartDrag
+          end
+        end
+        object cxTabSheet2: TcxTabSheet
+          Caption = #52769#47732
+          ImageIndex = 1
+          object ImageEnView2: TImageEnView
+            Left = 0
+            Top = 0
+            Width = 245
+            Height = 642
+            Cursor = crDefault
+            Background = clBlack
+            ScrollBars = ssNone
+            ZoomFilter = rfFastLinear
+            DelayZoomFilter = True
+            AutoStretch = True
+            AutoShrink = True
+            Align = alClient
+            DragMode = dmAutomatic
+            TabOrder = 0
+            OnStartDrag = ImageEnView2StartDrag
+          end
+        end
       end
     end
   end

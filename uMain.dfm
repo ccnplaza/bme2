@@ -2649,7 +2649,7 @@ object fmMain: TfmMain
     Left = 40
     Top = 128
     object N1: TMenuItem
-      Caption = #54924#50896#44288#47532
+      Caption = '1. '#54924#50896#44288#47532
       Hint = #54617#44368' '#48143' '#54617#49373#46308#51012' '#44288#47532#54633#45768#45796'.'
       ImageIndex = 0
       object N11: TMenuItem
@@ -2658,7 +2658,7 @@ object fmMain: TfmMain
       end
     end
     object N2: TMenuItem
-      Caption = #51088#49464#52524#50689
+      Caption = '2. '#51088#49464#52524#50689
       ImageIndex = 1
       object N12: TMenuItem
         Caption = #51088#49464#52524#50689
@@ -2666,7 +2666,7 @@ object fmMain: TfmMain
       end
     end
     object N3: TMenuItem
-      Caption = #51088#49464#54217#44032
+      Caption = '3. '#51088#49464#54217#44032
       ImageIndex = 2
       object N10: TMenuItem
         Caption = #51088#49464#54217#44032
@@ -2678,14 +2678,14 @@ object fmMain: TfmMain
       end
     end
     object N8: TMenuItem
-      Caption = #48708#44368#48516#49437
+      Caption = '4. '#48708#44368#48516#49437
       object N13: TMenuItem
         Caption = #48708#44368#48516#49437
         OnClick = N13Click
       end
     end
     object N4: TMenuItem
-      Caption = #44208#44284#52636#47141
+      Caption = '5. '#44208#44284#52636#47141
       ImageIndex = 3
       object N14: TMenuItem
         Caption = #44208#44284#52636#47141
@@ -2709,7 +2709,7 @@ object fmMain: TfmMain
       end
     end
     object N16: TMenuItem
-      Caption = #49444#51221
+      Caption = '6. '#49444#51221
       object MENU_SETTING: TMenuItem
         Caption = #51060#48120#51648#54260#45908' '#49444#51221
         OnClick = MENU_SETTINGClick

@@ -69,7 +69,7 @@ object fmAnalyzer: TfmAnalyzer
       Margins.Top = 1
       Margins.Bottom = 1
       Align = alLeft
-      Caption = #54869#51064
+      Caption = #51312#54924
       LookAndFeel.NativeStyle = False
       LookAndFeel.SkinName = 'DevExpressStyle'
       OptionsImage.Glyph.Data = {
@@ -111,7 +111,6 @@ object fmAnalyzer: TfmAnalyzer
       ShowHint = True
       TabOrder = 0
       OnClick = btnRefreshClick
-      ExplicitLeft = 378
     end
     object WORK_YEAR: TcxSpinEdit
       AlignWithMargins = True
@@ -682,18 +681,26 @@ object fmAnalyzer: TfmAnalyzer
           Top = 27
           Width = 434
           Height = 604
-          Cursor = crDefault
+          Cursor = crCross
           Background = clBlack
+          OnMouseEnter = ImageEnView2MouseEnter
+          OnMouseLeave = ImageEnView2MouseLeave
           ScrollBars = ssNone
+          ZoomFilter = rfFastLinear
           PopupMenus = [ievViewing, ievEditing, ievLayerEditing, ievSelection, ievLayerSelection]
           MouseInteractLayers = [mlMoveLayers, mlResizeLayers, mlRotateLayers, mlEditLayerPoints]
           DelayZoomFilter = True
+          OnPaint = ImageEnView2Paint
           AutoStretch = True
           AutoShrink = True
           OnLayerNotify = ImageEnView2LayerNotify
+          OnLayerNotifyEx = ImageEnView2LayerNotifyEx
           OnNewLayer = ImageEnView2NewLayer
+          OnDrawLayer = ImageEnView2DrawLayer
           Align = alClient
           TabOrder = 0
+          OnMouseMove = ImageEnView2MouseMove
+          OnMouseUp = ImageEnView2MouseUp
         end
         object Panel6: TPanel
           Left = 1
@@ -716,7 +723,7 @@ object fmAnalyzer: TfmAnalyzer
             Margins.Bottom = 1
             Align = alLeft
             AllowAllUp = True
-            GroupIndex = 1
+            GroupIndex = 2
             Down = True
             Glyph.Data = {
               F6000000424DF600000000000000760000002800000010000000100000000100
@@ -736,38 +743,6 @@ object fmAnalyzer: TfmAnalyzer
             ExplicitTop = 0
             ExplicitHeight = 26
           end
-          object btnLine2: TSpeedButton
-            AlignWithMargins = True
-            Left = 100
-            Top = 1
-            Width = 29
-            Height = 24
-            Hint = #46972#51064
-            Margins.Left = 1
-            Margins.Top = 1
-            Margins.Right = 1
-            Margins.Bottom = 1
-            Align = alLeft
-            AllowAllUp = True
-            GroupIndex = 1
-            Glyph.Data = {
-              F6000000424DF600000000000000760000002800000010000000100000000100
-              04000000000080000000120B0000120B00001000000000000000000000000000
-              8000008000000080800080000000800080008080000080808000C0C0C0000000
-              FF00C0C0C00000FFFF00FF000000C0C0C000FFFF0000FFFFFF00DADADADADADA
-              0000ADADADADADAD0FF0DADADADADADA0FF0ADADADADADAD0000DADADADADAD4
-              DADAADADADADAD4DADADDADADADAD4DADADAADADADAD4DADADADDADADAD4DADA
-              DADAADADAD4DADADADADDADAD4DADADADADAADAD4DADADADADAD0000DADADADA
-              DADA0FF0ADADADADADAD0FF0DADADADADADA0000ADADADADADAD}
-            Margin = 0
-            ParentShowHint = False
-            ShowHint = True
-            Spacing = 1
-            OnClick = btnLine2Click
-            ExplicitLeft = 31
-            ExplicitTop = 0
-            ExplicitHeight = 26
-          end
           object btnMultiLine2: TSpeedButton
             AlignWithMargins = True
             Left = 131
@@ -781,7 +756,7 @@ object fmAnalyzer: TfmAnalyzer
             Margins.Bottom = 1
             Align = alLeft
             AllowAllUp = True
-            GroupIndex = 1
+            GroupIndex = 2
             Glyph.Data = {
               F6000000424DF600000000000000760000002800000010000000100000000100
               04000000000080000000120B0000120B00001000000000000000000000000000
@@ -795,7 +770,7 @@ object fmAnalyzer: TfmAnalyzer
             ParentShowHint = False
             ShowHint = True
             Spacing = 1
-            OnClick = btnLine2Click
+            OnClick = btnMultiLine2Click
             ExplicitLeft = 59
             ExplicitTop = 0
             ExplicitHeight = 26
@@ -817,6 +792,68 @@ object fmAnalyzer: TfmAnalyzer
             ParentFont = False
             Layout = tlCenter
           end
+          object btnGrid2: TSpeedButton
+            AlignWithMargins = True
+            Left = 272
+            Top = 1
+            Width = 29
+            Height = 24
+            Hint = #44201#51088#47784#46300
+            Margins.Left = 1
+            Margins.Top = 1
+            Margins.Right = 1
+            Margins.Bottom = 1
+            Align = alLeft
+            AllowAllUp = True
+            GroupIndex = 2
+            Glyph.Data = {
+              F6000000424DF600000000000000760000002800000010000000100000000100
+              04000000000080000000120B0000120B00001000000000000000000000000000
+              8000008000000080800080000000800080008080000080808000C0C0C0000000
+              FF00C0C0C00000FFFF00FF000000C0C0C000FFFF0000FFFFFF00DADADADADADA
+              DADAADADADADADADADADDA7AD7DA7AD7DADAAD7DA7AD7DA7ADAD770770770770
+              77DAAD7DA7AD7DA7ADADDA7AD7DA7AD7DADA77077077077077ADDA7AD7DA7AD7
+              DADAAD7DA7AD7DA7ADAD77077077077077DAAD7DA7AD7DA7ADADDA7AD7DA7AD7
+              DADA77077077077077ADDA7AD7DA7AD7DADAAD7DA7AD7DA7ADAD}
+            Margin = 0
+            ParentShowHint = False
+            ShowHint = True
+            Spacing = 1
+            OnClick = btnGrid2Click
+            ExplicitLeft = 315
+            ExplicitTop = 3
+          end
+          object btnCross2: TSpeedButton
+            AlignWithMargins = True
+            Left = 100
+            Top = 1
+            Width = 29
+            Height = 24
+            Hint = #44592#51456#49440
+            Margins.Left = 1
+            Margins.Top = 1
+            Margins.Right = 1
+            Margins.Bottom = 1
+            Align = alLeft
+            AllowAllUp = True
+            GroupIndex = 2
+            Glyph.Data = {
+              F6000000424DF600000000000000760000002800000010000000100000000100
+              04000000000080000000120B0000120B00001000000000000000000000000000
+              8000008000000080800080000000800080008080000080808000C0C0C0000000
+              FF00C0C0C00000FFFF00FF000000C0C0C000FFFF0000FFFFFF00DADADADADADA
+              DADAAD7D7D7D0D7D7D7DDADADADA0ADADADAAD7DADAD0DADAD7DDADADADA0ADA
+              DADAAD7DADAD0DADAD7DDADADADA0ADADADAAD0000000000000DDADADADA0ADA
+              DADAAD7DADAD0DADAD7DDADADADA0ADADADAAD7DADAD0DADAD7DDADADADA0ADA
+              DADAAD7D7D7D0D7D7D7DDADADADADADADADAADADADADADADADAD}
+            Margin = 0
+            ParentShowHint = False
+            ShowHint = True
+            Spacing = 1
+            OnClick = btnLineClick
+            ExplicitLeft = 88
+            ExplicitTop = 3
+          end
           object speLineThick2: TcxSpinEdit
             AlignWithMargins = True
             Left = 162
@@ -832,6 +869,7 @@ object fmAnalyzer: TfmAnalyzer
             ShowHint = True
             TabOrder = 0
             Value = 10
+            ExplicitLeft = 193
             Width = 46
           end
           object ColorBox2: TcxColorComboBox
@@ -858,7 +896,35 @@ object fmAnalyzer: TfmAnalyzer
             StyleFocused.LookAndFeel.SkinName = 'VS2010'
             StyleHot.LookAndFeel.SkinName = 'VS2010'
             TabOrder = 1
+            ExplicitLeft = 241
             Width = 60
+          end
+          object cmbPreviewQuality2: TcxImageComboBox
+            AlignWithMargins = True
+            Left = 303
+            Top = 1
+            Margins.Left = 1
+            Margins.Top = 1
+            Margins.Right = 1
+            Margins.Bottom = 1
+            Align = alLeft
+            Properties.Items = <
+              item
+                Description = 'Fast'
+                ImageIndex = 0
+                Value = 0
+              end
+              item
+                Description = 'Best(Delayed)'
+                Value = 1
+              end
+              item
+                Description = 'Best Quality'
+                Value = 2
+              end>
+            Properties.OnChange = cmbPreviewQuality2PropertiesChange
+            TabOrder = 2
+            Width = 122
           end
         end
       end
@@ -874,18 +940,27 @@ object fmAnalyzer: TfmAnalyzer
           Top = 27
           Width = 431
           Height = 604
-          Cursor = crDefault
+          Cursor = crCross
           Background = clBlack
+          OnMouseEnter = ImageEnView1MouseEnter
+          OnMouseLeave = ImageEnView1MouseLeave
           ScrollBars = ssNone
+          ZoomFilter = rfFastLinear
           PopupMenus = [ievViewing, ievEditing, ievLayerEditing, ievSelection, ievLayerSelection]
+          LayerOptions = [loAllowMultiSelect, loAutoUndoChangesByUser, loAutoPromptForImage, loAutoFixBorders, loDynamicCanvas, loKeyboardShortcuts, loResizeOnRotate, loDragSelection, loSwapBackgroundProps, loShowRichTextToolbar, loAllowReturnsInRichText, loCtrlClickToCopy]
           MouseInteractLayers = [mlMoveLayers, mlResizeLayers, mlRotateLayers, mlEditLayerPoints]
           DelayZoomFilter = True
+          OnPaint = ImageEnView1Paint
           AutoStretch = True
           AutoShrink = True
           OnLayerNotify = ImageEnView1LayerNotify
           OnNewLayer = ImageEnView1NewLayer
+          OnDrawLayer = ImageEnView1DrawLayer
+          AsyncLoading = True
           Align = alClient
           TabOrder = 0
+          OnMouseMove = ImageEnView1MouseMove
+          OnMouseUp = ImageEnView1MouseUp
         end
         object Panel1: TPanel
           Left = 1
@@ -930,7 +1005,7 @@ object fmAnalyzer: TfmAnalyzer
           end
           object btnLine: TSpeedButton
             AlignWithMargins = True
-            Left = 100
+            Left = 131
             Top = 1
             Width = 29
             Height = 24
@@ -960,38 +1035,6 @@ object fmAnalyzer: TfmAnalyzer
             ExplicitTop = 0
             ExplicitHeight = 26
           end
-          object btnMultiLine: TSpeedButton
-            AlignWithMargins = True
-            Left = 131
-            Top = 1
-            Width = 29
-            Height = 24
-            Hint = #45796#51473#46972#51064
-            Margins.Left = 1
-            Margins.Top = 1
-            Margins.Right = 1
-            Margins.Bottom = 1
-            Align = alLeft
-            AllowAllUp = True
-            GroupIndex = 1
-            Glyph.Data = {
-              F6000000424DF600000000000000760000002800000010000000100000000100
-              04000000000080000000120B0000120B00001000000000000000000000000000
-              8000008000000080800080000000800080008080000080808000C0C0C0000000
-              FF00C0C0C00000FFFF00FF000000C0C0C000FFFF0000FFFFFF00DADADADAD4DA
-              0000ADADADADA44D0FF0DADADAD444440FF0ADADADA4A44D0000DADADAD4D4DA
-              DADAADADADA4ADADADADDADADAD4DADADADAADADADA4ADADADADDADADAD4DADA
-              DADAADADADA4ADADADADDADADAD4DADADADAADADADA4ADADADAD0000DAD4DADA
-              DADA0FF04444ADADADAD0FF0DADADADADADA0000ADADADADADAD}
-            Margin = 0
-            ParentShowHint = False
-            ShowHint = True
-            Spacing = 1
-            OnClick = btnLineClick
-            ExplicitLeft = 59
-            ExplicitTop = 0
-            ExplicitHeight = 26
-          end
           object Label5: TLabel
             Left = 0
             Top = 0
@@ -1009,6 +1052,67 @@ object fmAnalyzer: TfmAnalyzer
             ParentFont = False
             Layout = tlCenter
           end
+          object btnGrid: TSpeedButton
+            AlignWithMargins = True
+            Left = 272
+            Top = 1
+            Width = 29
+            Height = 24
+            Hint = #44201#51088#47784#46300
+            Margins.Left = 1
+            Margins.Top = 1
+            Margins.Right = 1
+            Margins.Bottom = 1
+            Align = alLeft
+            AllowAllUp = True
+            GroupIndex = 1
+            Glyph.Data = {
+              F6000000424DF600000000000000760000002800000010000000100000000100
+              04000000000080000000120B0000120B00001000000000000000000000000000
+              8000008000000080800080000000800080008080000080808000C0C0C0000000
+              FF00C0C0C00000FFFF00FF000000C0C0C000FFFF0000FFFFFF00DADADADADADA
+              DADAADADADADADADADADDA7AD7DA7AD7DADAAD7DA7AD7DA7ADAD770770770770
+              77DAAD7DA7AD7DA7ADADDA7AD7DA7AD7DADA77077077077077ADDA7AD7DA7AD7
+              DADAAD7DA7AD7DA7ADAD77077077077077DAAD7DA7AD7DA7ADADDA7AD7DA7AD7
+              DADA77077077077077ADDA7AD7DA7AD7DADAAD7DA7AD7DA7ADAD}
+            Margin = 0
+            ParentShowHint = False
+            ShowHint = True
+            Spacing = 1
+            OnClick = btnGridClick
+            ExplicitLeft = 315
+            ExplicitTop = 3
+          end
+          object btnCross: TSpeedButton
+            AlignWithMargins = True
+            Left = 100
+            Top = 1
+            Width = 29
+            Height = 24
+            Hint = #44592#51456#49440
+            Margins.Left = 1
+            Margins.Top = 1
+            Margins.Right = 1
+            Margins.Bottom = 1
+            Align = alLeft
+            AllowAllUp = True
+            GroupIndex = 1
+            Glyph.Data = {
+              F6000000424DF600000000000000760000002800000010000000100000000100
+              04000000000080000000120B0000120B00001000000000000000000000000000
+              8000008000000080800080000000800080008080000080808000C0C0C0000000
+              FF00C0C0C00000FFFF00FF000000C0C0C000FFFF0000FFFFFF00DADADADADADA
+              DADAAD7D7D7D0D7D7D7DDADADADA0ADADADAAD7DADAD0DADAD7DDADADADA0ADA
+              DADAAD7DADAD0DADAD7DDADADADA0ADADADAAD0000000000000DDADADADA0ADA
+              DADAAD7DADAD0DADAD7DDADADADA0ADADADAAD7DADAD0DADAD7DDADADADA0ADA
+              DADAAD7D7D7D0D7D7D7DDADADADADADADADAADADADADADADADAD}
+            Margin = 0
+            ParentShowHint = False
+            ShowHint = True
+            Spacing = 1
+            ExplicitLeft = 88
+            ExplicitTop = 3
+          end
           object speLineThick: TcxSpinEdit
             AlignWithMargins = True
             Left = 162
@@ -1024,6 +1128,7 @@ object fmAnalyzer: TfmAnalyzer
             ShowHint = True
             TabOrder = 0
             Value = 10
+            ExplicitLeft = 193
             Width = 46
           end
           object ColorBox: TcxColorComboBox
@@ -1050,7 +1155,35 @@ object fmAnalyzer: TfmAnalyzer
             StyleFocused.LookAndFeel.SkinName = 'VS2010'
             StyleHot.LookAndFeel.SkinName = 'VS2010'
             TabOrder = 1
+            ExplicitLeft = 241
             Width = 60
+          end
+          object cmbPreviewQuality: TcxImageComboBox
+            AlignWithMargins = True
+            Left = 303
+            Top = 1
+            Margins.Left = 1
+            Margins.Top = 1
+            Margins.Right = 1
+            Margins.Bottom = 1
+            Align = alLeft
+            Properties.Items = <
+              item
+                Description = 'Fast'
+                ImageIndex = 0
+                Value = 0
+              end
+              item
+                Description = 'Best(Delayed)'
+                Value = 1
+              end
+              item
+                Description = 'Best Quality'
+                Value = 2
+              end>
+            Properties.OnChange = cmbPreviewQualityPropertiesChange
+            TabOrder = 2
+            Width = 125
           end
         end
       end
