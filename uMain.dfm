@@ -9,7 +9,7 @@ object fmMain: TfmMain
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -13
-  Font.Name = #44404#47548
+  Font.Name = #45208#45588#44256#46357
   Font.Style = []
   FormStyle = fsMDIForm
   Menu = MainMenu1
@@ -20,7 +20,7 @@ object fmMain: TfmMain
   OnResize = FormResize
   OnShow = FormShow
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 15
   object pnlMain: TPanel
     Left = 416
     Top = 141

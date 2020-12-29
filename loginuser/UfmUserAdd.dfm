@@ -9,12 +9,12 @@ object fmUserAdd: TfmUserAdd
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -13
-  Font.Name = #44404#47548
+  Font.Name = #45208#45588#44256#46357
   Font.Style = []
   OldCreateOrder = False
   Position = poMainFormCenter
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 15
   object GroupBox2: TGroupBox
     AlignWithMargins = True
     Left = 3
@@ -44,7 +44,7 @@ object fmUserAdd: TfmUserAdd
       Left = 102
       Top = 72
       Width = 187
-      Height = 21
+      Height = 23
       ImeMode = imSAlpha
       TabOrder = 2
     end
@@ -60,7 +60,7 @@ object fmUserAdd: TfmUserAdd
       Left = 102
       Top = 23
       Width = 187
-      Height = 21
+      Height = 23
       ImeMode = imSHanguel
       TabOrder = 0
     end
@@ -83,7 +83,7 @@ object fmUserAdd: TfmUserAdd
       Left = 102
       Top = 48
       Width = 187
-      Height = 21
+      Height = 23
       ImeMode = imSHanguel
       TabOrder = 1
     end
@@ -193,19 +193,16 @@ object fmUserAdd: TfmUserAdd
     Align = alTop
     Caption = #49324#50857#51088#51221#48372
     TabOrder = 1
-    ExplicitLeft = 8
-    ExplicitTop = 136
-    ExplicitWidth = 440
     object Label1: TLabel
       Left = 280
       Top = 50
-      Width = 117
-      Height = 13
+      Width = 110
+      Height = 15
       Caption = '('#47196#44536#51064'ID '#51473#48373#48520#44032')'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clRed
       Font.Height = -13
-      Font.Name = #44404#47548
+      Font.Name = #45208#45588#44256#46357
       Font.Style = []
       ParentFont = False
     end
@@ -221,7 +218,7 @@ object fmUserAdd: TfmUserAdd
       Left = 102
       Top = 22
       Width = 168
-      Height = 21
+      Height = 23
       ImeMode = imSHanguel
       TabOrder = 0
     end
@@ -237,7 +234,7 @@ object fmUserAdd: TfmUserAdd
       Left = 102
       Top = 47
       Width = 168
-      Height = 21
+      Height = 23
       ImeMode = imSAlpha
       TabOrder = 1
     end
@@ -253,7 +250,7 @@ object fmUserAdd: TfmUserAdd
       Left = 102
       Top = 72
       Width = 168
-      Height = 21
+      Height = 23
       ImeMode = imSAlpha
       PasswordChar = '*'
       TabOrder = 2
@@ -270,7 +267,7 @@ object fmUserAdd: TfmUserAdd
       Left = 102
       Top = 97
       Width = 168
-      Height = 21
+      Height = 23
       ImeMode = imSAlpha
       PasswordChar = '*'
       TabOrder = 3

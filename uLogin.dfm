@@ -2,7 +2,7 @@ object fmLogin: TfmLogin
   Left = 0
   Top = 0
   BorderStyle = bsDialog
-  Caption = #48148#47476#48120
+  Caption = #48148#47476#48120' '#47196#44536#51064
   ClientHeight = 308
   ClientWidth = 357
   Color = clWhite
@@ -10,13 +10,13 @@ object fmLogin: TfmLogin
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -13
-  Font.Name = #44404#47548
+  Font.Name = #45208#45588#44256#46357
   Font.Style = []
   OldCreateOrder = False
   Position = poScreenCenter
   OnShow = FormShow
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 15
   object Image1: TImage
     Left = 20
     Top = 16
@@ -3176,13 +3176,13 @@ object fmLogin: TfmLogin
   object lblVersion: TLabel
     Left = 39
     Top = 129
-    Width = 72
-    Height = 13
+    Width = 60
+    Height = 15
     Caption = 'lblVersion'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clMaroon
     Font.Height = -13
-    Font.Name = #44404#47548
+    Font.Name = #45208#45588#44256#46357
     Font.Style = [fsBold]
     ParentFont = False
   end
@@ -3192,27 +3192,29 @@ object fmLogin: TfmLogin
     Width = 315
     Height = 129
     TabOrder = 0
-    Properties.ActivePage = cxTabSheet1
+    Properties.ActivePage = cxTabSheet2
     Properties.CustomButtons.Buttons = <>
     LookAndFeel.NativeStyle = False
     ClientRectBottom = 129
     ClientRectRight = 315
-    ClientRectTop = 24
+    ClientRectTop = 26
     object cxTabSheet1: TcxTabSheet
       Caption = 'ok'
       ImageIndex = 0
+      ExplicitTop = 24
+      ExplicitHeight = 105
       object Label6: TLabel
         Left = 16
         Top = 15
-        Width = 55
-        Height = 13
+        Width = 52
+        Height = 15
         Caption = #47196#44536#51064'ID:'
       end
       object Label8: TLabel
         Left = 15
         Top = 38
-        Width = 56
-        Height = 13
+        Width = 52
+        Height = 15
         Caption = #54056#49828#50892#46300':'
       end
       object btnLogin: TBitBtn
@@ -3293,7 +3295,7 @@ object fmLogin: TfmLogin
         Left = 77
         Top = 12
         Width = 146
-        Height = 21
+        Height = 23
         ImeName = 'Microsoft IME 2010'
         TabOrder = 0
       end
@@ -3301,7 +3303,7 @@ object fmLogin: TfmLogin
         Left = 77
         Top = 35
         Width = 146
-        Height = 21
+        Height = 23
         ImeName = 'Microsoft IME 2010'
         PasswordChar = '*'
         TabOrder = 1
@@ -3355,17 +3357,17 @@ object fmLogin: TfmLogin
       Caption = 'activate'
       ImageIndex = 1
       object Label2: TLabel
-        Left = 82
+        Left = 92
         Top = 13
-        Width = 151
-        Height = 13
+        Width = 140
+        Height = 15
         Caption = #49324#50857#51088#46321#47197#51060' '#54596#50836#54633#45768#45796'.'
       end
       object Label9: TLabel
-        Left = 32
+        Left = 42
         Top = 31
-        Width = 237
-        Height = 13
+        Width = 220
+        Height = 15
         Caption = #49324#50857#51088#46321#47197' '#48260#53948#51012' '#53364#47533#54616#50668' '#46321#47197#54616#49464#50836'.'
       end
       object btnRegist: TBitBtn
@@ -3417,17 +3419,17 @@ object fmLogin: TfmLogin
       Caption = 'cxTabSheet3'
       ImageIndex = 2
       object Label3: TLabel
-        Left = 48
-        Top = 9
-        Width = 168
-        Height = 13
+        Left = 85
+        Top = 11
+        Width = 156
+        Height = 15
         Caption = #49324#50857#51088' '#49849#51064#51012' '#52376#47532#51473#51077#45768#45796'.'
       end
       object Label4: TLabel
-        Left = 20
-        Top = 26
-        Width = 215
-        Height = 13
+        Left = 57
+        Top = 28
+        Width = 200
+        Height = 15
         Caption = #49324#50857#49849#51064#51060' '#50756#47308' '#46108' '#54980#50640' '#49324#50857#54616#49464#50836'.'
       end
       object BitBtn1: TBitBtn
@@ -3446,21 +3448,21 @@ object fmLogin: TfmLogin
       object Label1: TLabel
         Left = 21
         Top = 7
-        Width = 277
-        Height = 52
+        Width = 236
+        Height = 60
         Caption = 
           #50629#45936#51060#53944#54028#51068#51060' '#51080#49845#45768#45796'.'#13#10#45796#50868#47196#46300#47484' '#53364#47533#54616#49884#44256' '#51104#49884' '#44592#45796#47140' '#51452#49464#50836'.'#13#10#45796#50868#47196#46300#44032' '#50756#47308#46104#47732' '#51088#46041#51004#47196' '#49444#52824#47484#13#10#51652#54665#54633 +
           #45768#45796'.'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlue
         Font.Height = -13
-        Font.Name = #44404#47548
+        Font.Name = #45208#45588#44256#46357
         Font.Style = [fsBold]
         ParentFont = False
       end
       object btnDownload: TBitBtn
         Left = 112
-        Top = 64
+        Top = 69
         Width = 75
         Height = 25
         Caption = #45796#50868#47196#46300
