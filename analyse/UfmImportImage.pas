@@ -17,25 +17,40 @@ uses
   dxSkinSevenClassic, dxSkinSharp, dxSkinSharpPlus, dxSkinSilver,
   dxSkinSpringTime, dxSkinStardust, dxSkinSummer2008, dxSkinTheAsphaltWorld,
   dxSkinsDefaultPainters, dxSkinValentine, dxSkinVS2010, dxSkinWhiteprint,
-  dxSkinXmas2008Blue, ExtDlgs, cxButtons;
+  dxSkinXmas2008Blue, ExtDlgs, cxButtons, hyieutils, iexBitmaps, hyiedefs,
+  iesettings, iexLayers, iexRulers, iexToolbars, ieview, imageenview, ExtCtrls;
 
 type
   TfmImportImage = class(TForm)
-    GroupBox1: TGroupBox;
-    Label1: TLabel;
-    Label3: TLabel;
-    Edit1: TEdit;
-    Edit2: TEdit;
-    cxButton1: TcxButton;
+    OpenPictureDialog1: TOpenPictureDialog;
     cxButton2: TcxButton;
+    cxButton1: TcxButton;
+    Panel2: TPanel;
+    Panel1: TPanel;
     cxButton6: TcxButton;
     cxButton7: TcxButton;
-    OpenPictureDialog1: TOpenPictureDialog;
+    Panel4: TPanel;
+    Panel3: TPanel;
+    Panel5: TPanel;
+    ImageEnView1: TImageEnView;
+    ImageEnView2: TImageEnView;
+    lblLeft: TLabel;
+    Label1: TLabel;
+    btnRotate: TcxButton;
+    btnTrim: TcxButton;
+    cxButton3: TcxButton;
+    cxButton4: TcxButton;
     procedure cxButton1Click(Sender: TObject);
+    procedure cxButton2Click(Sender: TObject);
+    procedure btnTrimClick(Sender: TObject);
+    procedure cxButton3Click(Sender: TObject);
+    procedure btnRotateClick(Sender: TObject);
+    procedure cxButton4Click(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
+    ImageFile1, ImageFile2 : string;
   end;
 
 var
@@ -45,17 +60,40 @@ implementation
 
 {$R *.dfm}
 
-procedure TfmImportImage.cxButton1Click(Sender: TObject);
-var
-  tno : Integer;
+procedure TfmImportImage.btnRotateClick(Sender: TObject);
 begin
-  tno := (Sender as TcxButton).Tag;
+  ImageEnView1.Proc.Rotate(90);
+end;
+
+procedure TfmImportImage.btnTrimClick(Sender: TObject);
+begin
+  ImageEnView1.CropTool.Enact();
+end;
+
+procedure TfmImportImage.cxButton1Click(Sender: TObject);
+begin
   if OpenPictureDialog1.Execute then begin
-    case tno of
-      1: Edit1.Text := OpenPictureDialog1.FileName;
-      2: Edit2.Text := OpenPictureDialog1.FileName;
-    end;
+    ImageFile1 := OpenPictureDialog1.FileName;
+    ImageEnView1.IO.LoadFromFile(ImageFile1, 0);
   end;
+end;
+
+procedure TfmImportImage.cxButton2Click(Sender: TObject);
+begin
+  if OpenPictureDialog1.Execute then begin
+    ImageFile2 := OpenPictureDialog1.FileName;
+    ImageEnView2.IO.LoadFromFile(ImageFile2, 0);
+  end;
+end;
+
+procedure TfmImportImage.cxButton3Click(Sender: TObject);
+begin
+  ImageEnView2.CropTool.Enact();
+end;
+
+procedure TfmImportImage.cxButton4Click(Sender: TObject);
+begin
+  ImageEnView2.Proc.Rotate(90);
 end;
 
 end.

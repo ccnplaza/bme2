@@ -530,25 +530,28 @@ begin
   img1 := TMemoryStream.Create;
   img2 := TMemoryStream.Create;
   try
+    fmImportImage.ImageFile1 := '';
+    fmImportImage.ImageFile2 := '';
     fmImportImage.ShowModal;
     if fmImportImage.ModalResult = mrOk then begin
-      if FileExists(fmImportImage.Edit1.Text) then begin
-        img1.LoadFromFile(fmImportImage.Edit1.Text);
+      if fmImportImage.ImageFile1 <> '' then begin
+        fmImportImage.ImageEnView1.IO.SaveToStreamJpeg(img1);
         img1.Position := 0;
+        ImageEnView1.IO.LoadFromStreamJpeg(img1);
         DataModule1.STUDENT_IMAGE_UPD_ONE.ParamByName('PIC_ID').Value := gridStudentID.EditValue;
         DataModule1.STUDENT_IMAGE_UPD_ONE.ParamByName('IMAGE_SRC').LoadFromStream(img1, ftBlob);
         DataModule1.STUDENT_IMAGE_UPD_ONE.ParamByName('IMAGE_KIND').Value := 1;
         DataModule1.STUDENT_IMAGE_UPD_ONE.ExecProc;
       end;
-      if FileExists(fmImportImage.Edit2.Text) then begin
-        img2.LoadFromFile(fmImportImage.Edit2.Text);
+      if fmImportImage.ImageFile2 <> '' then begin
+        fmImportImage.ImageEnView2.IO.SaveToStreamJpeg(img2);
         img2.Position := 0;
+        ImageEnView2.IO.LoadFromStreamJpeg(img2);
         DataModule1.STUDENT_IMAGE_UPD_ONE.ParamByName('PIC_ID').Value := gridStudentID.EditValue;
         DataModule1.STUDENT_IMAGE_UPD_ONE.ParamByName('IMAGE_SRC').LoadFromStream(img2, ftBlob);
         DataModule1.STUDENT_IMAGE_UPD_ONE.ParamByName('IMAGE_KIND').Value := 2;
         DataModule1.STUDENT_IMAGE_UPD_ONE.ExecProc;
       end;
-      RetrievePicture;
     end;
   finally
     img1.Free;

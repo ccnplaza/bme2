@@ -89,7 +89,6 @@ object fmCapture: TfmCapture
       ShowHint = True
       TabOrder = 0
       OnClick = btnRefreshClick
-      ExplicitLeft = 378
     end
     object WORK_YEAR: TcxSpinEdit
       AlignWithMargins = True
@@ -120,8 +119,6 @@ object fmCapture: TfmCapture
         Align = alLeft
         Caption = #45800#52404'('#46020#51109#47749'):'
         Layout = tlCenter
-        ExplicitLeft = 4
-        ExplicitTop = 4
         ExplicitHeight = 17
       end
       object lcbSubCenter: TcxLookupComboBox
@@ -143,8 +140,6 @@ object fmCapture: TfmCapture
         Properties.ListSource = DataModule1.ds_REG_SCHOOL_SEL_LOOK
         Properties.OnCloseUp = lcbSubCenterPropertiesCloseUp
         TabOrder = 0
-        ExplicitLeft = 229
-        ExplicitTop = 2
         Width = 145
       end
     end
@@ -699,8 +694,6 @@ object fmCapture: TfmCapture
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 2
-    ExplicitLeft = 581
-    ExplicitWidth = 603
     object Panel4: TPanel
       Left = 366
       Top = 0
@@ -708,7 +701,6 @@ object fmCapture: TfmCapture
       Height = 632
       Align = alRight
       TabOrder = 0
-      ExplicitLeft = 362
       object cxGroupBox3: TcxGroupBox
         AlignWithMargins = True
         Left = 4
@@ -1071,10 +1063,6 @@ object fmCapture: TfmCapture
         StyleFocused.LookAndFeel.SkinName = 'Black'
         StyleHot.LookAndFeel.SkinName = 'Black'
         TabOrder = 1
-        ExplicitLeft = 6
-        ExplicitTop = 380
-        ExplicitWidth = 185
-        ExplicitHeight = 105
         Height = 395
         Width = 239
         object Label5: TLabel
@@ -1245,7 +1233,6 @@ object fmCapture: TfmCapture
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 1
-      ExplicitWidth = 362
       object ImageEnCam: TImageEnView
         Left = 0
         Top = 0
@@ -1261,10 +1248,6 @@ object fmCapture: TfmCapture
         TabOrder = 0
         OnMouseDown = ImageEnCamMouseDown
         OnMouseUp = ImageEnCamMouseUp
-        ExplicitLeft = 72
-        ExplicitTop = 208
-        ExplicitWidth = 105
-        ExplicitHeight = 105
       end
     end
   end

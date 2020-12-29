@@ -235,7 +235,7 @@
 						<VersionInfo Name="MajorVer">3</VersionInfo>
 						<VersionInfo Name="MinorVer">0</VersionInfo>
 						<VersionInfo Name="Release">2</VersionInfo>
-						<VersionInfo Name="Build">14</VersionInfo>
+						<VersionInfo Name="Build">16</VersionInfo>
 						<VersionInfo Name="Debug">False</VersionInfo>
 						<VersionInfo Name="PreRelease">False</VersionInfo>
 						<VersionInfo Name="Special">False</VersionInfo>
@@ -247,7 +247,7 @@
 					<VersionInfoKeys>
 						<VersionInfoKeys Name="CompanyName">ccn software</VersionInfoKeys>
 						<VersionInfoKeys Name="FileDescription">IkeySchool</VersionInfoKeys>
-						<VersionInfoKeys Name="FileVersion">3.0.2.14</VersionInfoKeys>
+						<VersionInfoKeys Name="FileVersion">3.0.2.16</VersionInfoKeys>
 						<VersionInfoKeys Name="InternalName"/>
 						<VersionInfoKeys Name="LegalCopyright">2014 ccnsoft</VersionInfoKeys>
 						<VersionInfoKeys Name="LegalTrademarks"/>
